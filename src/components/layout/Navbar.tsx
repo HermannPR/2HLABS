@@ -8,7 +8,8 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Product', path: '/formula' },
+    { name: 'Discover Your Soul', path: '/formula' },
+    { name: 'All Souls', path: '/souls' },
     { name: 'How It Works', path: '/how-it-works' },
     { name: 'Ingredients', path: '/ingredients' },
     { name: 'Pricing', path: '/pricing' },

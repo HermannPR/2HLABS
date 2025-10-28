@@ -1,190 +1,504 @@
-# 2HLABS - Personalized Preworkout Startup Website
+# 2HLABS - Personalized Preworkout Supplement Platform
 
-A modern, full-featured startup website for 2HLABS, a personalized preworkout supplement company. Built with React, TypeScript, Tailwind CSS, and Vite.
+> **Discover Your Training Soul** - An innovative preworkout supplement company that matches athletes with their unique training archetype through an intelligent personality-based quiz system.
 
-## Features
+[![Built with Vite](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-### Complete Website Pages
-- **Homepage**: Hero section, features, how it works, testimonials, FAQs, and CTAs
-- **Formula Generator**: Interactive multi-step quiz that generates personalized preworkout formulas
-- **How It Works**: Explanation of the science and process
-- **Ingredients Library**: Comprehensive database of all ingredients with filtering
-- **Pricing**: Three pricing tiers with detailed feature comparison
-- **About**: Company mission, values, and story
+## 🎯 Project Overview
 
-### Formula Generator
-- Multi-step form collecting user data (profile, training, preferences, health)
-- Personalized formula algorithm that considers:
-  - Body weight for dosage scaling
-  - Training goals (strength, endurance, fat-loss, etc.)
-  - Caffeine tolerance and stimulant preferences
-  - Workout timing and type
-  - Dietary restrictions
-- Real-time formula generation with detailed ingredient breakdown
-- Science-backed ingredient dosages based on clinical research
+2HLABS is a full-stack web application for a next-generation preworkout supplement brand. Unlike traditional supplement companies, 2HLABS uses a dimension-based personality system (similar to MBTI) to match users with one of **12 unique training archetypes** - each with its own scientifically-formulated supplement blend.
 
-### Tech Stack
-- **Frontend**: React 18 + TypeScript
-- **Build Tool**: Vite
-- **Styling**: Tailwind CSS with custom theme
-- **Animations**: Framer Motion
-- **Icons**: React Icons
-- **Routing**: React Router DOM
-- **Forms**: React Hook Form + Zod validation
+### Core Concept: Training Souls
 
-### Design Features
-- Modern, energetic color scheme (electric blue, neon pink, neon green)
-- Smooth animations and transitions
-- Fully responsive mobile-first design
-- Dark theme optimized for fitness/performance brand
-- Custom gradient text effects and glow effects
+Rather than offering a single preworkout, 2HLABS provides **12 distinct "souls"** - each representing a unique training philosophy and energy signature:
 
-## Project Structure
+- **GORILLA RAGE** - Unstoppable Force (High intensity, explosive power)
+- **DRAGON BLOOD** - Warrior Spirit (Balanced aggression and endurance)
+- **CHEETAH SPRINT** - Lightning Speed (Maximum speed and agility)
+- **EAGLE VISION** - Precision Master (Laser focus and control)
+- **TITAN STRENGTH** - Raw Power (Maximum strength output)
+- **WOLF PACK** - Team Warrior (Sustained group training energy)
+- **PHOENIX RISE** - Endurance Champion (Extreme stamina and recovery)
+- **BEAR ENDURANCE** - Steady Force (Long-duration power)
+- **MANTIS FOCUS** - Zen Warrior (Mind-muscle connection)
+- **THUNDER STRIKE** - Explosive Chaos (Maximum intensity bursts)
+- **SERPENT FLOW** - Mindful Movement (Controlled, flowing energy)
+- **LION HEART** - Courageous Leader (Balanced, confident power)
+
+Users can purchase multiple souls for different training needs (e.g., GORILLA RAGE for leg day, SERPENT FLOW for yoga).
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend Framework
+- **React 18.3** - Modern React with hooks and concurrent features
+- **TypeScript 5.6** - Type-safe development with strict mode enabled
+- **Vite 7.1** - Lightning-fast build tool with HMR
+
+### Styling & UI
+- **Tailwind CSS 3.4** - Utility-first CSS framework
+  - Custom color palette (Electric Blue, Neon Pink, Neon Green, Deep Navy)
+  - Extended theme with custom fonts and shadows
+  - Responsive mobile-first design
+- **Framer Motion 11.15** - Production-ready animations
+  - Page transitions
+  - Element animations
+  - Gesture handling
+- **React Icons 5.4** - Comprehensive icon library
+
+### Routing & Forms
+- **React Router DOM 7.1** - Client-side routing with lazy loading support
+- **React Hook Form 7.54** - Performant form state management
+- **Zod 3.24** - TypeScript-first schema validation
+
+### Development Tools
+- **ESLint** - Code linting with TypeScript support
+- **PostCSS** - CSS processing with Autoprefixer
+
+---
+
+## 📁 Project Structure
 
 ```
-src/
-├── components/
-│   ├── common/          # Reusable components (Button, Card)
-│   ├── layout/          # Layout components (Navbar, Footer, Layout)
-│   ├── home/            # Homepage sections
-│   └── formula/         # Formula generator components
-├── pages/               # Main page components
-│   ├── Home.tsx
-│   ├── FormulaGenerator.tsx
-│   ├── HowItWorks.tsx
-│   ├── Ingredients.tsx
-│   ├── Pricing.tsx
-│   └── About.tsx
-├── utils/               # Utility functions and algorithms
-│   └── formulaGenerator.ts  # Formula generation logic
-├── data/                # Static data
-│   ├── ingredients.ts   # Ingredient database
-│   ├── testimonials.ts
-│   └── faqs.ts
-├── types/               # TypeScript type definitions
-│   └── index.ts
-└── App.tsx              # Main app component with routing
+2HLABS/
+├── preworkout-startup/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── common/              # Reusable UI components
+│   │   │   │   ├── Button.tsx
+│   │   │   │   └── Card.tsx
+│   │   │   ├── layout/              # Layout components
+│   │   │   │   ├── Navbar.tsx
+│   │   │   │   ├── Footer.tsx
+│   │   │   │   └── Layout.tsx
+│   │   │   └── home/                # Homepage sections
+│   │   │       ├── Hero.tsx
+│   │   │       ├── Features.tsx
+│   │   │       ├── HowItWorks.tsx
+│   │   │       ├── Testimonials.tsx
+│   │   │       ├── FAQ.tsx
+│   │   │       └── FinalCTA.tsx
+│   │   ├── pages/                   # Route pages
+│   │   │   ├── Home.tsx
+│   │   │   ├── FormulaGenerator.tsx  # Soul discovery quiz
+│   │   │   ├── AllSouls.tsx          # Archetype comparison page
+│   │   │   ├── HowItWorks.tsx
+│   │   │   ├── Ingredients.tsx
+│   │   │   ├── Pricing.tsx
+│   │   │   └── About.tsx
+│   │   ├── data/                    # Static data & databases
+│   │   │   ├── archetypes.ts        # 12 training souls
+│   │   │   ├── quizQuestions.ts     # Soul discovery quiz
+│   │   │   ├── ingredients.ts       # Ingredient database (15+ items)
+│   │   │   ├── testimonials.ts
+│   │   │   └── faqs.ts
+│   │   ├── utils/                   # Business logic
+│   │   │   ├── archetypeMatching.ts          # Dimension scoring algorithm
+│   │   │   ├── archetypeFormulaGenerator.ts  # Formula generation
+│   │   │   └── doseAnalysis.ts               # Clinical dose analysis
+│   │   ├── types/                   # TypeScript definitions
+│   │   │   └── index.ts             # All type definitions
+│   │   ├── App.tsx                  # Root component with routing
+│   │   ├── main.tsx                 # Application entry point
+│   │   └── index.css                # Global styles
+│   ├── public/                      # Static assets
+│   ├── dist/                        # Production build output
+│   ├── package.json
+│   ├── tsconfig.json               # TypeScript configuration
+│   ├── tailwind.config.js          # Tailwind customization
+│   ├── vite.config.ts              # Vite configuration
+│   └── vercel.json                 # Vercel deployment config
+├── ASSET_PROMPTS.md                # AI image generation prompts
+└── README.md                       # This file
 ```
 
-## Getting Started
+---
+
+## 🧬 Soul Discovery System
+
+### The Algorithm
+
+The soul discovery system uses a **5-dimensional personality model** to match users with their ideal training archetype:
+
+#### 1. **Intensity Dimension**
+   - `explosive`: High-intensity, aggressive training
+   - `steady`: Consistent, controlled approach
+   - `mixed`: Variable intensity
+
+#### 2. **Duration Dimension**
+   - `sprint`: Short, intense sessions (20-30min)
+   - `mixed`: Balanced duration (45-60min)
+   - `marathon`: Extended training (90min+)
+
+#### 3. **Focus Dimension**
+   - `aggressive`: Primal, instinct-driven
+   - `controlled`: Calculated, technical
+   - `flow`: Meditative, present
+
+#### 4. **Energy Pattern**
+   - `burst`: Fast-acting, explosive energy
+   - `balanced`: Smooth, sustained energy
+   - `sustained`: Long-lasting endurance
+
+#### 5. **Stimulant Tolerance**
+   - `none`: No caffeine
+   - `low`: 0-150mg caffeine
+   - `moderate`: 150-250mg caffeine
+   - `high`: 250-400mg caffeine
+
+### The Quiz
+
+10 carefully crafted questions that assess:
+- Training philosophy and approach
+- Motivation and drive
+- Response to adversity
+- Session preferences
+- Energy flow preferences
+- Caffeine tolerance
+- Training timing
+- Primary fitness goals
+- Body composition
+- Safety considerations
+
+### Formula Generation
+
+Each archetype has a unique **formula profile** that determines:
+
+- **Caffeine Range**: Min/max caffeine content
+- **Pump Level**: light → moderate → high → maximum
+- **Strength Focus**: Creatine and power-boosting compounds
+- **Endurance Focus**: Beta-alanine and stamina ingredients
+- **Focus Level**: Nootropics and cognitive enhancers
+- **Intensity Rating**: 1-10 scale
+
+The formula generator then:
+1. Adjusts for user context (weight, timing, sensitivity)
+2. Selects ingredients in 6 layers:
+   - Energy & Stimulants
+   - Pump & Blood Flow
+   - Strength & Power
+   - Endurance & Stamina
+   - Focus & Cognition
+   - Hydration & Electrolytes
+3. Calculates clinical dosages with scaling factors
+4. Provides dose context (LOW/MODERATE/HIGH vs clinical range)
+
+---
+
+## 🧪 Ingredient Database
+
+### Categories & Examples
+
+| Category | Ingredients | Purpose |
+|----------|-------------|---------|
+| **Energy** | Caffeine Anhydrous, Theobromine | Alertness, energy, thermogenesis |
+| **Pump** | L-Citrulline, Beetroot Extract | Nitric oxide, blood flow, pumps |
+| **Strength** | Creatine Monohydrate, Betaine | Power output, muscle strength |
+| **Endurance** | Beta-Alanine, Taurine | Stamina, fatigue resistance |
+| **Focus** | L-Tyrosine, Alpha-GPC, L-Theanine | Mental clarity, mind-muscle connection |
+| **Hydration** | Sodium, Potassium | Electrolyte balance, performance |
+
+Each ingredient includes:
+- **Name & Description**
+- **Clinical Dosage Range** (min-max)
+- **Benefits** (array of effects)
+- **Science Rating** (1-5 stars)
+- **Caffeine Content** (if applicable)
+
+### Dose Analysis System
+
+For every ingredient in a user's formula, we show:
+- **Clinical Range**: e.g., "6,000-8,000mg"
+- **User's Dose**: e.g., "7,500mg"
+- **Dose Level**: `LOW` | `MODERATE` | `HIGH` | `MAXIMUM`
+- **Color-Coded Indicator**: Visual feedback on dosing strategy
+
+---
+
+## 🎨 Design System
+
+### Color Palette
+
+```javascript
+{
+  primary: {
+    DEFAULT: '#00E5FF',  // Electric Blue
+    dark: '#00B8D4',
+    light: '#6EFFFF',
+  },
+  secondary: {
+    DEFAULT: '#FF00E5',  // Neon Pink
+    dark: '#C700B3',
+    light: '#FF6EFF',
+  },
+  accent: '#39FF14',      // Neon Green
+  dark: {
+    DEFAULT: '#0A0E27',   // Deep Navy
+    lighter: '#141B3E',
+    light: '#1E2749',
+  }
+}
+```
+
+### Typography
+
+- **Headings**: Space Grotesk (Bold, Modern)
+- **Body**: Inter (Clean, Readable)
+
+### Animation Strategy
+
+- **Page Transitions**: Fade + slide animations
+- **Element Reveals**: Staggered appearance with delays
+- **Interactions**: Scale + color transitions on hover
+- **Loading States**: Spinning indicators with pulsing effects
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 16+ and npm
+
+- **Node.js**: v16 or higher
+- **npm** or **yarn**
 
 ### Installation
 
-1. Navigate to the project directory:
 ```bash
-cd preworkout-startup
-```
+# Clone the repository
+git clone https://github.com/HermannPR/2HLABS.git
 
-2. Install dependencies (already done):
-```bash
+# Navigate to project directory
+cd 2HLABS/preworkout-startup
+
+# Install dependencies
 npm install
-```
 
-3. Start the development server:
-```bash
+# Start development server
 npm run dev
 ```
 
-4. Open your browser to `http://localhost:5173`
+The application will be available at `http://localhost:5173`
 
-### Build for Production
+### Scripts
+
+```bash
+# Development
+npm run dev          # Start dev server with HMR
+
+# Production
+npm run build        # Build for production
+npm run preview      # Preview production build locally
+
+# Linting
+npm run lint         # Run ESLint
+```
+
+---
+
+## 📦 Deployment
+
+### Vercel (Recommended)
+
+The project is configured for zero-config Vercel deployment:
+
+```bash
+# Install Vercel CLI
+npm install -g vercel
+
+# Deploy
+vercel
+```
+
+Or connect your GitHub repository to Vercel for automatic deployments on every push to `main`.
+
+**Live URL**: [Your Vercel deployment URL]
+
+### Build Output
 
 ```bash
 npm run build
 ```
 
-The production-ready files will be in the `dist/` directory.
+Generates optimized production build in `dist/` directory:
+- Minified JavaScript bundles
+- Optimized CSS with PurgeCSS
+- Compressed assets
+- Source maps for debugging
 
-### Preview Production Build
+---
 
-```bash
-npm run preview
-```
+## 🎯 Key Features
 
-## Deployment to Vercel
+### ✅ Completed
 
-1. Install Vercel CLI:
-```bash
-npm install -g vercel
-```
+- **Soul Discovery Quiz** - 10-question personality-based assessment
+- **12 Unique Archetypes** - Complete profiles with formulas
+- **Dynamic Formula Generation** - Personalized ingredient selection
+- **Dose Context Display** - Clinical range comparison
+- **All Souls Comparison Page** - Browse all 12 archetypes
+- **Archetype Reveal Animation** - Epic results page with staggered animations
+- **Responsive Design** - Mobile-first, fully responsive
+- **Ingredient Library** - Filterable database with search
+- **Homepage** - Complete marketing site
+- **Navigation** - Multi-page routing with React Router
 
-2. Deploy:
-```bash
-vercel
-```
+### 🚧 Roadmap
 
-Or connect your GitHub repository to Vercel for automatic deployments.
+- [ ] User Authentication (Auth0 / Firebase)
+- [ ] Saved Formulas & User Profiles
+- [ ] E-commerce Integration (Stripe)
+- [ ] Subscription Management
+- [ ] Admin Dashboard
+- [ ] Email Marketing (Mailchimp / SendGrid)
+- [ ] Blog / Content Management
+- [ ] A/B Testing Framework
+- [ ] Analytics Integration (Google Analytics, Mixpanel)
+- [ ] Customer Reviews & Ratings
+- [ ] Referral Program
+- [ ] Mobile App (React Native)
 
-### Vercel Configuration
+---
 
-The project is already configured for Vercel deployment with the default Vite settings. No additional configuration needed.
+## 🧪 Formula Generation Algorithm
 
-## Customization
+### Input Data
 
-### Colors
-Edit `tailwind.config.js` to change the color scheme:
-```javascript
-colors: {
-  primary: '#00E5FF',    // Electric blue
-  secondary: '#FF00E5',  // Neon pink
-  accent: '#39FF14',     // Neon green
-  dark: '#0A0E27',       // Dark background
+```typescript
+{
+  archetype: Archetype,           // Matched soul
+  answers: QuizAnswers,           // Raw quiz responses
+  userContext: {
+    weight: number,
+    trainingTime: string,
+    isNewUser: boolean,
+    isSensitive: boolean,
+    isEveningTrainer: boolean,
+  }
 }
 ```
 
-### Ingredients
-Add or modify ingredients in `src/data/ingredients.ts`
+### Processing Steps
 
-### Formula Algorithm
-Customize the formula generation logic in `src/utils/formulaGenerator.ts`
+1. **Extract User Context**
+   - Parse body weight from quiz
+   - Determine training time preferences
+   - Identify sensitivities and restrictions
 
-## Key Components
+2. **Apply Archetype Profile**
+   - Load archetype's formula template
+   - Get caffeine range, pump level, focus level, etc.
 
-### Formula Generator Algorithm
-Located in `src/utils/formulaGenerator.ts`, the algorithm:
-- Scales dosages based on body weight
-- Selects ingredients based on training goals
-- Adjusts caffeine based on tolerance and workout timing
-- Includes electrolytes for high-intensity or long-duration workouts
-- Generates personalized formula names
+3. **Adjust for Context**
+   - Scale caffeine for new users (-30%)
+   - Scale caffeine for sensitive users (-40%)
+   - Scale caffeine for evening trainers (-50%)
+   - Scale ingredient dosages by body weight (±15%)
 
-### Ingredient Database
-15+ science-backed ingredients including:
-- Energy: Caffeine, Theobromine
-- Pump: L-Citrulline, Beetroot Extract
-- Strength: Creatine, Betaine
-- Endurance: Beta-Alanine, Taurine
-- Focus: L-Tyrosine, Alpha-GPC, L-Theanine
-- Hydration: Sodium, Potassium
+4. **Select Ingredients**
+   - Energy layer (caffeine, theobromine, theanine)
+   - Pump layer (citrulline, beetroot)
+   - Strength layer (creatine, betaine)
+   - Endurance layer (beta-alanine, taurine)
+   - Focus layer (tyrosine, alpha-GPC)
+   - Hydration layer (electrolytes)
 
-## Features to Add (Future Enhancements)
+5. **Generate Output**
+   - Calculate total caffeine
+   - Format dosages with units
+   - Provide reasoning for each ingredient
+   - Add dose context (clinical range comparison)
 
-- User authentication and saved formulas
-- Payment integration (Stripe)
-- Email capture and marketing automation
-- Admin dashboard for order management
-- Blog/content management system
-- A/B testing for conversion optimization
-- Analytics integration (Google Analytics, Mixpanel)
-- Customer reviews and ratings
-- Referral program
-- Subscription management
+### Output Data
 
-## Current Status
+```typescript
+{
+  id: string,
+  ingredients: FormulaIngredient[],  // Array of 8-12 ingredients
+  totalCaffeine: number,             // Total mg caffeine
+  createdAt: Date,
+  name: string,                      // Archetype name
+  profile: UserProfile,
+}
+```
 
-✅ Development server is running at `http://localhost:5173`
-✅ All pages are functional
-✅ Formula generator is operational
-✅ Responsive design implemented
-✅ Ready for further customization and deployment
+---
 
-## License
+## 📊 Type System
 
-All rights reserved - 2HLABS
+All data structures are strongly typed with TypeScript. Key types include:
 
-## Support
+```typescript
+// Core types
+Archetype, Formula, Ingredient, QuizQuestion, QuizAnswers
 
-For questions or issues, contact the development team.
+// Dimension types
+IntensityType, DurationType, FocusType, EnergyPattern, StimTolerance
+
+// Component types
+FormulaIngredient, DimensionScores, ArchetypeResult, UserContext
+
+// Analysis types
+DoseLevel, DoseAnalysis
+```
+
+See `src/types/index.ts` for complete type definitions.
+
+---
+
+## 🎨 Asset Generation
+
+The project includes `ASSET_PROMPTS.md` with 50+ detailed AI image generation prompts for:
+
+- 12 Soul Logos (circular badges, 512x512px)
+- Simplified Icons (128x128px)
+- Category Icons (7 types)
+- Trust Badges (4 types)
+- Background Images & Textures
+- UI Accent Graphics
+- Flavor Visuals (coming soon)
+- Social Media Templates
+
+All prompts are designed for consistency with the brand's electric/neon aesthetic.
+
+---
+
+## 🤝 Contributing
+
+This is a private project for 2HLABS. For internal development:
+
+1. Create a feature branch: `git checkout -b feature/your-feature`
+2. Make your changes
+3. Test thoroughly: `npm run build` (must succeed)
+4. Commit: `git commit -m "Description"`
+5. Push: `git push origin feature/your-feature`
+6. Create a Pull Request
+
+### Code Standards
+
+- Use TypeScript for all new code
+- Follow existing component patterns
+- Use Tailwind classes (avoid custom CSS)
+- Add proper type definitions
+- Test responsive design (mobile/tablet/desktop)
+
+---
+
+## 📄 License
+
+All rights reserved - 2HLABS © 2025
+
+---
+
+## 📞 Support
+
+For questions or issues:
+- **Email**: support@2hlabs.com
+- **GitHub Issues**: [Create an issue](https://github.com/HermannPR/2HLABS/issues)
+
+---
+
+**Built with 💪 by the 2HLABS Team**

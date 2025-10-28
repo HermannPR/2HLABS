@@ -324,15 +324,103 @@ Abstract athletic silhouette avatar, geometric and minimal, electric blue outlin
 
 ---
 
-## 12. SOCIAL MEDIA ASSETS
+## 12. SOUL CONCEPT INTRODUCTION IMAGES
 
-### 12.1 Instagram Post Template
+These images help users understand the soul discovery concept when they first arrive.
+
+### 12.1 Soul Discovery Hero Image
+**Prompt:**
+```
+Abstract visualization of 12 different energy signatures or auras, each with distinct colors and patterns, arranged in a circular composition, mystical but modern aesthetic, electric blue and neon pink energy flows connecting them, dark background with particle effects, represents the concept of different training souls or archetypes, 1920x1080px, cinematic and powerful, fitness meets spirituality
+```
+
+### 12.2 Dimension Visualization Image
+**Prompt:**
+```
+Five interconnected dimensional axes or vectors in 3D space, geometric abstract style, each axis labeled (Intensity, Duration, Focus, Energy, Tolerance), electric blue and neon pink gradients, dark background, modern infographic aesthetic, represents personality dimensions, 1200x800px, clean and professional
+```
+
+### 12.3 Quiz Journey Illustration
+**Prompt:**
+```
+Abstract path or journey visualization, 10 stepping stones or waypoints representing quiz questions, leading to a glowing destination, electric blue path with neon pink accents, dark background, inspirational and mysterious, represents soul discovery journey, 1600x900px, modern minimalist style
+```
+
+### 12.4 Archetype Matching Animation Frame
+**Prompt:**
+```
+Abstract DNA helix or matching algorithm visualization, geometric particles coming together to form a cohesive pattern, electric blue to neon pink gradient, dark background, represents the matching process between user and archetype, 1000x1000px, modern tech aesthetic, suitable for animation
+```
+
+### 12.5 "What is Your Soul?" Header Image
+**Prompt:**
+```
+Mystical question mark shape made of swirling energy particles, transforming into 12 small creature silhouettes (gorilla, dragon, cheetah, eagle, etc.), electric blue and neon colors, dark atmospheric background, powerful and intriguing, 1920x600px banner format, draws users into the concept
+```
+
+### 12.6 Training Philosophy Icons (Set of 5)
+**Prompt:**
+```
+Five minimalist icons representing the 5 dimensions: (1) Lightning bolt for Intensity, (2) Hourglass for Duration, (3) Target/crosshair for Focus, (4) Energy wave for Energy Pattern, (5) Thermometer/gauge for Tolerance. Clean line art style, electric blue color, 256x256px each, modern and professional, consistent style across all five
+```
+
+### 12.7 Before Quiz Explainer Infographic
+**Prompt:**
+```
+Vertical infographic showing "Your Training Soul Exists" concept, split into three sections: (1) top shows question mark silhouette, (2) middle shows quiz/test icons, (3) bottom shows creature transformation, electric blue and neon pink, dark background, 800x2000px vertical format, tells the story of discovery
+```
+
+### 12.8 Soul Comparison Chart Background
+**Prompt:**
+```
+Abstract grid or matrix visualization with 12 spaces/nodes, interconnected with subtle lines, represents the full archetype ecosystem, dark background with electric blue grid lines, neon pink highlights, modern data visualization aesthetic, 1920x1080px, suitable as background for comparison page
+```
+
+### 12.9 "Find Your Match" Hero Banner
+**Prompt:**
+```
+Split-screen composition: left side shows abstract human silhouette made of particles, right side shows all 12 soul creature silhouettes arranged in circle, electric blue connection lines between them, dark background, represents human-to-soul matching, 1920x800px banner, modern and mystical
+```
+
+### 12.10 Quiz Introduction Card Images (Set of 3)
+**Prompt for Card 1 - "No Wrong Answers":**
+```
+Abstract checkmark transforming into multiple paths, all glowing electric blue, represents that all answers are valid, dark background, reassuring and open aesthetic, 600x400px card format, modern illustration style
+```
+
+**Prompt for Card 2 - "Takes 2 Minutes":**
+```
+Minimalist clock or timer visualization with energy particles flowing around it, electric blue and neon pink, represents quick and easy process, dark background, 600x400px card format, clean and modern
+```
+
+**Prompt for Card 3 - "Science-Based":**
+```
+Abstract DNA helix merging with geometric data visualization, molecule structures with glowing nodes, electric blue and white colors, represents scientific approach, dark background, 600x400px card format, professional and trustworthy
+```
+
+### 12.11 Results Celebration Image
+**Prompt:**
+```
+Abstract energy explosion or burst pattern, radiating from center, electric blue to neon pink to neon green gradient, particle effects, represents the moment of soul discovery/revelation, dark background, 1200x1200px, celebratory and powerful aesthetic, suitable for results page background
+```
+
+### 12.12 Mobile Quiz Background Pattern
+**Prompt:**
+```
+Seamless subtle pattern of small abstract creature silhouettes and energy symbols, very dark with barely visible electric blue outlines, tileable texture, 800x800px, works as mobile app or mobile web background, modern and minimal
+```
+
+---
+
+## 13. SOCIAL MEDIA ASSETS
+
+### 13.1 Instagram Post Template
 **Prompt:**
 ```
 Square social media post template for fitness brand, dark background with electric blue accents, modern geometric layout, space for text overlay, 1080x1080px, energetic and professional
 ```
 
-### 12.2 Story Background
+### 13.2 Story Background
 **Prompt:**
 ```
 Vertical social media story background, dark with electric blue and neon pink gradients, modern energetic style, space for content overlay, 1080x1920px

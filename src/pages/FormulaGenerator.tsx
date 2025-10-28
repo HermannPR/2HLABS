@@ -7,6 +7,7 @@ import { Card } from '../components/common/Card';
 import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 import { getArchetypeResult } from '../utils/archetypeMatching';
 import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
+import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
 
 export const FormulaGenerator = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -334,32 +335,51 @@ export const FormulaGenerator = () => {
               </div>
 
               <div className="space-y-4">
-                {formula.ingredients.map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 bg-dark-lighter rounded-lg border border-dark-light hover:border-primary/30 transition-colors"
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-white">
-                          {item.ingredient.name}
-                        </h3>
-                        <p className="text-sm text-gray-400 mb-2">
-                          {item.ingredient.description}
-                        </p>
-                        <p className="text-sm text-accent italic">
-                          {item.reason}
-                        </p>
-                      </div>
-                      <div className="text-right ml-4">
-                        <div className="text-2xl font-bold text-primary">
-                          {item.dosage.toLocaleString()}
-                          <span className="text-sm ml-1">{item.unit}</span>
+                {formula.ingredients.map((item, idx) => {
+                  const doseAnalysis = analyzeDose(item.dosage, item.ingredient);
+                  const clinicalRange = formatDoseRange(item.ingredient);
+
+                  return (
+                    <div
+                      key={idx}
+                      className="p-4 bg-dark-lighter rounded-lg border border-dark-light hover:border-primary/30 transition-colors"
+                    >
+                      <div className="flex items-start justify-between mb-3">
+                        <div className="flex-1">
+                          <h3 className="text-lg font-semibold text-white">
+                            {item.ingredient.name}
+                          </h3>
+                          <p className="text-sm text-gray-400 mb-2">
+                            {item.ingredient.description}
+                          </p>
+                          <p className="text-sm text-accent italic mb-3">
+                            {item.reason}
+                          </p>
+
+                          {/* Dose Context */}
+                          <div className="flex items-center gap-4 text-xs">
+                            <div className="flex items-center gap-2">
+                              <span className="text-gray-500">Clinical Range:</span>
+                              <span className="text-gray-300 font-semibold">{clinicalRange}</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <span className="text-gray-500">Your Dose:</span>
+                              <span className={`font-bold ${doseAnalysis.color}`}>
+                                {doseAnalysis.label}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right ml-4 flex-shrink-0">
+                          <div className="text-2xl font-bold text-primary">
+                            {item.dosage.toLocaleString()}
+                            <span className="text-sm ml-1">{item.unit}</span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </Card>
           </motion.div>
@@ -392,7 +412,7 @@ export const FormulaGenerator = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
           >
             <Button size="lg" className="text-lg px-8">
               Get Your {archetype.name} Formula
@@ -410,6 +430,22 @@ export const FormulaGenerator = () => {
             >
               Discover Another Soul
             </Button>
+          </motion.div>
+
+          {/* View All Souls Link */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2.2 }}
+            className="text-center"
+          >
+            <a
+              href="/souls"
+              className="text-primary hover:text-primary-light transition-colors font-semibold inline-flex items-center gap-2"
+            >
+              <span>Compare All 12 Training Souls</span>
+              <span>→</span>
+            </a>
           </motion.div>
         </div>
       </div>
