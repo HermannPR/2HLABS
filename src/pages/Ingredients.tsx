@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { INGREDIENTS } from '../data/ingredients';
 import { Card } from '../components/common/Card';
-import { IngredientCategory } from '../types';
+import type { IngredientCategory } from '../types';
 
 export const Ingredients = () => {
   const [selectedCategory, setSelectedCategory] = useState<IngredientCategory | 'all'>('all');

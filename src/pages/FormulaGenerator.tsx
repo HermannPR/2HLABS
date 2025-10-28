@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { UserData, Formula } from '../types';
+import type { UserData, Formula } from '../types';
 import { generateFormula } from '../utils/formulaGenerator';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';

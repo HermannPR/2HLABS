@@ -1,5 +1,5 @@
-import { UserData, Formula, FormulaIngredient, Goal } from '../types';
-import { INGREDIENTS, getIngredientById } from '../data/ingredients';
+import type { UserData, Formula, FormulaIngredient, Goal } from '../types';
+import { getIngredientById } from '../data/ingredients';
 
 export class FormulaGenerator {
   private userData: UserData;

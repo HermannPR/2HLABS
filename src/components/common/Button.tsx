@@ -1,5 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
-import { motion } from 'framer-motion';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -16,7 +15,7 @@ export const Button = ({
   className = '',
   ...props
 }: ButtonProps) => {
-  const baseStyles = 'font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'font-semibold rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 active:scale-95';
 
   const variants = {
     primary: 'bg-gradient-to-r from-primary to-secondary text-white hover:shadow-lg hover:shadow-primary/50',
@@ -33,13 +32,11 @@ export const Button = ({
   const widthClass = fullWidth ? 'w-full' : '';
 
   return (
-    <motion.button
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
+    <button
       className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${widthClass} ${className}`}
       {...props}
     >
       {children}
-    </motion.button>
+    </button>
   );
 };
