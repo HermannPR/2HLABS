@@ -29,13 +29,6 @@ export const AllSouls = () => {
     return colorMap[value] || 'bg-gray-500/20 text-gray-400 border-gray-500/30';
   };
 
-  const getIntensityColor = (intensity: number) => {
-    if (intensity >= 8) return 'text-red-500';
-    if (intensity >= 6) return 'text-orange-500';
-    if (intensity >= 4) return 'text-yellow-500';
-    return 'text-green-500';
-  };
-
   return (
     <div className="min-h-screen bg-dark py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
