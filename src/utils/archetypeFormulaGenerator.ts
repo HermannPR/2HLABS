@@ -305,14 +305,14 @@ const getHydrationIngredients = (archetype: Archetype): FormulaIngredient[] => {
 };
 
 const extractWeight = (answers: QuizAnswers): number => {
-  const weightAnswer = answers['q9-bodyweight'];
+  const weightAnswer = answers['q9-body-size'];
   if (!weightAnswer) return 75; // default
 
   const weightMap: Record<string, number> = {
-    'light': 55,
-    'medium': 67.5,
-    'athletic': 82.5,
-    'heavy': 95,
+    'compact': 55,
+    'athletic': 67.5,
+    'powerful': 82.5,
+    'massive': 95,
   };
 
   return weightMap[weightAnswer as string] || 75;
@@ -328,22 +328,22 @@ const generateFormulaId = (): string => {
 };
 
 export const getUserContextFromAnswers = (answers: QuizAnswers): UserContext => {
-  const restrictions = answers['q10-restrictions'];
-  const restrictionsArray = Array.isArray(restrictions) ? restrictions : [restrictions];
+  const considerations = answers['q10-considerations'];
+  const considerationsArray = Array.isArray(considerations) ? considerations : [considerations];
 
   const timing = answers['q7-timing'] as string;
   const timingMap: Record<string, UserContext['trainingTime']> = {
-    'morning': 'morning',
+    'dawn': 'morning',
     'midday': 'midday',
     'afternoon': 'afternoon',
-    'evening': 'evening',
+    'night': 'evening',
   };
 
   return {
     weight: extractWeight(answers),
     trainingTime: timingMap[timing] || 'morning',
-    isNewUser: restrictionsArray.includes('new-user'),
-    isSensitive: restrictionsArray.includes('sensitive') || restrictionsArray.includes('sleep-issues'),
-    isEveningTrainer: restrictionsArray.includes('evening-train') || timing === 'evening',
+    isNewUser: considerationsArray.includes('first-timer'),
+    isSensitive: considerationsArray.includes('stim-sensitive') || considerationsArray.includes('sleep-priority'),
+    isEveningTrainer: considerationsArray.includes('evening-trainer') || timing === 'night',
   };
 };

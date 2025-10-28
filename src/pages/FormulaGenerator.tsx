@@ -1,479 +1,560 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import type { UserData, Formula } from '../types';
-import { generateFormula } from '../utils/formulaGenerator';
+import { QUIZ_QUESTIONS } from '../data/quizQuestions';
+import type { QuizAnswers, ArchetypeResult } from '../types';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
-import { HiCheckCircle } from 'react-icons/hi';
-
-type Step = 'profile' | 'training' | 'preferences' | 'health' | 'result';
+import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import { getArchetypeResult } from '../utils/archetypeMatching';
+import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
 
 export const FormulaGenerator = () => {
-  const [currentStep, setCurrentStep] = useState<Step>('profile');
-  const [formula, setFormula] = useState<Formula | null>(null);
-  const [userData, setUserData] = useState<Partial<UserData>>({
-    profile: {
-      age: 25,
-      weight: 70,
-      gender: 'male',
-      fitnessLevel: 'intermediate',
-      goals: [],
-    },
-    training: {
-      workoutTime: 'morning',
-      workoutType: [],
-      duration: 60,
-      frequency: 4,
-    },
-    preferences: {
-      caffeineTolerance: 'medium',
-      stimulantPreference: 'moderate',
-      dietaryRestrictions: [],
-      avoidIngredients: [],
-    },
-    health: {
-      sleepQuality: 'good',
-      stressLevel: 'medium',
-      sensitivities: [],
-    },
-  });
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<QuizAnswers>({});
+  const [showResults, setShowResults] = useState(false);
+  const [archetypeResult, setArchetypeResult] = useState<ArchetypeResult | null>(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
-  const steps: { id: Step; title: string; number: number }[] = [
-    { id: 'profile', title: 'Profile', number: 1 },
-    { id: 'training', title: 'Training', number: 2 },
-    { id: 'preferences', title: 'Preferences', number: 3 },
-    { id: 'health', title: 'Health', number: 4 },
-  ];
+  const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
+  const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
+  const progress = ((currentQuestionIndex + 1) / QUIZ_QUESTIONS.length) * 100;
 
-  const currentStepIndex = steps.findIndex(s => s.id === currentStep);
+  const handleAnswer = (optionId: string) => {
+    // Handle multi-select for q10-considerations
+    if (currentQuestion.id === 'q10-considerations') {
+      const currentAnswers = (answers[currentQuestion.id] as string[]) || [];
 
-  const handleGenerateFormula = () => {
-    const generated = generateFormula(userData as UserData);
-    setFormula(generated);
-    setCurrentStep('result');
+      // Toggle selection
+      let newAnswers: string[];
+      if (optionId === 'none-apply') {
+        // If "none apply" is selected, clear all others
+        newAnswers = ['none-apply'];
+      } else {
+        // Remove "none-apply" if selecting something else
+        newAnswers = currentAnswers.filter(a => a !== 'none-apply');
+
+        if (currentAnswers.includes(optionId)) {
+          // Deselect
+          newAnswers = newAnswers.filter(a => a !== optionId);
+        } else {
+          // Select
+          newAnswers = [...newAnswers, optionId];
+        }
+      }
+
+      setAnswers({
+        ...answers,
+        [currentQuestion.id]: newAnswers,
+      });
+    } else {
+      // Single select
+      setAnswers({
+        ...answers,
+        [currentQuestion.id]: optionId,
+      });
+    }
   };
 
-  return (
-    <div className="min-h-screen bg-dark py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {currentStep !== 'result' ? (
-          <>
-            {/* Progress Bar */}
-            <div className="mb-12">
-              <div className="flex justify-between items-center mb-4">
-                {steps.map((step, index) => (
-                  <div key={step.id} className="flex items-center flex-1">
-                    <div className="flex flex-col items-center">
-                      <div
-                        className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
-                          index <= currentStepIndex
-                            ? 'bg-gradient-to-r from-primary to-secondary text-white'
-                            : 'bg-dark-lighter text-gray-500'
-                        }`}
-                      >
-                        {index < currentStepIndex ? <HiCheckCircle size={24} /> : step.number}
+  const handleNext = () => {
+    if (isLastQuestion) {
+      // Show analyzing animation
+      setIsAnalyzing(true);
+
+      // Calculate archetype with a dramatic delay
+      setTimeout(() => {
+        const result = getArchetypeResult(answers);
+        const userContext = getUserContextFromAnswers(answers);
+        const formula = generateArchetypeFormula(result.archetype, answers, userContext);
+
+        setArchetypeResult({
+          ...result,
+          formula,
+        });
+
+        setIsAnalyzing(false);
+        setShowResults(true);
+      }, 2500);
+    } else {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1);
+    }
+  };
+
+  const isAnswered = () => {
+    const answer = answers[currentQuestion.id];
+    if (currentQuestion.id === 'q10-considerations') {
+      return Array.isArray(answer) && answer.length > 0;
+    }
+    return answer !== undefined && answer !== '';
+  };
+
+  // Analyzing screen
+  if (isAnalyzing) {
+    return (
+      <div className="min-h-screen bg-dark flex items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="text-center"
+        >
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="w-24 h-24 mx-auto mb-8 border-4 border-primary border-t-transparent rounded-full"
+          />
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-gradient mb-4">
+            Analyzing Your Soul...
+          </h2>
+          <p className="text-gray-400 text-lg">
+            Discovering your true training archetype
+          </p>
+        </motion.div>
+      </div>
+    );
+  }
+
+  // Results screen
+  if (showResults && archetypeResult) {
+    const { archetype, dimensionScores, formula, matchPercentage } = archetypeResult;
+
+    return (
+      <div className="min-h-screen bg-dark py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Archetype Reveal Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-12"
+          >
+            <motion.div
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
+              className="text-8xl mb-6"
+            >
+              {archetype.emoji}
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-5xl md:text-7xl font-heading font-bold mb-4"
+            >
+              {archetype.name}
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="text-2xl md:text-3xl text-primary font-semibold mb-6"
+            >
+              {archetype.tagline}
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+              className="inline-block px-6 py-2 bg-primary/10 border-2 border-primary rounded-full"
+            >
+              <span className="text-primary font-bold text-lg">
+                {matchPercentage}% Match
+              </span>
+            </motion.div>
+          </motion.div>
+
+          {/* Archetype Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+          >
+            <Card className="mb-8">
+              <h2 className="text-2xl font-heading font-bold mb-4">Your Soul's Essence</h2>
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                {archetype.description}
+              </p>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="text-lg font-semibold text-primary mb-3">Core Traits</h3>
+                  <ul className="space-y-2">
+                    {archetype.traits.map((trait, idx) => (
+                      <li key={idx} className="flex items-start space-x-2">
+                        <span className="text-accent mt-1">▸</span>
+                        <span className="text-gray-300">{trait}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-semibold text-primary mb-3">You Thrive As</h3>
+                  <ul className="space-y-2">
+                    {archetype.athleteTypes.map((type, idx) => (
+                      <li key={idx} className="flex items-start space-x-2">
+                        <span className="text-accent mt-1">▸</span>
+                        <span className="text-gray-300">{type}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* Dimension Scores */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4 }}
+          >
+            <Card className="mb-8">
+              <h2 className="text-2xl font-heading font-bold mb-6">Your Training DNA</h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-400">Intensity</span>
+                    <span className="text-primary font-bold uppercase text-sm">
+                      {dimensionScores.intensity}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                      style={{ width: `${dimensionScores.intensityScore}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-400">Duration</span>
+                    <span className="text-primary font-bold uppercase text-sm">
+                      {dimensionScores.duration}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                      style={{ width: `${dimensionScores.durationScore}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-400">Focus</span>
+                    <span className="text-primary font-bold uppercase text-sm">
+                      {dimensionScores.focus}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                      style={{ width: `${dimensionScores.focusScore}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-400">Energy Pattern</span>
+                    <span className="text-primary font-bold uppercase text-sm">
+                      {dimensionScores.energyPattern}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                      style={{ width: `${dimensionScores.energyScore}%` }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-gray-400">Stim Tolerance</span>
+                    <span className="text-primary font-bold uppercase text-sm">
+                      {dimensionScores.stimTolerance}
+                    </span>
+                  </div>
+                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-gradient-to-r from-primary to-secondary"
+                      style={{
+                        width: `${
+                          dimensionScores.stimTolerance === 'none' ? 0 :
+                          dimensionScores.stimTolerance === 'low' ? 25 :
+                          dimensionScores.stimTolerance === 'moderate' ? 60 :
+                          100
+                        }%`
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* Formula Breakdown */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.6 }}
+          >
+            <Card className="mb-8">
+              <h2 className="text-2xl font-heading font-bold mb-2">Your Custom Formula</h2>
+              <p className="text-gray-400 mb-6">
+                Scientifically dosed for your unique archetype
+              </p>
+
+              <div className="mb-6 p-4 bg-primary/5 border border-primary/20 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <span className="text-lg font-semibold">Total Caffeine</span>
+                  <span className="text-3xl font-bold text-primary">
+                    {formula.totalCaffeine}mg
+                  </span>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {formula.ingredients.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-4 bg-dark-lighter rounded-lg border border-dark-light hover:border-primary/30 transition-colors"
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-white">
+                          {item.ingredient.name}
+                        </h3>
+                        <p className="text-sm text-gray-400 mb-2">
+                          {item.ingredient.description}
+                        </p>
+                        <p className="text-sm text-accent italic">
+                          {item.reason}
+                        </p>
                       </div>
-                      <span className="text-xs mt-2 text-gray-400">{step.title}</span>
+                      <div className="text-right ml-4">
+                        <div className="text-2xl font-bold text-primary">
+                          {item.dosage.toLocaleString()}
+                          <span className="text-sm ml-1">{item.unit}</span>
+                        </div>
+                      </div>
                     </div>
-                    {index < steps.length - 1 && (
-                      <div className="flex-1 h-1 mx-2 bg-dark-lighter">
-                        <div
-                          className={`h-full transition-all duration-300 ${
-                            index < currentStepIndex ? 'bg-gradient-to-r from-primary to-secondary' : ''
-                          }`}
-                        />
-                      </div>
-                    )}
                   </div>
                 ))}
               </div>
-            </div>
+            </Card>
+          </motion.div>
 
-            {/* Form Content */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentStep}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <Card>
-                  {currentStep === 'profile' && <ProfileStep userData={userData} setUserData={setUserData} />}
-                  {currentStep === 'training' && <TrainingStep userData={userData} setUserData={setUserData} />}
-                  {currentStep === 'preferences' && <PreferencesStep userData={userData} setUserData={setUserData} />}
-                  {currentStep === 'health' && <HealthStep userData={userData} setUserData={setUserData} />}
-                </Card>
-              </motion.div>
-            </AnimatePresence>
+          {/* Warnings if any */}
+          {archetype.warnings.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8 }}
+            >
+              <Card className="mb-8 border-2 border-secondary/30">
+                <h2 className="text-xl font-heading font-bold mb-4 text-secondary">
+                  Important Considerations
+                </h2>
+                <ul className="space-y-2">
+                  {archetype.warnings.map((warning, idx) => (
+                    <li key={idx} className="flex items-start space-x-2">
+                      <span className="text-secondary mt-1">⚠</span>
+                      <span className="text-gray-300">{warning}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+            </motion.div>
+          )}
 
-            {/* Navigation Buttons */}
-            <div className="flex justify-between mt-8">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  const prevIndex = currentStepIndex - 1;
-                  if (prevIndex >= 0) setCurrentStep(steps[prevIndex].id);
-                }}
-                disabled={currentStepIndex === 0}
-              >
-                Previous
-              </Button>
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 2 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Button size="lg" className="text-lg px-8">
+              Get Your {archetype.name} Formula
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={() => {
+                setShowResults(false);
+                setCurrentQuestionIndex(0);
+                setAnswers({});
+                setArchetypeResult(null);
+              }}
+              className="text-lg px-8"
+            >
+              Discover Another Soul
+            </Button>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
-              {currentStepIndex < steps.length - 1 ? (
-                <Button
-                  onClick={() => {
-                    const nextIndex = currentStepIndex + 1;
-                    setCurrentStep(steps[nextIndex].id);
-                  }}
-                >
-                  Next
-                </Button>
-              ) : (
-                <Button onClick={handleGenerateFormula}>Generate My Formula</Button>
-              )}
-            </div>
-          </>
-        ) : (
-          <FormulaResult formula={formula!} />
+  return (
+    <div className="min-h-screen bg-dark py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        {currentQuestionIndex === 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
+              Discover Your <span className="text-gradient">Training Archetype</span>
+            </h1>
+            <p className="text-xl text-gray-400">
+              Answer honestly - there are no wrong answers. This takes about 2 minutes.
+            </p>
+          </motion.div>
         )}
-      </div>
-    </div>
-  );
-};
 
-// Profile Step Component
-const ProfileStep = ({ userData, setUserData }: any) => {
-  const goals = ['strength', 'endurance', 'fat-loss', 'muscle-gain', 'focus', 'power'];
-
-  return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-heading font-bold text-gradient mb-6">Tell us about yourself</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium mb-2">Age</label>
-          <input
-            type="number"
-            value={userData.profile?.age}
-            onChange={(e) => setUserData({
-              ...userData,
-              profile: { ...userData.profile, age: parseInt(e.target.value) }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Weight (kg)</label>
-          <input
-            type="number"
-            value={userData.profile?.weight}
-            onChange={(e) => setUserData({
-              ...userData,
-              profile: { ...userData.profile, weight: parseInt(e.target.value) }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Gender</label>
-          <select
-            value={userData.profile?.gender}
-            onChange={(e) => setUserData({
-              ...userData,
-              profile: { ...userData.profile, gender: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Fitness Level</label>
-          <select
-            value={userData.profile?.fitnessLevel}
-            onChange={(e) => setUserData({
-              ...userData,
-              profile: { ...userData.profile, fitnessLevel: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="beginner">Beginner</option>
-            <option value="intermediate">Intermediate</option>
-            <option value="advanced">Advanced</option>
-          </select>
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-4">Training Goals (select all that apply)</label>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {goals.map((goal) => (
-            <button
-              key={goal}
-              onClick={() => {
-                const current = userData.profile?.goals || [];
-                const updated = current.includes(goal)
-                  ? current.filter((g: string) => g !== goal)
-                  : [...current, goal];
-                setUserData({
-                  ...userData,
-                  profile: { ...userData.profile, goals: updated }
-                });
-              }}
-              className={`px-4 py-3 rounded-lg border-2 transition-all capitalize ${
-                userData.profile?.goals?.includes(goal)
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-dark-light text-gray-400 hover:border-primary/50'
-              }`}
-            >
-              {goal.replace('-', ' ')}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Training Step Component
-const TrainingStep = ({ userData, setUserData }: any) => {
-  const workoutTypes = ['weightlifting', 'cardio', 'hiit', 'crossfit', 'sports', 'endurance'];
-
-  return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-heading font-bold text-gradient mb-6">Your Training</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium mb-2">Workout Time</label>
-          <select
-            value={userData.training?.workoutTime}
-            onChange={(e) => setUserData({
-              ...userData,
-              training: { ...userData.training, workoutTime: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="morning">Morning</option>
-            <option value="afternoon">Afternoon</option>
-            <option value="evening">Evening</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Duration (minutes)</label>
-          <input
-            type="number"
-            value={userData.training?.duration}
-            onChange={(e) => setUserData({
-              ...userData,
-              training: { ...userData.training, duration: parseInt(e.target.value) }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Frequency (days/week)</label>
-          <input
-            type="number"
-            min="1"
-            max="7"
-            value={userData.training?.frequency}
-            onChange={(e) => setUserData({
-              ...userData,
-              training: { ...userData.training, frequency: parseInt(e.target.value) }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          />
-        </div>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-4">Workout Type (select all that apply)</label>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-          {workoutTypes.map((type) => (
-            <button
-              key={type}
-              onClick={() => {
-                const current = userData.training?.workoutType || [];
-                const updated = current.includes(type)
-                  ? current.filter((t: string) => t !== type)
-                  : [...current, type];
-                setUserData({
-                  ...userData,
-                  training: { ...userData.training, workoutType: updated }
-                });
-              }}
-              className={`px-4 py-3 rounded-lg border-2 transition-all capitalize ${
-                userData.training?.workoutType?.includes(type)
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-dark-light text-gray-400 hover:border-primary/50'
-              }`}
-            >
-              {type}
-            </button>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Preferences Step Component
-const PreferencesStep = ({ userData, setUserData }: any) => {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-heading font-bold text-gradient mb-6">Your Preferences</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium mb-2">Caffeine Tolerance</label>
-          <select
-            value={userData.preferences?.caffeineTolerance}
-            onChange={(e) => setUserData({
-              ...userData,
-              preferences: { ...userData.preferences, caffeineTolerance: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="none">None - I avoid caffeine</option>
-            <option value="low">Low - Up to 100mg</option>
-            <option value="medium">Medium - 100-200mg</option>
-            <option value="high">High - 200mg+</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Stimulant Preference</label>
-          <select
-            value={userData.preferences?.stimulantPreference}
-            onChange={(e) => setUserData({
-              ...userData,
-              preferences: { ...userData.preferences, stimulantPreference: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="none">None - No stimulants</option>
-            <option value="mild">Mild stimulation</option>
-            <option value="moderate">Moderate energy</option>
-            <option value="high">Maximum energy</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Health Step Component
-const HealthStep = ({ userData, setUserData }: any) => {
-  return (
-    <div className="space-y-6">
-      <h2 className="text-3xl font-heading font-bold text-gradient mb-6">Health & Wellness</h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label className="block text-sm font-medium mb-2">Sleep Quality</label>
-          <select
-            value={userData.health?.sleepQuality}
-            onChange={(e) => setUserData({
-              ...userData,
-              health: { ...userData.health, sleepQuality: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="poor">Poor</option>
-            <option value="fair">Fair</option>
-            <option value="good">Good</option>
-            <option value="excellent">Excellent</option>
-          </select>
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium mb-2">Stress Level</label>
-          <select
-            value={userData.health?.stressLevel}
-            onChange={(e) => setUserData({
-              ...userData,
-              health: { ...userData.health, stressLevel: e.target.value }
-            })}
-            className="w-full bg-dark border border-dark-light rounded-lg px-4 py-2 focus:border-primary focus:outline-none"
-          >
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Formula Result Component
-const FormulaResult = ({ formula }: { formula: Formula }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-    >
-      <div className="text-center mb-8">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ delay: 0.2, type: 'spring' }}
-          className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-primary to-secondary mb-4"
-        >
-          <HiCheckCircle size={48} className="text-white" />
-        </motion.div>
-        <h2 className="text-4xl font-heading font-bold mb-2">Your Formula is Ready!</h2>
-        <p className="text-xl text-gray-400">"{formula.name}"</p>
-      </div>
-
-      <Card glow className="mb-6">
-        <div className="mb-6">
-          <h3 className="text-2xl font-heading font-bold mb-4">Your Personalized Ingredients</h3>
-          <p className="text-gray-400 mb-6">Total Caffeine: <span className="text-primary font-bold">{formula.totalCaffeine}mg</span></p>
-
-          <div className="space-y-4">
-            {formula.ingredients.map((item, index) => (
-              <motion.div
-                key={item.ingredient.id}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="border border-dark-light rounded-lg p-4 hover:border-primary transition-all"
-              >
-                <div className="flex justify-between items-start mb-2">
-                  <div>
-                    <h4 className="font-semibold text-lg">{item.ingredient.name}</h4>
-                    <p className="text-sm text-gray-500 capitalize">{item.ingredient.category}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-bold text-primary">{item.dosage}{item.unit}</p>
-                  </div>
-                </div>
-                <p className="text-sm text-gray-400 italic">{item.reason}</p>
-                <p className="text-sm text-gray-500 mt-2">{item.ingredient.description}</p>
-              </motion.div>
-            ))}
+        {/* Progress Bar */}
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm text-gray-400">
+              Question {currentQuestionIndex + 1} of {QUIZ_QUESTIONS.length}
+            </span>
+            <span className="text-sm text-primary font-semibold">
+              {Math.round(progress)}% Complete
+            </span>
+          </div>
+          <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-primary to-secondary"
+              initial={{ width: 0 }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.3 }}
+            />
           </div>
         </div>
 
-        <div className="border-t border-dark-light pt-6">
-          <Button fullWidth size="lg">
-            Order Your Custom Formula - $49.99/month
+        {/* Question Card */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentQuestion.id}
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.3 }}
+          >
+            <Card className="mb-8">
+              <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3">
+                {currentQuestion.question}
+              </h2>
+              {currentQuestion.description && (
+                <p className="text-gray-400 mb-6">{currentQuestion.description}</p>
+              )}
+
+              {/* Options Grid */}
+              <div className={`grid gap-4 ${
+                currentQuestion.id === 'q10-considerations'
+                  ? 'grid-cols-1 md:grid-cols-2'
+                  : currentQuestion.options.length <= 3
+                  ? 'grid-cols-1'
+                  : 'grid-cols-1 md:grid-cols-2'
+              }`}>
+                {currentQuestion.options.map((option) => {
+                  const isSelected = currentQuestion.id === 'q10-considerations'
+                    ? (answers[currentQuestion.id] as string[] || []).includes(option.id)
+                    : answers[currentQuestion.id] === option.id;
+
+                  return (
+                    <motion.button
+                      key={option.id}
+                      onClick={() => handleAnswer(option.id)}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`
+                        p-6 rounded-xl border-2 transition-all text-left
+                        ${isSelected
+                          ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
+                          : 'border-dark-light bg-dark-lighter hover:border-primary/50'
+                        }
+                      `}
+                    >
+                      <div className="flex items-start space-x-4">
+                        {option.emoji && (
+                          <span className="text-4xl flex-shrink-0">{option.emoji}</span>
+                        )}
+                        <div className="flex-1">
+                          <p className={`text-lg font-semibold mb-1 ${
+                            isSelected ? 'text-primary' : 'text-white'
+                          }`}>
+                            {option.text}
+                          </p>
+                          {/* Show checkmark if multi-select and selected */}
+                          {currentQuestion.id === 'q10-considerations' && isSelected && (
+                            <span className="text-accent text-sm">✓ Selected</span>
+                          )}
+                        </div>
+                      </div>
+                    </motion.button>
+                  );
+                })}
+              </div>
+            </Card>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation */}
+        <div className="flex justify-between items-center">
+          <Button
+            variant="outline"
+            onClick={handlePrevious}
+            disabled={currentQuestionIndex === 0}
+            className="flex items-center space-x-2"
+          >
+            <HiArrowLeft />
+            <span>Previous</span>
           </Button>
-          <p className="text-center text-sm text-gray-500 mt-4">
-            30-day money-back guarantee • Free shipping • Cancel anytime
-          </p>
+
+          <div className="flex items-center space-x-4">
+            {!isAnswered() && (
+              <p className="text-sm text-gray-500">
+                {currentQuestion.id === 'q10-considerations'
+                  ? 'Select all that apply'
+                  : 'Select an option to continue'}
+              </p>
+            )}
+            <Button
+              onClick={handleNext}
+              disabled={!isAnswered()}
+              className="flex items-center space-x-2"
+            >
+              <span>{isLastQuestion ? 'Generate My Formula' : 'Next'}</span>
+              {!isLastQuestion && <HiArrowRight />}
+            </Button>
+          </div>
         </div>
-      </Card>
-    </motion.div>
+
+      </div>
+    </div>
   );
 };
