@@ -91,16 +91,42 @@ export const AllSouls = () => {
                   <div className="flex items-center justify-between p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">Intensity</span>
                     <div className="flex items-center gap-1">
-                      {[...Array(10)].map((_, i) => (
-                        <div
-                          key={i}
-                          className={`w-1.5 h-4 rounded-sm ${
-                            i < archetype.formulaProfile.intensity
-                              ? getIntensityColor(archetype.formulaProfile.intensity)
-                              : 'bg-dark-light'
-                          }`}
-                        />
-                      ))}
+                      {[...Array(10)].map((_, i) => {
+                        const isActive = i < archetype.formulaProfile.intensity;
+                        const intensity = archetype.formulaProfile.intensity;
+
+                        // Calculate gradient color based on position in the bar
+                        let bgClass = 'bg-gray-800';
+                        if (isActive) {
+                          if (intensity >= 9) {
+                            // Maximum intensity: red gradient
+                            bgClass = i < 3 ? 'bg-orange-500' : i < 6 ? 'bg-red-500' : 'bg-red-600';
+                          } else if (intensity >= 7) {
+                            // High intensity: orange to red
+                            bgClass = i < 4 ? 'bg-yellow-500' : i < 7 ? 'bg-orange-500' : 'bg-red-500';
+                          } else if (intensity >= 5) {
+                            // Medium intensity: yellow to orange
+                            bgClass = i < 3 ? 'bg-green-500' : i < 5 ? 'bg-yellow-500' : 'bg-orange-500';
+                          } else {
+                            // Low intensity: green to yellow
+                            bgClass = i < 2 ? 'bg-green-400' : i < 4 ? 'bg-green-500' : 'bg-yellow-500';
+                          }
+                        }
+
+                        return (
+                          <div
+                            key={i}
+                            className={`w-1.5 h-5 rounded-sm transition-all ${bgClass} ${
+                              isActive ? 'opacity-100 shadow-lg' : 'opacity-20'
+                            }`}
+                            style={isActive ? {
+                              boxShadow: intensity >= 8 ? '0 0 8px rgba(239, 68, 68, 0.6)' :
+                                        intensity >= 6 ? '0 0 8px rgba(249, 115, 22, 0.5)' :
+                                        '0 0 6px rgba(234, 179, 8, 0.4)'
+                            } : undefined}
+                          />
+                        );
+                      })}
                     </div>
                   </div>
 
