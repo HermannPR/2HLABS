@@ -115,3 +115,99 @@ export interface FAQ {
   answer: string;
   category?: string;
 }
+
+// Archetype System Types
+export type IntensityType = 'explosive' | 'steady' | 'mixed';
+export type DurationType = 'sprint' | 'mixed' | 'marathon';
+export type FocusType = 'aggressive' | 'controlled' | 'flow';
+export type EnergyPattern = 'burst' | 'sustained' | 'balanced';
+export type StimTolerance = 'none' | 'low' | 'moderate' | 'high';
+
+export interface DimensionScores {
+  intensity: IntensityType;
+  duration: DurationType;
+  focus: FocusType;
+  energyPattern: EnergyPattern;
+  stimTolerance: StimTolerance;
+  intensityScore: number; // 0-100
+  durationScore: number; // 0-100
+  focusScore: number; // 0-100
+  energyScore: number; // 0-100
+}
+
+export interface Archetype {
+  id: string;
+  name: string;
+  emoji: string;
+  tagline: string;
+  description: string;
+  traits: string[];
+  athleteTypes: string[];
+  dimensions: {
+    intensity: IntensityType;
+    duration: DurationType;
+    focus: FocusType;
+    energyPattern: EnergyPattern;
+    stimTolerance: StimTolerance;
+  };
+  formulaProfile: {
+    caffeineRange: [number, number];
+    pumpLevel: 'light' | 'moderate' | 'high' | 'maximum';
+    strengthFocus: 'none' | 'light' | 'moderate' | 'heavy';
+    enduranceFocus: 'none' | 'light' | 'moderate' | 'heavy';
+    focusLevel: 'light' | 'moderate' | 'high' | 'maximum';
+    intensity: number; // 1-10
+  };
+  warnings: string[];
+  flavors: FlavorOption[];
+  testimonials: ArchetypeTestimonial[];
+}
+
+export interface FlavorOption {
+  id: string;
+  name: string;
+  fullName: string; // e.g., "Gorilla Rage - Fruit Fury"
+  description: string;
+  color: string;
+  comingSoon?: boolean;
+}
+
+export interface ArchetypeTestimonial {
+  name: string;
+  role: string;
+  quote: string;
+  rating: number;
+}
+
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  description?: string;
+  options: QuizOption[];
+  dimension: 'intensity' | 'duration' | 'focus' | 'energy' | 'stimTolerance' | 'safety' | 'context';
+}
+
+export interface QuizOption {
+  id: string;
+  text: string;
+  emoji?: string;
+  image?: string;
+  scores: {
+    intensity?: number;
+    duration?: number;
+    focus?: number;
+    energy?: number;
+    stimTolerance?: number;
+  };
+}
+
+export interface QuizAnswers {
+  [questionId: string]: string | string[];
+}
+
+export interface ArchetypeResult {
+  archetype: Archetype;
+  dimensionScores: DimensionScores;
+  formula: Formula;
+  matchPercentage: number;
+}
