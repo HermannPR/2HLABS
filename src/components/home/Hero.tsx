@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../common/Button';
+import { EmailCapture } from '../common/EmailCapture';
 import { HiLightningBolt, HiBeaker, HiChartBar } from 'react-icons/hi';
 
 export const Hero = () => {
@@ -81,7 +82,7 @@ export const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 text-gray-400"
+            className="flex flex-wrap justify-center gap-8 text-gray-400 mb-16"
           >
             <div className="flex items-center space-x-2">
               <HiBeaker className="text-primary" size={24} />
@@ -95,6 +96,21 @@ export const Hero = () => {
               <HiLightningBolt className="text-primary" size={24} />
               <span>10,000+ Formulas Created</span>
             </div>
+          </motion.div>
+
+          {/* Email Capture */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="max-w-2xl mx-auto"
+          >
+            <EmailCapture
+              source="homepage"
+              heading="Join the Waitlist"
+              subheading="Be the first to access personalized preworkout formulas when we launch"
+              buttonText="Get Early Access"
+            />
           </motion.div>
         </motion.div>
       </div>

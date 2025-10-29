@@ -8,8 +8,11 @@ import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 import { getArchetypeResult } from '../utils/archetypeMatching';
 import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
 import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
+import { IntroCard } from '../components/quiz/IntroCard';
+import { EmailCapture } from '../components/common/EmailCapture';
 
 export const FormulaGenerator = () => {
+  const [showIntro, setShowIntro] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
   const [showResults, setShowResults] = useState(false);
@@ -93,6 +96,83 @@ export const FormulaGenerator = () => {
     }
     return answer !== undefined && answer !== '';
   };
+
+  // Intro screen with onboarding cards
+  if (showIntro) {
+    const introCards = [
+      {
+        icon: '✓',
+        headline: 'No Wrong Answers',
+        body: 'Every answer reveals something authentic about your training soul. Be honest - this isn\'t about what you think you should be, it\'s about who you truly are in the gym.',
+        color: 'primary' as const,
+      },
+      {
+        icon: '⚡',
+        headline: 'Takes 2 Minutes',
+        body: '10 quick questions stand between you and your personalized preworkout formula. Each question is designed to capture a unique dimension of your training personality.',
+        color: 'secondary' as const,
+      },
+      {
+        icon: '🔬',
+        headline: 'Science-Based Matching',
+        body: 'Our algorithm analyzes your answers across 5 key dimensions - Intensity, Duration, Focus, Energy Pattern, and Stim Tolerance - to match you with one of 12 distinct training archetypes.',
+        color: 'accent' as const,
+      },
+    ];
+
+    return (
+      <div className="min-h-screen bg-dark py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center mb-12"
+          >
+            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
+              Discover Your <span className="text-gradient">Training Soul</span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+              Before we begin, here's what to expect from this personalized journey
+            </p>
+          </motion.div>
+
+          {/* Intro Cards */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {introCards.map((card, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.2 }}
+              >
+                <IntroCard {...card} />
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Start Button */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.8 }}
+            className="text-center"
+          >
+            <Button
+              size="lg"
+              onClick={() => setShowIntro(false)}
+              className="text-xl px-12 py-6"
+            >
+              Begin Your Soul Discovery
+            </Button>
+            <p className="text-gray-500 text-sm mt-4">
+              Ready to find your training archetype?
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   // Analyzing screen
   if (isAnalyzing) {
@@ -406,6 +486,22 @@ export const FormulaGenerator = () => {
               </Card>
             </motion.div>
           )}
+
+          {/* Email Capture */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.9 }}
+            className="mb-8"
+          >
+            <EmailCapture
+              source="results"
+              archetype={archetype.name}
+              heading={`Get Your ${archetype.name} Formula`}
+              subheading="Be the first to know when your personalized preworkout is ready"
+              buttonText="Join the Waitlist"
+            />
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div

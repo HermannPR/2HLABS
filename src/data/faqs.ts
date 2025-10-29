@@ -49,4 +49,52 @@ export const FAQS: FAQ[] = [
     answer: 'Yes! We offer a 30-day money-back guarantee. If you\'re not satisfied with your personalized formula, contact us within 30 days for a full refund. We stand behind our products.',
     category: 'shipping',
   },
+  {
+    id: '9',
+    question: 'How accurate is the archetype matching?',
+    answer: 'Our archetype system uses a 5-dimensional personality model that maps your answers to 12 distinct training archetypes. The matching algorithm calculates compatibility across Intensity, Duration, Focus, Energy Pattern, and Stim Tolerance. While no quiz is perfect, our system has been refined through extensive testing to provide meaningful matches that resonate with real training styles.',
+    category: 'quiz',
+  },
+  {
+    id: '10',
+    question: 'Can I have multiple training souls?',
+    answer: 'Absolutely! Just like MBTI personality types, most people embody multiple archetypes. You might be a Zen Warrior during morning yoga and a Blitz Beast during evening HIIT. Each soul represents a different 30-serving preworkout product, so you can collect multiple souls and use them for different training contexts.',
+    category: 'quiz',
+  },
+  {
+    id: '11',
+    question: 'Are these dosages safe for everyone?',
+    answer: 'Our dosages are based on clinical research and fall within established safe ranges. However, individual tolerance varies. We adjust dosages based on your body weight and preferences. Always start with the recommended serving size. If you have any medical conditions or take medications, consult your doctor before using any supplement.',
+    category: 'safety',
+  },
+  {
+    id: '12',
+    question: 'What if I\'m sensitive to beta-alanine or other ingredients?',
+    answer: 'During the quiz, you can specify any ingredient sensitivities or preferences. If you experience tingling from beta-alanine or jitters from certain stimulants, our system will adjust or exclude those ingredients. We offer alternative compounds that provide similar benefits without the side effects you want to avoid.',
+    category: 'safety',
+  },
+  {
+    id: '13',
+    question: 'When will products be available to purchase?',
+    answer: 'We\'re currently in the pre-launch phase, building our community and refining our formulas based on feedback. Products will be available for purchase in Q2 2025. Sign up for early access to be notified when we launch and receive exclusive founding member benefits.',
+    category: 'product',
+  },
+  {
+    id: '14',
+    question: 'What makes 2HLABS different from other preworkouts?',
+    answer: 'Unlike one-size-fits-all products, 2HLABS creates truly personalized formulas based on your unique training soul. We use clinical dosages (not proprietary blends), provide full transparency about every ingredient, and adjust for your body weight, training time, and goals. Plus, our archetype system helps you understand your training identity, not just buy another generic preworkout.',
+    category: 'product',
+  },
+  {
+    id: '15',
+    question: 'Can I see the full ingredient breakdown?',
+    answer: 'Yes! Complete transparency is core to our mission. After taking the quiz, you\'ll see your full formula with every ingredient, exact dosages, clinical dose ranges, and the science behind each compound. We show you exactly what LOW, MODERATE, or HIGH dosing means compared to research standards. No proprietary blends, no hidden ingredients.',
+    category: 'product',
+  },
+  {
+    id: '16',
+    question: 'Do you ship internationally?',
+    answer: 'Yes! We ship to most countries worldwide. International orders typically take 7-14 business days after production. Shipping costs vary by location and will be calculated at checkout. Note that customs fees may apply depending on your country\'s import regulations.',
+    category: 'shipping',
+  },
 ];
