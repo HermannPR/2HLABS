@@ -5,7 +5,7 @@ import { HiLightningBolt } from 'react-icons/hi';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-20 pb-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-8 pb-12">
       {/* Hero Background Image */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
         <img
@@ -89,42 +89,30 @@ export const Hero = () => {
             transition={{ delay: 0.6 }}
             className="flex flex-wrap justify-center gap-8 md:gap-12"
           >
-            <div className="flex flex-col items-center">
-              <img
-                src="/assets/badges/lab-tested.png"
-                alt="Lab Tested"
-                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
-                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
-              />
-              <span className="text-sm md:text-base font-semibold text-gray-300">Lab Tested</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <img
-                src="/assets/badges/clinical-dosages.png"
-                alt="Clinical Dosages"
-                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
-                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
-              />
-              <span className="text-sm md:text-base font-semibold text-gray-300">Clinical Dosages</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <img
-                src="/assets/badges/science-backed.png"
-                alt="Science Backed"
-                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
-                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
-              />
-              <span className="text-sm md:text-base font-semibold text-gray-300">Science-Backed</span>
-            </div>
-            <div className="flex flex-col items-center">
-              <img
-                src="/assets/badges/full-transparency.png"
-                alt="Full Transparency"
-                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
-                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
-              />
-              <span className="text-sm md:text-base font-semibold text-gray-300">Full Transparency</span>
-            </div>
+            <img
+              src="/assets/badges/lab-tested.png"
+              alt="Lab Tested"
+              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+            />
+            <img
+              src="/assets/badges/clinical-dosages.png"
+              alt="Clinical Dosages"
+              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+            />
+            <img
+              src="/assets/badges/science-backed.png"
+              alt="Science Backed"
+              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+            />
+            <img
+              src="/assets/badges/full-transparency.png"
+              alt="Full Transparency"
+              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+            />
           </motion.div>
         </motion.div>
       </div>
