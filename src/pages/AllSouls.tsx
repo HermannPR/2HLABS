@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { ARCHETYPES } from '../data/archetypes';
+import { getSoulLogo } from '../utils/soulLogos';
 import type { Archetype } from '../types';
 import { useState } from 'react';
 
 export const AllSouls = () => {
+  const navigate = useNavigate();
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
 
   const getDimensionBadgeColor = (value: string) => {
@@ -58,8 +61,13 @@ export const AllSouls = () => {
               <Card className="h-full hover:border-primary/50 transition-all cursor-pointer group">
                 {/* Header */}
                 <div className="text-center mb-4">
-                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform">
-                    {archetype.emoji}
+                  <div className="mb-3 group-hover:scale-110 transition-transform flex justify-center">
+                    <img
+                      src={getSoulLogo(archetype.id)}
+                      alt={archetype.name}
+                      className="w-24 h-24 object-contain mix-blend-lighten"
+                      style={{ filter: 'drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))' }}
+                    />
                   </div>
                   <h3 className="text-2xl font-heading font-bold mb-1 group-hover:text-primary transition-colors">
                     {archetype.name}
@@ -198,7 +206,7 @@ export const AllSouls = () => {
             <p className="text-gray-400 mb-6">
               Take our 2-minute quiz to find which training soul lives inside you
             </p>
-            <Button size="lg" onClick={() => window.location.href = '/formula-generator'}>
+            <Button size="lg" onClick={() => navigate('/formula')}>
               Take the Soul Discovery Quiz
             </Button>
           </Card>
@@ -219,7 +227,14 @@ export const AllSouls = () => {
               <div className="p-8">
                 {/* Header */}
                 <div className="text-center mb-6">
-                  <div className="text-8xl mb-4">{selectedArchetype.emoji}</div>
+                  <div className="mb-4 flex justify-center">
+                    <img
+                      src={getSoulLogo(selectedArchetype.id)}
+                      alt={selectedArchetype.name}
+                      className="w-32 h-32 object-contain mix-blend-lighten"
+                      style={{ filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))' }}
+                    />
+                  </div>
                   <h2 className="text-4xl font-heading font-bold mb-2">
                     {selectedArchetype.name}
                   </h2>

@@ -8,8 +8,11 @@ import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
 import { getArchetypeResult } from '../utils/archetypeMatching';
 import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
 import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
+import { getSoulLogo } from '../utils/soulLogos';
 import { IntroCard } from '../components/quiz/IntroCard';
 import { EmailCapture } from '../components/common/EmailCapture';
+import { ShareButton } from '../components/common/ShareButton';
+import { saveResult } from '../utils/resultsStorage';
 
 export const FormulaGenerator = () => {
   const [showIntro, setShowIntro] = useState(true);
@@ -18,6 +21,7 @@ export const FormulaGenerator = () => {
   const [showResults, setShowResults] = useState(false);
   const [archetypeResult, setArchetypeResult] = useState<ArchetypeResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [isNavigating, setIsNavigating] = useState(false);
 
   const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
@@ -70,22 +74,45 @@ export const FormulaGenerator = () => {
         const userContext = getUserContextFromAnswers(answers);
         const formula = generateArchetypeFormula(result.archetype, answers, userContext);
 
-        setArchetypeResult({
+        const fullResult = {
           ...result,
           formula,
-        });
+        };
+
+        setArchetypeResult(fullResult);
+
+        // Save result to localStorage
+        saveResult(fullResult);
 
         setIsAnalyzing(false);
         setShowResults(true);
       }, 2500);
     } else {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setIsNavigating(true);
+      setTimeout(() => {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setIsNavigating(false);
+      }, 150);
     }
   };
 
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
+      setIsNavigating(true);
+      setTimeout(() => {
+        setCurrentQuestionIndex(currentQuestionIndex - 1);
+        setIsNavigating(false);
+      }, 150);
+    }
+  };
+
+  const handleStartOver = () => {
+    if (window.confirm('Are you sure you want to start over? Your current results will be lost.')) {
+      setShowResults(false);
+      setShowIntro(true);
+      setCurrentQuestionIndex(0);
+      setAnswers({});
+      setArchetypeResult(null);
     }
   };
 
@@ -224,9 +251,14 @@ export const FormulaGenerator = () => {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-              className="text-8xl mb-6"
+              className="mb-6 flex justify-center"
             >
-              {archetype.emoji}
+              <img
+                src={getSoulLogo(archetype.id)}
+                alt={archetype.name}
+                className="w-40 h-40 object-contain mix-blend-lighten"
+                style={{ filter: 'drop-shadow(0 0 20px rgba(0, 229, 255, 0.5))' }}
+              />
             </motion.div>
 
             <motion.h1
@@ -306,8 +338,8 @@ export const FormulaGenerator = () => {
             transition={{ delay: 1.4 }}
           >
             <Card className="mb-8">
-              <h2 className="text-2xl font-heading font-bold mb-6">Your Training DNA</h2>
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <h2 className="text-xl md:text-2xl font-heading font-bold mb-6">Your Training DNA</h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-gray-400">Intensity</span>
@@ -422,22 +454,31 @@ export const FormulaGenerator = () => {
                   return (
                     <div
                       key={idx}
-                      className="p-4 bg-dark-lighter rounded-lg border border-dark-light hover:border-primary/30 transition-colors"
+                      className="p-3 md:p-4 bg-dark-lighter rounded-lg border border-dark-light hover:border-primary/30 transition-colors"
                     >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="flex-1">
-                          <h3 className="text-lg font-semibold text-white">
-                            {item.ingredient.name}
-                          </h3>
-                          <p className="text-sm text-gray-400 mb-2">
+                      <div className="flex flex-col sm:flex-row items-start justify-between gap-3">
+                        <div className="flex-1 w-full sm:w-auto">
+                          <div className="flex items-start justify-between sm:block mb-2">
+                            <h3 className="text-base md:text-lg font-semibold text-white">
+                              {item.ingredient.name}
+                            </h3>
+                            {/* Mobile dosage - show on mobile only */}
+                            <div className="sm:hidden text-right">
+                              <div className="text-xl font-bold text-primary">
+                                {item.dosage.toLocaleString()}
+                                <span className="text-xs ml-1">{item.unit}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <p className="text-xs md:text-sm text-gray-400 mb-2">
                             {item.ingredient.description}
                           </p>
-                          <p className="text-sm text-accent italic mb-3">
+                          <p className="text-xs md:text-sm text-accent italic mb-3">
                             {item.reason}
                           </p>
 
                           {/* Dose Context */}
-                          <div className="flex items-center gap-4 text-xs">
+                          <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 text-xs">
                             <div className="flex items-center gap-2">
                               <span className="text-gray-500">Clinical Range:</span>
                               <span className="text-gray-300 font-semibold">{clinicalRange}</span>
@@ -450,7 +491,8 @@ export const FormulaGenerator = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="text-right ml-4 flex-shrink-0">
+                        {/* Desktop dosage - hidden on mobile */}
+                        <div className="hidden sm:block text-right ml-4 flex-shrink-0">
                           <div className="text-2xl font-bold text-primary">
                             {item.dosage.toLocaleString()}
                             <span className="text-sm ml-1">{item.unit}</span>
@@ -513,15 +555,15 @@ export const FormulaGenerator = () => {
             <Button size="lg" className="text-lg px-8">
               Get Your {archetype.name} Formula
             </Button>
+            <ShareButton
+              archetypeName={archetype.name}
+              matchPercentage={matchPercentage}
+              tagline={archetype.tagline}
+            />
             <Button
               variant="outline"
               size="lg"
-              onClick={() => {
-                setShowResults(false);
-                setCurrentQuestionIndex(0);
-                setAnswers({});
-                setArchetypeResult(null);
-              }}
+              onClick={handleStartOver}
               className="text-lg px-8"
             >
               Discover Another Soul
@@ -616,6 +658,7 @@ export const FormulaGenerator = () => {
                   const isSelected = currentQuestion.id === 'q10-considerations'
                     ? (answers[currentQuestion.id] as string[] || []).includes(option.id)
                     : answers[currentQuestion.id] === option.id;
+                  const isNoneApply = option.id === 'none-apply';
 
                   return (
                     <motion.button
@@ -629,21 +672,36 @@ export const FormulaGenerator = () => {
                           ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
                           : 'border-dark-light bg-dark-lighter hover:border-primary/50'
                         }
+                        ${isNoneApply && currentQuestion.id === 'q10-considerations' ? 'md:col-span-2' : ''}
                       `}
                     >
                       <div className="flex items-start space-x-4">
-                        {option.emoji && (
+                        {currentQuestion.id === 'q10-considerations' && (
+                          <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
+                            isSelected
+                              ? 'bg-primary border-primary'
+                              : 'border-gray-600 bg-dark-lighter'
+                          }`}>
+                            {isSelected && (
+                              <svg className="w-4 h-4 text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                              </svg>
+                            )}
+                          </div>
+                        )}
+                        {option.emoji && currentQuestion.id !== 'q10-considerations' && (
                           <span className="text-4xl flex-shrink-0">{option.emoji}</span>
                         )}
                         <div className="flex-1">
-                          <p className={`text-lg font-semibold mb-1 ${
+                          <p className={`text-lg font-semibold ${
                             isSelected ? 'text-primary' : 'text-white'
                           }`}>
                             {option.text}
                           </p>
-                          {/* Show checkmark if multi-select and selected */}
-                          {currentQuestion.id === 'q10-considerations' && isSelected && (
-                            <span className="text-accent text-sm">✓ Selected</span>
+                          {isNoneApply && currentQuestion.id === 'q10-considerations' && (
+                            <p className="text-sm text-gray-400 mt-1">
+                              Selecting this will clear all other selections
+                            </p>
                           )}
                         </div>
                       </div>
@@ -651,6 +709,23 @@ export const FormulaGenerator = () => {
                   );
                 })}
               </div>
+
+              {/* Multi-select controls */}
+              {currentQuestion.id === 'q10-considerations' && (
+                <div className="mt-4 flex items-center justify-between text-sm">
+                  <span className="text-gray-400">
+                    {((answers[currentQuestion.id] as string[] || []).length) || 0} selected
+                  </span>
+                  {(answers[currentQuestion.id] as string[] || []).length > 0 && (
+                    <button
+                      onClick={() => setAnswers({ ...answers, [currentQuestion.id]: [] })}
+                      className="text-primary hover:text-primary-light transition-colors"
+                    >
+                      Clear all
+                    </button>
+                  )}
+                </div>
+              )}
             </Card>
           </motion.div>
         </AnimatePresence>
@@ -660,7 +735,7 @@ export const FormulaGenerator = () => {
           <Button
             variant="outline"
             onClick={handlePrevious}
-            disabled={currentQuestionIndex === 0}
+            disabled={currentQuestionIndex === 0 || isNavigating}
             className="flex items-center space-x-2"
           >
             <HiArrowLeft />
@@ -668,20 +743,37 @@ export const FormulaGenerator = () => {
           </Button>
 
           <div className="flex items-center space-x-4">
-            {!isAnswered() && (
-              <p className="text-sm text-gray-500">
+            {!isAnswered() && !isNavigating && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-gray-500 hidden sm:block"
+              >
                 {currentQuestion.id === 'q10-considerations'
                   ? 'Select all that apply'
                   : 'Select an option to continue'}
-              </p>
+              </motion.p>
             )}
             <Button
               onClick={handleNext}
-              disabled={!isAnswered()}
+              disabled={!isAnswered() || isNavigating}
               className="flex items-center space-x-2"
             >
-              <span>{isLastQuestion ? 'Generate My Formula' : 'Next'}</span>
-              {!isLastQuestion && <HiArrowRight />}
+              {isNavigating ? (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                    className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                  />
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <>
+                  <span>{isLastQuestion ? 'Generate My Formula' : 'Next'}</span>
+                  {!isLastQuestion && <HiArrowRight />}
+                </>
+              )}
             </Button>
           </div>
         </div>

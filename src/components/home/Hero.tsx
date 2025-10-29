@@ -1,14 +1,19 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../common/Button';
-import { EmailCapture } from '../common/EmailCapture';
-import { HiLightningBolt, HiBeaker, HiChartBar } from 'react-icons/hi';
+import { HiLightningBolt } from 'react-icons/hi';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark">
-      {/* Animated background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-20 pb-16">
+      {/* Hero Background Image */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
+        <img
+          src="/assets/backgrounds/hero-bg.png"
+          alt="Hero Background"
+          className="w-full h-full object-cover opacity-30 mix-blend-overlay"
+        />
+      </div>
 
       {/* Floating particles effect */}
       <div className="absolute inset-0 overflow-hidden">
@@ -33,7 +38,7 @@ export const Hero = () => {
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -44,27 +49,27 @@ export const Hero = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-dark-lighter border border-primary/30 rounded-full px-4 py-2 mb-8"
+            className="inline-flex items-center space-x-2 bg-dark-lighter border border-primary/30 rounded-full px-4 py-2 mb-6"
           >
             <HiLightningBolt className="text-accent" />
             <span className="text-sm text-gray-300">Science-Backed | Personalized | Results-Driven</span>
           </motion.div>
 
           {/* Main headline */}
-          <h1 className="text-5xl md:text-7xl font-heading font-bold mb-6">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4">
             Your <span className="text-gradient glow-primary">Perfect</span>
             <br />
             Preworkout Formula
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-gray-300 mb-6 max-w-3xl mx-auto">
             Stop settling for one-size-fits-all supplements. Get a personalized preworkout
             tailored to your goals, body, and training style.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link to="/formula">
               <Button size="lg">
                 Build Your Formula Now
@@ -77,40 +82,49 @@ export const Hero = () => {
             </Link>
           </div>
 
-          {/* Trust indicators */}
+          {/* Trust Badges */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 text-gray-400 mb-16"
+            className="flex flex-wrap justify-center gap-8 md:gap-12"
           >
-            <div className="flex items-center space-x-2">
-              <HiBeaker className="text-primary" size={24} />
-              <span>Lab Tested</span>
+            <div className="flex flex-col items-center">
+              <img
+                src="/assets/badges/lab-tested.png"
+                alt="Lab Tested"
+                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
+                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              />
+              <span className="text-sm md:text-base font-semibold text-gray-300">Lab Tested</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <HiChartBar className="text-primary" size={24} />
-              <span>Clinical Dosages</span>
+            <div className="flex flex-col items-center">
+              <img
+                src="/assets/badges/clinical-dosages.png"
+                alt="Clinical Dosages"
+                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
+                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              />
+              <span className="text-sm md:text-base font-semibold text-gray-300">Clinical Dosages</span>
             </div>
-            <div className="flex items-center space-x-2">
-              <HiLightningBolt className="text-primary" size={24} />
-              <span>10,000+ Formulas Created</span>
+            <div className="flex flex-col items-center">
+              <img
+                src="/assets/badges/science-backed.png"
+                alt="Science Backed"
+                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
+                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              />
+              <span className="text-sm md:text-base font-semibold text-gray-300">Science-Backed</span>
             </div>
-          </motion.div>
-
-          {/* Email Capture */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="max-w-2xl mx-auto"
-          >
-            <EmailCapture
-              source="homepage"
-              heading="Join the Waitlist"
-              subheading="Be the first to access personalized preworkout formulas when we launch"
-              buttonText="Get Early Access"
-            />
+            <div className="flex flex-col items-center">
+              <img
+                src="/assets/badges/full-transparency.png"
+                alt="Full Transparency"
+                className="w-24 h-24 md:w-32 md:h-32 object-contain mb-3 mix-blend-lighten"
+                style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              />
+              <span className="text-sm md:text-base font-semibold text-gray-300">Full Transparency</span>
+            </div>
           </motion.div>
         </motion.div>
       </div>

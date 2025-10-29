@@ -2,7 +2,7 @@ import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from './Button';
-import { saveEmail, isValidEmail, hasSubmittedEmail } from '../../utils/emailStorage';
+import { saveEmail, isValidEmail, hasSubmittedEmail, detectEmailTypo, getCorrectedEmail } from '../../utils/emailStorage';
 
 interface EmailCaptureProps {
   source: 'homepage' | 'results';
@@ -25,6 +25,24 @@ export const EmailCapture = ({
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [typoSuggestion, setTypoSuggestion] = useState<string | null>(null);
+
+  const handleEmailChange = (value: string) => {
+    setEmail(value);
+    setError('');
+
+    // Check for typos
+    const suggestion = detectEmailTypo(value);
+    setTypoSuggestion(suggestion);
+  };
+
+  const handleAcceptSuggestion = () => {
+    if (typoSuggestion) {
+      const corrected = getCorrectedEmail(email);
+      setEmail(corrected);
+      setTypoSuggestion(null);
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -104,7 +122,7 @@ export const EmailCapture = ({
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => handleEmailChange(e.target.value)}
             placeholder="Enter your email"
             className={`
               flex-1 px-4 py-3 bg-dark border-2 rounded-lg
@@ -123,6 +141,27 @@ export const EmailCapture = ({
             {isSubmitting ? 'Submitting...' : buttonText}
           </Button>
         </div>
+
+        {/* Typo Suggestion */}
+        {typoSuggestion && !error && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-2 text-center"
+          >
+            <p className="text-sm text-gray-400">
+              Did you mean{' '}
+              <button
+                type="button"
+                onClick={handleAcceptSuggestion}
+                className="text-primary hover:text-primary-light underline font-semibold"
+              >
+                {getCorrectedEmail(email)}
+              </button>
+              ?
+            </p>
+          </motion.div>
+        )}
 
         {error && (
           <motion.p
