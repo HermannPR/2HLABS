@@ -1,6 +1,7 @@
 import { Hero } from '../components/home/Hero';
 import { WaitlistSection } from '../components/home/WaitlistSection';
 import { Features } from '../components/home/Features';
+import { TrustBadges } from '../components/home/TrustBadges';
 import { HowItWorksPreview } from '../components/home/HowItWorksPreview';
 import { Testimonials } from '../components/home/Testimonials';
 import { FAQ } from '../components/home/FAQ';
@@ -12,6 +13,7 @@ export const Home = () => {
       <Hero />
       <WaitlistSection />
       <Features />
+      <TrustBadges />
       <HowItWorksPreview />
       <Testimonials />
       <FAQ />
