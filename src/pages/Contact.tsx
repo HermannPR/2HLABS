@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, FormEvent } from 'react';
+import { useState, type FormEvent } from 'react';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { HiMail, HiChat, HiQuestionMarkCircle } from 'react-icons/hi';
