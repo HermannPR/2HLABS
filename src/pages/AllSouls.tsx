@@ -5,11 +5,21 @@ import { Button } from '../components/common/Button';
 import { ARCHETYPES } from '../data/archetypes';
 import { getSoulLogo } from '../utils/soulLogos';
 import type { Archetype } from '../types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { SkeletonSoulCard } from '../components/common/Skeleton';
 
 export const AllSouls = () => {
   const navigate = useNavigate();
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Simulate loading for demonstration (remove in production or when using real API)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const getDimensionBadgeColor = (value: string) => {
     const colorMap: Record<string, string> = {
@@ -51,7 +61,20 @@ export const AllSouls = () => {
 
         {/* Archetypes Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {ARCHETYPES.map((archetype, idx) => (
+          {isLoading ? (
+            // Show skeleton cards while loading
+            [...Array(12)].map((_, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.05 }}
+              >
+                <SkeletonSoulCard />
+              </motion.div>
+            ))
+          ) : (
+            ARCHETYPES.map((archetype, idx) => (
             <motion.div
               key={archetype.id}
               initial={{ opacity: 0, y: 20 }}
@@ -191,7 +214,8 @@ export const AllSouls = () => {
                 </Button>
               </Card>
             </motion.div>
-          ))}
+          ))
+          )}
         </div>
 
         {/* CTA Section */}
