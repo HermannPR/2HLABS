@@ -66,6 +66,29 @@
   - No more abrupt color changes
   - Uses `mode="wait"` for proper exit animations
 
+#### 8. Scroll Restoration
+- **Auto scroll to top**: Pages scroll to top on route change
+- **Disabled browser scroll restoration**: Set `history.scrollRestoration = 'manual'`
+- **Timing fix**: Used setTimeout to ensure scroll happens after React transitions
+- Improved navigation UX significantly
+
+#### 9. Soul Card Column Spacing
+- **Increased label column**: 120px → 140px
+- **Increased gap**: gap-4 (16px) → gap-6 (24px)
+- Better visual balance with values column positioned more to the right
+
+#### 10. Skeleton Loading States
+- **Created comprehensive Skeleton component library**: `src/components/common/Skeleton.tsx`
+  - Base Skeleton component (text/circular/rectangular variants)
+  - SkeletonText for multi-line text placeholders
+  - SkeletonSoulCard matching exact soul card layout
+  - SkeletonIngredientCard for future ingredient pages
+  - LoadingSpinner (sm/md/lg sizes)
+  - PageLoader for full-page loading states
+- **Implemented in AllSouls page**: 800ms demo loading state
+- **Smooth animations**: Pulsing opacity effect on skeletons
+- Ready to use across entire app for async data loading
+
 ### Technical Details:
 
 #### Component Changes:
@@ -106,6 +129,12 @@
 ### Commits:
 1. `8581cc5` - Previous session end
 2. `8444cf9` - Update AllSouls page: fix stat alignment and caffeine display
+3. `55587ad` - Update Claude context: document 2025-10-29 session changes
+4. `b0c5070` - Add automatic scroll to top on route change
+5. `8454a40` - Fix scroll to top functionality on route change
+6. `db8d3cd` - Adjust soul card stats column spacing
+7. `7640d7f` - Update Claude context: reflect current sprint and completed work
+8. `8c529a9` - Add comprehensive skeleton loading states
 
 ---
 
