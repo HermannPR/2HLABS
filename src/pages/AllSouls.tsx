@@ -12,18 +12,18 @@ import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData'
 
 // Brand colors for each soul archetype
 const SOUL_COLORS: Record<string, string> = {
-  'gorilla-rage': '#FF0066',
-  'dragon-blood': '#0066FF',
-  'cheetah-sprint': '#FFFF00',
-  'eagle-vision': '#00FFCC',
-  'titan-strength': '#663399',
-  'phoenix-rise': '#FF6600',
-  'serpent-flow': '#00FF88',
-  'wolf-pack': '#999999',
-  'monk-mind': '#9933FF',
-  'viper-strike': '#00FF00',
-  'bear-endurance': '#8B4513',
-  'lightning-bolt': '#00e5ff',
+  'gorilla-rage': '#FF5722',      // Warmer orange-red
+  'dragon-blood': '#8B0000',      // Red wine / dark red
+  'cheetah-sprint': '#FFFF99',    // Pale yellow / light yellow
+  'eagle-vision': '#00D4FF',      // Colder cyan / ice blue
+  'titan-strength': '#708090',    // Slate gray
+  'phoenix-rise': '#FF6600',      // Keep orange
+  'serpent-flow': '#00FF88',      // Keep green
+  'wolf-pack': '#6B8E23',         // Olive green / green-gray
+  'monk-mind': '#32CD32',         // Lime green (mantis focus)
+  'viper-strike': '#00FF00',      // Keep neon green
+  'bear-endurance': '#8B4513',    // Keep brown
+  'lightning-bolt': '#9933FF',    // Purple (thunder strike)
 };
 
 export const AllSouls = () => {
