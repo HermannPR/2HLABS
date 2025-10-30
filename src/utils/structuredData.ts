@@ -111,14 +111,14 @@ export const getServiceSchema = () => ({
   areaServed: 'Worldwide',
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
-    name: 'Training Soul Archetypes',
+    name: 'Personalized Pre-Workout Formulas',
     itemListElement: [
       {
         '@type': 'Offer',
         itemOffered: {
           '@type': 'Service',
-          name: 'Soul Discovery Quiz',
-          description: '2-minute quiz to discover your training archetype',
+          name: 'Formula Matching Quiz',
+          description: '2-minute quiz to create your personalized pre-workout formula',
         },
       },
     ],

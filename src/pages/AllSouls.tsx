@@ -241,13 +241,13 @@ export const AllSouls = () => {
         >
           <Card className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-heading font-bold mb-4">
-              Ready to Discover Your Soul?
+              Ready to Create Your Formula?
             </h2>
             <p className="text-gray-400 mb-6">
-              Take our 2-minute quiz to find which training soul lives inside you
+              Take our 2-minute quiz to match your formula to today's training
             </p>
             <Button size="lg" onClick={() => navigate('/formula')}>
-              Take the Soul Discovery Quiz
+              Create Your Formula
             </Button>
           </Card>
         </motion.div>

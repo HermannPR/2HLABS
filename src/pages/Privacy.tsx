@@ -37,7 +37,7 @@ export const Privacy = () => {
                   We may collect personal information that you voluntarily provide to us when you:
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Take our training soul discovery quiz</li>
+                  <li>Take our personalized formula quiz</li>
                   <li>Subscribe to our email list or waitlist</li>
                   <li>Create an account</li>
                   <li>Make a purchase</li>

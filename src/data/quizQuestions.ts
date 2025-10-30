@@ -3,8 +3,8 @@ import type { QuizQuestion } from '../types';
 export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: 'q1-approach',
-    question: 'How do you approach your training?',
-    description: 'Your training philosophy reveals your soul',
+    question: 'What type of training are you doing TODAY?',
+    description: 'Your current workout style determines what you need',
     dimension: 'intensity',
     options: [
       {
@@ -41,8 +41,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q2-drive',
-    question: 'What drives you to train?',
-    description: 'Your motivation shapes your soul',
+    question: 'What\'s your main goal for today\'s session?',
+    description: 'Your current goal determines what you need most',
     dimension: 'focus',
     options: [
       {
@@ -79,8 +79,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q3-adversity',
-    question: 'When facing a brutal set, you...',
-    description: 'How you handle adversity reveals your true nature',
+    question: 'How do you want to handle tough sets today?',
+    description: 'Your approach determines the mental support you need',
     dimension: 'focus',
     options: [
       {
@@ -117,8 +117,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q4-session-type',
-    question: 'Your ideal training session is...',
-    description: 'Session preference reveals your essence',
+    question: 'How long is today\'s training session?',
+    description: 'Duration affects energy and endurance requirements',
     dimension: 'duration',
     options: [
       {
@@ -155,8 +155,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q5-energy-flow',
-    question: 'How should energy move through you?',
-    description: 'Your energy signature defines your power',
+    question: 'How do you want your pre-workout to kick in?',
+    description: 'Different energy curves for different training needs',
     dimension: 'energy',
     options: [
       {
@@ -193,8 +193,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q6-caffeine-spirit',
-    question: 'Your caffeine spirit...',
-    description: 'How your body handles stimulation',
+    question: 'What\'s your caffeine tolerance level?',
+    description: 'We\'ll match your stimulant needs accurately',
     dimension: 'stimTolerance',
     options: [
       {
@@ -226,8 +226,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q7-timing',
-    question: 'When do you unleash your training?',
-    description: 'Timing affects stimulant recommendations',
+    question: 'When are you training today?',
+    description: 'Training time affects stimulant recommendations',
     dimension: 'context',
     options: [
       {
@@ -254,8 +254,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q8-primary-goal',
-    question: 'What do you seek to gain?',
-    description: 'Your primary goal guides the formula',
+    question: 'What\'s your primary training goal?',
+    description: 'Your goal determines the optimal ingredient profile',
     dimension: 'context',
     options: [
       {
@@ -292,8 +292,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q9-body-size',
-    question: 'Your physical form...',
-    description: 'Used to calculate precise dosages',
+    question: 'What\'s your body weight range?',
+    description: 'Helps us calculate precise, effective dosages',
     dimension: 'context',
     options: [
       {
@@ -320,8 +320,8 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   },
   {
     id: 'q10-considerations',
-    question: 'Important considerations for your formula',
-    description: 'Select all that apply - we adjust accordingly',
+    question: 'Any special considerations we should know?',
+    description: 'Select all that apply - we\'ll adjust your formula',
     dimension: 'safety',
     options: [
       {

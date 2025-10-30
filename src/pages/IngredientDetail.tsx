@@ -326,14 +326,14 @@ export const IngredientDetail = () => {
               Find Your Perfect Formula
             </h2>
             <p className="text-gray-400 mb-6">
-              Discover which souls contain {ingredient.name} optimally dosed for your training style
+              See which formulas contain {ingredient.name} optimally dosed for your training style
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" onClick={() => navigate('/formula')}>
-                Take the Soul Discovery Quiz
+                Create Your Formula
               </Button>
               <Button variant="outline" size="lg" onClick={() => navigate('/souls')}>
-                View All 12 Souls
+                View All 12 Formulas
               </Button>
             </div>
           </Card>
