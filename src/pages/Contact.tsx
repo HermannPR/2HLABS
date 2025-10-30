@@ -3,8 +3,10 @@ import { useState, type FormEvent } from 'react';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { HiMail, HiChat, HiQuestionMarkCircle } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 
 export const Contact = () => {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -21,12 +23,12 @@ export const Contact = () => {
 
     // Validation
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
-      setError('Please fill in all required fields');
+      setError(t('contact.errorMessage'));
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      setError('Please enter a valid email address');
+      setError(t('contact.errorMessage'));
       return;
     }
 
@@ -65,13 +67,13 @@ export const Contact = () => {
                 ✓
               </motion.div>
               <h2 className="text-3xl font-heading font-bold text-white mb-3">
-                Message Received!
+                {t('contact.successMessage')}
               </h2>
               <p className="text-gray-400 text-lg mb-6">
-                Thanks for reaching out. We'll get back to you within 24 hours.
+                {t('contact.pageSubtitle')}
               </p>
               <Button onClick={() => window.location.href = '/'}>
-                Return to Homepage
+                {t('notFound.homeButton')}
               </Button>
             </Card>
           </motion.div>
@@ -90,10 +92,10 @@ export const Contact = () => {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Get in <span className="text-gradient">Touch</span>
+            {t('contact.pageTitle')} <span className="text-gradient">{t('contact.pageTitleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Have questions about your training soul or our formulas? We're here to help.
+            {t('contact.pageSubtitle')}
           </p>
         </motion.div>
 
@@ -105,11 +107,11 @@ export const Contact = () => {
             transition={{ delay: 0.1 }}
           >
             <Card>
-              <h2 className="text-2xl font-heading font-bold mb-6">Send Us a Message</h2>
+              <h2 className="text-2xl font-heading font-bold mb-6">{t('contact.sendButton')}</h2>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <label htmlFor="name" className="block text-sm font-semibold text-gray-300 mb-2">
-                    Name <span className="text-red-400">*</span>
+                    {t('contact.nameLabel')} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="text"
@@ -117,14 +119,14 @@ export const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     className="w-full px-4 py-3 bg-dark border-2 border-dark-light rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Your name"
+                    placeholder={t('contact.nameLabel')}
                     disabled={isSubmitting}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-semibold text-gray-300 mb-2">
-                    Email <span className="text-red-400">*</span>
+                    {t('contact.emailLabel')} <span className="text-red-400">*</span>
                   </label>
                   <input
                     type="email"
@@ -132,7 +134,7 @@ export const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     className="w-full px-4 py-3 bg-dark border-2 border-dark-light rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="your@email.com"
+                    placeholder={t('contact.emailLabel')}
                     disabled={isSubmitting}
                   />
                 </div>
@@ -147,14 +149,14 @@ export const Contact = () => {
                     value={formData.subject}
                     onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                     className="w-full px-4 py-3 bg-dark border-2 border-dark-light rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="What's this about?"
+                    placeholder="Subject"
                     disabled={isSubmitting}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-gray-300 mb-2">
-                    Message <span className="text-red-400">*</span>
+                    {t('contact.messageLabel')} <span className="text-red-400">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -162,7 +164,7 @@ export const Contact = () => {
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={6}
                     className="w-full px-4 py-3 bg-dark border-2 border-dark-light rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-primary transition-colors resize-none"
-                    placeholder="Tell us what's on your mind..."
+                    placeholder={t('contact.messageLabel')}
                     disabled={isSubmitting}
                   />
                 </div>
@@ -183,7 +185,7 @@ export const Contact = () => {
                   disabled={isSubmitting}
                   className="w-full"
                 >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {isSubmitting ? t('contact.sending') : t('contact.sendButton')}
                 </Button>
               </form>
             </Card>

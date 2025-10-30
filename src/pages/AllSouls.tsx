@@ -9,6 +9,7 @@ import { useState, useEffect } from 'react';
 import { SkeletonSoulCard } from '../components/common/Skeleton';
 import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
+import { useTranslation } from 'react-i18next';
 
 // Brand colors for each soul archetype
 const SOUL_COLORS: Record<string, string> = {
@@ -28,6 +29,7 @@ const SOUL_COLORS: Record<string, string> = {
 };
 
 export const AllSouls = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -114,10 +116,10 @@ export const AllSouls = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
-            Discover All <span className="text-gradient">12 Training Souls</span>
+            {t('allSouls.title')} <span className="text-gradient">{t('allSouls.titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Each soul represents a unique training philosophy and energy signature. Find the ones that match your different training needs.
+            {t('allSouls.subtitle')}
           </p>
         </motion.div>
 
@@ -205,7 +207,7 @@ export const AllSouls = () => {
                 <div className="space-y-3 mb-4">
                   {/* Caffeine Range */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">Caffeine</span>
+                    <span className="text-xs text-gray-400">{t('allSouls.caffeine')}</span>
                     <span className="text-sm font-bold text-white">
                       {archetype.formulaProfile.caffeineRange[0] === archetype.formulaProfile.caffeineRange[1]
                         ? `${archetype.formulaProfile.caffeineRange[0]}mg`
@@ -216,7 +218,7 @@ export const AllSouls = () => {
 
                   {/* Intensity */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">Intensity</span>
+                    <span className="text-xs text-gray-400">{t('allSouls.intensity')}</span>
                     <div className="flex items-center gap-1">
                       {[...Array(10)].map((_, i) => {
                         const isActive = i < archetype.formulaProfile.intensity;
@@ -259,7 +261,7 @@ export const AllSouls = () => {
 
                   {/* Pump Level */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">Pump</span>
+                    <span className="text-xs text-gray-400">{t('allSouls.pump')}</span>
                     <span className="text-sm font-semibold text-secondary uppercase">
                       {archetype.formulaProfile.pumpLevel}
                     </span>
@@ -267,7 +269,7 @@ export const AllSouls = () => {
 
                   {/* Focus Level */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">Focus</span>
+                    <span className="text-xs text-gray-400">{t('allSouls.focus')}</span>
                     <span className="text-sm font-semibold text-accent uppercase">
                       {archetype.formulaProfile.focusLevel}
                     </span>
@@ -295,7 +297,7 @@ export const AllSouls = () => {
                       archetype.dimensions.stimTolerance
                     )}`}
                   >
-                    Stim: {archetype.dimensions.stimTolerance}
+                    {t('allSouls.stim')}: {archetype.dimensions.stimTolerance}
                   </span>
                 </div>
 
@@ -311,7 +313,7 @@ export const AllSouls = () => {
                   className="w-full"
                   onClick={() => setSelectedArchetype(archetype)}
                 >
-                  View Full Profile
+                  {t('allSouls.viewProfile')}
                 </Button>
               </Card>
             </motion.div>
@@ -329,13 +331,13 @@ export const AllSouls = () => {
         >
           <Card className="max-w-2xl mx-auto">
             <h2 className="text-2xl font-heading font-bold mb-4">
-              Ready to Discover Your Soul?
+              {t('allSouls.ctaTitle')}
             </h2>
             <p className="text-gray-400 mb-6">
-              Take our 2-minute quiz to find which soul matches today's training. You can discover multiple souls for different workout styles.
+              {t('allSouls.ctaDescription')}
             </p>
             <Button size="lg" onClick={() => navigate('/formula')}>
-              Discover Your Soul
+              {t('allSouls.ctaButton')}
             </Button>
           </Card>
         </motion.div>
@@ -425,7 +427,7 @@ export const AllSouls = () => {
                 <div className="grid md:grid-cols-2 gap-4 mb-6">
                   <div className="p-4 bg-dark rounded-lg">
                     <h3 className="text-sm font-semibold text-gray-400 mb-2">
-                      Caffeine Range
+                      {t('allSouls.modal.caffeineRange')}
                     </h3>
                     <p className="text-2xl font-bold text-primary">
                       {selectedArchetype.formulaProfile.caffeineRange[0] === selectedArchetype.formulaProfile.caffeineRange[1]
@@ -436,20 +438,20 @@ export const AllSouls = () => {
                   </div>
                   <div className="p-4 bg-dark rounded-lg">
                     <h3 className="text-sm font-semibold text-gray-400 mb-2">
-                      Intensity Level
+                      {t('allSouls.modal.intensityLevel')}
                     </h3>
                     <p className="text-2xl font-bold text-secondary">
                       {selectedArchetype.formulaProfile.intensity}/10
                     </p>
                   </div>
                   <div className="p-4 bg-dark rounded-lg">
-                    <h3 className="text-sm font-semibold text-gray-400 mb-2">Pump Level</h3>
+                    <h3 className="text-sm font-semibold text-gray-400 mb-2">{t('allSouls.modal.pumpLevel')}</h3>
                     <p className="text-xl font-bold text-white uppercase">
                       {selectedArchetype.formulaProfile.pumpLevel}
                     </p>
                   </div>
                   <div className="p-4 bg-dark rounded-lg">
-                    <h3 className="text-sm font-semibold text-gray-400 mb-2">Focus Level</h3>
+                    <h3 className="text-sm font-semibold text-gray-400 mb-2">{t('allSouls.modal.focusLevel')}</h3>
                     <p className="text-xl font-bold text-white uppercase">
                       {selectedArchetype.formulaProfile.focusLevel}
                     </p>
@@ -459,7 +461,7 @@ export const AllSouls = () => {
                 {/* Traits & Athlete Types */}
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <h3 className="text-lg font-semibold text-primary mb-3">Core Traits</h3>
+                    <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.coreTraits')}</h3>
                     <ul className="space-y-2">
                       {selectedArchetype.traits.map((trait, idx) => (
                         <li key={idx} className="flex items-start space-x-2">
@@ -470,7 +472,7 @@ export const AllSouls = () => {
                     </ul>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-primary mb-3">Perfect For</h3>
+                    <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.perfectFor')}</h3>
                     <ul className="space-y-2">
                       {selectedArchetype.athleteTypes.map((type, idx) => (
                         <li key={idx} className="flex items-start space-x-2">
@@ -488,7 +490,7 @@ export const AllSouls = () => {
                   className="w-full"
                   onClick={() => setSelectedArchetype(null)}
                 >
-                  Close
+                  {t('allSouls.modal.closeButton')}
                 </Button>
               </div>
             </motion.div>

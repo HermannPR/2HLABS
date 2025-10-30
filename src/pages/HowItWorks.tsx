@@ -3,8 +3,10 @@ import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { Link } from 'react-router-dom';
 import { HiBeaker, HiCog, HiChartBar, HiShieldCheck } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 
 export const HowItWorks = () => {
+  const { t } = useTranslation();
   return (
     <div className="bg-dark min-h-screen py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,10 +16,10 @@ export const HowItWorks = () => {
           className="text-center mb-16"
         >
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6">
-            How <span className="text-gradient">2HLABS</span> Works
+            {t('howItWorksPage.pageTitle')} <span className="text-gradient">{t('howItWorksPage.pageTitleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Our science-backed process creates a preworkout formula optimized for your unique physiology and goals
+            {t('howItWorksPage.pageSubtitle')}
           </p>
         </motion.div>
 

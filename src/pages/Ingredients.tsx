@@ -3,8 +3,10 @@ import { useState } from 'react';
 import { INGREDIENTS } from '../data/ingredients';
 import { Card } from '../components/common/Card';
 import type { IngredientCategory } from '../types';
+import { useTranslation } from 'react-i18next';
 
 export const Ingredients = () => {
+  const { t } = useTranslation();
   const [selectedCategory, setSelectedCategory] = useState<IngredientCategory | 'all'>('all');
 
   const categories: (IngredientCategory | 'all')[] = ['all', 'energy', 'pump', 'strength', 'endurance', 'focus', 'recovery', 'hydration'];
@@ -22,10 +24,10 @@ export const Ingredients = () => {
           className="text-center mb-16"
         >
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6">
-            Ingredient <span className="text-gradient">Library</span>
+            {t('ingredients.title')} <span className="text-gradient">{t('ingredients.titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Explore the science-backed ingredients we use in our personalized formulas
+            {t('ingredients.subtitle')}
           </p>
         </motion.div>
 
@@ -41,7 +43,7 @@ export const Ingredients = () => {
                   : 'border-dark-light text-gray-400 hover:border-primary/50'
               }`}
             >
-              {category}
+              {t(`ingredients.${category}`)}
             </button>
           ))}
         </div>

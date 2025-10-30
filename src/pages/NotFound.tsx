@@ -2,8 +2,10 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
+import { useTranslation } from 'react-i18next';
 
 export const NotFound = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-dark flex items-center justify-center px-4">
       <Card className="max-w-2xl w-full text-center">
@@ -29,11 +31,10 @@ export const NotFound = () => {
             transition={{ delay: 0.4 }}
           >
             <h2 className="text-3xl font-heading font-bold mb-4 text-white">
-              Page Not Found
+              {t('notFound.title')}
             </h2>
             <p className="text-gray-400 text-lg mb-8">
-              Looks like this page went for an extra rep and never came back.
-              Let's get you back on track.
+              {t('notFound.message')}
             </p>
           </motion.div>
 
@@ -46,12 +47,12 @@ export const NotFound = () => {
           >
             <Link to="/">
               <Button size="lg" className="w-full sm:w-auto">
-                Go to Homepage
+                {t('notFound.homeButton')}
               </Button>
             </Link>
             <Link to="/formula">
               <Button variant="outline" size="lg" className="w-full sm:w-auto">
-                Take the Quiz
+                {t('notFound.quizButton')}
               </Button>
             </Link>
           </motion.div>
@@ -63,22 +64,22 @@ export const NotFound = () => {
             transition={{ delay: 0.8 }}
             className="mt-12 pt-8 border-t border-dark-light"
           >
-            <p className="text-sm text-gray-500 mb-4">Quick Links:</p>
+            <p className="text-sm text-gray-500 mb-4">{t('notFound.quickLinks')}</p>
             <div className="flex flex-wrap justify-center gap-4 text-sm">
               <Link to="/souls" className="text-primary hover:text-primary-light transition-colors">
-                All Souls
+                {t('notFound.linkSouls')}
               </Link>
               <Link to="/how-it-works" className="text-primary hover:text-primary-light transition-colors">
-                How It Works
+                {t('notFound.linkHowItWorks')}
               </Link>
               <Link to="/ingredients" className="text-primary hover:text-primary-light transition-colors">
-                Ingredients
+                {t('notFound.linkIngredients')}
               </Link>
               <Link to="/pricing" className="text-primary hover:text-primary-light transition-colors">
-                Pricing
+                {t('notFound.linkPricing')}
               </Link>
               <Link to="/about" className="text-primary hover:text-primary-light transition-colors">
-                About
+                {t('notFound.linkAbout')}
               </Link>
             </div>
           </motion.div>
