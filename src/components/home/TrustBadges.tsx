@@ -4,23 +4,19 @@ export const TrustBadges = () => {
   const badges = [
     {
       icon: '/assets/badges/science-backed.png',
-      title: 'Science-Backed',
-      description: 'Research-driven formulations'
+      alt: 'Science-Backed'
     },
     {
       icon: '/assets/badges/clinical-dosages.png',
-      title: 'Clinical Dosages',
-      description: 'Effective ingredient amounts'
+      alt: 'Clinical Dosages'
     },
     {
       icon: '/assets/badges/full-transparency.png',
-      title: 'Full Transparency',
-      description: 'Complete label disclosure'
+      alt: 'Full Transparency'
     },
     {
       icon: '/assets/badges/lab-tested.png',
-      title: 'Lab Tested',
-      description: 'Third-party verified purity'
+      alt: 'Lab Tested'
     },
   ];
 
@@ -35,20 +31,18 @@ export const TrustBadges = () => {
         >
           {badges.map((badge, index) => (
             <motion.div
-              key={badge.title}
+              key={badge.alt}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="text-center"
+              className="flex justify-center"
             >
               <img
                 src={badge.icon}
-                alt={badge.title}
-                className="w-24 h-24 mx-auto mb-3 object-contain"
+                alt={badge.alt}
+                className="w-32 h-32 object-contain"
               />
-              <h3 className="font-semibold text-white mb-1">{badge.title}</h3>
-              <p className="text-gray-400 text-sm">{badge.description}</p>
             </motion.div>
           ))}
         </motion.div>

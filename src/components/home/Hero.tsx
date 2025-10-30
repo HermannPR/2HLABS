@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../common/Button';
-import { HiLightningBolt } from 'react-icons/hi';
 
 export const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-8 pb-12">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
       {/* Hero Background Image */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
         <img
@@ -44,17 +43,6 @@ export const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center space-x-2 bg-dark-lighter border border-primary/30 rounded-full px-4 py-2 mb-6"
-          >
-            <HiLightningBolt className="text-accent" />
-            <span className="text-sm text-gray-300">Science-Backed | Personalized | Results-Driven</span>
-          </motion.div>
-
           {/* Main headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4">
             Your <span className="text-gradient glow-primary">Perfect</span>
