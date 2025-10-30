@@ -14,7 +14,12 @@ export const Layout = ({ children }: LayoutProps) => {
 
   // Scroll to top on route change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // Use setTimeout to ensure scroll happens after route transition
+    const timer = setTimeout(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
