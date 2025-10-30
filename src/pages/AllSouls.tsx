@@ -7,6 +7,8 @@ import { getSoulLogo } from '../utils/soulLogos';
 import type { Archetype } from '../types';
 import { useState, useEffect } from 'react';
 import { SkeletonSoulCard } from '../components/common/Skeleton';
+import { SEO, StructuredData } from '../components/seo/SEO';
+import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 
 export const AllSouls = () => {
   const navigate = useNavigate();
@@ -44,6 +46,18 @@ export const AllSouls = () => {
 
   return (
     <div className="min-h-screen bg-dark py-12">
+      <SEO
+        title="All 12 Training Souls"
+        description="Explore all 12 unique pre-workout archetypes. From Lion Heart's explosive power to Serpent Flow's stim-free endurance - find the perfect formula for your training style."
+        keywords="training archetypes, pre-workout types, fitness personalities, workout supplements, personalized nutrition"
+        ogType="website"
+      />
+      <StructuredData data={getItemListSchema(ARCHETYPES)} />
+      <StructuredData data={getBreadcrumbSchema([
+        { name: 'Home', url: '/' },
+        { name: 'All Souls', url: '/souls' }
+      ])} />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Section */}
         <motion.div
