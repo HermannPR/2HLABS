@@ -80,7 +80,7 @@ export const AllSouls = () => {
                 {/* Key Stats */}
                 <div className="space-y-3 mb-4">
                   {/* Caffeine Range */}
-                  <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
+                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">Caffeine</span>
                     <span className="text-sm font-bold text-white">
                       {archetype.formulaProfile.caffeineRange[0] === archetype.formulaProfile.caffeineRange[1]
@@ -91,7 +91,7 @@ export const AllSouls = () => {
                   </div>
 
                   {/* Intensity */}
-                  <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
+                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">Intensity</span>
                     <div className="flex items-center gap-1">
                       {[...Array(10)].map((_, i) => {
@@ -134,7 +134,7 @@ export const AllSouls = () => {
                   </div>
 
                   {/* Pump Level */}
-                  <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
+                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">Pump</span>
                     <span className="text-sm font-semibold text-secondary uppercase">
                       {archetype.formulaProfile.pumpLevel}
@@ -142,7 +142,7 @@ export const AllSouls = () => {
                   </div>
 
                   {/* Focus Level */}
-                  <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
+                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">Focus</span>
                     <span className="text-sm font-semibold text-accent uppercase">
                       {archetype.formulaProfile.focusLevel}
