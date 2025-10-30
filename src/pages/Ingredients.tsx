@@ -67,10 +67,10 @@ export const Ingredients = () => {
                 <div className="flex justify-between items-start mb-4">
                   <div>
                     <h3 className="text-xl font-heading font-semibold mb-1">{ingredient.name}</h3>
-                    <span className="text-xs uppercase text-primary">{ingredient.category}</span>
+                    <span className="text-xs uppercase text-primary">{t(`ingredientsPage.${ingredient.category}`)}</span>
                   </div>
                   <div className="text-right">
-                    <div className="text-sm text-gray-500">Science Rating</div>
+                    <div className="text-sm text-gray-500">{t('ingredientsPage.scienceRating')}</div>
                     <div className="text-2xl font-bold text-accent">{ingredient.scienceRating}/5</div>
                   </div>
                 </div>
@@ -78,7 +78,7 @@ export const Ingredients = () => {
                 <p className="text-gray-400 text-sm mb-4">{ingredient.description}</p>
 
                 <div className="mb-4">
-                  <div className="text-sm font-semibold mb-2">Benefits:</div>
+                  <div className="text-sm font-semibold mb-2">{t('ingredientsPage.benefits')}</div>
                   <ul className="space-y-1">
                     {ingredient.benefits.slice(0, 3).map((benefit, i) => (
                       <li key={i} className="text-sm text-gray-400 flex items-start">
@@ -90,7 +90,7 @@ export const Ingredients = () => {
                 </div>
 
                 <div className="text-sm text-gray-500">
-                  Dosage: {ingredient.dosageRange.min}-{ingredient.dosageRange.max}{ingredient.dosageRange.unit}
+                  {t('ingredientsPage.dosage')}: {ingredient.dosageRange.min}-{ingredient.dosageRange.max}{ingredient.dosageRange.unit}
                 </div>
               </Card>
             </motion.div>

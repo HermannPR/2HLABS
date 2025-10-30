@@ -448,7 +448,10 @@
     "focusCategory": "Concentración",
     "recovery": "Recuperación",
     "hydration": "Hidratación",
-    "viewDetails": "Ver Detalles"
+    "viewDetails": "Ver Detalles",
+    "scienceRating": "Calificación Científica",
+    "benefits": "Beneficios:",
+    "dosage": "Dosis"
   },
   "about": {
     "pageTitle": "Acerca de",

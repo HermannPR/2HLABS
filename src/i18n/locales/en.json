@@ -448,7 +448,10 @@
     "focusCategory": "Focus",
     "recovery": "Recovery",
     "hydration": "Hydration",
-    "viewDetails": "View Details"
+    "viewDetails": "View Details",
+    "scienceRating": "Science Rating",
+    "benefits": "Benefits:",
+    "dosage": "Dosage"
   },
   "about": {
     "pageTitle": "About",
