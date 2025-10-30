@@ -35,6 +35,12 @@ export const FormulaGenerator = () => {
   const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
   const progress = ((currentQuestionIndex + 1) / QUIZ_QUESTIONS.length) * 100;
 
+  // Helper to get simple question ID (q1, q2, etc.) from full ID (q1-approach, q2-drive, etc.)
+  const getSimpleQuestionId = (fullId: string) => {
+    const match = fullId.match(/^(q\d+)/);
+    return match ? match[1] : fullId;
+  };
+
   // Get icon for question dimension
   const getDimensionIcon = (dimension: string) => {
     const iconProps = { size: 32, className: "text-primary" };
@@ -788,10 +794,10 @@ export const FormulaGenerator = () => {
               </div>
 
               <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3 text-center">
-                {currentQuestion.question}
+                {t(`quiz.questions.${getSimpleQuestionId(currentQuestion.id)}.question`)}
               </h2>
               {currentQuestion.description && (
-                <p className="text-gray-400 mb-6 text-center">{currentQuestion.description}</p>
+                <p className="text-gray-400 mb-6 text-center">{t(`quiz.questions.${getSimpleQuestionId(currentQuestion.id)}.description`)}</p>
               )}
 
               {/* Options Grid */}
@@ -844,11 +850,11 @@ export const FormulaGenerator = () => {
                           <p className={`text-lg font-semibold ${
                             isSelected ? 'text-primary' : 'text-white'
                           }`}>
-                            {option.text}
+                            {t(`quiz.questions.${getSimpleQuestionId(currentQuestion.id)}.options.${option.id}`)}
                           </p>
                           {isNoneApply && currentQuestion.id === 'q10-considerations' && (
                             <p className="text-sm text-gray-400 mt-1">
-                              Selecting this will clear all other selections
+                              {t('quiz.selectingNoneWillClear')}
                             </p>
                           )}
                         </div>

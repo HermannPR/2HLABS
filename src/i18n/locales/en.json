@@ -33,6 +33,7 @@
     "submit": "Discover My Soul",
     "loading": "Analyzing your training soul...",
     "multiSelectHint": "Select all that apply",
+    "selectingNoneWillClear": "Selecting this will clear all other selections",
     "questions": {
       "q1": {
         "question": "What type of training are you doing TODAY?",

@@ -33,6 +33,7 @@
     "submit": "Descubrir mi Arquetipo",
     "loading": "Analizando tu perfil de entrenamiento...",
     "multiSelectHint": "Selecciona todas las que te identifiquen",
+    "selectingNoneWillClear": "Seleccionar esto eliminará las demás selecciones",
     "questions": {
       "q1": {
         "question": "¿Qué tipo de entrenamiento vas a hacer HOY?",
