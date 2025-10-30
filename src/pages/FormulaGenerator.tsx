@@ -11,7 +11,7 @@ import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
 import { getSoulLogo } from '../utils/soulLogos';
 import { IntroCard } from '../components/quiz/IntroCard';
 import { EmailCapture } from '../components/common/EmailCapture';
-import { ShareButton } from '../components/common/ShareButton';
+import { ShareCardGenerator } from '../components/common/ShareCardGenerator';
 import { saveResult } from '../utils/resultsStorage';
 
 export const FormulaGenerator = () => {
@@ -555,10 +555,9 @@ export const FormulaGenerator = () => {
             <Button size="lg" className="text-lg px-8">
               Get Your {archetype.name} Formula
             </Button>
-            <ShareButton
-              archetypeName={archetype.name}
+            <ShareCardGenerator
+              archetype={archetype}
               matchPercentage={matchPercentage}
-              tagline={archetype.tagline}
             />
             <Button
               variant="outline"
