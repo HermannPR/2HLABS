@@ -301,5 +301,29 @@
     "title": "Preguntas",
     "titleHighlight": "Frecuentes",
     "subtitle": "¿Tienes preguntas? Tenemos respuestas."
+  },
+  "formulaGenerator": {
+    "intro": {
+      "title": "Descubre tu",
+      "titleHighlight": "Arquetipo de Entrenamiento",
+      "subtitle": "Antes de empezar, esto es lo que puedes esperar de este viaje personalizado",
+      "card1Headline": "No Hay Respuestas Incorrectas",
+      "card1Body": "Cada respuesta revela algo auténtico sobre tu arquetipo de entrenamiento. Sé honesto - no se trata de lo que crees que deberías ser, sino de quién realmente eres en el gimnasio.",
+      "card2Headline": "Toma 2 Minutos",
+      "card2Body": "10 preguntas rápidas te separan de tu fórmula pre-entreno personalizada. Cada pregunta captura una dimensión única de tu personalidad de entrenamiento.",
+      "card3Headline": "Ciencia y Algoritmos",
+      "card3Body": "Nuestro algoritmo analiza tus respuestas en 5 dimensiones clave - Intensidad, Duración, Concentración, Patrón de Energía y Tolerancia a Estimulantes - para encontrar tu arquetipo entre 12 distintos.",
+      "startButton": "Descubrir mi Arquetipo",
+      "startSubtext": "Encuentra qué arquetipo te corresponde hoy"
+    },
+    "analyzing": {
+      "title": "Analizando tu Perfil...",
+      "subtitle": "Descubriendo tu verdadero arquetipo de entrenamiento"
+    },
+    "navigation": {
+      "previous": "Anterior",
+      "next": "Siguiente Pregunta",
+      "submit": "Ver mis Resultados"
+    }
   }
 }

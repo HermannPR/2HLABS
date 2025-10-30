@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { QUIZ_QUESTIONS } from '../data/quizQuestions';
 import type { QuizAnswers, ArchetypeResult } from '../types';
 import { Button } from '../components/common/Button';
@@ -16,6 +17,7 @@ import { ShareCardGenerator } from '../components/common/ShareCardGenerator';
 import { saveResult } from '../utils/resultsStorage';
 
 export const FormulaGenerator = () => {
+  const { t } = useTranslation();
   const [showIntro, setShowIntro] = useState(true);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<QuizAnswers>({});
@@ -171,20 +173,20 @@ export const FormulaGenerator = () => {
     const introCards = [
       {
         icon: '✓',
-        headline: 'No Wrong Answers',
-        body: 'Every answer reveals something authentic about your training soul. Be honest - this isn\'t about what you think you should be, it\'s about who you truly are in the gym.',
+        headline: t('formulaGenerator.intro.card1Headline'),
+        body: t('formulaGenerator.intro.card1Body'),
         color: 'primary' as const,
       },
       {
         icon: '⚡',
-        headline: 'Takes 2 Minutes',
-        body: '10 quick questions stand between you and your personalized preworkout formula. Each question is designed to capture a unique dimension of your training personality.',
+        headline: t('formulaGenerator.intro.card2Headline'),
+        body: t('formulaGenerator.intro.card2Body'),
         color: 'secondary' as const,
       },
       {
         icon: '🔬',
-        headline: 'Science-Based Matching',
-        body: 'Our algorithm analyzes your answers across 5 key dimensions - Intensity, Duration, Focus, Energy Pattern, and Stim Tolerance - to match you with one of 12 distinct training archetypes.',
+        headline: t('formulaGenerator.intro.card3Headline'),
+        body: t('formulaGenerator.intro.card3Body'),
         color: 'accent' as const,
       },
     ];
@@ -199,10 +201,10 @@ export const FormulaGenerator = () => {
             className="text-center mb-12"
           >
             <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
-              Discover Your <span className="text-gradient">Training Soul</span>
+              {t('formulaGenerator.intro.title')} <span className="text-gradient">{t('formulaGenerator.intro.titleHighlight')}</span>
             </h1>
             <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              Before we begin, here's what to expect from this personalized journey
+              {t('formulaGenerator.intro.subtitle')}
             </p>
           </motion.div>
 
@@ -232,10 +234,10 @@ export const FormulaGenerator = () => {
               onClick={() => setShowIntro(false)}
               className="text-xl px-12 py-6"
             >
-              Discover Your Soul
+              {t('formulaGenerator.intro.startButton')}
             </Button>
             <p className="text-gray-500 text-sm mt-4">
-              Find which training soul matches you today
+              {t('formulaGenerator.intro.startSubtext')}
             </p>
           </motion.div>
         </div>
@@ -265,10 +267,10 @@ export const FormulaGenerator = () => {
             className="w-24 h-24 mx-auto mb-8 border-4 border-primary border-t-transparent rounded-full"
           />
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-gradient mb-4">
-            Analyzing Your Soul...
+            {t('formulaGenerator.analyzing.title')}
           </h2>
           <p className="text-gray-400 text-lg">
-            Discovering your true training archetype
+            {t('formulaGenerator.analyzing.subtitle')}
           </p>
         </motion.div>
       </div>
