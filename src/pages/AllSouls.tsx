@@ -81,16 +81,18 @@ export const AllSouls = () => {
                 <div className="space-y-3 mb-4">
                   {/* Caffeine Range */}
                   <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400 text-right">Caffeine</span>
+                    <span className="text-xs text-gray-400">Caffeine</span>
                     <span className="text-sm font-bold text-white">
-                      {archetype.formulaProfile.caffeineRange[0]}-
-                      {archetype.formulaProfile.caffeineRange[1]}mg
+                      {archetype.formulaProfile.caffeineRange[0] === archetype.formulaProfile.caffeineRange[1]
+                        ? `${archetype.formulaProfile.caffeineRange[0]}mg`
+                        : `${archetype.formulaProfile.caffeineRange[0]}-${archetype.formulaProfile.caffeineRange[1]}mg`
+                      }
                     </span>
                   </div>
 
                   {/* Intensity */}
                   <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400 text-right">Intensity</span>
+                    <span className="text-xs text-gray-400">Intensity</span>
                     <div className="flex items-center gap-1">
                       {[...Array(10)].map((_, i) => {
                         const isActive = i < archetype.formulaProfile.intensity;
@@ -133,7 +135,7 @@ export const AllSouls = () => {
 
                   {/* Pump Level */}
                   <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400 text-right">Pump</span>
+                    <span className="text-xs text-gray-400">Pump</span>
                     <span className="text-sm font-semibold text-secondary uppercase">
                       {archetype.formulaProfile.pumpLevel}
                     </span>
@@ -141,7 +143,7 @@ export const AllSouls = () => {
 
                   {/* Focus Level */}
                   <div className="grid grid-cols-[120px_1fr] gap-4 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400 text-right">Focus</span>
+                    <span className="text-xs text-gray-400">Focus</span>
                     <span className="text-sm font-semibold text-accent uppercase">
                       {archetype.formulaProfile.focusLevel}
                     </span>
@@ -255,8 +257,10 @@ export const AllSouls = () => {
                       Caffeine Range
                     </h3>
                     <p className="text-2xl font-bold text-primary">
-                      {selectedArchetype.formulaProfile.caffeineRange[0]}-
-                      {selectedArchetype.formulaProfile.caffeineRange[1]}mg
+                      {selectedArchetype.formulaProfile.caffeineRange[0] === selectedArchetype.formulaProfile.caffeineRange[1]
+                        ? `${selectedArchetype.formulaProfile.caffeineRange[0]}mg`
+                        : `${selectedArchetype.formulaProfile.caffeineRange[0]}-${selectedArchetype.formulaProfile.caffeineRange[1]}mg`
+                      }
                     </p>
                   </div>
                   <div className="p-4 bg-dark rounded-lg">
