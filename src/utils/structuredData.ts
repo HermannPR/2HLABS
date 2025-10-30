@@ -118,7 +118,7 @@ export const getServiceSchema = () => ({
         itemOffered: {
           '@type': 'Service',
           name: 'Soul Discovery Quiz',
-          description': '2-minute quiz to discover your training archetype',
+          description: '2-minute quiz to discover your training archetype',
         },
       },
     ],
