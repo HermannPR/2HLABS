@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
 
 export const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
       {/* Hero Background Image */}
@@ -46,27 +49,26 @@ export const Hero = () => {
         >
           {/* Main headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4">
-            Your <span className="text-gradient glow-primary">Perfect</span>
+            {t('hero.titlePart1')} <span className="text-gradient glow-primary">{t('hero.titlePart2')}</span>
             <br />
-            Preworkout Formula
+            {t('hero.titlePart3')}
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-gray-300 mb-6 max-w-3xl mx-auto">
-            Stop settling for one-size-fits-all supplements. Get a personalized preworkout
-            tailored to your goals, body, and training style.
+            {t('hero.subtitle')}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link to="/formula">
               <Button size="lg">
-                Build Your Formula Now
+                {t('hero.ctaPrimary')}
               </Button>
             </Link>
             <Link to="/how-it-works">
               <Button size="lg" variant="outline">
-                See How It Works
+                {t('hero.ctaSecondary')}
               </Button>
             </Link>
           </div>
@@ -80,29 +82,29 @@ export const Hero = () => {
           >
             <BadgeWithTooltip
               src="/assets/badges/lab-tested.png"
-              alt="Lab Tested"
-              tooltip="Third-party tested for purity and potency"
+              alt={t('hero.badges.labTested')}
+              tooltip={t('hero.badges.labTestedTooltip')}
               className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/clinical-dosages.png"
-              alt="Clinical Dosages"
-              tooltip="Effective amounts proven in clinical trials"
+              alt={t('hero.badges.clinicalDosages')}
+              tooltip={t('hero.badges.clinicalDosagesTooltip')}
               className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/science-backed.png"
-              alt="Science Backed"
-              tooltip="All ingredients backed by peer-reviewed research"
+              alt={t('hero.badges.scienceBacked')}
+              tooltip={t('hero.badges.scienceBackedTooltip')}
               className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/full-transparency.png"
-              alt="Full Transparency"
-              tooltip="Complete ingredient disclosure, no proprietary blends"
+              alt={t('hero.badges.fullTransparency')}
+              tooltip={t('hero.badges.fullTransparencyTooltip')}
               className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />

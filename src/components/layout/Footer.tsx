@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { FaInstagram, FaTwitter, FaYoutube, FaTiktok } from 'react-icons/fa';
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -12,7 +14,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <h3 className="text-2xl font-heading font-bold text-gradient">2HLABS</h3>
             <p className="text-gray-400 text-sm">
-              Personalized preworkout formulas backed by science, tailored to your goals.
+              {t('footer.tagline')}
             </p>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-primary transition-colors">
@@ -32,26 +34,26 @@ export const Footer = () => {
 
           {/* Product */}
           <div>
-            <h4 className="font-semibold mb-4 text-white">Product</h4>
+            <h4 className="font-semibold mb-4 text-white">{t('footer.product')}</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/formula" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Build Formula
+                  {t('footer.links.buildFormula')}
                 </Link>
               </li>
               <li>
                 <Link to="/how-it-works" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  How It Works
+                  {t('footer.links.howItWorks')}
                 </Link>
               </li>
               <li>
                 <Link to="/ingredients" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Ingredients
+                  {t('footer.links.ingredients')}
                 </Link>
               </li>
               <li>
                 <Link to="/pricing" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Pricing
+                  {t('footer.links.pricing')}
                 </Link>
               </li>
             </ul>
@@ -59,21 +61,21 @@ export const Footer = () => {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold mb-4 text-white">Company</h4>
+            <h4 className="font-semibold mb-4 text-white">{t('footer.company')}</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/about" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  About Us
+                  {t('footer.links.about')}
                 </Link>
               </li>
               <li>
                 <Link to="/blog" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Blog
+                  {t('footer.links.blog')}
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Contact
+                  {t('footer.links.contact')}
                 </Link>
               </li>
             </ul>
@@ -81,21 +83,21 @@ export const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h4 className="font-semibold mb-4 text-white">Legal</h4>
+            <h4 className="font-semibold mb-4 text-white">{t('footer.legal')}</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/privacy" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Privacy Policy
+                  {t('footer.links.privacy')}
                 </Link>
               </li>
               <li>
                 <Link to="/terms" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Terms of Service
+                  {t('footer.links.terms')}
                 </Link>
               </li>
               <li>
                 <Link to="/shipping" className="text-gray-400 hover:text-primary transition-colors text-sm">
-                  Shipping & Returns
+                  {t('footer.links.shipping')}
                 </Link>
               </li>
             </ul>
@@ -104,7 +106,7 @@ export const Footer = () => {
 
         <div className="mt-12 pt-8 border-t border-dark-light text-center">
           <p className="text-gray-400 text-sm">
-            © {currentYear} 2HLABS. All rights reserved. These statements have not been evaluated by the FDA.
+            © {currentYear} 2HLABS. {t('footer.copyright')}
           </p>
         </div>
       </div>

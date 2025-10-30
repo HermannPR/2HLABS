@@ -7,11 +7,22 @@
     "languageSwitcher": "Idioma"
   },
   "hero": {
-    "eyebrow": "Pre-Entreno de Precisión",
-    "title": "Descubre Tu Alma de Entrenamiento",
-    "subtitle": "12 fórmulas únicas. Cada una diseñada para un enfoque diferente de dominación.",
-    "cta": "Descubre Tu Alma",
-    "trustBadge": "Confiado por Atletas en Todo el Mundo"
+    "titlePart1": "Tu",
+    "titlePart2": "Perfecto",
+    "titlePart3": "Pre-Entreno Personalizado",
+    "subtitle": "Deja de conformarte con suplementos genéricos. Obtén un pre-entreno personalizado adaptado a tus objetivos, cuerpo y estilo de entrenamiento.",
+    "ctaPrimary": "Crea Tu Fórmula Ahora",
+    "ctaSecondary": "Ver Cómo Funciona",
+    "badges": {
+      "labTested": "Probado en Laboratorio",
+      "labTestedTooltip": "Probado por terceros para pureza y potencia",
+      "clinicalDosages": "Dosis Clínicas",
+      "clinicalDosagesTooltip": "Cantidades efectivas probadas en ensayos clínicos",
+      "scienceBacked": "Respaldado por la Ciencia",
+      "scienceBackedTooltip": "Todos los ingredientes respaldados por investigación revisada por pares",
+      "fullTransparency": "Transparencia Total",
+      "fullTransparencyTooltip": "Divulgación completa de ingredientes, sin mezclas propietarias"
+    }
   },
   "quiz": {
     "title": "Descubre Tu Alma de Entrenamiento",
@@ -192,19 +203,22 @@
     "error": "Algo salió mal. Por favor intenta de nuevo."
   },
   "footer": {
-    "tagline": "Pre-entreno de precisión para cada alma de entrenamiento",
-    "rights": "Todos los derechos reservados.",
+    "tagline": "Fórmulas de pre-entreno personalizadas respaldadas por la ciencia, adaptadas a tus objetivos.",
     "product": "Producto",
     "company": "Compañía",
     "legal": "Legal",
+    "copyright": "Todos los derechos reservados. Estas declaraciones no han sido evaluadas por la FDA.",
     "links": {
-      "allSouls": "Todas las Almas",
+      "buildFormula": "Crear Fórmula",
+      "howItWorks": "Cómo Funciona",
       "ingredients": "Ingredientes",
-      "quiz": "Hacer Cuestionario",
-      "about": "Acerca de",
+      "pricing": "Precios",
+      "about": "Sobre Nosotros",
+      "blog": "Blog",
       "contact": "Contacto",
       "privacy": "Política de Privacidad",
-      "terms": "Términos de Servicio"
+      "terms": "Términos de Servicio",
+      "shipping": "Envíos y Devoluciones"
     }
   },
   "common": {

@@ -7,11 +7,22 @@
     "languageSwitcher": "Language"
   },
   "hero": {
-    "eyebrow": "Precision-Crafted Pre-Workout",
-    "title": "Discover Your Training Soul",
-    "subtitle": "12 unique formulas. Each one engineered for a different approach to domination.",
-    "cta": "Discover Your Soul",
-    "trustBadge": "Trusted by Athletes Worldwide"
+    "titlePart1": "Your",
+    "titlePart2": "Perfect",
+    "titlePart3": "Preworkout Formula",
+    "subtitle": "Stop settling for one-size-fits-all supplements. Get a personalized preworkout tailored to your goals, body, and training style.",
+    "ctaPrimary": "Build Your Formula Now",
+    "ctaSecondary": "See How It Works",
+    "badges": {
+      "labTested": "Lab Tested",
+      "labTestedTooltip": "Third-party tested for purity and potency",
+      "clinicalDosages": "Clinical Dosages",
+      "clinicalDosagesTooltip": "Effective amounts proven in clinical trials",
+      "scienceBacked": "Science Backed",
+      "scienceBackedTooltip": "All ingredients backed by peer-reviewed research",
+      "fullTransparency": "Full Transparency",
+      "fullTransparencyTooltip": "Complete ingredient disclosure, no proprietary blends"
+    }
   },
   "quiz": {
     "title": "Discover Your Training Soul",
@@ -192,19 +203,22 @@
     "error": "Something went wrong. Please try again."
   },
   "footer": {
-    "tagline": "Precision-crafted pre-workout for every training soul",
-    "rights": "All rights reserved.",
+    "tagline": "Personalized preworkout formulas backed by science, tailored to your goals.",
     "product": "Product",
     "company": "Company",
     "legal": "Legal",
+    "copyright": "All rights reserved. These statements have not been evaluated by the FDA.",
     "links": {
-      "allSouls": "All Souls",
+      "buildFormula": "Build Formula",
+      "howItWorks": "How It Works",
       "ingredients": "Ingredients",
-      "quiz": "Take Quiz",
-      "about": "About",
+      "pricing": "Pricing",
+      "about": "About Us",
+      "blog": "Blog",
       "contact": "Contact",
       "privacy": "Privacy Policy",
-      "terms": "Terms of Service"
+      "terms": "Terms of Service",
+      "shipping": "Shipping & Returns"
     }
   },
   "common": {
