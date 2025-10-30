@@ -26,39 +26,35 @@ export const HowItWorks = () => {
         {/* The Science */}
         <section className="mb-20">
           <h2 className="text-3xl font-heading font-bold mb-8 text-center">
-            The <span className="text-gradient">Science</span> Behind It
+            {t('howItWorksPage.scienceTitle')} <span className="text-gradient">{t('howItWorksPage.scienceTitleHighlight')}</span> {t('howItWorksPage.scienceSubtitle')}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card hover>
               <HiBeaker className="text-primary mb-4" size={40} />
-              <h3 className="text-2xl font-heading font-semibold mb-3">Evidence-Based Ingredients</h3>
+              <h3 className="text-2xl font-heading font-semibold mb-3">{t('howItWorksPage.card1Title')}</h3>
               <p className="text-gray-400">
-                Every ingredient in our formulas is backed by peer-reviewed research. We use only compounds
-                with proven efficacy for athletic performance, dosed according to scientific literature.
+                {t('howItWorksPage.card1Description')}
               </p>
             </Card>
             <Card hover>
               <HiCog className="text-primary mb-4" size={40} />
-              <h3 className="text-2xl font-heading font-semibold mb-3">Personalization Algorithm</h3>
+              <h3 className="text-2xl font-heading font-semibold mb-3">{t('howItWorksPage.card2Title')}</h3>
               <p className="text-gray-400">
-                Our algorithm considers your weight, goals, training style, and preferences to calculate
-                optimal dosages and select synergistic ingredient combinations.
+                {t('howItWorksPage.card2Description')}
               </p>
             </Card>
             <Card hover>
               <HiChartBar className="text-primary mb-4" size={40} />
-              <h3 className="text-2xl font-heading font-semibold mb-3">Clinical Dosages</h3>
+              <h3 className="text-2xl font-heading font-semibold mb-3">{t('howItWorksPage.card3Title')}</h3>
               <p className="text-gray-400">
-                Unlike underdosed commercial products, we use clinically effective doses. If 6g of citrulline
-                is proven effective, that's what you get—not 2g.
+                {t('howItWorksPage.card3Description')}
               </p>
             </Card>
             <Card hover>
               <HiShieldCheck className="text-primary mb-4" size={40} />
-              <h3 className="text-2xl font-heading font-semibold mb-3">Quality Assurance</h3>
+              <h3 className="text-2xl font-heading font-semibold mb-3">{t('howItWorksPage.card4Title')}</h3>
               <p className="text-gray-400">
-                Third-party tested for purity and potency. Manufactured in FDA-registered facilities.
-                No banned substances. Complete transparency.
+                {t('howItWorksPage.card4Description')}
               </p>
             </Card>
           </div>
@@ -67,7 +63,7 @@ export const HowItWorks = () => {
         {/* CTA */}
         <div className="text-center">
           <Link to="/formula">
-            <Button size="lg">Create Your Formula</Button>
+            <Button size="lg">{t('howItWorksPage.ctaButton')}</Button>
           </Link>
         </div>
       </div>

@@ -295,7 +295,37 @@
     "stat2Number": "4.9/5",
     "stat2Label": "Calificación Promedio",
     "stat3Number": "98%",
-    "stat3Label": "Lo Recomendarían"
+    "stat3Label": "Lo Recomendarían",
+    "testimonial1": {
+      "name": "Marcus Chen",
+      "role": "Levantador Competitivo",
+      "content": "Finalmente, un pre-entreno hecho para MIS necesidades. Sin nervios, sin bajones, solo energía limpia y congestión masiva. Mi entrenamiento nunca ha sido mejor."
+    },
+    "testimonial2": {
+      "name": "Sarah Mitchell",
+      "role": "Corredora de Maratón",
+      "content": "Era escéptica de los pre-entrenos, pero 2HLABS creó una fórmula perfecta para resistencia. Sin sobrecarga de estimulantes, solo energía sostenida para mis carreras largas."
+    },
+    "testimonial3": {
+      "name": "David Rodriguez",
+      "role": "Atleta de CrossFit",
+      "content": "El enfoque personalizado es revolucionario. Realmente escucharon mi horario de entrenamiento y sensibilidad a la cafeína. El mejor pre-entreno que he usado."
+    },
+    "testimonial4": {
+      "name": "Emily Thompson",
+      "role": "Entusiasta de HIIT",
+      "content": "Me encanta que pude personalizarlo para mis entrenamientos matutinos. La concentración es increíble y no me siento alterada todo el día. Balance perfecto."
+    },
+    "testimonial5": {
+      "name": "James Park",
+      "role": "Culturista",
+      "content": "Ingredientes transparentes, dosis respaldadas por ciencia, y personalizado para mi fase de volumen. Esto es lo que la industria necesitaba."
+    },
+    "testimonial6": {
+      "name": "Lisa Anderson",
+      "role": "Entrenadora Fitness",
+      "content": "Recomiendo 2HLABS a todos mis clientes. La capacidad de ajustar para diferentes objetivos y sensibilidades no tiene comparación."
+    }
   },
   "faq": {
     "title": "Preguntas",
@@ -417,7 +447,19 @@
   "howItWorksPage": {
     "pageTitle": "Cómo",
     "pageTitleHighlight": "Funciona",
-    "pageSubtitle": "Del cuestionario a tu fórmula personalizada en tres pasos simples"
+    "pageSubtitle": "Del cuestionario a tu fórmula personalizada en tres pasos simples",
+    "scienceTitle": "La",
+    "scienceTitleHighlight": "Ciencia",
+    "scienceSubtitle": "Detrás de Todo",
+    "card1Title": "Ingredientes Basados en Evidencia",
+    "card1Description": "Cada ingrediente en nuestras fórmulas está respaldado por investigación revisada por expertos. Solo usamos compuestos con eficacia comprobada para el rendimiento atlético, dosificados según la literatura científica.",
+    "card2Title": "Algoritmo de Personalización",
+    "card2Description": "Nuestro algoritmo considera tu peso, objetivos, estilo de entrenamiento y preferencias para calcular dosis óptimas y seleccionar combinaciones sinérgicas de ingredientes.",
+    "card3Title": "Dosis Clínicas",
+    "card3Description": "A diferencia de productos comerciales subdosificados, usamos dosis clínicamente efectivas. Si 6g de citrulina está comprobado que funciona, eso es lo que recibes—no 2g.",
+    "card4Title": "Garantía de Calidad",
+    "card4Description": "Probado por terceros para pureza y potencia. Fabricado en instalaciones registradas por la FDA. Sin sustancias prohibidas. Transparencia total.",
+    "ctaButton": "Crea Tu Fórmula"
   },
   "pricing": {
     "pageTitle": "Precios",

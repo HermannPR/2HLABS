@@ -295,7 +295,37 @@
     "stat2Number": "4.9/5",
     "stat2Label": "Average Rating",
     "stat3Number": "98%",
-    "stat3Label": "Would Recommend"
+    "stat3Label": "Would Recommend",
+    "testimonial1": {
+      "name": "Marcus Chen",
+      "role": "Competitive Powerlifter",
+      "content": "Finally, a preworkout tailored to MY needs. No more jitters, no crashes, just clean energy and massive pumps. My training has never been better."
+    },
+    "testimonial2": {
+      "name": "Sarah Mitchell",
+      "role": "Marathon Runner",
+      "content": "I was skeptical about preworkouts, but 2HLABS created a formula perfect for endurance. No stimulant overload, just sustained energy for my long runs."
+    },
+    "testimonial3": {
+      "name": "David Rodriguez",
+      "role": "CrossFit Athlete",
+      "content": "The personalized approach is game-changing. They actually listened to my training schedule and caffeine sensitivity. Best preworkout I've ever used."
+    },
+    "testimonial4": {
+      "name": "Emily Thompson",
+      "role": "HIIT Enthusiast",
+      "content": "Love that I could customize for my early morning workouts. The focus is incredible and I don't feel wired all day. Perfect balance."
+    },
+    "testimonial5": {
+      "name": "James Park",
+      "role": "Bodybuilder",
+      "content": "Transparent ingredients, science-backed dosages, and customized to my bulking phase. This is what the industry needed."
+    },
+    "testimonial6": {
+      "name": "Lisa Anderson",
+      "role": "Fitness Coach",
+      "content": "I recommend 2HLABS to all my clients. The ability to adjust for different goals and sensitivities is unmatched."
+    }
   },
   "faq": {
     "title": "Frequently Asked",
@@ -417,7 +447,19 @@
   "howItWorksPage": {
     "pageTitle": "How It",
     "pageTitleHighlight": "Works",
-    "pageSubtitle": "From quiz to custom formula in three simple steps"
+    "pageSubtitle": "From quiz to custom formula in three simple steps",
+    "scienceTitle": "The",
+    "scienceTitleHighlight": "Science",
+    "scienceSubtitle": "Behind It",
+    "card1Title": "Evidence-Based Ingredients",
+    "card1Description": "Every ingredient in our formulas is backed by peer-reviewed research. We use only compounds with proven efficacy for athletic performance, dosed according to scientific literature.",
+    "card2Title": "Personalization Algorithm",
+    "card2Description": "Our algorithm considers your weight, goals, training style, and preferences to calculate optimal dosages and select synergistic ingredient combinations.",
+    "card3Title": "Clinical Dosages",
+    "card3Description": "Unlike underdosed commercial products, we use clinically effective doses. If 6g of citrulline is proven effective, that's what you get—not 2g.",
+    "card4Title": "Quality Assurance",
+    "card4Description": "Third-party tested for purity and potency. Manufactured in FDA-registered facilities. No banned substances. Complete transparency.",
+    "ctaButton": "Create Your Formula"
   },
   "pricing": {
     "pageTitle": "Simple",

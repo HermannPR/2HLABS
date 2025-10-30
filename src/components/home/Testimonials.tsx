@@ -1,11 +1,12 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Card } from '../common/Card';
-import { TESTIMONIALS } from '../../data/testimonials';
 import { HiStar } from 'react-icons/hi';
 
 export const Testimonials = () => {
   const { t } = useTranslation();
+
+  const testimonials = [1, 2, 3, 4, 5, 6];
 
   return (
     <section className="py-20 bg-dark">
@@ -25,9 +26,9 @@ export const Testimonials = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {TESTIMONIALS.slice(0, 6).map((testimonial, index) => (
+          {testimonials.map((num, index) => (
             <motion.div
-              key={testimonial.id}
+              key={num}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -36,20 +37,18 @@ export const Testimonials = () => {
               <Card className="h-full">
                 {/* Stars */}
                 <div className="flex space-x-1 mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <HiStar key={i} className="text-accent" size={20} />
                   ))}
                 </div>
 
                 {/* Content */}
-                <p className="text-gray-300 mb-6 italic">"{testimonial.content}"</p>
+                <p className="text-gray-300 mb-6 italic">"{t(`testimonials.testimonial${num}.content`)}"</p>
 
                 {/* Author */}
                 <div className="mt-auto">
-                  <p className="font-semibold text-white">{testimonial.name}</p>
-                  {testimonial.role && (
-                    <p className="text-sm text-gray-500">{testimonial.role}</p>
-                  )}
+                  <p className="font-semibold text-white">{t(`testimonials.testimonial${num}.name`)}</p>
+                  <p className="text-sm text-gray-500">{t(`testimonials.testimonial${num}.role`)}</p>
                 </div>
               </Card>
             </motion.div>
