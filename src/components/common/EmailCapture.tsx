@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Button } from './Button';
 import { saveEmail, isValidEmail, hasSubmittedEmail, detectEmailTypo, getCorrectedEmail } from '../../utils/emailStorage';
 
@@ -18,9 +19,10 @@ export const EmailCapture = ({
   archetype,
   heading,
   subheading,
-  buttonText = 'Get Early Access',
+  buttonText,
   onSuccess,
 }: EmailCaptureProps) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
@@ -50,17 +52,17 @@ export const EmailCapture = ({
 
     // Validation
     if (!email.trim()) {
-      setError('Please enter your email');
+      setError(t('email.errorRequired'));
       return;
     }
 
     if (!isValidEmail(email)) {
-      setError('Please enter a valid email address');
+      setError(t('email.errorInvalid'));
       return;
     }
 
     if (hasSubmittedEmail(email)) {
-      setError('This email is already registered!');
+      setError(t('email.errorAlreadyRegistered'));
       return;
     }
 
@@ -97,10 +99,13 @@ export const EmailCapture = ({
           ✓
         </motion.div>
         <h3 className="text-2xl font-heading font-bold text-white mb-2">
-          You're On The List!
+          {t('email.successTitle')}
         </h3>
         <p className="text-gray-300">
-          We'll notify you when {archetype ? `your ${archetype} formula` : 'we launch'} is ready.
+          {archetype
+            ? t('email.successMessage', { formula: `${t('common.loading')} ${archetype}` })
+            : t('email.successMessageDefault')
+          }
         </p>
       </motion.div>
     );
@@ -123,7 +128,7 @@ export const EmailCapture = ({
             type="email"
             value={email}
             onChange={(e) => handleEmailChange(e.target.value)}
-            placeholder="Enter your email"
+            placeholder={t('email.placeholder')}
             className={`
               flex-1 px-4 py-3 bg-dark border-2 rounded-lg
               text-white placeholder-gray-500
@@ -138,7 +143,7 @@ export const EmailCapture = ({
             disabled={isSubmitting}
             className="sm:px-8"
           >
-            {isSubmitting ? 'Submitting...' : buttonText}
+            {isSubmitting ? t('email.submitting') : (buttonText || t('email.button'))}
           </Button>
         </div>
 
@@ -150,7 +155,7 @@ export const EmailCapture = ({
             className="mt-2 text-center"
           >
             <p className="text-sm text-gray-400">
-              Did you mean{' '}
+              {t('email.typoSuggestion')}{' '}
               <button
                 type="button"
                 onClick={handleAcceptSuggestion}
@@ -174,7 +179,7 @@ export const EmailCapture = ({
         )}
 
         <p className="text-gray-500 text-xs text-center mt-3">
-          We'll never share your email. Unsubscribe anytime.
+          {t('email.privacyText')}
         </p>
       </form>
     </div>

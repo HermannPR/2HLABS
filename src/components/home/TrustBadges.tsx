@@ -26,7 +26,7 @@ export const TrustBadges = () => {
   ];
 
   return (
-    <section className="py-12 md:py-16 bg-dark-lighter">
+    <section className="py-8 md:py-12 bg-dark-lighter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

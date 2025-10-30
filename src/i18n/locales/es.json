@@ -197,10 +197,19 @@
   "email": {
     "title": "Únete a la Lista de Espera",
     "subtitle": "Sé el primero en saberlo cuando lancemos. Acceso anticipado exclusivo.",
-    "placeholder": "Tu correo electrónico",
+    "placeholder": "Ingresa tu correo",
     "button": "Quiero Acceso Anticipado",
     "success": "¡Listo! Estás en la lista.",
-    "error": "Algo falló. Intenta de nuevo."
+    "error": "Algo falló. Intenta de nuevo.",
+    "privacyText": "Nunca compartiremos tu correo. Cancela cuando quieras.",
+    "submitting": "Enviando...",
+    "successTitle": "¡Ya Estás en la Lista!",
+    "successMessage": "Te avisaremos cuando {{formula}} esté lista.",
+    "successMessageDefault": "Te avisaremos cuando lancemos.",
+    "typoSuggestion": "¿Quisiste decir",
+    "errorRequired": "Ingresa tu correo",
+    "errorInvalid": "Ingresa un correo válido",
+    "errorAlreadyRegistered": "¡Este correo ya está registrado!"
   },
   "footer": {
     "tagline": "Pre-entrenos personalizados con ciencia real, diseñados para tus metas.",

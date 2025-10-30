@@ -200,7 +200,16 @@
     "placeholder": "Enter your email",
     "button": "Join Waitlist",
     "success": "Thanks! You're on the list.",
-    "error": "Something went wrong. Please try again."
+    "error": "Something went wrong. Please try again.",
+    "privacyText": "We'll never share your email. Unsubscribe anytime.",
+    "submitting": "Submitting...",
+    "successTitle": "You're On The List!",
+    "successMessage": "We'll notify you when {{formula}} is ready.",
+    "successMessageDefault": "We'll notify you when we launch is ready.",
+    "typoSuggestion": "Did you mean",
+    "errorRequired": "Please enter your email",
+    "errorInvalid": "Please enter a valid email address",
+    "errorAlreadyRegistered": "This email is already registered!"
   },
   "footer": {
     "tagline": "Personalized preworkout formulas backed by science, tailored to your goals.",
