@@ -10,6 +10,7 @@ import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/ar
 import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
 import { getSoulLogo } from '../utils/soulLogos';
 import { IntroCard } from '../components/quiz/IntroCard';
+import { FlavorSelection } from '../components/quiz/FlavorSelection';
 import { EmailCapture } from '../components/common/EmailCapture';
 import { ShareCardGenerator } from '../components/common/ShareCardGenerator';
 import { saveResult } from '../utils/resultsStorage';
@@ -22,6 +23,11 @@ export const FormulaGenerator = () => {
   const [archetypeResult, setArchetypeResult] = useState<ArchetypeResult | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [showFlavorSelection, setShowFlavorSelection] = useState(false);
+  const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null);
+
+  // TODO: Use selectedFlavor for formula creation/ordering
+  console.log('Current flavor selection:', selectedFlavor);
 
   const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
@@ -113,7 +119,24 @@ export const FormulaGenerator = () => {
       setCurrentQuestionIndex(0);
       setAnswers({});
       setArchetypeResult(null);
+      setShowFlavorSelection(false);
+      setSelectedFlavor(null);
     }
+  };
+
+  const handleGetFormula = () => {
+    setShowFlavorSelection(true);
+  };
+
+  const handleFlavorSelected = (flavorId: string) => {
+    setSelectedFlavor(flavorId);
+    setShowFlavorSelection(false);
+    // Could add logic here to save the complete formula with flavor
+    console.log('Selected flavor:', flavorId);
+  };
+
+  const handleSkipFlavor = () => {
+    setShowFlavorSelection(false);
   };
 
   const isAnswered = () => {
@@ -552,7 +575,7 @@ export const FormulaGenerator = () => {
             transition={{ delay: 2 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
           >
-            <Button size="lg" className="text-lg px-8">
+            <Button size="lg" onClick={handleGetFormula} className="text-lg px-8">
               Get Your {archetype.name} Formula
             </Button>
             <ShareCardGenerator
@@ -569,21 +592,38 @@ export const FormulaGenerator = () => {
             </Button>
           </motion.div>
 
-          {/* View All Souls Link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 2.2 }}
-            className="text-center"
-          >
-            <a
-              href="/souls"
-              className="text-primary hover:text-primary-light transition-colors font-semibold inline-flex items-center gap-2"
+          {/* Flavor Selection */}
+          {showFlavorSelection && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-12"
             >
-              <span>Compare All 12 Training Souls</span>
-              <span>→</span>
-            </a>
-          </motion.div>
+              <FlavorSelection
+                archetype={archetype}
+                onFlavorSelected={handleFlavorSelected}
+                onSkip={handleSkipFlavor}
+              />
+            </motion.div>
+          )}
+
+          {/* View All Souls Link */}
+          {!showFlavorSelection && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.2 }}
+              className="text-center"
+            >
+              <a
+                href="/souls"
+                className="text-primary hover:text-primary-light transition-colors font-semibold inline-flex items-center gap-2"
+              >
+                <span>Compare All 12 Training Souls</span>
+                <span>→</span>
+              </a>
+            </motion.div>
+          )}
         </div>
       </div>
     );
