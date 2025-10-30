@@ -1,6 +1,115 @@
 # Session History & Recent Changes
 
-## Latest Session (2025-10-28)
+## Latest Session (2025-10-29)
+
+### Major Implementations:
+
+#### 1. Asset Management & Standardization
+- **GEN 3 Standarized Assets**: Replaced all old assets with new standardized set
+- **12 Soul Logos**: Uploaded and organized in `public/assets/souls/`
+  - Fixed filename typos: `serpent-flow.png.png` → `serpent-flow.png`
+  - Fixed typo: `titan-strenght.png` → `titan-strength.png`
+- **4 Trust Badges**: Added to `public/assets/badges/`
+  - science-backed.png, clinical-dosages.png, full-transparency.png, lab-tested.png
+- **Hero Background**: Added `hero-bg.png` to `public/assets/backgrounds/`
+- Cleaned folder structure by removing old assets and backups
+
+#### 2. Hero Section Optimization
+- **Reduced excessive spacing**: Changed padding from `pt-20 pb-16` to `pt-0 pb-8`
+- **Removed redundancy**: Deleted "Science-Backed | Personalized | Results-Driven" pill badge
+- **Cleaner UI**: Removed text labels from badge images (text already in image)
+- Content now fills viewport height more effectively
+
+#### 3. Badge Sizing & Responsiveness
+- **Hero Section Badges**: Upgraded from 96px to responsive sizing:
+  - `w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40` (112-160px range)
+- **TrustBadges Section**: Upgraded from 128px to responsive sizing:
+  - `w-40 h-40 sm:w-48 sm:h-48 md:w-44 md:h-44 lg:w-52 lg:h-52` (160-208px range)
+- Proper scaling across all breakpoints (mobile → desktop)
+
+#### 4. Interactive Badge Tooltips
+- **Created BadgeWithTooltip Component**: `src/components/common/BadgeWithTooltip.tsx`
+  - Hover reveals informational tooltip
+  - Non-clickable, educational purpose
+  - Smooth animations with Framer Motion
+  - Centered positioning above badge
+  - Arrow indicator pointing to badge
+- **Applied to both sections**: Hero badges and TrustBadges section
+- **Tooltip content**: Explanations of quality standards and certifications
+  - "All ingredients backed by peer-reviewed research"
+  - "Effective amounts proven in clinical trials"
+  - "Complete ingredient disclosure, no proprietary blends"
+  - "Third-party tested for purity and potency"
+
+#### 5. Soul Card Stats Alignment (AllSouls Page)
+- **Fixed alignment issues**: Stats were misaligned with varying x-positions
+- **Implemented CSS Grid**: `grid-cols-[120px_1fr] gap-4`
+  - Labels in fixed 120px column (left-aligned)
+  - Values in flexible column starting at consistent position
+- **Applied to 4 stats**: Caffeine, Intensity, Pump, Focus
+- **Better readability**: Table-style layout with consistent vertical alignment
+
+#### 6. Caffeine Display Logic
+- **Fixed "0-0mg" issue**: Serpent Flow (stim-free) displayed incorrectly
+- **Smart display logic**:
+  - If min === max: Show single value ("0mg")
+  - If range exists: Show range ("200-300mg")
+- **Applied to both views**: Soul cards and detailed modal
+- Improved clarity for all archetypes
+
+#### 7. Animation Optimization
+- **Faster hover effects**: Reduced from 300ms to 150ms
+  - Badge hover feels snappier and more responsive
+  - Scale and lift animations now quick and smooth
+- **Smooth page transitions**: Added AnimatePresence to App.tsx
+  - 300ms fade effect between page changes
+  - No more abrupt color changes
+  - Uses `mode="wait"` for proper exit animations
+
+### Technical Details:
+
+#### Component Changes:
+- **`src/components/common/BadgeWithTooltip.tsx`** (NEW)
+  - Uses Framer Motion for animations
+  - Tooltip positioned with inline styles + Motion's `x` property
+  - Conditional glow effect based on `glowEffect` prop
+  - `whitespace-nowrap` prevents text wrapping
+
+- **`src/components/home/Hero.tsx`**
+  - Reduced spacing, removed redundant pill badge
+  - Integrated BadgeWithTooltip component
+  - Responsive badge sizing
+
+- **`src/components/home/TrustBadges.tsx`**
+  - Integrated BadgeWithTooltip component
+  - Increased badge sizes with responsive breakpoints
+
+- **`src/pages/AllSouls.tsx`**
+  - Fixed stats alignment with CSS Grid
+  - Smart caffeine display logic
+  - Left-aligned stat labels
+
+- **`src/components/layout/Layout.tsx`**
+  - Added Framer Motion wrapper
+  - Page transition animations
+
+- **`src/App.tsx`**
+  - Added AnimatePresence for route transitions
+  - Uses `useLocation` hook for animation keys
+
+### Bug Fixes:
+1. **Tooltip positioning bug**: Fixed offset issue by using Motion's `x` property instead of CSS transform
+2. **Text wrapping bug**: Fixed "smashed" tooltip text with `whitespace-nowrap`
+3. **Caffeine display bug**: Fixed "0-0mg" displaying as range instead of single value
+4. **Stats alignment bug**: Fixed inconsistent x-positions with CSS Grid
+
+### Commits:
+1. `8581cc5` - Previous session end
+2. `8444cf9` - Update AllSouls page: fix stat alignment and caffeine display
+
+---
+
+## Previous Session (2025-10-28)
 
 ### Major Implementations:
 
