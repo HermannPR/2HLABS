@@ -75,30 +75,30 @@ export const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-8 md:gap-12"
+            className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12"
           >
             <img
               src="/assets/badges/lab-tested.png"
               alt="Lab Tested"
-              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
               style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
             />
             <img
               src="/assets/badges/clinical-dosages.png"
               alt="Clinical Dosages"
-              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
               style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
             />
             <img
               src="/assets/badges/science-backed.png"
               alt="Science Backed"
-              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
               style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
             />
             <img
               src="/assets/badges/full-transparency.png"
               alt="Full Transparency"
-              className="w-24 h-24 md:w-32 md:h-32 object-contain mix-blend-lighten"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
               style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
             />
           </motion.div>

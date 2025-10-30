@@ -21,13 +21,13 @@ export const TrustBadges = () => {
   ];
 
   return (
-    <section className="py-16 bg-dark-lighter">
+    <section className="py-12 md:py-16 bg-dark-lighter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12"
         >
           {badges.map((badge, index) => (
             <motion.div
@@ -36,12 +36,12 @@ export const TrustBadges = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="flex justify-center"
+              className="flex justify-center items-center"
             >
               <img
                 src={badge.icon}
                 alt={badge.alt}
-                className="w-32 h-32 object-contain"
+                className="w-40 h-40 sm:w-48 sm:h-48 md:w-44 md:h-44 lg:w-52 lg:h-52 object-contain"
               />
             </motion.div>
           ))}
