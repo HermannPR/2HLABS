@@ -32,7 +32,7 @@ export const BadgeWithTooltip = ({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 10 }}
             transition={{ duration: 0.2 }}
-            className="absolute bottom-full mb-3 px-4 py-2 bg-dark-lighter border border-primary/30 rounded-lg shadow-xl z-50 max-w-xs text-center"
+            className="absolute bottom-full mb-3 px-4 py-2 bg-dark-lighter border border-primary/30 rounded-lg shadow-xl z-50 whitespace-nowrap"
             style={{
               left: '50%',
               transform: 'translateX(-50%)'
