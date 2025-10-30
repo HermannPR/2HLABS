@@ -2,16 +2,19 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
+import { LanguageSwitcher } from '../common/LanguageSwitcher';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const navLinks = [
-    { name: 'Discover Your Soul', path: '/formula' },
-    { name: 'All Souls', path: '/souls' },
+    { name: t('nav.formula'), path: '/formula' },
+    { name: t('nav.allSouls'), path: '/souls' },
     { name: 'How It Works', path: '/how-it-works' },
-    { name: 'Ingredients', path: '/ingredients' },
+    { name: t('nav.ingredients'), path: '/ingredients' },
     { name: 'Pricing', path: '/pricing' },
     { name: 'About', path: '/about' },
   ];
@@ -41,6 +44,7 @@ export const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <LanguageSwitcher />
             <Link to="/formula">
               <Button size="sm">Build Your Formula</Button>
             </Link>
@@ -76,6 +80,9 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
+              <div className="pt-2">
+                <LanguageSwitcher />
+              </div>
               <Link to="/formula" onClick={() => setIsOpen(false)}>
                 <Button fullWidth>Build Your Formula</Button>
               </Link>

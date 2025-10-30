@@ -1,0 +1,222 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "allSouls": "Todas las Almas",
+    "ingredients": "Ingredientes",
+    "formula": "Descubre Tu Alma",
+    "languageSwitcher": "Idioma"
+  },
+  "hero": {
+    "eyebrow": "Pre-Entreno de Precisión",
+    "title": "Descubre Tu Alma de Entrenamiento",
+    "subtitle": "12 fórmulas únicas. Cada una diseñada para un enfoque diferente de dominación.",
+    "cta": "Descubre Tu Alma",
+    "trustBadge": "Confiado por Atletas en Todo el Mundo"
+  },
+  "quiz": {
+    "title": "Descubre Tu Alma de Entrenamiento",
+    "subtitle": "Responde estas preguntas para encontrar tu pre-entreno perfecto",
+    "progress": "Pregunta {{current}} de {{total}}",
+    "next": "Siguiente Pregunta",
+    "previous": "Anterior",
+    "submit": "Descubre Mi Alma",
+    "loading": "Analizando tu alma de entrenamiento...",
+    "multiSelectHint": "Selecciona todas las que apliquen",
+    "questions": {
+      "q1": {
+        "question": "¿Qué tipo de entrenamiento vas a hacer HOY?",
+        "description": "Tu estilo de entrenamiento actual revela qué alma te corresponde",
+        "options": {
+          "destroy": "Agresión máxima - Destruir todo en mi camino",
+          "explosive": "Ráfagas explosivas - Golpear rápido, golpear fuerte",
+          "steady": "Conquista constante - El esfuerzo nunca se detiene",
+          "flow": "Fluir con la sesión - Sentir el ritmo",
+          "precision": "Ejecución de precisión - Cada repetición cuenta",
+          "calculated": "Paciente y calculado - Mente sobre músculo"
+        }
+      },
+      "q2": {
+        "question": "¿Cuál es tu objetivo principal para la sesión de hoy?",
+        "description": "Tu objetivo ayuda a identificar tu alma de entrenamiento",
+        "options": {
+          "domination": "Dominación pura y poder absoluto",
+          "battle": "La batalla en sí - Vivo para la lucha",
+          "improvement": "Mejora constante y progreso",
+          "limits": "Romper mis límites",
+          "connection": "Conexión profunda mente-cuerpo",
+          "building": "Construir algo que perdure"
+        }
+      },
+      "q3": {
+        "question": "¿Cómo quieres manejar las series difíciles hoy?",
+        "description": "Tu enfoque bajo presión revela tu alma",
+        "options": {
+          "rage": "Canalizar furia pura y seguir adelante",
+          "explode": "Explotar con todo lo que tienes",
+          "execute": "Mantener la calma y ejecutar el plan",
+          "feed": "Alimentarte de la quemadura y abrazarla",
+          "focusDeeper": "Enfocarte más profundamente en el momento",
+          "endure": "Resistir constantemente hasta completar"
+        }
+      },
+      "q4": {
+        "question": "¿Cuánto dura tu sesión de entrenamiento hoy?",
+        "description": "La duración afecta los requisitos de energía y resistencia",
+        "options": {
+          "brutal": "Corta, brutal y absolutamente devastadora (20-30min)",
+          "explosiveVaried": "Explosiva y de intensidad variada (30-45min)",
+          "balanced": "Equilibrada y completa (45-60min)",
+          "sustained": "Esfuerzo largo y sostenido (60-90min)",
+          "marathon": "Jornada de resistencia extendida (90min+)",
+          "mindful": "Movimiento controlado y consciente (cualquier duración)"
+        }
+      },
+      "q5": {
+        "question": "¿Cómo quieres que tu pre-entreno haga efecto?",
+        "description": "Diferentes curvas de energía para diferentes necesidades de entrenamiento",
+        "options": {
+          "lightning": "INSTANTÁNEO - Que me golpee como un rayo",
+          "explosion": "EXPLOSIVO - Subida rápida, quemadura agresiva",
+          "wave": "OLA - Construir gradualmente, sostener poderosamente",
+          "controlledBurn": "CONTROLADO - Poder constante y confiable",
+          "dawn": "SUAVE - Subida suave, sin bordes ásperos",
+          "natural": "NATURAL - Sin estimulantes, enfoque puro"
+        }
+      },
+      "q6": {
+        "question": "¿Cuál es tu nivel de tolerancia a la cafeína?",
+        "description": "Ajustaremos tus necesidades de estimulantes con precisión",
+        "options": {
+          "warrior": "GUERRERO - Alta tolerancia, trae estimulación máxima",
+          "experienced": "EXPERIMENTADO - Usuario regular, puede manejar dosis fuertes",
+          "balanced": "EQUILIBRADO - Cantidades moderadas funcionan perfectamente",
+          "sensitive": "SENSIBLE - Se necesita toque ligero, prefiero menos",
+          "pure": "PURO - Sin estimulantes, soy naturalmente motivado"
+        }
+      },
+      "q7": {
+        "question": "¿Cuándo vas a entrenar hoy?",
+        "description": "El horario de entrenamiento afecta las recomendaciones de estimulantes",
+        "options": {
+          "dawn": "GUERRERO DEL AMANECER - Temprano en la mañana (necesito despertar)",
+          "midday": "CAZADOR DEL MEDIODÍA - A media jornada (10am-2pm)",
+          "afternoon": "TRITURADORA DE LA TARDE - Sesiones de tarde (2pm-6pm)",
+          "night": "DEPREDADOR NOCTURNO - Entrenamiento nocturno (después de las 6pm)"
+        }
+      },
+      "q8": {
+        "question": "¿Cuál es tu objetivo principal de entrenamiento?",
+        "description": "Tu objetivo determina el perfil óptimo de ingredientes",
+        "options": {
+          "maxStrength": "FUERZA MÁXIMA - Poder puro, levantamientos pesados",
+          "muscleBuild": "CONSTRUCCIÓN MUSCULAR - Bombeo e hipertrofia",
+          "endurance": "RESISTENCIA - Ir más lejos, empujar más",
+          "explosivePower": "PODER EXPLOSIVO - Velocidad y atletismo",
+          "focusTechnique": "ENFOQUE Y TÉCNICA - Perfeccionar cada movimiento",
+          "intensityTraining": "ALTA INTENSIDAD - HIIT, circuitos, caos"
+        }
+      },
+      "q9": {
+        "question": "¿Cuál es tu rango de peso corporal?",
+        "description": "Nos ayuda a calcular dosis precisas y efectivas",
+        "options": {
+          "compact": "COMPACTO - Menos de 60kg / 130lbs",
+          "athletic": "ATLÉTICO - 60-75kg / 130-165lbs",
+          "powerful": "PODEROSO - 75-90kg / 165-200lbs",
+          "massive": "MASIVO - Más de 90kg / 200lbs+"
+        }
+      },
+      "q10": {
+        "question": "¿Alguna consideración especial que debamos saber?",
+        "description": "Selecciona todas las que apliquen - ajustaremos tu fórmula",
+        "options": {
+          "stimSensitive": "Me pongo nervioso o ansioso con estimulantes",
+          "sleepPriority": "La calidad del sueño es crítica para mí",
+          "firstTimer": "Esta es mi primera experiencia con pre-entreno",
+          "eveningTrainer": "Entreno en la noche regularmente",
+          "naturalPreference": "Prefiero ingredientes mínimos/naturales",
+          "drugTested": "Soy un atleta competitivo con pruebas de dopaje",
+          "noneApply": "Ninguna de estas - Puedo manejarlo todo"
+        }
+      }
+    }
+  },
+  "results": {
+    "title": "Tu Alma de Entrenamiento",
+    "subtitle": "Basado en tus respuestas, esta es tu combinación perfecta",
+    "share": "Compartir Resultado",
+    "retake": "Repetir Cuestionario",
+    "viewAllSouls": "Ver Todas las Almas",
+    "keyStrengths": "Fortalezas Clave",
+    "bestFor": "Mejor Para",
+    "ingredients": "Ingredientes Clave",
+    "fullProfile": "Perfil Completo"
+  },
+  "souls": {
+    "title": "Todas las Almas de Entrenamiento",
+    "subtitle": "Explora las 12 fórmulas únicas. Cada una diseñada para un camino diferente hacia la grandeza.",
+    "modal": {
+      "close": "Cerrar",
+      "tagline": "Eslogan",
+      "description": "Descripción",
+      "profile": "Perfil",
+      "strengths": "Fortalezas Clave",
+      "bestFor": "Mejor Para",
+      "ingredients": "Ingredientes Principales",
+      "dosage": "Dosificación",
+      "timing": "Mejor Horario",
+      "discover": "Descubre Tu Alma"
+    }
+  },
+  "ingredients": {
+    "title": "Ingredientes Respaldados por la Ciencia",
+    "subtitle": "Cada ingrediente está incluido en dosis clínicas respaldadas por investigación revisada por pares",
+    "searchPlaceholder": "Buscar ingredientes...",
+    "filterAll": "Todas las Categorías",
+    "viewStudies": "Ver Estudios",
+    "hideStudies": "Ocultar Estudios",
+    "clinicalDosage": "Dosis Clínica",
+    "categories": {
+      "energy": "Energía y Enfoque",
+      "pump": "Bombeo y Rendimiento",
+      "endurance": "Resistencia",
+      "recovery": "Recuperación"
+    }
+  },
+  "email": {
+    "title": "Únete a la Lista de Espera",
+    "subtitle": "Sé el primero en saber cuando lancemos. Obtén acceso temprano exclusivo.",
+    "placeholder": "Ingresa tu email",
+    "button": "Unirse a Lista de Espera",
+    "success": "¡Gracias! Estás en la lista.",
+    "error": "Algo salió mal. Por favor intenta de nuevo."
+  },
+  "footer": {
+    "tagline": "Pre-entreno de precisión para cada alma de entrenamiento",
+    "rights": "Todos los derechos reservados.",
+    "product": "Producto",
+    "company": "Compañía",
+    "legal": "Legal",
+    "links": {
+      "allSouls": "Todas las Almas",
+      "ingredients": "Ingredientes",
+      "quiz": "Hacer Cuestionario",
+      "about": "Acerca de",
+      "contact": "Contacto",
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Ocurrió un error",
+    "comingSoon": "Próximamente",
+    "learnMore": "Aprender Más",
+    "getStarted": "Comenzar",
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "submit": "Enviar"
+  }
+}
