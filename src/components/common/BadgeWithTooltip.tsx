@@ -56,7 +56,7 @@ export const BadgeWithTooltip = ({
       <motion.img
         src={src}
         alt={alt}
-        className={`object-contain transition-all duration-300 ${className}`}
+        className={`object-contain transition-all duration-150 ${className}`}
         style={glowEffect ? {
           filter: isHovered
             ? 'drop-shadow(0 0 20px rgba(0, 229, 255, 0.6))'
@@ -66,7 +66,7 @@ export const BadgeWithTooltip = ({
           scale: isHovered ? 1.1 : 1,
           y: isHovered ? -4 : 0,
         }}
-        transition={{ duration: 0.3, ease: 'easeOut' }}
+        transition={{ duration: 0.15, ease: 'easeOut' }}
       />
     </div>
   );

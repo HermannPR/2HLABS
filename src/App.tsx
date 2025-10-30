@@ -1,4 +1,5 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 import { Layout } from './components/layout/Layout';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { Home } from './pages/Home';
@@ -14,22 +15,26 @@ import { Terms } from './pages/Terms';
 import { NotFound } from './pages/NotFound';
 
 function App() {
+  const location = useLocation();
+
   return (
     <ErrorBoundary>
       <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/formula" element={<FormulaGenerator />} />
-          <Route path="/souls" element={<AllSouls />} />
-          <Route path="/how-it-works" element={<HowItWorks />} />
-          <Route path="/ingredients" element={<Ingredients />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.pathname}>
+            <Route path="/" element={<Home />} />
+            <Route path="/formula" element={<FormulaGenerator />} />
+            <Route path="/souls" element={<AllSouls />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
+            <Route path="/ingredients" element={<Ingredients />} />
+            <Route path="/pricing" element={<Pricing />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AnimatePresence>
       </Layout>
     </ErrorBoundary>
   );
