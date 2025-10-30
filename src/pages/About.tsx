@@ -18,7 +18,7 @@ export const About = () => {
             About <span className="text-gradient">2HLABS</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            We're on a mission to revolutionize the supplement industry with personalization, transparency, and science.
+            We believe every athlete has a unique training soul. We're revolutionizing supplements with personalization, transparency, and science.
           </p>
         </motion.div>
 
@@ -26,11 +26,11 @@ export const About = () => {
         <section className="mb-20">
           <Card glow className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-heading font-bold mb-4">Our Mission</h2>
+            <p className="text-xl text-gray-300 leading-relaxed mb-4">
+              The supplement industry is broken. One-size-fits-all preworkouts ignore what makes you unique: your training style, goals, physiology, and preferences. Companies sell overpriced, underdosed products with proprietary blends and marketing hype.
+            </p>
             <p className="text-xl text-gray-300 leading-relaxed">
-              The supplement industry is broken. Companies sell overpriced, underdosed products with
-              proprietary blends and marketing hype. We believe athletes deserve better. That's why
-              we created 2HLABS—to provide truly personalized, science-backed preworkout formulas
-              tailored to your unique needs.
+              We believe every athlete has a unique <span className="text-primary font-semibold">training soul</span>—a distinct approach to training that requires its own formula. That's why we created 2HLABS: 12 precision-engineered preworkout formulas, each designed for a different type of athlete. Science-backed. Clinically dosed. Transparently labeled. Matched to you.
             </p>
           </Card>
         </section>
@@ -85,19 +85,16 @@ export const About = () => {
             </h2>
             <Card>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                2HLABS was born from frustration. As competitive athletes, we were tired of buying
-                expensive preworkouts loaded with underdosed ingredients and unnecessary fillers.
-                We knew the science existed for effective formulations, but the industry wasn't
-                delivering.
+                2HLABS was born from a simple observation: athletes train differently, yet they all drink the same preworkout. A powerlifter crushing 1-rep maxes has different needs than an endurance athlete grinding through a 2-hour session. A focused precision trainer needs different support than someone chasing an explosive pump.
               </p>
               <p className="text-gray-300 mb-4 leading-relaxed">
-                So we built something better. Using our backgrounds in exercise science and software
-                engineering, we created an algorithm that generates truly personalized preworkout
-                formulas based on individual physiology, goals, and preferences.
+                As competitive athletes and exercise scientists, we were frustrated by the industry's one-size-fits-all approach. So we spent two years researching, testing, and refining 12 distinct formulas—each optimized for a specific training archetype. We call them <span className="text-primary font-semibold">Training Souls</span>.
+              </p>
+              <p className="text-gray-300 mb-4 leading-relaxed">
+                From Gorilla Rage (maximum aggression, short and brutal) to Serpent Flow (mind-body connection, movement mastery) to Bear Endurance (long-haul grinding), each formula is engineered with precision. Clinical dosages. Peer-reviewed ingredients. No proprietary blends. No marketing fluff.
               </p>
               <p className="text-gray-300 leading-relaxed">
-                Today, thousands of athletes trust 2HLABS for their preworkout needs. We're proud
-                to be changing the industry, one personalized formula at a time.
+                We're not just selling supplements. We're building a movement where every athlete gets the formula they deserve—one that matches how they actually train, not how the industry thinks they should.
               </p>
             </Card>
           </div>
