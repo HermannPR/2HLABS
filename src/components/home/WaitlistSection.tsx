@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { EmailCapture } from '../common/EmailCapture';
 
 export const WaitlistSection = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="relative bg-gradient-to-b from-dark via-dark-lighter to-dark py-16 md:py-20">
       {/* Decorative elements */}
@@ -19,11 +22,10 @@ export const WaitlistSection = () => {
           className="text-center mb-8"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
-            Join the <span className="text-gradient">Waitlist</span>
+            {t('waitlist.title')} <span className="text-gradient">{t('waitlist.titleHighlight')}</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
-            Be the first to access personalized preworkout formulas when we launch.
-            Get exclusive early bird pricing and bonus content.
+            {t('waitlist.subtitle')}
           </p>
         </motion.div>
 
@@ -35,9 +37,9 @@ export const WaitlistSection = () => {
         >
           <EmailCapture
             source="homepage"
-            heading="Get Early Access"
-            subheading="Join 500+ athletes already on the waitlist"
-            buttonText="Reserve Your Spot"
+            heading={t('waitlist.heading')}
+            subheading={t('waitlist.subheading')}
+            buttonText={t('waitlist.buttonText')}
           />
         </motion.div>
 
@@ -52,15 +54,15 @@ export const WaitlistSection = () => {
           <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-400">
             <div className="flex items-center gap-2">
               <span className="text-primary text-xl">✓</span>
-              <span>No credit card required</span>
+              <span>{t('waitlist.benefit1')}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-primary text-xl">✓</span>
-              <span>Cancel anytime</span>
+              <span>{t('waitlist.benefit2')}</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-primary text-xl">✓</span>
-              <span>Exclusive launch pricing</span>
+              <span>{t('waitlist.benefit3')}</span>
             </div>
           </div>
         </motion.div>

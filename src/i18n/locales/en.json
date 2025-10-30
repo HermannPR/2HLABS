@@ -232,5 +232,37 @@
     "next": "Next",
     "previous": "Previous",
     "submit": "Submit"
+  },
+  "waitlist": {
+    "title": "Join the",
+    "titleHighlight": "Waitlist",
+    "subtitle": "Be the first to access personalized preworkout formulas when we launch. Get exclusive early bird pricing and bonus content.",
+    "heading": "Get Early Access",
+    "subheading": "Join 500+ athletes already on the waitlist",
+    "buttonText": "Reserve Your Spot",
+    "benefit1": "No credit card required",
+    "benefit2": "Cancel anytime",
+    "benefit3": "Exclusive launch pricing"
+  },
+  "features": {
+    "title": "Why",
+    "titleHighlight": "2HLABS",
+    "subtitle": "The preworkout industry is broken. We're fixing it with personalization and transparency.",
+    "feature1Title": "Personalized to You",
+    "feature1Description": "Our algorithm analyzes your goals, body composition, training schedule, and preferences to create your perfect formula.",
+    "feature2Title": "Science-Backed Ingredients",
+    "feature2Description": "Every ingredient is backed by clinical research and dosed according to scientific literature, not marketing hype.",
+    "feature3Title": "Fully Customizable",
+    "feature3Description": "Control your caffeine intake, avoid ingredients you dislike, and adjust for dietary restrictions or sensitivities.",
+    "feature4Title": "Quality Guaranteed",
+    "feature4Description": "Third-party tested, no banned substances, and manufactured in FDA-registered facilities."
+  },
+  "finalCta": {
+    "title": "Ready to",
+    "titleHighlight": "Level Up",
+    "titleLine2": "Your Training?",
+    "subtitle": "Stop wasting money on generic preworkouts. Get a formula designed specifically for your body, goals, and training style.",
+    "buttonText": "Build Your Formula - It's Free",
+    "benefits": "Free formula generation • 30-day money-back guarantee • Cancel anytime"
   }
 }

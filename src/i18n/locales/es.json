@@ -232,5 +232,37 @@
     "next": "Siguiente",
     "previous": "Anterior",
     "submit": "Enviar"
+  },
+  "waitlist": {
+    "title": "Únete a la",
+    "titleHighlight": "Lista de Espera",
+    "subtitle": "Sé el primero en acceder a fórmulas pre-entreno personalizadas cuando lancemos. Precios especiales de lanzamiento y contenido exclusivo.",
+    "heading": "Acceso Anticipado",
+    "subheading": "Únete a más de 500 atletas en la lista de espera",
+    "buttonText": "Reserva tu Lugar",
+    "benefit1": "Sin tarjeta de crédito",
+    "benefit2": "Cancela cuando quieras",
+    "benefit3": "Precio exclusivo de lanzamiento"
+  },
+  "features": {
+    "title": "¿Por qué",
+    "titleHighlight": "2HLABS",
+    "subtitle": "La industria de pre-entrenos está rota. La arreglamos con personalización y transparencia.",
+    "feature1Title": "Personalizado para Ti",
+    "feature1Description": "Nuestro algoritmo analiza tus metas, composición corporal, horarios de entrenamiento y preferencias para crear tu fórmula perfecta.",
+    "feature2Title": "Ingredientes Científicos",
+    "feature2Description": "Cada ingrediente está respaldado por investigación clínica y dosificado según literatura científica, no marketing vacío.",
+    "feature3Title": "Totalmente Personalizable",
+    "feature3Description": "Controla tu ingesta de cafeína, evita ingredientes que no te gustan, y ajusta por restricciones dietéticas o sensibilidades.",
+    "feature4Title": "Calidad Garantizada",
+    "feature4Description": "Probado por terceros, sin sustancias prohibidas, fabricado en instalaciones registradas por la FDA."
+  },
+  "finalCta": {
+    "title": "¿Listo para",
+    "titleHighlight": "Llevar tu Entrenamiento",
+    "titleLine2": "al Siguiente Nivel?",
+    "subtitle": "Deja de gastar dinero en pre-entrenos genéricos. Obtén una fórmula diseñada específicamente para tu cuerpo, metas y estilo de entrenamiento.",
+    "buttonText": "Construye tu Fórmula - Gratis",
+    "benefits": "Generación de fórmula gratis • Garantía de 30 días • Cancela cuando quieras"
   }
 }
