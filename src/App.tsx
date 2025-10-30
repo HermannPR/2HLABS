@@ -7,6 +7,7 @@ import { FormulaGenerator } from './pages/FormulaGenerator';
 import { AllSouls } from './pages/AllSouls';
 import { HowItWorks } from './pages/HowItWorks';
 import { Ingredients } from './pages/Ingredients';
+import { IngredientDetail } from './pages/IngredientDetail';
 import { Pricing } from './pages/Pricing';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
@@ -27,6 +28,7 @@ function App() {
             <Route path="/souls" element={<AllSouls />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/ingredients" element={<Ingredients />} />
+            <Route path="/ingredients/:ingredientId" element={<IngredientDetail />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
