@@ -66,7 +66,7 @@ export const Ingredients = () => {
               <Card hover className="h-full">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-heading font-semibold mb-1">{ingredient.name}</h3>
+                    <h3 className="text-xl font-heading font-semibold mb-1">{t(`ingredients.${ingredient.id}.name`)}</h3>
                     <span className="text-xs uppercase text-primary">{t(`ingredientsPage.${ingredient.category}`)}</span>
                   </div>
                   <div className="text-right">
@@ -75,12 +75,12 @@ export const Ingredients = () => {
                   </div>
                 </div>
 
-                <p className="text-gray-400 text-sm mb-4">{ingredient.description}</p>
+                <p className="text-gray-400 text-sm mb-4">{t(`ingredients.${ingredient.id}.description`)}</p>
 
                 <div className="mb-4">
                   <div className="text-sm font-semibold mb-2">{t('ingredientsPage.benefits')}</div>
                   <ul className="space-y-1">
-                    {ingredient.benefits.slice(0, 3).map((benefit, i) => (
+                    {t(`ingredients.${ingredient.id}.benefits`, { returnObjects: true }).slice(0, 3).map((benefit: string, i: number) => (
                       <li key={i} className="text-sm text-gray-400 flex items-start">
                         <span className="text-primary mr-2">•</span>
                         {benefit}

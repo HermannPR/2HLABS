@@ -2,8 +2,12 @@
   "nav": {
     "home": "Inicio",
     "allSouls": "Todos los Arquetipos",
+    "howItWorks": "Cómo Funciona",
     "ingredients": "Ingredientes",
+    "pricing": "Precios",
+    "about": "Acerca de",
     "formula": "Descubre tu Arquetipo",
+    "buildFormula": "Construye tu Fórmula",
     "languageSwitcher": "Idioma"
   },
   "hero": {
@@ -452,6 +456,78 @@
     "scienceRating": "Calificación Científica",
     "benefits": "Beneficios:",
     "dosage": "Dosis"
+  },
+  "ingredients": {
+    "caffeine": {
+      "name": "Cafeína Anhidra",
+      "description": "Cafeína pura que aumenta el estado de alerta, la energía y la concentración",
+      "benefits": ["Mayor energía", "Concentración mejorada", "Resistencia aumentada", "Oxidación de grasa"]
+    },
+    "theobromine": {
+      "name": "Teobromina",
+      "description": "Estimulante natural del cacao con energía suave y duradera",
+      "benefits": ["Energía sostenida", "Mejora del estado de ánimo", "Vasodilatación"]
+    },
+    "l-citrulline": {
+      "name": "L-Citrulina",
+      "description": "Aminoácido que aumenta la producción de óxido nítrico para mejorar el flujo sanguíneo",
+      "benefits": ["Congestión muscular", "Mejor flujo sanguíneo", "Fatiga reducida", "Mejor entrega de nutrientes"]
+    },
+    "citrulline-malate": {
+      "name": "Citrulina Malato",
+      "description": "L-Citrulina unida a ácido málico para mejor absorción",
+      "benefits": ["Congestión mejorada", "Dolor muscular reducido", "Producción mejorada de ATP"]
+    },
+    "beetroot": {
+      "name": "Extracto de Remolacha",
+      "description": "Fuente natural de nitratos para mejorar el flujo sanguíneo",
+      "benefits": ["Resistencia mejorada", "Mejor uso del oxígeno", "Congestión mejorada"]
+    },
+    "creatine": {
+      "name": "Monohidrato de Creatina",
+      "description": "Suplemento más investigado para fuerza y potencia",
+      "benefits": ["Mayor fuerza", "Potencia mejorada", "Crecimiento muscular", "Recuperación mejorada"]
+    },
+    "betaine": {
+      "name": "Betaína Anhidra",
+      "description": "Mejora la producción de potencia y apoya la hidratación",
+      "benefits": ["Mayor potencia", "Fuerza mejorada", "Mejor hidratación"]
+    },
+    "beta-alanine": {
+      "name": "Beta-Alanina",
+      "description": "Amortigua la acumulación de ácido láctico para mejorar la resistencia",
+      "benefits": ["Fatiga retrasada", "Mayor resistencia", "Mejor rendimiento en altas repeticiones"]
+    },
+    "taurine": {
+      "name": "Taurina",
+      "description": "Aminoácido que apoya la resistencia y reduce el estrés oxidativo",
+      "benefits": ["Resistencia mejorada", "Daño muscular reducido", "Concentración mejorada"]
+    },
+    "l-tyrosine": {
+      "name": "L-Tirosina",
+      "description": "Precursor de aminoácidos de dopamina para mejor rendimiento mental",
+      "benefits": ["Concentración mejorada", "Reducción del estrés", "Estado de ánimo mejorado"]
+    },
+    "alpha-gpc": {
+      "name": "Alpha-GPC",
+      "description": "Compuesto de colina que mejora la producción de acetilcolina",
+      "benefits": ["Concentración mejorada", "Mejor conexión mente-músculo", "Mejor producción de potencia"]
+    },
+    "l-theanine": {
+      "name": "L-Teanina",
+      "description": "Promueve concentración tranquila y reduce los nervios de la cafeína",
+      "benefits": ["Energía suave", "Ansiedad reducida", "Concentración mejorada"]
+    },
+    "sodium": {
+      "name": "Sodio (como Sal Marina)",
+      "description": "Electrolito esencial para la hidratación y función muscular",
+      "benefits": ["Hidratación mejorada", "Mejores contracciones musculares", "Congestión mejorada"]
+    },
+    "potassium": {
+      "name": "Potasio",
+      "description": "Electrolito que apoya la hidratación y función muscular",
+      "benefits": ["Función muscular", "Soporte de hidratación", "Prevención de calambres"]
+    }
   },
   "about": {
     "pageTitle": "Acerca de",

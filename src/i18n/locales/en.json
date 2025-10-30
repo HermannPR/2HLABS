@@ -2,8 +2,12 @@
   "nav": {
     "home": "Home",
     "allSouls": "All Souls",
+    "howItWorks": "How It Works",
     "ingredients": "Ingredients",
+    "pricing": "Pricing",
+    "about": "About",
     "formula": "Discover Your Soul",
+    "buildFormula": "Build Your Formula",
     "languageSwitcher": "Language"
   },
   "hero": {
@@ -452,6 +456,78 @@
     "scienceRating": "Science Rating",
     "benefits": "Benefits:",
     "dosage": "Dosage"
+  },
+  "ingredients": {
+    "caffeine": {
+      "name": "Caffeine Anhydrous",
+      "description": "Pure caffeine that increases alertness, energy, and focus",
+      "benefits": ["Increased energy", "Enhanced focus", "Improved endurance", "Fat oxidation"]
+    },
+    "theobromine": {
+      "name": "Theobromine",
+      "description": "Natural stimulant from cocoa with smooth, long-lasting energy",
+      "benefits": ["Sustained energy", "Mood enhancement", "Vasodilation"]
+    },
+    "l-citrulline": {
+      "name": "L-Citrulline",
+      "description": "Amino acid that boosts nitric oxide production for enhanced blood flow",
+      "benefits": ["Muscle pumps", "Improved blood flow", "Reduced fatigue", "Better nutrient delivery"]
+    },
+    "citrulline-malate": {
+      "name": "Citrulline Malate",
+      "description": "L-Citrulline bound to malic acid for enhanced absorption",
+      "benefits": ["Enhanced pumps", "Reduced muscle soreness", "Improved ATP production"]
+    },
+    "beetroot": {
+      "name": "Beetroot Extract",
+      "description": "Natural nitrate source for improved blood flow",
+      "benefits": ["Enhanced endurance", "Better oxygen utilization", "Improved pumps"]
+    },
+    "creatine": {
+      "name": "Creatine Monohydrate",
+      "description": "Most researched supplement for strength and power output",
+      "benefits": ["Increased strength", "Enhanced power", "Muscle growth", "Improved recovery"]
+    },
+    "betaine": {
+      "name": "Betaine Anhydrous",
+      "description": "Improves power output and supports hydration",
+      "benefits": ["Increased power", "Enhanced strength", "Better hydration"]
+    },
+    "beta-alanine": {
+      "name": "Beta-Alanine",
+      "description": "Buffers lactic acid buildup for improved endurance",
+      "benefits": ["Delayed fatigue", "Increased endurance", "Better high-rep performance"]
+    },
+    "taurine": {
+      "name": "Taurine",
+      "description": "Amino acid that supports endurance and reduces oxidative stress",
+      "benefits": ["Enhanced endurance", "Reduced muscle damage", "Improved focus"]
+    },
+    "l-tyrosine": {
+      "name": "L-Tyrosine",
+      "description": "Amino acid precursor to dopamine for enhanced mental performance",
+      "benefits": ["Improved focus", "Stress reduction", "Enhanced mood"]
+    },
+    "alpha-gpc": {
+      "name": "Alpha-GPC",
+      "description": "Choline compound that enhances acetylcholine production",
+      "benefits": ["Enhanced focus", "Improved mind-muscle connection", "Better power output"]
+    },
+    "l-theanine": {
+      "name": "L-Theanine",
+      "description": "Promotes calm focus and reduces caffeine jitters",
+      "benefits": ["Smooth energy", "Reduced anxiety", "Enhanced focus"]
+    },
+    "sodium": {
+      "name": "Sodium (as Sea Salt)",
+      "description": "Essential electrolyte for hydration and muscle function",
+      "benefits": ["Improved hydration", "Better muscle contractions", "Enhanced pumps"]
+    },
+    "potassium": {
+      "name": "Potassium",
+      "description": "Electrolyte that supports hydration and muscle function",
+      "benefits": ["Muscle function", "Hydration support", "Cramp prevention"]
+    }
   },
   "about": {
     "pageTitle": "About",

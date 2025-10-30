@@ -13,10 +13,10 @@ export const Navbar = () => {
   const navLinks = [
     { name: t('nav.formula'), path: '/formula' },
     { name: t('nav.allSouls'), path: '/souls' },
-    { name: 'How It Works', path: '/how-it-works' },
+    { name: t('nav.howItWorks'), path: '/how-it-works' },
     { name: t('nav.ingredients'), path: '/ingredients' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'About', path: '/about' },
+    { name: t('nav.pricing'), path: '/pricing' },
+    { name: t('nav.about'), path: '/about' },
   ];
 
   return (
@@ -46,7 +46,7 @@ export const Navbar = () => {
             ))}
             <LanguageSwitcher />
             <Link to="/formula">
-              <Button size="sm">Build Your Formula</Button>
+              <Button size="sm">{t('nav.buildFormula')}</Button>
             </Link>
           </div>
 
@@ -84,7 +84,7 @@ export const Navbar = () => {
                 <LanguageSwitcher />
               </div>
               <Link to="/formula" onClick={() => setIsOpen(false)}>
-                <Button fullWidth>Build Your Formula</Button>
+                <Button fullWidth>{t('nav.buildFormula')}</Button>
               </Link>
             </div>
           </motion.div>
