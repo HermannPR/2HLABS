@@ -19,7 +19,7 @@ const SOUL_COLORS: Record<string, string> = {
   'titan-strength': '#708090',    // Slate gray
   'phoenix-rise': '#FF6600',      // Orange
   'serpent-flow': '#00FF88',      // Green
-  'wolf-pack': '#6B8E23',         // Olive green / green-gray
+  'wolf-pack': '#90EE90',         // Light green
   'mantis-focus': '#32CD32',      // Lime green (mantis focus)
   'viper-strike': '#00FF00',      // Neon green
   'bear-endurance': '#8B4513',    // Brown
