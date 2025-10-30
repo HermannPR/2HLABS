@@ -323,17 +323,17 @@ export const IngredientDetail = () => {
         >
           <Card>
             <h2 className="text-2xl font-heading font-bold mb-4">
-              Find Your Perfect Formula
+              Find Your Perfect Soul
             </h2>
             <p className="text-gray-400 mb-6">
-              See which formulas contain {ingredient.name} optimally dosed for your training style
+              See which souls contain {ingredient.name} optimally dosed for your training style
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" onClick={() => navigate('/formula')}>
-                Create Your Formula
+                Discover Your Soul
               </Button>
               <Button variant="outline" size="lg" onClick={() => navigate('/souls')}>
-                View All 12 Formulas
+                View All 12 Souls
               </Button>
             </div>
           </Card>

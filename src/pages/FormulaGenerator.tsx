@@ -190,10 +190,10 @@ export const FormulaGenerator = () => {
               onClick={() => setShowIntro(false)}
               className="text-xl px-12 py-6"
             >
-              Create Your Formula
+              Discover Your Soul
             </Button>
             <p className="text-gray-500 text-sm mt-4">
-              Ready to match your formula to today's training?
+              Find which training soul matches you today
             </p>
           </motion.div>
         </div>

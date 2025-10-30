@@ -4,7 +4,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: 'q1-approach',
     question: 'What type of training are you doing TODAY?',
-    description: 'Your current workout style determines what you need',
+    description: 'Your current workout style reveals which soul matches you',
     dimension: 'intensity',
     options: [
       {
@@ -42,7 +42,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: 'q2-drive',
     question: 'What\'s your main goal for today\'s session?',
-    description: 'Your current goal determines what you need most',
+    description: 'Your goal helps identify your training soul',
     dimension: 'focus',
     options: [
       {
@@ -80,7 +80,7 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
   {
     id: 'q3-adversity',
     question: 'How do you want to handle tough sets today?',
-    description: 'Your approach determines the mental support you need',
+    description: 'Your approach under pressure reveals your soul',
     dimension: 'focus',
     options: [
       {

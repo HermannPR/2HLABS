@@ -14,7 +14,7 @@ export const Home = () => {
     <>
       <SEO
         title="Personalized Pre-Workout Supplements"
-        description="Create your personalized pre-workout formula matched to today's training. Science-backed ingredients, clinical dosages, 12 distinct profiles for every training style and goal."
+        description="Discover your training soul and build your personalized pre-workout formula. Science-backed ingredients, clinical dosages, 12 distinct archetypes matched to your training style."
         keywords="pre-workout, personalized supplements, training archetype, fitness supplements, science-backed nutrition, clinical dosages"
         ogType="website"
       />
