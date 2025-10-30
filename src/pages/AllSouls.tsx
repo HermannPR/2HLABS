@@ -10,10 +10,27 @@ import { SkeletonSoulCard } from '../components/common/Skeleton';
 import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 
+// Brand colors for each soul archetype
+const SOUL_COLORS: Record<string, string> = {
+  'gorilla-rage': '#FF0066',
+  'dragon-blood': '#0066FF',
+  'cheetah-sprint': '#FFFF00',
+  'eagle-vision': '#00FFCC',
+  'titan-strength': '#663399',
+  'phoenix-rise': '#FF6600',
+  'serpent-flow': '#00FF88',
+  'wolf-pack': '#999999',
+  'monk-mind': '#9933FF',
+  'viper-strike': '#00FF00',
+  'bear-endurance': '#8B4513',
+  'lightning-bolt': '#00e5ff',
+};
+
 export const AllSouls = () => {
   const navigate = useNavigate();
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
 
   // Simulate loading for demonstration (remove in production or when using real API)
   useEffect(() => {
@@ -88,25 +105,64 @@ export const AllSouls = () => {
               </motion.div>
             ))
           ) : (
-            ARCHETYPES.map((archetype, idx) => (
+            ARCHETYPES.map((archetype, idx) => {
+              const brandColor = SOUL_COLORS[archetype.id] || '#00e5ff';
+              const isHovered = hoveredCard === archetype.id;
+              const hexToRgb = (hex: string) => {
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                  r: parseInt(result[1], 16),
+                  g: parseInt(result[2], 16),
+                  b: parseInt(result[3], 16)
+                } : { r: 0, g: 229, b: 255 };
+              };
+              const rgb = hexToRgb(brandColor);
+
+              return (
             <motion.div
               key={archetype.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
+              onMouseEnter={() => setHoveredCard(archetype.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+              style={{
+                borderColor: isHovered ? brandColor : 'rgba(255, 255, 255, 0.1)',
+                boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
+                borderWidth: '2px',
+                borderStyle: 'solid',
+                borderRadius: '0.75rem',
+                transition: 'all 0.3s ease',
+              }}
             >
-              <Card className="h-full hover:border-primary/50 transition-all cursor-pointer group">
+              <Card
+                className="h-full cursor-pointer group relative overflow-hidden !border-0"
+              >
                 {/* Header */}
                 <div className="text-center mb-4">
-                  <div className="mb-3 group-hover:scale-110 transition-transform flex justify-center">
+                  <div className="mb-3 transition-transform duration-300 flex justify-center"
+                    style={{
+                      transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                    }}
+                  >
                     <img
                       src={getSoulLogo(archetype.id)}
                       alt={archetype.name}
                       className="w-24 h-24 object-contain mix-blend-lighten"
-                      style={{ filter: 'drop-shadow(0 0 10px rgba(0, 229, 255, 0.3))' }}
+                      style={{
+                        filter: isHovered
+                          ? `drop-shadow(0 0 40px ${brandColor}) drop-shadow(0 0 20px ${brandColor})`
+                          : `drop-shadow(0 0 10px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3))`,
+                        transition: 'filter 0.3s ease',
+                      }}
                     />
                   </div>
-                  <h3 className="text-2xl font-heading font-bold mb-1 group-hover:text-primary transition-colors">
+                  <h3
+                    className="text-2xl font-heading font-bold mb-1 transition-colors duration-300"
+                    style={{
+                      color: isHovered ? brandColor : 'white',
+                    }}
+                  >
                     {archetype.name}
                   </h3>
                   <p className="text-primary font-semibold text-sm">
@@ -228,7 +284,8 @@ export const AllSouls = () => {
                 </Button>
               </Card>
             </motion.div>
-          ))
+              );
+            })
           )}
         </div>
 
