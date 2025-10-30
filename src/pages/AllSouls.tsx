@@ -199,7 +199,7 @@ export const AllSouls = () => {
                     {archetype.name}
                   </h3>
                   <p className="text-primary font-semibold text-sm">
-                    {archetype.tagline}
+                    {t(`archetypes.${archetype.id}.tagline`)}
                   </p>
                 </div>
 
@@ -303,7 +303,7 @@ export const AllSouls = () => {
 
                 {/* Description */}
                 <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-                  {archetype.description}
+                  {t(`archetypes.${archetype.id}.description`)}
                 </p>
 
                 {/* View Details Button */}
@@ -414,13 +414,13 @@ export const AllSouls = () => {
                     {selectedArchetype.name}
                   </h2>
                   <p className="text-xl font-semibold" style={{ color: modalBrandColor }}>
-                    {selectedArchetype.tagline}
+                    {t(`archetypes.${selectedArchetype.id}.tagline`)}
                   </p>
                 </div>
 
                 {/* Description */}
                 <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                  {selectedArchetype.description}
+                  {t(`archetypes.${selectedArchetype.id}.description`)}
                 </p>
 
                 {/* Formula Profile */}
@@ -463,7 +463,7 @@ export const AllSouls = () => {
                   <div>
                     <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.coreTraits')}</h3>
                     <ul className="space-y-2">
-                      {selectedArchetype.traits.map((trait, idx) => (
+                      {(t(`archetypes.${selectedArchetype.id}.traits`, { returnObjects: true }) as string[]).map((trait, idx) => (
                         <li key={idx} className="flex items-start space-x-2">
                           <span className="text-accent mt-1">▸</span>
                           <span className="text-gray-300">{trait}</span>
@@ -474,7 +474,7 @@ export const AllSouls = () => {
                   <div>
                     <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.perfectFor')}</h3>
                     <ul className="space-y-2">
-                      {selectedArchetype.athleteTypes.map((type, idx) => (
+                      {(t(`archetypes.${selectedArchetype.id}.athleteTypes`, { returnObjects: true }) as string[]).map((type, idx) => (
                         <li key={idx} className="flex items-start space-x-2">
                           <span className="text-accent mt-1">▸</span>
                           <span className="text-gray-300">{type}</span>

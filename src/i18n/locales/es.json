@@ -1,12 +1,12 @@
 {
   "nav": {
     "home": "Inicio",
-    "allSouls": "Todos los Arquetipos",
+    "allSouls": "Todas las Almas",
     "howItWorks": "Cómo Funciona",
     "ingredients": "Ingredientes",
     "pricing": "Precios",
     "about": "Acerca de",
-    "formula": "Descubre tu Arquetipo",
+    "formula": "Descubre tu Alma",
     "buildFormula": "Construye tu Fórmula",
     "languageSwitcher": "Idioma"
   },
@@ -29,19 +29,19 @@
     }
   },
   "quiz": {
-    "title": "Descubre tu Arquetipo de Entrenamiento",
+    "title": "Descubre tu Alma de Entrenamiento",
     "subtitle": "Responde estas preguntas para encontrar tu fórmula pre-entreno ideal",
     "progress": "Pregunta {{current}} de {{total}}",
     "next": "Siguiente",
     "previous": "Anterior",
-    "submit": "Descubrir mi Arquetipo",
+    "submit": "Descubrir mi Alma",
     "loading": "Analizando tu perfil de entrenamiento...",
     "multiSelectHint": "Selecciona todas las que te identifiquen",
     "selectingNoneWillClear": "Seleccionar esto eliminará las demás selecciones",
     "questions": {
       "q1": {
         "question": "¿Qué tipo de entrenamiento vas a hacer HOY?",
-        "description": "Tu forma de entrenar revela tu arquetipo perfecto",
+        "description": "Tu forma de entrenar revela tu alma perfecta",
         "options": {
           "destroy": "Agresión total - Voy a destrozar el gimnasio",
           "explosive": "Explosivo e intenso - Rápido, fuerte y sin freno",
@@ -53,7 +53,7 @@
       },
       "q2": {
         "question": "¿Cuál es tu meta principal en esta sesión?",
-        "description": "Tu propósito define tu arquetipo ideal",
+        "description": "Tu propósito define tu alma ideal",
         "options": {
           "domination": "Dominación absoluta - Ser el más fuerte",
           "battle": "La batalla misma - Amo el desafío",
@@ -158,18 +158,18 @@
     }
   },
   "results": {
-    "title": "Tu Arquetipo de Entrenamiento",
+    "title": "Tu Alma de Entrenamiento",
     "subtitle": "Según tus respuestas, esta es tu fórmula perfecta",
     "share": "Compartir",
     "retake": "Volver a Hacer el Quiz",
-    "viewAllSouls": "Ver Todos los Arquetipos",
+    "viewAllSouls": "Ver Todas las Almas",
     "keyStrengths": "Tus Fortalezas",
     "bestFor": "Ideal Para",
     "ingredients": "Ingredientes Clave",
     "fullProfile": "Ver Perfil Completo"
   },
   "souls": {
-    "title": "Todos los Arquetipos de Entrenamiento",
+    "title": "Todas las Almas de Entrenamiento",
     "subtitle": "12 fórmulas únicas. Cada una diseñada para un tipo diferente de guerrero.",
     "modal": {
       "close": "Cerrar",
@@ -181,7 +181,7 @@
       "ingredients": "Ingredientes Principales",
       "dosage": "Dosis",
       "timing": "Mejor Horario",
-      "discover": "Descubre tu Arquetipo"
+      "discover": "Descubre tu Alma"
     }
   },
   "ingredients": {
@@ -364,20 +364,20 @@
   "formulaGenerator": {
     "intro": {
       "title": "Descubre tu",
-      "titleHighlight": "Arquetipo de Entrenamiento",
+      "titleHighlight": "Alma de Entrenamiento",
       "subtitle": "Antes de empezar, esto es lo que puedes esperar de este viaje personalizado",
       "card1Headline": "No Hay Respuestas Incorrectas",
-      "card1Body": "Cada respuesta revela algo auténtico sobre tu arquetipo de entrenamiento. Sé honesto - no se trata de lo que crees que deberías ser, sino de quién realmente eres en el gimnasio.",
+      "card1Body": "Cada respuesta revela algo auténtico sobre tu alma de entrenamiento. Sé honesto - no se trata de lo que crees que deberías ser, sino de quién realmente eres en el gimnasio.",
       "card2Headline": "Toma 2 Minutos",
       "card2Body": "10 preguntas rápidas te separan de tu fórmula pre-entreno personalizada. Cada pregunta captura una dimensión única de tu personalidad de entrenamiento.",
       "card3Headline": "Ciencia y Algoritmos",
-      "card3Body": "Nuestro algoritmo analiza tus respuestas en 5 dimensiones clave - Intensidad, Duración, Concentración, Patrón de Energía y Tolerancia a Estimulantes - para encontrar tu arquetipo entre 12 distintos.",
-      "startButton": "Descubrir mi Arquetipo",
-      "startSubtext": "Encuentra qué arquetipo te corresponde hoy"
+      "card3Body": "Nuestro algoritmo analiza tus respuestas en 5 dimensiones clave - Intensidad, Duración, Concentración, Patrón de Energía y Tolerancia a Estimulantes - para encontrar tu alma entre 12 distintas.",
+      "startButton": "Descubrir mi Alma",
+      "startSubtext": "Encuentra qué alma te corresponde hoy"
     },
     "analyzing": {
       "title": "Analizando tu Perfil...",
-      "subtitle": "Descubriendo tu verdadero arquetipo de entrenamiento"
+      "subtitle": "Descubriendo tu verdadera alma de entrenamiento"
     },
     "navigation": {
       "previous": "Anterior",
@@ -403,15 +403,15 @@
       "nextSteps": "¿Qué Sigue?",
       "selectFlavor": "Elige tu Sabor",
       "saveResults": "Guardar Resultados",
-      "shareResults": "Compartir mi Arquetipo",
+      "shareResults": "Compartir mi Alma",
       "retakeQuiz": "Repetir Cuestionario",
-      "viewAllSouls": "Comparar los 12 Arquetipos"
+      "viewAllSouls": "Comparar las 12 Almas"
     }
   },
   "allSouls": {
     "title": "Descubre los",
-    "titleHighlight": "12 Arquetipos de Entrenamiento",
-    "subtitle": "Cada arquetipo representa una filosofía única de entrenamiento y energía. Encuentra los que se ajustan a tus diferentes necesidades de entrenamiento.",
+    "titleHighlight": "12 Almas de Entrenamiento",
+    "subtitle": "Cada alma representa una filosofía única de entrenamiento y energía. Encuentra las que se ajustan a tus diferentes necesidades de entrenamiento.",
     "caffeine": "Cafeína",
     "intensity": "Intensidad",
     "pump": "Congestión",
@@ -419,10 +419,10 @@
     "stim": "Estimulante",
     "viewProfile": "Ver Perfil Completo",
     "viewDetails": "Ver Detalles",
-    "discoverYours": "Descubre tu Arquetipo",
-    "ctaTitle": "¿Listo para Descubrir tu Arquetipo?",
-    "ctaDescription": "Completa nuestro cuestionario de 2 minutos para encontrar qué arquetipo se ajusta al entrenamiento de hoy. Puedes descubrir múltiples arquetipos para diferentes estilos de entrenamiento.",
-    "ctaButton": "Descubre tu Arquetipo",
+    "discoverYours": "Descubre tu Alma",
+    "ctaTitle": "¿Listo para Descubrir tu Alma?",
+    "ctaDescription": "Completa nuestro cuestionario de 2 minutos para encontrar qué alma se ajusta al entrenamiento de hoy. Puedes descubrir múltiples almas para diferentes estilos de entrenamiento.",
+    "ctaButton": "Descubre tu Alma",
     "modalClose": "Cerrar",
     "modalTagline": "Lema",
     "modalDescription": "Descripción",
@@ -529,13 +529,99 @@
       "benefits": ["Función muscular", "Soporte de hidratación", "Prevención de calambres"]
     }
   },
+  "archetypes": {
+    "gorilla-rage": {
+      "tagline": "FUERZA IMPARABLE",
+      "description": "Eres EL DESTRUCTOR. Con 250-350mg de cafeína pura y congestión MÁXIMA, esto es poder bruto desatado. Sesiones cortas y brutales impulsadas por estimulación extrema y energía explosiva. Peso pesado, levantamientos agresivos e intensidad implacable - la energía golpea como un tren de carga.",
+      "traits": ["Cafeína máxima para poder explosivo (250-350mg)", "Congestión y vascularidad extremas", "Diseñado para sesiones pesadas cortas y brutales", "Energía agresiva que golpea rápido y fuerte"],
+      "athleteTypes": ["Levantadores de Potencia", "Hombre Fuerte", "Levantadores Pesados", "Guerreros"],
+      "warnings": ["No para entrenamientos nocturnos (no dormirás)", "Comienza con ½ porción para evaluar tolerancia", "No combines con otras fuentes de cafeína", "Toma 1 semana de descanso cada 8 semanas"]
+    },
+    "dragon-blood": {
+      "tagline": "LISTO PARA EL COMBATE",
+      "description": "La fórmula híbrida definitiva. Con 200-250mg de cafeína y congestión ALTA, obtienes poder versátil para cualquier desafío. Perfecta para culturismo, deportes de combate o entrenamiento funcional - esta fórmula entrega agresión sostenida y vascularidad impresionante durante toda tu sesión.",
+      "traits": ["Cafeína balanceada 200-250mg para poder sostenido", "Congestión alta para máxima vascularidad", "Versátil para levantamiento y acondicionamiento", "Enfoque controlado para trabajo técnico"],
+      "athleteTypes": ["Atletas de CrossFit", "Peleadores de MMA", "Culturismo", "Atletas Híbridos"],
+      "warnings": ["Monitorea tu tolerancia con el tiempo", "Evita el uso nocturno", "Mantente bien hidratado durante el entrenamiento"]
+    },
+    "cheetah-sprint": {
+      "tagline": "VELOCIDAD LIBERADA",
+      "description": "Construido para velocidad y agilidad. Con 150-200mg de cafeína optimizada para ráfagas explosivas, esta fórmula entrega energía de inicio rápido para sprints, saltos y movimientos rápidos poderosos. Congestión moderada te mantiene ligero y rápido, mientras que la intensidad alta (8/10) impulsa tu dominio de fibras rápidas.",
+      "traits": ["Cafeína moderada 150-200mg para velocidad explosiva", "Energía de acción rápida para ráfagas cortas e intensas", "Optimizada para agilidad y movimientos rápidos", "Reclutamiento mejorado de fibras musculares rápidas"],
+      "athleteTypes": ["Velocistas", "Atletas de Pista", "Entusiastas HIIT", "Atletas de Poder Explosivo"],
+      "warnings": ["Fórmula alta en estimulantes", "No para entrenamiento nocturno", "Descansa periódicamente para mejores resultados"]
+    },
+    "eagle-vision": {
+      "tagline": "ENFOQUE PRECISO",
+      "description": "Fórmula de ENFOQUE MÁXIMO. Con solo 100-150mg de cafeína pero soporte nootrópico máximo, esto es claridad mental pura sin sobreestimulación. Perfecta para conexión mente-músculo en culturismo, trabajo de movilidad, o cualquier entrenamiento que requiera precisión y control. Energía limpia, enfoque como láser.",
+      "traits": ["Estimulación baja (100-150mg) con soporte de ENFOQUE MÁXIMO", "Conexión mente-músculo definitiva para culturismo", "Perfecta para entrenamiento de movilidad de precisión", "Energía calmada y controlada sin nerviosismo"],
+      "athleteTypes": ["Culturistas", "Entrenamiento de Movilidad", "Levantadores Enfocados en Forma", "Atletas de Precisión"],
+      "warnings": ["Contiene nootrópicos que mejoran el enfoque", "Reduce la ingesta de café en días de entrenamiento", "Perfecto para sesiones matutinas y de mediodía"]
+    },
+    "titan-strength": {
+      "tagline": "PODER PURO",
+      "description": "Diseñado para fuerza pura. Con 250-300mg de cafeína, congestión ALTA y poder explosivo controlado, esta fórmula está construida para PRs y levantamientos máximos. Singles pesados, agresión controlada, fuerza absoluta - todo lo que necesitas para la plataforma, nada que no necesites.",
+      "traits": ["Cafeína alta (250-300mg) para activación máxima del SNC", "Congestión alta para plenitud muscular en levantamientos pesados", "Enfoque controlado para trabajo de fuerza técnica", "Diseñada para entrenamiento de repeticiones bajas y peso máximo"],
+      "athleteTypes": ["Levantadores de Potencia", "Hombre Fuerte", "Levantadores Olímpicos", "Especialistas en Fuerza"],
+      "warnings": ["Alto contenido de estimulantes", "Solo mañana y temprano en la tarde", "Descansa cada 8 semanas"]
+    },
+    "wolf-pack": {
+      "tagline": "MENTALIDAD DE MANADA",
+      "description": "Balanceada para rendimiento sostenido en equipo. Con 150-200mg de cafeína y congestión moderada, esta fórmula entrega energía constante para sesiones extendidas. Perfecta para deportes de equipo, entrenamiento grupal o trabajo funcional de movilidad - poder confiable sin sobreestimulación.",
+      "traits": ["Cafeína balanceada 150-200mg para esfuerzo sostenido", "Intensidad moderada perfecta para ambientes de equipo", "Combina fuerza funcional con resistencia", "Energía constante y confiable durante toda tu sesión"],
+      "athleteTypes": ["Deportes de Equipo", "Futbolistas", "Entrenamiento de Movilidad", "Entrenamiento Grupal"],
+      "warnings": ["Genial para entrenamiento vespertino", "Mantente hidratado durante sesiones de equipo", "Se necesita ciclado moderado"]
+    },
+    "phoenix-rise": {
+      "tagline": "RENACIMIENTO DE RESISTENCIA",
+      "description": "Construida para rendimiento de larga duración. Con cafeína moderada 100-150mg, congestión moderada y soporte de resistencia pesado, esta fórmula es ideal para sesiones de culturismo maratónicas, entrenamiento de resistencia o trabajo de ultra distancia. Energía sostenida sin caída - resurge de la fatiga más fuerte.",
+      "traits": ["Cafeína suave 100-150mg para energía sostenida", "Congestión moderada para trabajo muscular de larga duración", "Soporte pesado de resistencia e hidratación", "Perfecta para culturismo de alto volumen o cardio"],
+      "athleteTypes": ["Corredores de Maratón", "Culturismo", "Triatletas", "Ultra Resistencia"],
+      "warnings": ["Perfecto para sesiones de entrenamiento largas", "Estimulación mínima para trabajo de resistencia", "Excelente fórmula de hidratación incluida"]
+    },
+    "bear-endurance": {
+      "tagline": "PODER CONSTANTE",
+      "description": "La fórmula más suave para fuerza-resistencia de todo el día. Con solo 75-125mg de cafeína y congestión ligera, esto entrega energía calmada y controlada para acarreos con carga, rucking, senderismo y trabajo sostenido al aire libre. Soporte de resistencia pesado te mantiene moviéndote fuerte durante horas sin sobreestimulación.",
+      "traits": ["Estimulación ultra-baja (75-125mg) para energía suave", "Congestión ligera optimizada para trabajo de resistencia", "Soporte pesado de resistencia y electrolitos", "Perfecta para actividades al aire libre de todo el día"],
+      "athleteTypes": ["Excursionistas", "Ruckers", "Atletas de Aventura", "Entrenamiento al Aire Libre"],
+      "warnings": ["Estimulación muy suave", "Perfecto para actividades de todo el día", "Genial para trabajo de resistencia al aire libre"]
+    },
+    "mantis-focus": {
+      "tagline": "PRECISIÓN QUIRÚRGICA",
+      "description": "La fórmula definitiva de mente-músculo. Con 125-175mg de cafeína, congestión ALTA y soporte de ENFOQUE MÁXIMO, esto es culturismo de precisión perfeccionado. Cada repetición es controlada, cada contracción se siente. También ideal para entrenamiento de movilidad donde la técnica y la conciencia corporal lo son todo.",
+      "traits": ["Cafeína moderada 125-175mg con enfoque máximo", "Congestión ALTA para plenitud muscular increíble", "Conexión mente-músculo máxima", "Perfecta para culturismo y trabajo de movilidad"],
+      "athleteTypes": ["Culturistas", "Entrenamiento de Movilidad", "Atletas de Físico", "Levantadores Enfocados en Forma"],
+      "warnings": ["Estimulación ligera para mejor control", "Fórmula que mejora el enfoque", "Perfecto para trabajo técnico"]
+    },
+    "thunder-strike": {
+      "tagline": "FUERZA EXPLOSIVA",
+      "description": "CAOS MÁXIMO. Con 275-350mg de cafeína, congestión alta y clasificación de intensidad de 10/10, esta es la fórmula más extrema. Construida para HIIT, circuitos y sesiones de levantamiento de potencia donde necesitas poder explosivo absoluto. No para principiantes - esta es la tormenta.",
+      "traits": ["Cafeína EXTREMA (275-350mg) - máxima intensidad", "Congestión alta para rendimiento máximo", "Construida para HIIT, circuitos y levantamiento explosivo", "Clasificación de intensidad 10/10 - caos máximo"],
+      "athleteTypes": ["Atletas HIIT", "Levantamiento de Potencia", "Entrenadores de Circuito", "Especialistas en Acondicionamiento"],
+      "warnings": ["Estimulación MÁXIMA - no para principiantes", "Solo recomendado por la mañana", "Requiere semana de descanso cada 6-8 semanas", "No apto para entrenamiento nocturno"]
+    },
+    "serpent-flow": {
+      "tagline": "ARMONÍA MENTE-CUERPO",
+      "description": "CERO ESTIMULANTES. Rendimiento puro sin estimulantes para yoga, entrenamiento de movilidad, trabajo de flexibilidad y recuperación activa. Con 0mg de cafeína, soporte de congestión ligera y potenciadores de energía natural, esto es movimiento consciente perfeccionado. Entrena en cualquier momento, en cualquier lugar - incluso sesiones nocturnas.",
+      "traits": ["100% sin estimulantes - cero cafeína", "Congestión ligera para flujo sanguíneo sin tensión", "Energía natural de adaptógenos", "Perfecta para entrenamiento de movilidad y días de recuperación"],
+      "athleteTypes": ["Practicantes de Yoga", "Entrenamiento de Movilidad", "Bailarines", "Atletas Enfocados en Recuperación"],
+      "warnings": ["Cero estimulantes - perfecto para cualquier momento", "Ideal para entrenamiento nocturno", "Genial para días de recuperación"]
+    },
+    "lion-heart": {
+      "tagline": "ESPÍRITU GUERRERO",
+      "description": "La fórmula guerrera balanceada. Con 175-225mg de cafeína, congestión moderada e intensidad 7/10, esto es poder versátil para cualquier estilo de entrenamiento. Perfecta para levantamiento de potencia, culturismo, fitness funcional - entrena con corazón, coraje y determinación inquebrantable.",
+      "traits": ["Cafeína balanceada 175-225mg para consistencia diaria", "Congestión e intensidad moderadas (7/10)", "Versátil para levantamiento de potencia, culturismo o trabajo funcional", "Fortaleza mental sin sobreestimulación"],
+      "athleteTypes": ["Levantamiento de Potencia", "Culturismo", "Fitness Funcional", "Artistas Marciales"],
+      "warnings": ["Estimulación balanceada", "Fórmula versátil", "Genial para cualquier hora del día"]
+    }
+  },
   "about": {
     "pageTitle": "Acerca de",
     "pageTitleHighlight": "2HLABS",
-    "pageSubtitle": "Creemos que cada atleta tiene un arquetipo de entrenamiento único. Estamos revolucionando los suplementos con personalización, transparencia y ciencia.",
+    "pageSubtitle": "Creemos que cada atleta tiene un alma de entrenamiento única. Estamos revolucionando los suplementos con personalización, transparencia y ciencia.",
     "missionTitle": "Nuestra Misión",
     "missionText1": "La industria de suplementos está rota. Los pre-entrenos genéricos ignoran lo que te hace único: tu estilo de entrenamiento, metas, fisiología y preferencias. Las empresas venden productos sobrevalorados, con dosis bajas, mezclas propietarias y puro marketing.",
-    "missionText2": "Creemos que cada atleta tiene un arquetipo de entrenamiento único - un enfoque distintivo que requiere su propia fórmula. Por eso creamos 2HLABS: 12 fórmulas pre-entreno de precisión, cada una diseñada para un tipo diferente de atleta. Respaldadas por ciencia. Dosis clínicas. Etiquetado transparente. Hechas para ti.",
+    "missionText2": "Creemos que cada atleta tiene un alma de entrenamiento única - un enfoque distintivo que requiere su propia fórmula. Por eso creamos 2HLABS: 12 fórmulas pre-entreno de precisión, cada una diseñada para un tipo diferente de atleta. Respaldadas por ciencia. Dosis clínicas. Etiquetado transparente. Hechas para ti.",
     "valuesTitle": "Nuestros",
     "valuesTitleHighlight": "Valores",
     "value1Title": "Ciencia Primero",
@@ -543,10 +629,10 @@
     "value2Title": "Transparencia Radical",
     "value2Text": "Mereces saber exactamente lo que pones en tu cuerpo. Revelamos cada ingrediente, cada dosis y cada fuente. Sin secretos, sin sorpresas.",
     "value3Title": "Personalización",
-    "value3Text": "Tu arquetipo de entrenamiento es único. Tu pre-entreno también debería serlo. Te emparejamos con el arquetipo que se ajusta a tu estilo de entrenamiento, no te forzamos a una fórmula genérica.",
+    "value3Text": "Tu alma de entrenamiento es única. Tu pre-entreno también debería serlo. Te emparejamos con el alma que se ajusta a tu estilo de entrenamiento, no te forzamos a una fórmula genérica.",
     "ctaTitle": "¿Listo para",
-    "ctaTitleHighlight": "Encontrar tu Arquetipo",
-    "ctaButton": "Descubre tu Arquetipo de Entrenamiento"
+    "ctaTitleHighlight": "Encontrar tu Alma",
+    "ctaButton": "Descubre tu Alma de Entrenamiento"
   },
   "howItWorksPage": {
     "pageTitle": "Cómo",
@@ -590,7 +676,7 @@
     "subtitle": "Página No Encontrada",
     "message": "La página que buscas no existe o fue movida.",
     "homeButton": "Ir al Inicio",
-    "discoverButton": "Descubre tu Arquetipo"
+    "discoverButton": "Descubre tu Alma"
   },
   "legal": {
     "privacyTitle": "Política de Privacidad",

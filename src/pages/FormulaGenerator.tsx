@@ -326,7 +326,7 @@ export const FormulaGenerator = () => {
               transition={{ delay: 0.8 }}
               className="text-2xl md:text-3xl text-primary font-semibold mb-6"
             >
-              {archetype.tagline}
+              {t(`archetypes.${archetype.id}.tagline`)}
             </motion.p>
 
             <motion.div
@@ -350,14 +350,14 @@ export const FormulaGenerator = () => {
             <Card className="mb-8">
               <h2 className="text-2xl font-heading font-bold mb-4">Your Soul's Essence</h2>
               <p className="text-gray-300 text-lg leading-relaxed mb-6">
-                {archetype.description}
+                {t(`archetypes.${archetype.id}.description`)}
               </p>
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <h3 className="text-lg font-semibold text-primary mb-3">Core Traits</h3>
                   <ul className="space-y-2">
-                    {archetype.traits.map((trait, idx) => (
+                    {(t(`archetypes.${archetype.id}.traits`, { returnObjects: true }) as string[]).map((trait, idx) => (
                       <li key={idx} className="flex items-start space-x-2">
                         <span className="text-accent mt-1">▸</span>
                         <span className="text-gray-300">{trait}</span>
@@ -369,7 +369,7 @@ export const FormulaGenerator = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-primary mb-3">You Thrive As</h3>
                   <ul className="space-y-2">
-                    {archetype.athleteTypes.map((type, idx) => (
+                    {(t(`archetypes.${archetype.id}.athleteTypes`, { returnObjects: true }) as string[]).map((type, idx) => (
                       <li key={idx} className="flex items-start space-x-2">
                         <span className="text-accent mt-1">▸</span>
                         <span className="text-gray-300">{type}</span>
@@ -568,7 +568,7 @@ export const FormulaGenerator = () => {
                   Important Considerations
                 </h2>
                 <ul className="space-y-2">
-                  {archetype.warnings.map((warning, idx) => (
+                  {(t(`archetypes.${archetype.id}.warnings`, { returnObjects: true }) as string[]).map((warning, idx) => (
                     <li key={idx} className="flex items-start space-x-2">
                       <span className="text-secondary mt-1">⚠</span>
                       <span className="text-gray-300">{warning}</span>
