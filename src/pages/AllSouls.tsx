@@ -14,16 +14,17 @@ import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData'
 const SOUL_COLORS: Record<string, string> = {
   'gorilla-rage': '#FF5722',      // Warmer orange-red
   'dragon-blood': '#8B0000',      // Red wine / dark red
-  'cheetah-sprint': '#FFFF99',    // Pale yellow / light yellow
+  'cheetah-sprint': '#FFFF00',    // Bright yellow (reverted)
   'eagle-vision': '#00D4FF',      // Colder cyan / ice blue
   'titan-strength': '#708090',    // Slate gray
-  'phoenix-rise': '#FF6600',      // Keep orange
-  'serpent-flow': '#00FF88',      // Keep green
+  'phoenix-rise': '#FF6600',      // Orange
+  'serpent-flow': '#00FF88',      // Green
   'wolf-pack': '#6B8E23',         // Olive green / green-gray
-  'monk-mind': '#32CD32',         // Lime green (mantis focus)
-  'viper-strike': '#00FF00',      // Keep neon green
-  'bear-endurance': '#8B4513',    // Keep brown
-  'lightning-bolt': '#9933FF',    // Purple (thunder strike)
+  'mantis-focus': '#32CD32',      // Lime green (mantis focus)
+  'viper-strike': '#00FF00',      // Neon green
+  'bear-endurance': '#8B4513',    // Brown
+  'thunder-strike': '#9933FF',    // Purple (thunder strike)
+  'lion-heart': '#FFD700',        // Warm golden yellow
 };
 
 export const AllSouls = () => {
@@ -39,6 +40,36 @@ export const AllSouls = () => {
     }, 800);
     return () => clearTimeout(timer);
   }, []);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedArchetype) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedArchetype]);
+
+  // Handle browser back button to close modal
+  useEffect(() => {
+    if (selectedArchetype) {
+      // Push a state when modal opens
+      window.history.pushState({ modalOpen: true }, '');
+
+      const handlePopState = () => {
+        setSelectedArchetype(null);
+      };
+
+      window.addEventListener('popstate', handlePopState);
+
+      return () => {
+        window.removeEventListener('popstate', handlePopState);
+      };
+    }
+  }, [selectedArchetype]);
 
   const getDimensionBadgeColor = (value: string) => {
     const colorMap: Record<string, string> = {
@@ -310,7 +341,19 @@ export const AllSouls = () => {
         </motion.div>
 
         {/* Detailed Modal */}
-        {selectedArchetype && (
+        {selectedArchetype && (() => {
+          const modalBrandColor = SOUL_COLORS[selectedArchetype.id] || '#00e5ff';
+          const hexToRgb = (hex: string) => {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+              r: parseInt(result[1], 16),
+              g: parseInt(result[2], 16),
+              b: parseInt(result[3], 16)
+            } : { r: 0, g: 229, b: 255 };
+          };
+          const modalRgb = hexToRgb(modalBrandColor);
+
+          return (
           <div
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={() => setSelectedArchetype(null)}
@@ -318,10 +361,38 @@ export const AllSouls = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-dark-lighter border-2 border-primary/30 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+              className="bg-dark-lighter rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative"
+              style={{
+                borderWidth: '2px',
+                borderStyle: 'solid',
+                borderColor: modalBrandColor,
+                boxShadow: `0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4), 0 0 80px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
+              }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="p-8">
+              {/* Sticky Close Button */}
+              <button
+                onClick={() => setSelectedArchetype(null)}
+                className="sticky top-4 right-4 float-right z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
+                style={{
+                  backgroundColor: `rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
+                  border: `2px solid ${modalBrandColor}`,
+                }}
+                aria-label="Close modal"
+              >
+                <svg
+                  className="w-5 h-5"
+                  style={{ color: modalBrandColor }}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="p-8 clear-both">
                 {/* Header */}
                 <div className="text-center mb-6">
                   <div className="mb-4 flex justify-center">
@@ -329,13 +400,18 @@ export const AllSouls = () => {
                       src={getSoulLogo(selectedArchetype.id)}
                       alt={selectedArchetype.name}
                       className="w-32 h-32 object-contain mix-blend-lighten"
-                      style={{ filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))' }}
+                      style={{
+                        filter: `drop-shadow(0 0 30px ${modalBrandColor}) drop-shadow(0 0 15px ${modalBrandColor})`,
+                      }}
                     />
                   </div>
-                  <h2 className="text-4xl font-heading font-bold mb-2">
+                  <h2
+                    className="text-4xl font-heading font-bold mb-2"
+                    style={{ color: modalBrandColor }}
+                  >
                     {selectedArchetype.name}
                   </h2>
-                  <p className="text-xl text-primary font-semibold">
+                  <p className="text-xl font-semibold" style={{ color: modalBrandColor }}>
                     {selectedArchetype.tagline}
                   </p>
                 </div>
@@ -417,7 +493,8 @@ export const AllSouls = () => {
               </div>
             </motion.div>
           </div>
-        )}
+          );
+        })()}
       </div>
     </div>
   );
