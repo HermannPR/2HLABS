@@ -1,22 +1,27 @@
 import { motion } from 'framer-motion';
+import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
 
 export const TrustBadges = () => {
   const badges = [
     {
       icon: '/assets/badges/science-backed.png',
-      alt: 'Science-Backed'
+      alt: 'Science-Backed',
+      tooltip: 'All ingredients backed by peer-reviewed research'
     },
     {
       icon: '/assets/badges/clinical-dosages.png',
-      alt: 'Clinical Dosages'
+      alt: 'Clinical Dosages',
+      tooltip: 'Effective amounts proven in clinical trials'
     },
     {
       icon: '/assets/badges/full-transparency.png',
-      alt: 'Full Transparency'
+      alt: 'Full Transparency',
+      tooltip: 'Complete ingredient disclosure, no proprietary blends'
     },
     {
       icon: '/assets/badges/lab-tested.png',
-      alt: 'Lab Tested'
+      alt: 'Lab Tested',
+      tooltip: 'Third-party tested for purity and potency'
     },
   ];
 
@@ -38,10 +43,11 @@ export const TrustBadges = () => {
               transition={{ delay: index * 0.1 }}
               className="flex justify-center items-center"
             >
-              <img
+              <BadgeWithTooltip
                 src={badge.icon}
                 alt={badge.alt}
-                className="w-40 h-40 sm:w-48 sm:h-48 md:w-44 md:h-44 lg:w-52 lg:h-52 object-contain"
+                tooltip={badge.tooltip}
+                className="w-40 h-40 sm:w-48 sm:h-48 md:w-44 md:h-44 lg:w-52 lg:h-52"
               />
             </motion.div>
           ))}

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '../common/Button';
+import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
 
 export const Hero = () => {
   return (
@@ -77,29 +78,33 @@ export const Hero = () => {
             transition={{ delay: 0.6 }}
             className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12"
           >
-            <img
+            <BadgeWithTooltip
               src="/assets/badges/lab-tested.png"
               alt="Lab Tested"
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              tooltip="Third-party tested for purity and potency"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              glowEffect
             />
-            <img
+            <BadgeWithTooltip
               src="/assets/badges/clinical-dosages.png"
               alt="Clinical Dosages"
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              tooltip="Effective amounts proven in clinical trials"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              glowEffect
             />
-            <img
+            <BadgeWithTooltip
               src="/assets/badges/science-backed.png"
               alt="Science Backed"
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              tooltip="All ingredients backed by peer-reviewed research"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              glowEffect
             />
-            <img
+            <BadgeWithTooltip
               src="/assets/badges/full-transparency.png"
               alt="Full Transparency"
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 object-contain mix-blend-lighten"
-              style={{ filter: 'drop-shadow(0 0 12px rgba(0, 229, 255, 0.3))' }}
+              tooltip="Complete ingredient disclosure, no proprietary blends"
+              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              glowEffect
             />
           </motion.div>
         </motion.div>
