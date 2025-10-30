@@ -330,7 +330,31 @@
   "faq": {
     "title": "Preguntas",
     "titleHighlight": "Frecuentes",
-    "subtitle": "¿Tienes preguntas? Tenemos respuestas."
+    "subtitle": "¿Tienes preguntas? Tenemos respuestas.",
+    "faq1": {
+      "question": "¿Cómo funciona la fórmula personalizada?",
+      "answer": "Nuestro algoritmo analiza tus objetivos fitness, horario de entrenamiento, composición corporal y preferencias para crear una fórmula pre-entreno única. Ajustamos las dosis de ingredientes según tu peso, seleccionamos compuestos que se alinean con tus objetivos, y consideramos tu tolerancia a la cafeína y restricciones dietéticas."
+    },
+    "faq2": {
+      "question": "¿Los ingredientes están respaldados por ciencia?",
+      "answer": "Absolutamente. Solo usamos ingredientes con investigación clínica sólida que respalda su eficacia. Cada ingrediente está dosificado según la literatura científica, no subdosificado como muchos productos comerciales. Ofrecemos transparencia total con referencias a estudios publicados."
+    },
+    "faq3": {
+      "question": "¿Puedo ajustar mi fórmula después?",
+      "answer": "¡Sí! A medida que tu entrenamiento evoluciona, tu fórmula también puede hacerlo. Puedes actualizar tu perfil en cualquier momento y regeneraremos tu fórmula para que coincida con tus necesidades actuales. Muchos atletas ajustan su fórmula para diferentes fases de entrenamiento (definición, volumen, preparación para competencias)."
+    },
+    "faq4": {
+      "question": "¿Es seguro para atletas que se someten a pruebas antidopaje?",
+      "answer": "Sí. Todos nuestros ingredientes son compuestos naturales o versiones sintéticas de compuestos naturales. No usamos sustancias prohibidas. Sin embargo, siempre recomendamos que los atletas verifiquen la lista de sustancias prohibidas de su organización específica y consulten con su equipo."
+    },
+    "faq5": {
+      "question": "¿Cuánta cafeína tendrá mi fórmula?",
+      "answer": "Esto depende completamente de tus preferencias y tolerancia. Durante el cuestionario, especificarás tu tolerancia a la cafeína (ninguna, baja, media, alta) y ajustaremos en consecuencia. Las fórmulas van desde 0mg hasta 400mg de cafeína. Tienes control total."
+    },
+    "faq6": {
+      "question": "¿Qué pasa si tengo alergias o restricciones dietéticas?",
+      "answer": "Nuestro constructor de fórmulas incluye una sección para restricciones dietéticas y alérgenos. Podemos acomodar requisitos veganos, vegetarianos, sin gluten y otros. Excluiremos automáticamente cualquier ingrediente que marques."
+    }
   },
   "formulaGenerator": {
     "intro": {
