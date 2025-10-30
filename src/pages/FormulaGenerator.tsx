@@ -647,7 +647,7 @@ export const FormulaGenerator = () => {
               )}
 
               {/* Options Grid */}
-              <div className={`grid gap-4 ${
+              <div className={`grid gap-4 items-stretch ${
                 currentQuestion.id === 'q10-considerations'
                   ? 'grid-cols-1 md:grid-cols-2'
                   : currentQuestion.options.length <= 3
@@ -667,7 +667,7 @@ export const FormulaGenerator = () => {
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       className={`
-                        p-6 rounded-xl border-2 transition-all text-left
+                        p-6 rounded-xl border-2 transition-all text-left h-full
                         ${isSelected
                           ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
                           : 'border-dark-light bg-dark-lighter hover:border-primary/50'
