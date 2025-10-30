@@ -264,5 +264,33 @@
     "subtitle": "Deja de gastar dinero en pre-entrenos genéricos. Obtén una fórmula diseñada específicamente para tu cuerpo, metas y estilo de entrenamiento.",
     "buttonText": "Construye tu Fórmula - Gratis",
     "benefits": "Generación de fórmula gratis • Garantía de 30 días • Cancela cuando quieras"
+  },
+  "howItWorks": {
+    "title": "Cómo",
+    "titleHighlight": "Funciona",
+    "subtitle": "Obtén tu pre-entreno personalizado en tres pasos simples",
+    "step1Title": "Responde Preguntas",
+    "step1Description": "Cuéntanos sobre tus metas, entrenamiento, cuerpo y preferencias a través de nuestro cuestionario guiado.",
+    "step2Title": "Generamos tu Fórmula",
+    "step2Description": "Nuestro algoritmo crea una fórmula personalizada con ingredientes científicos en dosis óptimas.",
+    "step3Title": "Recibe y Domina",
+    "step3Description": "Recibe tu pre-entreno personalizado fresco. Rastrea resultados y ajusta tu fórmula cuando quieras.",
+    "buttonText": "Conoce Más Sobre Nuestro Proceso"
+  },
+  "testimonials": {
+    "title": "Confianza de",
+    "titleHighlight": "Atletas",
+    "subtitle": "Mira lo que nuestra comunidad dice sobre sus fórmulas personalizadas",
+    "stat1Number": "10,000+",
+    "stat1Label": "Fórmulas Creadas",
+    "stat2Number": "4.9/5",
+    "stat2Label": "Calificación Promedio",
+    "stat3Number": "98%",
+    "stat3Label": "Lo Recomendarían"
+  },
+  "faq": {
+    "title": "Preguntas",
+    "titleHighlight": "Frecuentes",
+    "subtitle": "¿Tienes preguntas? Tenemos respuestas."
   }
 }

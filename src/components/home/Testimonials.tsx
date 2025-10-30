@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../common/Card';
 import { TESTIMONIALS } from '../../data/testimonials';
 import { HiStar } from 'react-icons/hi';
 
 export const Testimonials = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-20 bg-dark">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,10 +17,10 @@ export const Testimonials = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Trusted by <span className="text-gradient">Athletes</span>
+            {t('testimonials.title')} <span className="text-gradient">{t('testimonials.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            See what our community is saying about their personalized formulas
+            {t('testimonials.subtitle')}
           </p>
         </motion.div>
 
@@ -61,16 +64,16 @@ export const Testimonials = () => {
           className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center"
         >
           <div>
-            <p className="text-5xl font-heading font-bold text-gradient mb-2">10,000+</p>
-            <p className="text-gray-400">Formulas Created</p>
+            <p className="text-5xl font-heading font-bold text-gradient mb-2">{t('testimonials.stat1Number')}</p>
+            <p className="text-gray-400">{t('testimonials.stat1Label')}</p>
           </div>
           <div>
-            <p className="text-5xl font-heading font-bold text-gradient mb-2">4.9/5</p>
-            <p className="text-gray-400">Average Rating</p>
+            <p className="text-5xl font-heading font-bold text-gradient mb-2">{t('testimonials.stat2Number')}</p>
+            <p className="text-gray-400">{t('testimonials.stat2Label')}</p>
           </div>
           <div>
-            <p className="text-5xl font-heading font-bold text-gradient mb-2">98%</p>
-            <p className="text-gray-400">Would Recommend</p>
+            <p className="text-5xl font-heading font-bold text-gradient mb-2">{t('testimonials.stat3Number')}</p>
+            <p className="text-gray-400">{t('testimonials.stat3Label')}</p>
           </div>
         </motion.div>
       </div>

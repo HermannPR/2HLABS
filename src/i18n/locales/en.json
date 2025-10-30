@@ -264,5 +264,33 @@
     "subtitle": "Stop wasting money on generic preworkouts. Get a formula designed specifically for your body, goals, and training style.",
     "buttonText": "Build Your Formula - It's Free",
     "benefits": "Free formula generation • 30-day money-back guarantee • Cancel anytime"
+  },
+  "howItWorks": {
+    "title": "How It",
+    "titleHighlight": "Works",
+    "subtitle": "Get your personalized preworkout in three simple steps",
+    "step1Title": "Answer Questions",
+    "step1Description": "Tell us about your goals, training, body, and preferences through our guided quiz.",
+    "step2Title": "We Generate Your Formula",
+    "step2Description": "Our algorithm creates a personalized formula with science-backed ingredients at optimal dosages.",
+    "step3Title": "Receive & Dominate",
+    "step3Description": "Get your custom preworkout delivered fresh. Track results and adjust your formula anytime.",
+    "buttonText": "Learn More About Our Process"
+  },
+  "testimonials": {
+    "title": "Trusted by",
+    "titleHighlight": "Athletes",
+    "subtitle": "See what our community is saying about their personalized formulas",
+    "stat1Number": "10,000+",
+    "stat1Label": "Formulas Created",
+    "stat2Number": "4.9/5",
+    "stat2Label": "Average Rating",
+    "stat3Number": "98%",
+    "stat3Label": "Would Recommend"
+  },
+  "faq": {
+    "title": "Frequently Asked",
+    "titleHighlight": "Questions",
+    "subtitle": "Got questions? We've got answers."
   }
 }

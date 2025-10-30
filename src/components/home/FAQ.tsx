@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import { HiChevronDown } from 'react-icons/hi';
 import { FAQS } from '../../data/faqs';
 
 export const FAQ = () => {
+  const { t } = useTranslation();
   const [openId, setOpenId] = useState<string | null>(null);
 
   const topFaqs = FAQS.slice(0, 6);
@@ -18,10 +20,10 @@ export const FAQ = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            Frequently Asked <span className="text-gradient">Questions</span>
+            {t('faq.title')} <span className="text-gradient">{t('faq.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-400">
-            Got questions? We've got answers.
+            {t('faq.subtitle')}
           </p>
         </motion.div>
 

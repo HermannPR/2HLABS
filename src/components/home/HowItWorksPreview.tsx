@@ -1,30 +1,33 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { HiClipboardList, HiCog, HiTruck } from 'react-icons/hi';
 
-const steps = [
-  {
-    icon: HiClipboardList,
-    number: '01',
-    title: 'Answer Questions',
-    description: 'Tell us about your goals, training, body, and preferences through our guided quiz.',
-  },
-  {
-    icon: HiCog,
-    number: '02',
-    title: 'We Generate Your Formula',
-    description: 'Our algorithm creates a personalized formula with science-backed ingredients at optimal dosages.',
-  },
-  {
-    icon: HiTruck,
-    number: '03',
-    title: 'Receive & Dominate',
-    description: 'Get your custom preworkout delivered fresh. Track results and adjust your formula anytime.',
-  },
-];
-
 export const HowItWorksPreview = () => {
+  const { t } = useTranslation();
+
+  const steps = [
+    {
+      icon: HiClipboardList,
+      number: '01',
+      titleKey: 'howItWorks.step1Title',
+      descriptionKey: 'howItWorks.step1Description',
+    },
+    {
+      icon: HiCog,
+      number: '02',
+      titleKey: 'howItWorks.step2Title',
+      descriptionKey: 'howItWorks.step2Description',
+    },
+    {
+      icon: HiTruck,
+      number: '03',
+      titleKey: 'howItWorks.step3Title',
+      descriptionKey: 'howItWorks.step3Description',
+    },
+  ];
+
   return (
     <section className="py-20 bg-dark-lighter">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,10 +38,10 @@ export const HowItWorksPreview = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-            How It <span className="text-gradient">Works</span>
+            {t('howItWorks.title')} <span className="text-gradient">{t('howItWorks.titleHighlight')}</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Get your personalized preworkout in three simple steps
+            {t('howItWorks.subtitle')}
           </p>
         </motion.div>
 
@@ -64,8 +67,8 @@ export const HowItWorksPreview = () => {
                   </div>
                   <span className="text-6xl font-heading font-bold text-primary/20">{step.number}</span>
                 </div>
-                <h3 className="text-2xl font-heading font-semibold mb-3">{step.title}</h3>
-                <p className="text-gray-400">{step.description}</p>
+                <h3 className="text-2xl font-heading font-semibold mb-3">{t(step.titleKey)}</h3>
+                <p className="text-gray-400">{t(step.descriptionKey)}</p>
               </div>
             </motion.div>
           ))}
@@ -74,7 +77,7 @@ export const HowItWorksPreview = () => {
         <div className="text-center">
           <Link to="/how-it-works">
             <Button variant="outline" size="lg">
-              Learn More About Our Process
+              {t('howItWorks.buttonText')}
             </Button>
           </Link>
         </div>
