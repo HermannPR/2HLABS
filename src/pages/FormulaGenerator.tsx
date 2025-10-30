@@ -4,7 +4,7 @@ import { QUIZ_QUESTIONS } from '../data/quizQuestions';
 import type { QuizAnswers, ArchetypeResult } from '../types';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
-import { HiArrowLeft, HiArrowRight } from 'react-icons/hi';
+import { HiArrowLeft, HiArrowRight, HiLightningBolt, HiClock, HiFire, HiSparkles, HiBeaker } from 'react-icons/hi';
 import { getArchetypeResult } from '../utils/archetypeMatching';
 import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
 import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
@@ -32,6 +32,25 @@ export const FormulaGenerator = () => {
   const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
   const progress = ((currentQuestionIndex + 1) / QUIZ_QUESTIONS.length) * 100;
+
+  // Get icon for question dimension
+  const getDimensionIcon = (dimension: string) => {
+    const iconProps = { size: 32, className: "text-primary" };
+    switch (dimension) {
+      case 'intensity':
+        return <HiFire {...iconProps} />;
+      case 'focus':
+        return <HiSparkles {...iconProps} />;
+      case 'energy':
+        return <HiLightningBolt {...iconProps} />;
+      case 'duration':
+        return <HiClock {...iconProps} />;
+      case 'stimTolerance':
+        return <HiBeaker {...iconProps} />;
+      default:
+        return <HiSparkles {...iconProps} />;
+    }
+  };
 
   const handleAnswer = (optionId: string) => {
     // Handle multi-select for q10-considerations
@@ -630,8 +649,33 @@ export const FormulaGenerator = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-dark py-12 relative overflow-hidden">
+      {/* Floating Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 bg-primary rounded-full opacity-10"
+            initial={{
+              x: Math.random() * window.innerWidth,
+              y: Math.random() * window.innerHeight,
+            }}
+            animate={{
+              y: [null, Math.random() * window.innerHeight],
+              x: [null, Math.random() * window.innerWidth],
+              scale: [1, 1.5, 1],
+              opacity: [0.1, 0.3, 0.1],
+            }}
+            transition={{
+              duration: 15 + Math.random() * 10,
+              repeat: Infinity,
+              ease: 'linear',
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         {currentQuestionIndex === 0 && (
           <motion.div
@@ -648,23 +692,67 @@ export const FormulaGenerator = () => {
           </motion.div>
         )}
 
-        {/* Progress Bar */}
-        <div className="mb-8">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-sm text-gray-400">
-              Question {currentQuestionIndex + 1} of {QUIZ_QUESTIONS.length}
-            </span>
-            <span className="text-sm text-primary font-semibold">
-              {Math.round(progress)}% Complete
-            </span>
+        {/* Progress Section */}
+        <div className="mb-8 flex items-center gap-6">
+          {/* Circular Progress */}
+          <div className="relative w-20 h-20 flex-shrink-0">
+            <svg className="transform -rotate-90 w-full h-full">
+              {/* Background Circle */}
+              <circle
+                cx="40"
+                cy="40"
+                r="36"
+                stroke="currentColor"
+                strokeWidth="6"
+                fill="none"
+                className="text-dark-lighter"
+              />
+              {/* Progress Circle */}
+              <motion.circle
+                cx="40"
+                cy="40"
+                r="36"
+                stroke="url(#progressGradient)"
+                strokeWidth="6"
+                fill="none"
+                strokeLinecap="round"
+                initial={{ strokeDashoffset: 226 }}
+                animate={{ strokeDashoffset: 226 - (226 * progress) / 100 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{
+                  strokeDasharray: 226,
+                }}
+              />
+              <defs>
+                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#00e5ff" />
+                  <stop offset="100%" stopColor="#00b8cc" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-sm font-bold text-primary">{Math.round(progress)}%</span>
+            </div>
           </div>
-          <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-gradient-to-r from-primary to-secondary"
-              initial={{ width: 0 }}
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.3 }}
-            />
+
+          {/* Linear Progress */}
+          <div className="flex-1">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm text-gray-400">
+                Question {currentQuestionIndex + 1} of {QUIZ_QUESTIONS.length}
+              </span>
+              <span className="text-sm text-primary font-semibold">
+                {Math.round(progress)}% Complete
+              </span>
+            </div>
+            <div className="w-full h-3 bg-dark-lighter rounded-full overflow-hidden shadow-inner">
+              <motion.div
+                className="h-full bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/50"
+                initial={{ width: 0 }}
+                animate={{ width: `${progress}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            </div>
           </div>
         </div>
 
@@ -677,12 +765,31 @@ export const FormulaGenerator = () => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
           >
-            <Card className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3">
+            <Card className="mb-8 relative overflow-visible">
+              {/* Dimension Icon Badge */}
+              <div className="flex items-center justify-center mb-6">
+                <motion.div
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
+                  className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 border-2 border-primary/30 flex items-center justify-center shadow-lg shadow-primary/20"
+                >
+                  {getDimensionIcon(currentQuestion.dimension)}
+                </motion.div>
+              </div>
+
+              {/* Question Number Badge */}
+              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/30">
+                <span className="text-sm font-semibold text-primary">
+                  {currentQuestionIndex + 1}/{QUIZ_QUESTIONS.length}
+                </span>
+              </div>
+
+              <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3 text-center">
                 {currentQuestion.question}
               </h2>
               {currentQuestion.description && (
-                <p className="text-gray-400 mb-6">{currentQuestion.description}</p>
+                <p className="text-gray-400 mb-6 text-center">{currentQuestion.description}</p>
               )}
 
               {/* Options Grid */}
