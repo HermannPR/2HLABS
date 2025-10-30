@@ -357,15 +357,29 @@
     "intensity": "Intensidad",
     "pump": "Congestión",
     "focus": "Concentración",
+    "stim": "Estimulante",
+    "viewProfile": "Ver Perfil Completo",
     "viewDetails": "Ver Detalles",
     "discoverYours": "Descubre tu Arquetipo",
+    "ctaTitle": "¿Listo para Descubrir tu Arquetipo?",
+    "ctaDescription": "Completa nuestro cuestionario de 2 minutos para encontrar qué arquetipo se ajusta al entrenamiento de hoy. Puedes descubrir múltiples arquetipos para diferentes estilos de entrenamiento.",
+    "ctaButton": "Descubre tu Arquetipo",
     "modalClose": "Cerrar",
     "modalTagline": "Lema",
     "modalDescription": "Descripción",
     "modalTraits": "Características Clave",
     "modalAthleteTypes": "Destacas Como",
     "modalDimensions": "Dimensiones Clave",
-    "modalIngredients": "Ingredientes Principales"
+    "modalIngredients": "Ingredientes Principales",
+    "modal": {
+      "caffeineRange": "Rango de Cafeína",
+      "intensityLevel": "Nivel de Intensidad",
+      "pumpLevel": "Nivel de Congestión",
+      "focusLevel": "Nivel de Concentración",
+      "coreTraits": "Características Clave",
+      "perfectFor": "Perfecto Para",
+      "closeButton": "Cerrar"
+    }
   },
   "ingredientsPage": {
     "pageTitle": "Biblioteca de",

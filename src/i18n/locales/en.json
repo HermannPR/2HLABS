@@ -357,15 +357,29 @@
     "intensity": "Intensity",
     "pump": "Pump",
     "focus": "Focus",
+    "stim": "Stim",
+    "viewProfile": "View Full Profile",
     "viewDetails": "View Details",
     "discoverYours": "Discover Your Soul",
+    "ctaTitle": "Ready to Discover Your Soul?",
+    "ctaDescription": "Take our 2-minute quiz to find which soul matches today's training. You can discover multiple souls for different workout styles.",
+    "ctaButton": "Discover Your Soul",
     "modalClose": "Close",
     "modalTagline": "Tagline",
     "modalDescription": "Description",
     "modalTraits": "Core Traits",
     "modalAthleteTypes": "You Thrive As",
     "modalDimensions": "Key Dimensions",
-    "modalIngredients": "Core Ingredients"
+    "modalIngredients": "Core Ingredients",
+    "modal": {
+      "caffeineRange": "Caffeine Range",
+      "intensityLevel": "Intensity Level",
+      "pumpLevel": "Pump Level",
+      "focusLevel": "Focus Level",
+      "coreTraits": "Core Traits",
+      "perfectFor": "Perfect For",
+      "closeButton": "Close"
+    }
   },
   "ingredientsPage": {
     "pageTitle": "Ingredient",

@@ -11,6 +11,12 @@ export const Ingredients = () => {
 
   const categories: (IngredientCategory | 'all')[] = ['all', 'energy', 'pump', 'strength', 'endurance', 'focus', 'recovery', 'hydration'];
 
+  const getCategoryTranslationKey = (category: string) => {
+    if (category === 'all') return 'ingredientsPage.filterAll';
+    if (category === 'focus') return 'ingredientsPage.focusCategory';
+    return `ingredientsPage.${category}`;
+  };
+
   const filteredIngredients = selectedCategory === 'all'
     ? INGREDIENTS
     : INGREDIENTS.filter(ing => ing.category === selectedCategory);
@@ -24,10 +30,10 @@ export const Ingredients = () => {
           className="text-center mb-16"
         >
           <h1 className="text-5xl md:text-6xl font-heading font-bold mb-6">
-            {t('ingredients.title')} <span className="text-gradient">{t('ingredients.titleHighlight')}</span>
+            {t('ingredientsPage.pageTitle')} <span className="text-gradient">{t('ingredientsPage.pageTitleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            {t('ingredients.subtitle')}
+            {t('ingredientsPage.pageSubtitle')}
           </p>
         </motion.div>
 
@@ -43,7 +49,7 @@ export const Ingredients = () => {
                   : 'border-dark-light text-gray-400 hover:border-primary/50'
               }`}
             >
-              {t(`ingredients.${category}`)}
+              {t(getCategoryTranslationKey(category))}
             </button>
           ))}
         </div>
