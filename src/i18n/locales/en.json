@@ -324,6 +324,118 @@
       "previous": "Previous",
       "next": "Next Question",
       "submit": "See My Results"
+    },
+    "results": {
+      "matchPercentage": "{{percentage}}% Match",
+      "yourSoulEssence": "Your Soul's Essence",
+      "coreTraits": "Core Traits",
+      "youThriveAs": "You Thrive As",
+      "yourTrainingDNA": "Your Training DNA",
+      "intensity": "Intensity",
+      "duration": "Duration",
+      "focus": "Focus",
+      "energyPattern": "Energy Pattern",
+      "stimTolerance": "Stim Tolerance",
+      "yourFormula": "Your Personalized Formula",
+      "formulaBreakdown": "Formula Breakdown",
+      "keyIngredients": "Key Ingredients",
+      "doseLevel": "Dose Level",
+      "warnings": "Important Considerations",
+      "nextSteps": "What's Next?",
+      "selectFlavor": "Select Your Flavor",
+      "saveResults": "Save My Results",
+      "shareResults": "Share My Soul",
+      "retakeQuiz": "Retake Quiz",
+      "viewAllSouls": "Compare All 12 Souls"
     }
+  },
+  "allSouls": {
+    "title": "Discover All",
+    "titleHighlight": "12 Training Souls",
+    "subtitle": "Each soul represents a unique training philosophy and energy signature. Find the ones that match your different training needs.",
+    "caffeine": "Caffeine",
+    "intensity": "Intensity",
+    "pump": "Pump",
+    "focus": "Focus",
+    "viewDetails": "View Details",
+    "discoverYours": "Discover Your Soul",
+    "modalClose": "Close",
+    "modalTagline": "Tagline",
+    "modalDescription": "Description",
+    "modalTraits": "Core Traits",
+    "modalAthleteTypes": "You Thrive As",
+    "modalDimensions": "Key Dimensions",
+    "modalIngredients": "Core Ingredients"
+  },
+  "ingredientsPage": {
+    "pageTitle": "Ingredient",
+    "pageTitleHighlight": "Library",
+    "pageSubtitle": "Explore the science-backed ingredients we use in our personalized formulas",
+    "filterAll": "All",
+    "energy": "Energy",
+    "pump": "Pump",
+    "strength": "Strength",
+    "endurance": "Endurance",
+    "focusCategory": "Focus",
+    "recovery": "Recovery",
+    "hydration": "Hydration",
+    "viewDetails": "View Details"
+  },
+  "about": {
+    "pageTitle": "About",
+    "pageTitleHighlight": "2HLABS",
+    "pageSubtitle": "We believe every athlete has a unique training soul. We're revolutionizing supplements with personalization, transparency, and science.",
+    "missionTitle": "Our Mission",
+    "missionText1": "The supplement industry is broken. One-size-fits-all preworkouts ignore what makes you unique: your training style, goals, physiology, and preferences. Companies sell overpriced, underdosed products with proprietary blends and marketing hype.",
+    "missionText2": "We believe every athlete has a unique training soul—a distinct approach to training that requires its own formula. That's why we created 2HLABS: 12 precision-engineered preworkout formulas, each designed for a different type of athlete. Science-backed. Clinically dosed. Transparently labeled. Matched to you.",
+    "valuesTitle": "Our",
+    "valuesTitleHighlight": "Values",
+    "value1Title": "Science First",
+    "value1Text": "Every ingredient is backed by clinical research. Every dosage is based on peer-reviewed studies. No proprietary blends, no pixie dust—just proven compounds at effective amounts.",
+    "value2Title": "Radical Transparency",
+    "value2Text": "You deserve to know exactly what you're putting in your body. We disclose every ingredient, every dosage, and every source. No secrets, no surprises.",
+    "value3Title": "Personalization",
+    "value3Text": "Your training soul is unique. Your preworkout should be too. We match you with the archetype that fits your training style, not force you into a one-size-fits-all formula.",
+    "ctaTitle": "Ready to",
+    "ctaTitleHighlight": "Find Your Soul",
+    "ctaButton": "Discover Your Training Soul"
+  },
+  "howItWorksPage": {
+    "pageTitle": "How It",
+    "pageTitleHighlight": "Works",
+    "pageSubtitle": "From quiz to custom formula in three simple steps"
+  },
+  "pricing": {
+    "pageTitle": "Simple",
+    "pageTitleHighlight": "Pricing",
+    "pageSubtitle": "Choose the plan that fits your training schedule",
+    "comingSoon": "Pricing Coming Soon",
+    "comingSoonText": "We're finalizing our pricing structure. Join the waitlist to be notified when we launch.",
+    "joinWaitlist": "Join Waitlist"
+  },
+  "contact": {
+    "pageTitle": "Get in",
+    "pageTitleHighlight": "Touch",
+    "pageSubtitle": "Have questions? We'd love to hear from you.",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "sendButton": "Send Message",
+    "sending": "Sending...",
+    "successMessage": "Message sent! We'll get back to you soon.",
+    "errorMessage": "Something went wrong. Please try again."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Page Not Found",
+    "message": "The page you're looking for doesn't exist or has been moved.",
+    "homeButton": "Go Home",
+    "discoverButton": "Discover Your Soul"
+  },
+  "legal": {
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms of Service",
+    "lastUpdated": "Last Updated",
+    "backButton": "Back to Home"
   }
 }

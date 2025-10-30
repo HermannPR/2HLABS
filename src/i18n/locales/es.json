@@ -324,6 +324,118 @@
       "previous": "Anterior",
       "next": "Siguiente Pregunta",
       "submit": "Ver mis Resultados"
+    },
+    "results": {
+      "matchPercentage": "{{percentage}}% Compatible",
+      "yourSoulEssence": "Tu Esencia de Entrenamiento",
+      "coreTraits": "Características Clave",
+      "youThriveAs": "Destacas Como",
+      "yourTrainingDNA": "Tu ADN de Entrenamiento",
+      "intensity": "Intensidad",
+      "duration": "Duración",
+      "focus": "Concentración",
+      "energyPattern": "Patrón de Energía",
+      "stimTolerance": "Tolerancia a Estimulantes",
+      "yourFormula": "Tu Fórmula Personalizada",
+      "formulaBreakdown": "Composición de tu Fórmula",
+      "keyIngredients": "Ingredientes Clave",
+      "doseLevel": "Nivel de Dosis",
+      "warnings": "Consideraciones Importantes",
+      "nextSteps": "¿Qué Sigue?",
+      "selectFlavor": "Elige tu Sabor",
+      "saveResults": "Guardar Resultados",
+      "shareResults": "Compartir mi Arquetipo",
+      "retakeQuiz": "Repetir Cuestionario",
+      "viewAllSouls": "Comparar los 12 Arquetipos"
     }
+  },
+  "allSouls": {
+    "title": "Descubre los",
+    "titleHighlight": "12 Arquetipos de Entrenamiento",
+    "subtitle": "Cada arquetipo representa una filosofía única de entrenamiento y energía. Encuentra los que se ajustan a tus diferentes necesidades de entrenamiento.",
+    "caffeine": "Cafeína",
+    "intensity": "Intensidad",
+    "pump": "Congestión",
+    "focus": "Concentración",
+    "viewDetails": "Ver Detalles",
+    "discoverYours": "Descubre tu Arquetipo",
+    "modalClose": "Cerrar",
+    "modalTagline": "Lema",
+    "modalDescription": "Descripción",
+    "modalTraits": "Características Clave",
+    "modalAthleteTypes": "Destacas Como",
+    "modalDimensions": "Dimensiones Clave",
+    "modalIngredients": "Ingredientes Principales"
+  },
+  "ingredientsPage": {
+    "pageTitle": "Biblioteca de",
+    "pageTitleHighlight": "Ingredientes",
+    "pageSubtitle": "Explora los ingredientes respaldados por la ciencia que usamos en nuestras fórmulas personalizadas",
+    "filterAll": "Todos",
+    "energy": "Energía",
+    "pump": "Congestión",
+    "strength": "Fuerza",
+    "endurance": "Resistencia",
+    "focusCategory": "Concentración",
+    "recovery": "Recuperación",
+    "hydration": "Hidratación",
+    "viewDetails": "Ver Detalles"
+  },
+  "about": {
+    "pageTitle": "Acerca de",
+    "pageTitleHighlight": "2HLABS",
+    "pageSubtitle": "Creemos que cada atleta tiene un arquetipo de entrenamiento único. Estamos revolucionando los suplementos con personalización, transparencia y ciencia.",
+    "missionTitle": "Nuestra Misión",
+    "missionText1": "La industria de suplementos está rota. Los pre-entrenos genéricos ignoran lo que te hace único: tu estilo de entrenamiento, metas, fisiología y preferencias. Las empresas venden productos sobrevalorados, con dosis bajas, mezclas propietarias y puro marketing.",
+    "missionText2": "Creemos que cada atleta tiene un arquetipo de entrenamiento único - un enfoque distintivo que requiere su propia fórmula. Por eso creamos 2HLABS: 12 fórmulas pre-entreno de precisión, cada una diseñada para un tipo diferente de atleta. Respaldadas por ciencia. Dosis clínicas. Etiquetado transparente. Hechas para ti.",
+    "valuesTitle": "Nuestros",
+    "valuesTitleHighlight": "Valores",
+    "value1Title": "Ciencia Primero",
+    "value1Text": "Cada ingrediente está respaldado por investigación clínica. Cada dosis está basada en estudios revisados por pares. Sin mezclas propietarias, sin polvo mágico - solo compuestos probados en cantidades efectivas.",
+    "value2Title": "Transparencia Radical",
+    "value2Text": "Mereces saber exactamente lo que pones en tu cuerpo. Revelamos cada ingrediente, cada dosis y cada fuente. Sin secretos, sin sorpresas.",
+    "value3Title": "Personalización",
+    "value3Text": "Tu arquetipo de entrenamiento es único. Tu pre-entreno también debería serlo. Te emparejamos con el arquetipo que se ajusta a tu estilo de entrenamiento, no te forzamos a una fórmula genérica.",
+    "ctaTitle": "¿Listo para",
+    "ctaTitleHighlight": "Encontrar tu Arquetipo",
+    "ctaButton": "Descubre tu Arquetipo de Entrenamiento"
+  },
+  "howItWorksPage": {
+    "pageTitle": "Cómo",
+    "pageTitleHighlight": "Funciona",
+    "pageSubtitle": "Del cuestionario a tu fórmula personalizada en tres pasos simples"
+  },
+  "pricing": {
+    "pageTitle": "Precios",
+    "pageTitleHighlight": "Simples",
+    "pageSubtitle": "Elige el plan que se ajuste a tu horario de entrenamiento",
+    "comingSoon": "Precios Próximamente",
+    "comingSoonText": "Estamos finalizando nuestra estructura de precios. Únete a la lista de espera para ser notificado cuando lancemos.",
+    "joinWaitlist": "Únete a la Lista"
+  },
+  "contact": {
+    "pageTitle": "Ponte en",
+    "pageTitleHighlight": "Contacto",
+    "pageSubtitle": "¿Tienes preguntas? Nos encantaría escucharte.",
+    "nameLabel": "Nombre",
+    "emailLabel": "Correo",
+    "messageLabel": "Mensaje",
+    "sendButton": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "successMessage": "¡Mensaje enviado! Te responderemos pronto.",
+    "errorMessage": "Algo salió mal. Intenta de nuevo."
+  },
+  "notFound": {
+    "title": "404",
+    "subtitle": "Página No Encontrada",
+    "message": "La página que buscas no existe o fue movida.",
+    "homeButton": "Ir al Inicio",
+    "discoverButton": "Descubre tu Arquetipo"
+  },
+  "legal": {
+    "privacyTitle": "Política de Privacidad",
+    "termsTitle": "Términos de Servicio",
+    "lastUpdated": "Última Actualización",
+    "backButton": "Volver al Inicio"
   }
 }
