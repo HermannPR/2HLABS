@@ -237,39 +237,31 @@ export const AllSouls = () => {
                       {[...Array(10)].map((_, i) => {
                         const isActive = i < archetype.formulaProfile.intensity;
 
-                        // Fixed gradient: Blue → Green → Yellow → Red
-                        // Position-based color (same gradient for all souls)
-                        let bgClass = 'bg-gray-800';
-                        let glowColor = 'rgba(156, 163, 175, 0.3)'; // gray glow for inactive
+                        // Hardcoded smooth gradient: Blue → Cyan → Green → Lime → Yellow → Orange → Red
+                        const gradientColors = [
+                          { bg: '#3B82F6', glow: 'rgba(59, 130, 246, 0.6)' },    // Bar 0: Blue
+                          { bg: '#06B6D4', glow: 'rgba(6, 182, 212, 0.6)' },     // Bar 1: Cyan
+                          { bg: '#10B981', glow: 'rgba(16, 185, 129, 0.6)' },    // Bar 2: Green
+                          { bg: '#84CC16', glow: 'rgba(132, 204, 22, 0.6)' },    // Bar 3: Lime
+                          { bg: '#EAB308', glow: 'rgba(234, 179, 8, 0.6)' },     // Bar 4: Yellow
+                          { bg: '#F59E0B', glow: 'rgba(245, 158, 11, 0.6)' },    // Bar 5: Amber
+                          { bg: '#F97316', glow: 'rgba(249, 115, 22, 0.6)' },    // Bar 6: Orange
+                          { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.6)' },     // Bar 7: Red
+                          { bg: '#DC2626', glow: 'rgba(220, 38, 38, 0.6)' },     // Bar 8: Dark Red
+                          { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.7)' },     // Bar 9: Darker Red
+                        ];
 
-                        if (isActive) {
-                          if (i <= 1) {
-                            // Bars 0-1: Blue
-                            bgClass = i === 0 ? 'bg-blue-500' : 'bg-blue-400';
-                            glowColor = 'rgba(59, 130, 246, 0.6)'; // blue glow
-                          } else if (i <= 4) {
-                            // Bars 2-4: Green
-                            bgClass = i === 2 ? 'bg-green-500' : i === 3 ? 'bg-green-400' : 'bg-green-300';
-                            glowColor = 'rgba(34, 197, 94, 0.6)'; // green glow
-                          } else if (i <= 6) {
-                            // Bars 5-6: Yellow
-                            bgClass = i === 5 ? 'bg-yellow-500' : 'bg-yellow-400';
-                            glowColor = 'rgba(234, 179, 8, 0.6)'; // yellow glow
-                          } else {
-                            // Bars 7-9: Orange to Red
-                            bgClass = i === 7 ? 'bg-orange-500' : i === 8 ? 'bg-red-500' : 'bg-red-600';
-                            glowColor = 'rgba(239, 68, 68, 0.6)'; // red glow
-                          }
-                        }
+                        const color = gradientColors[i];
 
                         return (
                           <div
                             key={i}
-                            className={`w-1.5 h-5 rounded-sm transition-all ${bgClass} ${
-                              isActive ? 'opacity-100 shadow-lg' : 'opacity-20'
+                            className={`w-1.5 h-5 rounded-sm transition-all ${
+                              isActive ? 'opacity-100 shadow-lg' : 'opacity-20 bg-gray-800'
                             }`}
                             style={isActive ? {
-                              boxShadow: `0 0 8px ${glowColor}`
+                              backgroundColor: color.bg,
+                              boxShadow: `0 0 8px ${color.glow}`
                             } : undefined}
                           />
                         );
