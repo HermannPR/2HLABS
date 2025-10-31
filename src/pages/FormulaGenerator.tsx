@@ -31,15 +31,32 @@ export const FormulaGenerator = () => {
   // TODO: Use selectedFlavor for formula creation/ordering
   console.log('Current flavor selection:', selectedFlavor);
 
-  const currentQuestion = QUIZ_QUESTIONS[currentQuestionIndex];
-  const isLastQuestion = currentQuestionIndex === QUIZ_QUESTIONS.length - 1;
-  const progress = ((currentQuestionIndex + 1) / QUIZ_QUESTIONS.length) * 100;
+  // Filter questions based on conditional logic
+  const getVisibleQuestions = () => {
+    return QUIZ_QUESTIONS.filter(question => {
+      // Always show questions without conditionalOn
+      if (!question.conditionalOn) return true;
 
-  // Helper to get simple question ID (q1, q2, etc.) from full ID (q1-approach, q2-drive, etc.)
-  const getSimpleQuestionId = (fullId: string) => {
-    const match = fullId.match(/^(q\d+)/);
-    return match ? match[1] : fullId;
+      // Check if all conditions are met
+      return Object.entries(question.conditionalOn).every(([questionId, requiredAnswers]) => {
+        const answer = answers[questionId];
+        if (Array.isArray(answer)) {
+          // For multi-select, check if any required answer is selected
+          return requiredAnswers.some(req => answer.includes(req));
+        }
+        // For single select, check if answer matches
+        return requiredAnswers.includes(answer as string);
+      });
+    });
   };
+
+  const visibleQuestions = getVisibleQuestions();
+  const currentQuestion = visibleQuestions[currentQuestionIndex];
+  const isLastQuestion = currentQuestionIndex === visibleQuestions.length - 1;
+  const progress = ((currentQuestionIndex + 1) / visibleQuestions.length) * 100;
+
+  // No longer needed - we use full question IDs in translations now
+  // Old quiz had simple IDs (q1, q2), new quiz has full IDs (q1-caffeine-tolerance, q2-extreme-intensity)
 
   // Get icon for question dimension
   const getDimensionIcon = (dimension: string) => {
@@ -61,39 +78,11 @@ export const FormulaGenerator = () => {
   };
 
   const handleAnswer = (optionId: string) => {
-    // Handle multi-select for q10-considerations
-    if (currentQuestion.id === 'q10-considerations') {
-      const currentAnswers = (answers[currentQuestion.id] as string[]) || [];
-
-      // Toggle selection
-      let newAnswers: string[];
-      if (optionId === 'none-apply') {
-        // If "none apply" is selected, clear all others
-        newAnswers = ['none-apply'];
-      } else {
-        // Remove "none-apply" if selecting something else
-        newAnswers = currentAnswers.filter(a => a !== 'none-apply');
-
-        if (currentAnswers.includes(optionId)) {
-          // Deselect
-          newAnswers = newAnswers.filter(a => a !== optionId);
-        } else {
-          // Select
-          newAnswers = [...newAnswers, optionId];
-        }
-      }
-
-      setAnswers({
-        ...answers,
-        [currentQuestion.id]: newAnswers,
-      });
-    } else {
-      // Single select
-      setAnswers({
-        ...answers,
-        [currentQuestion.id]: optionId,
-      });
-    }
+    // All questions are now single-select
+    setAnswers({
+      ...answers,
+      [currentQuestion.id]: optionId,
+    });
   };
 
   const handleNext = () => {
@@ -168,9 +157,8 @@ export const FormulaGenerator = () => {
 
   const isAnswered = () => {
     const answer = answers[currentQuestion.id];
-    if (currentQuestion.id === 'q10-considerations') {
-      return Array.isArray(answer) && answer.length > 0;
-    }
+    // Skip optional questions - they can be unanswered
+    if (currentQuestion.optional) return true;
     return answer !== undefined && answer !== '';
   };
 
@@ -747,7 +735,7 @@ export const FormulaGenerator = () => {
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-gray-400">
-                Question {currentQuestionIndex + 1} of {QUIZ_QUESTIONS.length}
+                Question {currentQuestionIndex + 1} of {visibleQuestions.length}
               </span>
               <span className="text-sm text-primary font-semibold">
                 {Math.round(progress)}% Complete
@@ -789,30 +777,25 @@ export const FormulaGenerator = () => {
               {/* Question Number Badge */}
               <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/30">
                 <span className="text-sm font-semibold text-primary">
-                  {currentQuestionIndex + 1}/{QUIZ_QUESTIONS.length}
+                  {currentQuestionIndex + 1}/{visibleQuestions.length}
                 </span>
               </div>
 
               <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3 text-center">
-                {t(`quiz.questions.${getSimpleQuestionId(currentQuestion.id)}.question`)}
+                {t(`quiz.questions.${currentQuestion.id}.question`)}
               </h2>
               {currentQuestion.description && (
-                <p className="text-gray-400 mb-6 text-center">{t(`quiz.questions.${getSimpleQuestionId(currentQuestion.id)}.description`)}</p>
+                <p className="text-gray-400 mb-6 text-center">{t(`quiz.questions.${currentQuestion.id}.description`)}</p>
               )}
 
               {/* Options Grid */}
               <div className={`grid gap-4 items-stretch ${
-                currentQuestion.id === 'q10-considerations'
-                  ? 'grid-cols-1 md:grid-cols-2'
-                  : currentQuestion.options.length <= 3
+                currentQuestion.options.length <= 3
                   ? 'grid-cols-1'
                   : 'grid-cols-1 md:grid-cols-2'
               }`}>
                 {currentQuestion.options.map((option) => {
-                  const isSelected = currentQuestion.id === 'q10-considerations'
-                    ? (answers[currentQuestion.id] as string[] || []).includes(option.id)
-                    : answers[currentQuestion.id] === option.id;
-                  const isNoneApply = option.id === 'none-apply';
+                  const isSelected = answers[currentQuestion.id] === option.id;
 
                   return (
                     <motion.button
@@ -826,60 +809,24 @@ export const FormulaGenerator = () => {
                           ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
                           : 'border-dark-light bg-dark-lighter hover:border-primary/50'
                         }
-                        ${isNoneApply && currentQuestion.id === 'q10-considerations' ? 'md:col-span-2' : ''}
                       `}
                     >
                       <div className="flex items-start space-x-4">
-                        {currentQuestion.id === 'q10-considerations' && (
-                          <div className={`w-6 h-6 rounded-md border-2 flex items-center justify-center flex-shrink-0 mt-0.5 transition-all ${
-                            isSelected
-                              ? 'bg-primary border-primary'
-                              : 'border-gray-600 bg-dark-lighter'
-                          }`}>
-                            {isSelected && (
-                              <svg className="w-4 h-4 text-dark" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-                              </svg>
-                            )}
-                          </div>
-                        )}
-                        {option.emoji && currentQuestion.id !== 'q10-considerations' && (
+                        {option.emoji && (
                           <span className="text-4xl flex-shrink-0">{option.emoji}</span>
                         )}
                         <div className="flex-1">
                           <p className={`text-lg font-semibold ${
                             isSelected ? 'text-primary' : 'text-white'
                           }`}>
-                            {t(`quiz.questions.${getSimpleQuestionId(currentQuestion.id)}.options.${option.id}`)}
+                            {t(`quiz.questions.${currentQuestion.id}.options.${option.id}`)}
                           </p>
-                          {isNoneApply && currentQuestion.id === 'q10-considerations' && (
-                            <p className="text-sm text-gray-400 mt-1">
-                              {t('quiz.selectingNoneWillClear')}
-                            </p>
-                          )}
                         </div>
                       </div>
                     </motion.button>
                   );
                 })}
               </div>
-
-              {/* Multi-select controls */}
-              {currentQuestion.id === 'q10-considerations' && (
-                <div className="mt-4 flex items-center justify-between text-sm">
-                  <span className="text-gray-400">
-                    {((answers[currentQuestion.id] as string[] || []).length) || 0} selected
-                  </span>
-                  {(answers[currentQuestion.id] as string[] || []).length > 0 && (
-                    <button
-                      onClick={() => setAnswers({ ...answers, [currentQuestion.id]: [] })}
-                      className="text-primary hover:text-primary-light transition-colors"
-                    >
-                      Clear all
-                    </button>
-                  )}
-                </div>
-              )}
             </Card>
           </motion.div>
         </AnimatePresence>
@@ -897,15 +844,22 @@ export const FormulaGenerator = () => {
           </Button>
 
           <div className="flex items-center space-x-4">
-            {!isAnswered() && !isNavigating && (
+            {!isAnswered() && !isNavigating && !currentQuestion.optional && (
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 className="text-sm text-gray-500 hidden sm:block"
               >
-                {currentQuestion.id === 'q10-considerations'
-                  ? 'Select all that apply'
-                  : 'Select an option to continue'}
+                Select an option to continue
+              </motion.p>
+            )}
+            {currentQuestion.optional && !isAnswered() && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="text-sm text-gray-400 hidden sm:block"
+              >
+                Optional - Skip if you prefer
               </motion.p>
             )}
             <Button
