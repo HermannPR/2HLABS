@@ -42,29 +42,29 @@ const INTENSITY_GRADIENT = [
 ];
 
 const PUMP_GRADIENT = [
-  { bg: '#1E3A8A', glow: 'rgba(30, 58, 138, 0.6)' },
-  { bg: '#1D4ED8', glow: 'rgba(29, 78, 216, 0.6)' },
-  { bg: '#2563EB', glow: 'rgba(37, 99, 235, 0.6)' },
-  { bg: '#3B82F6', glow: 'rgba(59, 130, 246, 0.6)' },
-  { bg: '#60A5FA', glow: 'rgba(96, 165, 250, 0.6)' },
-  { bg: '#F472B6', glow: 'rgba(244, 114, 182, 0.6)' },
-  { bg: '#FB7185', glow: 'rgba(251, 113, 133, 0.6)' },
-  { bg: '#F87171', glow: 'rgba(248, 113, 113, 0.6)' },
+  { bg: '#0EA5E9', glow: 'rgba(14, 165, 233, 0.65)' },
+  { bg: '#0284C7', glow: 'rgba(2, 132, 199, 0.65)' },
+  { bg: '#2563EB', glow: 'rgba(37, 99, 235, 0.65)' },
+  { bg: '#4338CA', glow: 'rgba(67, 56, 202, 0.65)' },
+  { bg: '#7C3AED', glow: 'rgba(124, 58, 237, 0.65)' },
+  { bg: '#A855F7', glow: 'rgba(168, 85, 247, 0.65)' },
+  { bg: '#D946EF', glow: 'rgba(217, 70, 239, 0.65)' },
+  { bg: '#F43F5E', glow: 'rgba(244, 63, 94, 0.7)' },
   { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.7)' },
-  { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.75)' },
+  { bg: '#DC2626', glow: 'rgba(220, 38, 38, 0.75)' },
 ];
 
 const FOCUS_GRADIENT = [
-  { bg: '#064E3B', glow: 'rgba(6, 78, 59, 0.6)' },
-  { bg: '#047857', glow: 'rgba(4, 120, 87, 0.6)' },
-  { bg: '#059669', glow: 'rgba(5, 150, 105, 0.6)' },
-  { bg: '#10B981', glow: 'rgba(16, 185, 129, 0.6)' },
-  { bg: '#34D399', glow: 'rgba(52, 211, 153, 0.6)' },
-  { bg: '#4ADE80', glow: 'rgba(74, 222, 128, 0.6)' },
-  { bg: '#a7f3d0', glow: 'rgba(167, 243, 208, 0.6)' },
-  { bg: '#A855F7', glow: 'rgba(168, 85, 247, 0.6)' },
-  { bg: '#7C3AED', glow: 'rgba(124, 58, 237, 0.6)' },
-  { bg: '#6D28D9', glow: 'rgba(109, 40, 217, 0.7)' },
+  { bg: '#047857', glow: 'rgba(4, 120, 87, 0.65)' },
+  { bg: '#059669', glow: 'rgba(5, 150, 105, 0.65)' },
+  { bg: '#0F766E', glow: 'rgba(15, 118, 110, 0.65)' },
+  { bg: '#0EA5E9', glow: 'rgba(14, 165, 233, 0.65)' },
+  { bg: '#2563EB', glow: 'rgba(37, 99, 235, 0.65)' },
+  { bg: '#4338CA', glow: 'rgba(67, 56, 202, 0.65)' },
+  { bg: '#6D28D9', glow: 'rgba(109, 40, 217, 0.65)' },
+  { bg: '#7C3AED', glow: 'rgba(124, 58, 237, 0.65)' },
+  { bg: '#A855F7', glow: 'rgba(168, 85, 247, 0.65)' },
+  { bg: '#C084FC', glow: 'rgba(192, 132, 252, 0.65)' },
 ];
 
 const LEVEL_TO_VALUE: Record<string, number> = {
