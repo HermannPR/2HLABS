@@ -236,23 +236,29 @@ export const AllSouls = () => {
                     <div className="flex items-center gap-1">
                       {[...Array(10)].map((_, i) => {
                         const isActive = i < archetype.formulaProfile.intensity;
-                        const intensity = archetype.formulaProfile.intensity;
 
-                        // Calculate gradient color based on position in the bar
+                        // Fixed gradient: Blue → Green → Yellow → Red
+                        // Position-based color (same gradient for all souls)
                         let bgClass = 'bg-gray-800';
+                        let glowColor = 'rgba(156, 163, 175, 0.3)'; // gray glow for inactive
+
                         if (isActive) {
-                          if (intensity >= 9) {
-                            // Maximum intensity: red gradient
-                            bgClass = i < 3 ? 'bg-orange-500' : i < 6 ? 'bg-red-500' : 'bg-red-600';
-                          } else if (intensity >= 7) {
-                            // High intensity: orange to red
-                            bgClass = i < 4 ? 'bg-yellow-500' : i < 7 ? 'bg-orange-500' : 'bg-red-500';
-                          } else if (intensity >= 5) {
-                            // Medium intensity: yellow to orange
-                            bgClass = i < 3 ? 'bg-green-500' : i < 5 ? 'bg-yellow-500' : 'bg-orange-500';
+                          if (i <= 1) {
+                            // Bars 0-1: Blue
+                            bgClass = i === 0 ? 'bg-blue-500' : 'bg-blue-400';
+                            glowColor = 'rgba(59, 130, 246, 0.6)'; // blue glow
+                          } else if (i <= 4) {
+                            // Bars 2-4: Green
+                            bgClass = i === 2 ? 'bg-green-500' : i === 3 ? 'bg-green-400' : 'bg-green-300';
+                            glowColor = 'rgba(34, 197, 94, 0.6)'; // green glow
+                          } else if (i <= 6) {
+                            // Bars 5-6: Yellow
+                            bgClass = i === 5 ? 'bg-yellow-500' : 'bg-yellow-400';
+                            glowColor = 'rgba(234, 179, 8, 0.6)'; // yellow glow
                           } else {
-                            // Low intensity: green to yellow
-                            bgClass = i < 2 ? 'bg-green-400' : i < 4 ? 'bg-green-500' : 'bg-yellow-500';
+                            // Bars 7-9: Orange to Red
+                            bgClass = i === 7 ? 'bg-orange-500' : i === 8 ? 'bg-red-500' : 'bg-red-600';
+                            glowColor = 'rgba(239, 68, 68, 0.6)'; // red glow
                           }
                         }
 
@@ -263,9 +269,7 @@ export const AllSouls = () => {
                               isActive ? 'opacity-100 shadow-lg' : 'opacity-20'
                             }`}
                             style={isActive ? {
-                              boxShadow: intensity >= 8 ? '0 0 8px rgba(239, 68, 68, 0.6)' :
-                                        intensity >= 6 ? '0 0 8px rgba(249, 115, 22, 0.5)' :
-                                        '0 0 6px rgba(234, 179, 8, 0.4)'
+                              boxShadow: `0 0 8px ${glowColor}`
                             } : undefined}
                           />
                         );
