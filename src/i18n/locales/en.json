@@ -39,120 +39,74 @@
     "multiSelectHint": "Select all that apply",
     "selectingNoneWillClear": "Selecting this will clear all other selections",
     "questions": {
-      "q1": {
-        "question": "What type of training are you doing TODAY?",
-        "description": "Your current workout style reveals which soul matches you",
+      "q1-caffeine-tolerance": {
+        "question": "How much caffeine do you want/tolerate in your pre-workout?",
+        "description": "This determines the baseline stimulation level",
         "options": {
-          "destroy": "Maximum aggression - Destroy everything in my path",
-          "explosive": "Explosive bursts - Strike fast, strike hard",
-          "steady": "Steady conquest - The grind never stops",
-          "flow": "Flow with the session - Feel the rhythm",
-          "precision": "Precision execution - Every rep counts",
-          "calculated": "Patient and calculated - Mind over muscle"
+          "extreme": "EXTREME POWER (275-350mg) - Very high tolerance, need maximum stimulation",
+          "high": "HIGH ENERGY (200-300mg) - Strong energy without going overboard",
+          "moderate": "MODERATE BOOST (150-200mg) - Solid energy lift is perfect",
+          "low": "LIGHT STIM (100-175mg) - Sensitive to caffeine, prefer lower doses",
+          "minimal": "MINIMAL STIM (75-125mg) - Just a gentle energy boost",
+          "none": "NO STIM (0mg) - I avoid all caffeine/stimulants"
         }
       },
-      "q2": {
-        "question": "What's your main goal for today's session?",
-        "description": "Your goal helps identify your training soul",
+      "q2-extreme-intensity": {
+        "question": "What's your training intensity today?",
+        "description": "Your intensity level determines the right extreme formula",
         "options": {
-          "domination": "Pure domination and absolute power",
-          "battle": "The battle itself - I live for the fight",
-          "improvement": "Constant improvement and progress",
-          "limits": "Breaking through my limits",
-          "connection": "Deep mind-body connection",
-          "building": "Building something that lasts"
+          "chaos": "MAXIMUM CHAOS (10/10) - HIIT, circuits, absolute insanity",
+          "aggression": "MAXIMUM AGGRESSION (9/10) - Heavy lifting, all-out power"
         }
       },
-      "q3": {
-        "question": "How do you want to handle tough sets today?",
-        "description": "Your approach under pressure reveals your soul",
+      "q2-high-training-style": {
+        "question": "What's your training style today?",
+        "description": "Select the training approach that matches your session",
         "options": {
-          "rage": "Channel pure rage and push through",
-          "explode": "Explode with everything you have",
-          "execute": "Stay calm and execute the plan",
-          "feed": "Feed off the burn and embrace it",
-          "focusDeeper": "Focus deeper into the moment",
-          "endure": "Endure steadily until completion"
+          "max-strength": "MAX STRENGTH - Heavy singles/doubles, powerlifting focus",
+          "hybrid": "HYBRID ATHLETE - Mixed training (combat sports, CrossFit, functional)",
+          "balanced": "BALANCED TRAINING - Versatile across strength, endurance, skill"
         }
       },
-      "q4": {
-        "question": "How long is today's training session?",
-        "description": "Duration affects energy and endurance requirements",
+      "q3-moderate-goal": {
+        "question": "What's your primary training goal today?",
+        "description": "Your goal determines the optimal moderate-stim formula",
         "options": {
-          "brutal": "Short, brutal, and absolutely devastating (20-30min)",
-          "explosiveVaried": "Explosive and varied intensity (30-45min)",
-          "balanced": "Balanced and complete (45-60min)",
-          "sustained": "Long and sustained effort (60-90min)",
-          "marathon": "Extended endurance journey (90min+)",
-          "mindful": "Controlled and mindful movement (any duration)"
+          "speed-power": "SPEED & POWER - Sprints, jumps, explosive movements",
+          "team-endurance": "TEAM SPORTS / ENDURANCE - Soccer, basketball, sustained effort"
         }
       },
-      "q5": {
-        "question": "How do you want your pre-workout to kick in?",
-        "description": "Different energy curves for different training needs",
+      "q4-low-priority": {
+        "question": "What do you prioritize in today's session?",
+        "description": "Choose your main focus for low-stim optimization",
         "options": {
-          "lightning": "INSTANT - Hit me like lightning strikes",
-          "explosion": "EXPLOSIVE - Fast rise, aggressive burn",
-          "wave": "WAVE - Build gradually, sustain powerfully",
-          "controlledBurn": "CONTROLLED - Steady and reliable power",
-          "dawn": "GENTLE - Smooth rise, no harsh edges",
-          "natural": "NATURAL - No stimulants, pure focus"
+          "max-focus": "MAXIMUM FOCUS - Mind-muscle connection, precision technique",
+          "pump-focus": "PUMP & FOCUS - Bodybuilding, hypertrophy, muscle fullness",
+          "long-endurance": "LONG ENDURANCE - Marathon training, high-volume bodybuilding"
         }
       },
-      "q6": {
-        "question": "What's your caffeine tolerance level?",
-        "description": "We'll match your stimulant needs accurately",
+      "q5-minimal-confirm": {
+        "question": "Confirm your training type:",
+        "description": "Minimal stimulation is ideal for all-day outdoor activities",
         "options": {
-          "warrior": "WARRIOR - High tolerance, bring maximum stimulation",
-          "experienced": "EXPERIENCED - Regular user, can handle strong doses",
-          "balanced": "BALANCED - Moderate amounts work perfectly",
-          "sensitive": "SENSITIVE - Light touch needed, prefer less",
-          "pure": "PURE - No stimulants, I am naturally driven"
+          "outdoor": "OUTDOOR / ADVENTURE - Hiking, rucking, all-day activities"
         }
       },
-      "q7": {
-        "question": "When are you training today?",
-        "description": "Training time affects stimulant recommendations",
+      "q6-stim-free-confirm": {
+        "question": "Confirm your stim-free preference:",
+        "description": "Zero caffeine is perfect for mobility, recovery, and evening training",
         "options": {
-          "dawn": "DAWN WARRIOR - Early morning (need to wake up)",
-          "midday": "MIDDAY HUNTER - Middle of the day (10am-2pm)",
-          "afternoon": "AFTERNOON GRINDER - Afternoon sessions (2pm-6pm)",
-          "night": "NIGHT PROWLER - Evening training (after 6pm)"
+          "stim-free": "STIM-FREE TRAINING - Yoga, mobility, recovery, evening sessions"
         }
       },
-      "q8": {
-        "question": "What's your primary training goal?",
-        "description": "Your goal determines the optimal ingredient profile",
+      "q7-training-time": {
+        "question": "What time are you training?",
+        "description": "This helps us give additional recommendations for sleep optimization",
         "options": {
-          "maxStrength": "MAXIMUM STRENGTH - Pure power, heavy lifts",
-          "muscleBuild": "MUSCLE BUILDING - Pump and hypertrophy",
-          "endurance": "ENDURANCE - Go longer, push further",
-          "explosivePower": "EXPLOSIVE POWER - Speed and athleticism",
-          "focusTechnique": "FOCUS & TECHNIQUE - Perfect every movement",
-          "intensityTraining": "HIGH INTENSITY - HIIT, circuits, chaos"
-        }
-      },
-      "q9": {
-        "question": "What's your body weight range?",
-        "description": "Helps us calculate precise, effective dosages",
-        "options": {
-          "compact": "COMPACT - Under 60kg / 130lbs",
-          "athletic": "ATHLETIC - 60-75kg / 130-165lbs",
-          "powerful": "POWERFUL - 75-90kg / 165-200lbs",
-          "massive": "MASSIVE - Over 90kg / 200lbs+"
-        }
-      },
-      "q10": {
-        "question": "Any special considerations we should know?",
-        "description": "Select all that apply - we'll adjust your formula",
-        "options": {
-          "stimSensitive": "I get jittery or anxious with stimulants",
-          "sleepPriority": "Sleep quality is critical to me",
-          "firstTimer": "This is my first preworkout experience",
-          "eveningTrainer": "I train in the evening regularly",
-          "naturalPreference": "I prefer minimal/natural ingredients",
-          "drugTested": "I am a drug-tested competitive athlete",
-          "noneApply": "None of these - I can handle it all"
+          "early-morning": "Early Morning (5-10am) - Need to wake up",
+          "late-morning": "Late Morning / Afternoon (10am-4pm) - Optimal training window",
+          "early-evening": "Early Evening (4-7pm) - After work/school",
+          "late-evening": "Late Evening (7pm+) - Night owl training"
         }
       }
     }

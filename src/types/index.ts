@@ -184,7 +184,9 @@ export interface QuizQuestion {
   question: string;
   description?: string;
   options: QuizOption[];
-  dimension: 'intensity' | 'duration' | 'focus' | 'energy' | 'stimTolerance' | 'safety' | 'context';
+  dimension: 'intensity' | 'duration' | 'focus' | 'energy' | 'stimTolerance' | 'safety' | 'context' | 'trainingType';
+  conditionalOn?: { [questionId: string]: string[] }; // Show question only if previous answer matches
+  optional?: boolean; // Optional questions can be skipped
 }
 
 export interface QuizOption {
@@ -198,6 +200,12 @@ export interface QuizOption {
     focus?: number;
     energy?: number;
     stimTolerance?: number;
+    caffeineLevel?: 'extreme' | 'high' | 'moderate' | 'low' | 'minimal' | 'none';
+    archetype?: string; // Direct archetype ID mapping
+    timeOfDay?: 'morning' | 'midday' | 'evening' | 'night';
+    stimWarning?: boolean;
+    recommendLowStim?: boolean;
+    trainingType?: string;
   };
 }
 

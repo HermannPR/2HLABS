@@ -39,120 +39,74 @@
     "multiSelectHint": "Selecciona todas las que te identifiquen",
     "selectingNoneWillClear": "Seleccionar esto eliminará las demás selecciones",
     "questions": {
-      "q1": {
-        "question": "¿Qué tipo de entrenamiento vas a hacer HOY?",
-        "description": "Tu forma de entrenar revela tu alma perfecta",
+      "q1-caffeine-tolerance": {
+        "question": "¿Cuánta cafeína quieres/toleras en tu pre-entreno?",
+        "description": "Esto determina el nivel de estimulación base",
         "options": {
-          "destroy": "Agresión total - Voy a destrozar el gimnasio",
-          "explosive": "Explosivo e intenso - Rápido, fuerte y sin freno",
-          "steady": "Constancia imparable - El trabajo duro no para",
-          "flow": "Fluir con naturalidad - Sentir cada movimiento",
-          "precision": "Técnica perfecta - Cada rep es una obra de arte",
-          "calculated": "Estratégico y cerebral - La mente domina al músculo"
+          "extreme": "PODER EXTREMO (275-350mg) - Tolerancia muy alta, necesito estimulación máxima",
+          "high": "ENERGÍA ALTA (200-300mg) - Energía fuerte sin pasarme",
+          "moderate": "IMPULSO MODERADO (150-200mg) - Un buen levantón de energía es perfecto",
+          "low": "ESTIMULACIÓN LIGERA (100-175mg) - Soy sensible a la cafeína, prefiero dosis bajas",
+          "minimal": "ESTIMULACIÓN MÍNIMA (75-125mg) - Solo un empujón de energía suave",
+          "none": "SIN ESTIMULANTES (0mg) - Evito toda la cafeína/estimulantes"
         }
       },
-      "q2": {
-        "question": "¿Cuál es tu meta principal en esta sesión?",
-        "description": "Tu propósito define tu alma ideal",
+      "q2-extreme-intensity": {
+        "question": "¿Cuál es tu intensidad de entrenamiento hoy?",
+        "description": "Tu nivel de intensidad determina la fórmula extrema correcta",
         "options": {
-          "domination": "Dominación absoluta - Ser el más fuerte",
-          "battle": "La batalla misma - Amo el desafío",
-          "improvement": "Ser mejor que ayer - Progreso constante",
-          "limits": "Romper barreras - Superar lo imposible",
-          "connection": "Conexión total - Mente, cuerpo y espíritu",
-          "building": "Construir legado - Algo que perdure"
+          "chaos": "CAOS MÁXIMO (10/10) - HIIT, circuitos, locura absoluta",
+          "aggression": "AGRESIÓN MÁXIMA (9/10) - Levantamiento pesado, poder total"
         }
       },
-      "q3": {
-        "question": "¿Cómo enfrentas las series más duras?",
-        "description": "Tu actitud bajo presión define quién eres",
+      "q2-high-training-style": {
+        "question": "¿Cuál es tu estilo de entrenamiento hoy?",
+        "description": "Selecciona el enfoque de entrenamiento que coincida con tu sesión",
         "options": {
-          "rage": "Saco mi rabia interior y la convierto en fuerza",
-          "explode": "Lo doy todo sin pensar - Pura explosión",
-          "execute": "Respiro, me concentro y ejecuto el plan",
-          "feed": "Me alimenta el dolor - Mientras más arde, mejor",
-          "focusDeeper": "Entro en un estado de concentración absoluta",
-          "endure": "Aguanto firme hasta terminar - Sin rendirse"
+          "max-strength": "FUERZA MÁXIMA - Levantamientos pesados individuales/dobles, enfoque powerlifting",
+          "hybrid": "ATLETA HÍBRIDO - Entrenamiento mixto (deportes de combate, CrossFit, funcional)",
+          "balanced": "ENTRENAMIENTO BALANCEADO - Versátil en fuerza, resistencia, habilidad"
         }
       },
-      "q4": {
-        "question": "¿Cuánto dura tu entrenamiento hoy?",
-        "description": "La duración determina tu necesidad de energía y resistencia",
+      "q3-moderate-goal": {
+        "question": "¿Cuál es tu objetivo principal de entrenamiento hoy?",
+        "description": "Tu objetivo determina la fórmula óptima de estimulación moderada",
         "options": {
-          "brutal": "Corto y brutal - Todo en 20-30 minutos devastadores",
-          "explosiveVaried": "Intenso y variado - 30-45min a todo gas",
-          "balanced": "Completo y balanceado - 45-60min de trabajo sólido",
-          "sustained": "Largo y sostenido - 60-90min de pura determinación",
-          "marathon": "Maratón épico - Más de 90min de resistencia",
-          "mindful": "Movimiento consciente - Cualquier duración con control"
+          "speed-power": "VELOCIDAD Y POTENCIA - Sprints, saltos, movimientos explosivos",
+          "team-endurance": "DEPORTES DE EQUIPO / RESISTENCIA - Fútbol, basketball, esfuerzo sostenido"
         }
       },
-      "q5": {
-        "question": "¿Cómo quieres que pegue el pre-entreno?",
-        "description": "Cada energía es diferente - elige la que necesitas",
+      "q4-low-priority": {
+        "question": "¿Qué priorizas en la sesión de hoy?",
+        "description": "Elige tu enfoque principal para optimización de baja estimulación",
         "options": {
-          "lightning": "RELÁMPAGO - Que me pegue de inmediato y duro",
-          "explosion": "EXPLOSIVO - Sube rápido y quema intenso",
-          "wave": "EN OLEADAS - Crece gradual y dura mucho",
-          "controlledBurn": "CONTROLADO - Energía constante y confiable",
-          "dawn": "SUAVE - Sube sin golpes, sin nervios",
-          "natural": "NATURAL - Sin estimulantes, solo concentración"
+          "max-focus": "ENFOQUE MÁXIMO - Conexión mente-músculo, técnica de precisión",
+          "pump-focus": "BOMBEO Y ENFOQUE - Culturismo, hipertrofia, plenitud muscular",
+          "long-endurance": "RESISTENCIA LARGA - Entrenamiento de maratón, culturismo de alto volumen"
         }
       },
-      "q6": {
-        "question": "¿Cómo toleras la cafeína?",
-        "description": "Vamos a ajustar los estimulantes perfectos para ti",
+      "q5-minimal-confirm": {
+        "question": "Confirma tu tipo de entrenamiento:",
+        "description": "La estimulación mínima es ideal para actividades al aire libre de todo el día",
         "options": {
-          "warrior": "GUERRERO - Tolerancia alta, dame la dosis máxima",
-          "experienced": "VETERANO - Uso regular, puedo con dosis fuertes",
-          "balanced": "MODERADO - Cantidades normales me caen perfecto",
-          "sensitive": "SENSIBLE - Poco me basta, me afecta fácil",
-          "pure": "PURO - Cero estimulantes, mi motivación es natural"
+          "outdoor": "AL AIRE LIBRE / AVENTURA - Senderismo, rucking, actividades de todo el día"
         }
       },
-      "q7": {
-        "question": "¿A qué hora vas a entrenar hoy?",
-        "description": "El horario afecta qué estimulantes debes tomar",
+      "q6-stim-free-confirm": {
+        "question": "Confirma tu preferencia sin estimulantes:",
+        "description": "Cero cafeína es perfecto para movilidad, recuperación y entrenamiento nocturno",
         "options": {
-          "dawn": "AMANECER - Muy temprano (necesito despertar ya)",
-          "midday": "MEDIODÍA - Entre las 10am y 2pm",
-          "afternoon": "TARDE - Entre las 2pm y 6pm",
-          "night": "NOCHE - Después de las 6pm"
+          "stim-free": "ENTRENAMIENTO SIN ESTIMULANTES - Yoga, movilidad, recuperación, sesiones nocturnas"
         }
       },
-      "q8": {
-        "question": "¿Cuál es tu objetivo principal de entrenamiento?",
-        "description": "Tu meta define los ingredientes perfectos para ti",
+      "q7-training-time": {
+        "question": "¿A qué hora vas a entrenar?",
+        "description": "Esto nos ayuda a darte recomendaciones adicionales para optimización del sueño",
         "options": {
-          "maxStrength": "FUERZA MÁXIMA - Mover hierro pesado, ganar poder",
-          "muscleBuild": "GANAR MÚSCULO - Hipertrofia y bombeo brutal",
-          "endurance": "RESISTENCIA - Durar más, ir más allá",
-          "explosivePower": "POTENCIA EXPLOSIVA - Velocidad, saltos, atletismo",
-          "focusTechnique": "TÉCNICA Y ENFOQUE - Dominar cada movimiento",
-          "intensityTraining": "ALTA INTENSIDAD - HIIT, circuitos, entrenar duro"
-        }
-      },
-      "q9": {
-        "question": "¿Cuánto pesas?",
-        "description": "Para calcular las dosis exactas que tu cuerpo necesita",
-        "options": {
-          "compact": "LIGERO - Menos de 60kg / 130lbs",
-          "athletic": "ATLÉTICO - 60-75kg / 130-165lbs",
-          "powerful": "FUERTE - 75-90kg / 165-200lbs",
-          "massive": "PESADO - Más de 90kg / 200lbs+"
-        }
-      },
-      "q10": {
-        "question": "¿Algo más que debamos considerar?",
-        "description": "Selecciona todo lo que te identifique - ajustaremos tu fórmula",
-        "options": {
-          "stimSensitive": "Los estimulantes me ponen nervioso/ansioso",
-          "sleepPriority": "Mi sueño es sagrado - no puedo comprometerlo",
-          "firstTimer": "Es mi primera vez con pre-entrenos",
-          "eveningTrainer": "Entreno seguido en la noche",
-          "naturalPreference": "Prefiero ingredientes naturales y mínimos",
-          "drugTested": "Compito y me hacen pruebas anti-doping",
-          "noneApply": "Nada de esto - Puedo con todo"
+          "early-morning": "Madrugada (5-10am) - Necesito despertar",
+          "late-morning": "Mañana Tarde / Tarde (10am-4pm) - Ventana óptima de entrenamiento",
+          "early-evening": "Tarde Temprana (4-7pm) - Después del trabajo/escuela",
+          "late-evening": "Tarde Noche (7pm+) - Entrenamiento nocturno"
         }
       }
     }
