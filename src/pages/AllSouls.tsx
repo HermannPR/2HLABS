@@ -28,6 +28,74 @@ const SOUL_COLORS: Record<string, string> = {
   'lion-heart': '#FFD700',        // Warm golden yellow
 };
 
+const INTENSITY_GRADIENT = [
+  { bg: '#3B82F6', glow: 'rgba(59, 130, 246, 0.6)' },
+  { bg: '#06B6D4', glow: 'rgba(6, 182, 212, 0.6)' },
+  { bg: '#10B981', glow: 'rgba(16, 185, 129, 0.6)' },
+  { bg: '#84CC16', glow: 'rgba(132, 204, 22, 0.6)' },
+  { bg: '#EAB308', glow: 'rgba(234, 179, 8, 0.6)' },
+  { bg: '#F59E0B', glow: 'rgba(245, 158, 11, 0.6)' },
+  { bg: '#F97316', glow: 'rgba(249, 115, 22, 0.6)' },
+  { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.6)' },
+  { bg: '#DC2626', glow: 'rgba(220, 38, 38, 0.6)' },
+  { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.7)' },
+];
+
+const PUMP_GRADIENT = [
+  { bg: '#0EA5E9', glow: 'rgba(14, 165, 233, 0.6)' },
+  { bg: '#2196F3', glow: 'rgba(33, 150, 243, 0.6)' },
+  { bg: '#3B82F6', glow: 'rgba(59, 130, 246, 0.6)' },
+  { bg: '#60A5FA', glow: 'rgba(96, 165, 250, 0.6)' },
+  { bg: '#93C5FD', glow: 'rgba(147, 197, 253, 0.5)' },
+  { bg: '#FCA5A5', glow: 'rgba(252, 165, 165, 0.6)' },
+  { bg: '#F87171', glow: 'rgba(248, 113, 113, 0.6)' },
+  { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.6)' },
+  { bg: '#DC2626', glow: 'rgba(220, 38, 38, 0.6)' },
+  { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.7)' },
+];
+
+const FOCUS_GRADIENT = [
+  { bg: '#22C55E', glow: 'rgba(34, 197, 94, 0.6)' },
+  { bg: '#16A34A', glow: 'rgba(22, 163, 74, 0.6)' },
+  { bg: '#10B981', glow: 'rgba(16, 185, 129, 0.6)' },
+  { bg: '#34D399', glow: 'rgba(52, 211, 153, 0.6)' },
+  { bg: '#4ADE80', glow: 'rgba(74, 222, 128, 0.6)' },
+  { bg: '#A3E635', glow: 'rgba(163, 230, 53, 0.6)' },
+  { bg: '#C084FC', glow: 'rgba(192, 132, 252, 0.6)' },
+  { bg: '#A855F7', glow: 'rgba(168, 85, 247, 0.6)' },
+  { bg: '#9333EA', glow: 'rgba(147, 51, 234, 0.6)' },
+  { bg: '#7C3AED', glow: 'rgba(124, 58, 237, 0.6)' },
+];
+
+const LEVEL_TO_VALUE: Record<string, number> = {
+  light: 3,
+  moderate: 6,
+  high: 8,
+  maximum: 10,
+};
+
+const renderGradientBars = (value: number, gradient: { bg: string; glow: string }[]) => (
+  <div className="flex items-center gap-1">
+    {gradient.map((color, idx) => {
+      const isActive = idx < value;
+      return (
+        <div
+          key={idx}
+          className="w-1.5 h-5 rounded-sm transition-all"
+          style={isActive ? {
+            backgroundColor: color.bg,
+            boxShadow: `0 0 8px ${color.glow}`,
+            opacity: 1,
+          } : {
+            backgroundColor: '#1F2937',
+            opacity: 0.2,
+          }}
+        />
+      );
+    })}
+  </div>
+);
+
 export const AllSouls = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -151,19 +219,21 @@ export const AllSouls = () => {
               </motion.div>
             ))
           ) : (
-            ARCHETYPES.map((archetype, idx) => {
-              const brandColor = SOUL_COLORS[archetype.id] || '#00e5ff';
-              // On mobile, always show effects; on desktop, show on hover
-              const isHovered = isMobile ? true : hoveredCard === archetype.id;
-              const hexToRgb = (hex: string) => {
-                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                return result ? {
-                  r: parseInt(result[1], 16),
-                  g: parseInt(result[2], 16),
-                  b: parseInt(result[3], 16)
-                } : { r: 0, g: 229, b: 255 };
-              };
-              const rgb = hexToRgb(brandColor);
+                ARCHETYPES.map((archetype, idx) => {
+                  const brandColor = SOUL_COLORS[archetype.id] || '#00e5ff';
+                  // On mobile, always show effects; on desktop, show on hover
+                  const isHovered = isMobile ? true : hoveredCard === archetype.id;
+                  const hexToRgb = (hex: string) => {
+                    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                    return result ? {
+                      r: parseInt(result[1], 16),
+                      g: parseInt(result[2], 16),
+                      b: parseInt(result[3], 16)
+                    } : { r: 0, g: 229, b: 255 };
+                  };
+                  const rgb = hexToRgb(brandColor);
+                  const pumpValue = LEVEL_TO_VALUE[archetype.formulaProfile.pumpLevel] ?? 0;
+                  const focusValue = LEVEL_TO_VALUE[archetype.formulaProfile.focusLevel] ?? 0;
 
               return (
             <motion.div
@@ -233,58 +303,29 @@ export const AllSouls = () => {
                   {/* Intensity */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">{t('allSouls.intensity')}</span>
-                    <div className="flex items-center gap-1">
-                      {[...Array(10)].map((_, i) => {
-                        const isActive = i < archetype.formulaProfile.intensity;
-
-                        // Hardcoded smooth gradient: Blue → Cyan → Green → Lime → Yellow → Orange → Red
-                        const gradientColors = [
-                          { bg: '#3B82F6', glow: 'rgba(59, 130, 246, 0.6)' },    // Bar 0: Blue
-                          { bg: '#06B6D4', glow: 'rgba(6, 182, 212, 0.6)' },     // Bar 1: Cyan
-                          { bg: '#10B981', glow: 'rgba(16, 185, 129, 0.6)' },    // Bar 2: Green
-                          { bg: '#84CC16', glow: 'rgba(132, 204, 22, 0.6)' },    // Bar 3: Lime
-                          { bg: '#EAB308', glow: 'rgba(234, 179, 8, 0.6)' },     // Bar 4: Yellow
-                          { bg: '#F59E0B', glow: 'rgba(245, 158, 11, 0.6)' },    // Bar 5: Amber
-                          { bg: '#F97316', glow: 'rgba(249, 115, 22, 0.6)' },    // Bar 6: Orange
-                          { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.6)' },     // Bar 7: Red
-                          { bg: '#DC2626', glow: 'rgba(220, 38, 38, 0.6)' },     // Bar 8: Dark Red
-                          { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.7)' },     // Bar 9: Darker Red
-                        ];
-
-                        const color = gradientColors[i];
-
-                        return (
-                          <div
-                            key={i}
-                            className="w-1.5 h-5 rounded-sm transition-all"
-                            style={isActive ? {
-                              backgroundColor: color.bg,
-                              boxShadow: `0 0 8px ${color.glow}`,
-                              opacity: 1
-                            } : {
-                              backgroundColor: '#1F2937',
-                              opacity: 0.2
-                            }}
-                          />
-                        );
-                      })}
-                    </div>
+                    {renderGradientBars(archetype.formulaProfile.intensity, INTENSITY_GRADIENT)}
                   </div>
 
                   {/* Pump Level */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">{t('allSouls.pump')}</span>
-                    <span className="text-sm font-semibold text-secondary uppercase">
-                      {archetype.formulaProfile.pumpLevel}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-semibold text-secondary uppercase">
+                        {archetype.formulaProfile.pumpLevel}
+                      </span>
+                      {renderGradientBars(pumpValue, PUMP_GRADIENT)}
+                    </div>
                   </div>
 
                   {/* Focus Level */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">{t('allSouls.focus')}</span>
-                    <span className="text-sm font-semibold text-accent uppercase">
-                      {archetype.formulaProfile.focusLevel}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-sm font-semibold text-accent uppercase">
+                        {archetype.formulaProfile.focusLevel}
+                      </span>
+                      {renderGradientBars(focusValue, FOCUS_GRADIENT)}
+                    </div>
                   </div>
                 </div>
 
