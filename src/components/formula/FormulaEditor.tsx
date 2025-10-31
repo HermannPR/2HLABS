@@ -12,8 +12,9 @@ interface FormulaEditorProps {
 }
 
 export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => {
-  const [showWarning, setShowWarning] = useState(true);
   const [showAddIngredient, setShowAddIngredient] = useState(false);
+  const [showAddWarning, setShowAddWarning] = useState(false);
+  const [pendingIngredient, setPendingIngredient] = useState<Ingredient | null>(null);
   const [removedIngredients, setRemovedIngredients] = useState<FormulaIngredient[]>([]);
 
   const handleDosageChange = (index: number, newDosage: number) => {
@@ -37,15 +38,34 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
     setRemovedIngredients(removedIngredients.filter(i => i.ingredient.id !== ingredient.ingredient.id));
   };
 
-  const handleAddNewIngredient = (ingredient: Ingredient) => {
+  const handleAddIngredientClick = (ingredient: Ingredient) => {
+    // Store the ingredient and show warning modal
+    setPendingIngredient(ingredient);
+    setShowAddWarning(true);
+    setShowAddIngredient(false);
+  };
+
+  const handleConfirmAddIngredient = () => {
+    if (!pendingIngredient) return;
+
     const newIngredient: FormulaIngredient = {
-      ingredient,
-      dosage: ingredient.dosageRange.min,
-      unit: ingredient.dosageRange.unit,
+      ingredient: pendingIngredient,
+      dosage: pendingIngredient.dosageRange.min,
+      unit: pendingIngredient.dosageRange.unit,
       reason: 'Custom addition'
     };
     onUpdate([...ingredients, newIngredient]);
-    setShowAddIngredient(false);
+    setShowAddWarning(false);
+    setPendingIngredient(null);
+  };
+
+  const handleCancelAddIngredient = () => {
+    setShowAddWarning(false);
+    setPendingIngredient(null);
+  };
+
+  const handleOpenAddIngredients = () => {
+    setShowAddIngredient(true);
   };
 
   // Get ingredients not currently in formula
@@ -55,45 +75,6 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
 
   return (
     <div className="space-y-6">
-      {/* Warning Banner */}
-      <AnimatePresence>
-        {showWarning && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <Card className="border-2 border-yellow-500/30 bg-yellow-500/5">
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <HiExclamation className="w-6 h-6 text-yellow-500" />
-                </div>
-                <div className="flex-1">
-                  <h3 className="text-lg font-semibold text-yellow-500 mb-2">
-                    ⚠️ Customize at Your Own Risk
-                  </h3>
-                  <p className="text-sm text-gray-300 mb-3">
-                    <strong>This formula was scientifically matched to your archetype.</strong> Modifying dosages
-                    or adding/removing ingredients may reduce effectiveness or cause unwanted effects.
-                    Only make changes if you understand ingredient interactions and dosing.
-                  </p>
-                  <p className="text-xs text-gray-400">
-                    <strong>You assume all responsibility</strong> for custom modifications.
-                    Consult a healthcare professional if unsure.
-                  </p>
-                </div>
-                <button
-                  onClick={() => setShowWarning(false)}
-                  className="text-gray-500 hover:text-white transition-colors"
-                >
-                  ✕
-                </button>
-              </div>
-            </Card>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Active Ingredients */}
       <div className="space-y-4">
         <h3 className="text-xl font-heading font-bold">Formula Ingredients</h3>
@@ -202,7 +183,7 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
       <Button
         variant="outline"
         className="w-full"
-        onClick={() => setShowAddIngredient(!showAddIngredient)}
+        onClick={handleOpenAddIngredients}
       >
         <HiPlus className="w-5 h-5 mr-2" />
         Add Ingredient
@@ -231,7 +212,7 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
                       key={ingredient.id}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      onClick={() => handleAddNewIngredient(ingredient)}
+                      onClick={() => handleAddIngredientClick(ingredient)}
                       className="p-3 bg-dark-lighter rounded-lg border border-dark-light hover:border-primary/50 transition-colors text-left"
                     >
                       <div className="font-semibold text-sm mb-1">{ingredient.name}</div>
@@ -253,6 +234,64 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
                 Close
               </Button>
             </Card>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Add Ingredient Warning Modal */}
+      <AnimatePresence>
+        {showAddWarning && pendingIngredient && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+            onClick={handleCancelAddIngredient}
+          >
+            <motion.div
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              onClick={(e) => e.stopPropagation()}
+              className="bg-dark border-2 border-yellow-500/30 rounded-xl p-6 max-w-md w-full"
+            >
+              <div className="flex items-start gap-4 mb-6">
+                <div className="flex-shrink-0">
+                  <HiExclamation className="w-8 h-8 text-yellow-500" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-heading font-bold text-yellow-500 mb-2">
+                    ⚠️ Add Custom Ingredient?
+                  </h3>
+                  <p className="text-sm text-gray-300 mb-3">
+                    You are about to add <strong className="text-white">{pendingIngredient.name}</strong> to your formula.
+                  </p>
+                  <p className="text-sm text-gray-300 mb-3">
+                    <strong>Your formula was scientifically matched to your archetype.</strong> Adding ingredients may reduce effectiveness or cause unwanted effects.
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    <strong>You assume all responsibility</strong> for custom modifications. Only proceed if you understand ingredient interactions and dosing.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={handleCancelAddIngredient}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="primary"
+                  className="flex-1 bg-yellow-500 hover:bg-yellow-600 text-black border-yellow-500"
+                  onClick={handleConfirmAddIngredient}
+                >
+                  I Understand, Add It
+                </Button>
+              </div>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

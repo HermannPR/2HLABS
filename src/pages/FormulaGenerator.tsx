@@ -114,6 +114,8 @@ export const FormulaGenerator = () => {
       }, 2500);
     } else {
       setIsNavigating(true);
+      // Scroll to top when navigating to next question
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setIsNavigating(false);
@@ -124,6 +126,8 @@ export const FormulaGenerator = () => {
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
       setIsNavigating(true);
+      // Scroll to top when navigating to previous question
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex - 1);
         setIsNavigating(false);
@@ -159,9 +163,17 @@ export const FormulaGenerator = () => {
   };
 
   const handleToggleFormulaEditor = () => {
-    // Initialize custom ingredients with original formula on first open
-    if (!showFormulaEditor && archetypeResult) {
-      setCustomIngredients([...archetypeResult.formula.ingredients]);
+    if (!showFormulaEditor) {
+      if (customIngredients.length === 0 && archetypeResult) {
+        setCustomIngredients([...archetypeResult.formula.ingredients]);
+      }
+      // Scroll to editor section when opening
+      setTimeout(() => {
+        const editorElement = document.getElementById('formula-editor');
+        if (editorElement) {
+          editorElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 150);
     }
     setShowFormulaEditor(!showFormulaEditor);
   };
@@ -289,6 +301,22 @@ export const FormulaGenerator = () => {
   // Results screen
   if (showResults && archetypeResult) {
     const { archetype, dimensionScores, formula, matchPercentage } = archetypeResult;
+    const baseIngredients = formula.ingredients;
+    const displayedIngredients = customIngredients.length > 0 ? customIngredients : baseIngredients;
+
+    const calculatedCaffeine = displayedIngredients.reduce((total, item) => {
+      if (item.ingredient.id === 'caffeine') {
+        return total + item.dosage;
+      }
+      if (item.ingredient.caffeineContent) {
+        return total + item.dosage * item.ingredient.caffeineContent;
+      }
+      return total;
+    }, 0);
+
+    const totalCaffeineDisplay = customIngredients.length > 0
+      ? Math.round(calculatedCaffeine)
+      : formula.totalCaffeine;
 
     return (
       <div className="min-h-screen bg-dark py-12">
@@ -494,13 +522,13 @@ export const FormulaGenerator = () => {
                 <div className="flex items-center justify-between">
                   <span className="text-lg font-semibold">Total Caffeine</span>
                   <span className="text-3xl font-bold text-primary">
-                    {formula.totalCaffeine}mg
+                    {totalCaffeineDisplay}mg
                   </span>
                 </div>
               </div>
 
               <div className="space-y-4">
-                {formula.ingredients.map((item, idx) => {
+                {displayedIngredients.map((item, idx) => {
                   const doseAnalysis = analyzeDose(item.dosage, item.ingredient);
                   const clinicalRange = formatDoseRange(item.ingredient);
 
@@ -582,10 +610,12 @@ export const FormulaGenerator = () => {
                 transition={{ duration: 0.3 }}
                 className="mb-8"
               >
-                <FormulaEditor
-                  ingredients={customIngredients}
-                  onUpdate={handleUpdateCustomIngredients}
-                />
+                <div id="formula-editor">
+                  <FormulaEditor
+                    ingredients={displayedIngredients}
+                    onUpdate={handleUpdateCustomIngredients}
+                  />
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
