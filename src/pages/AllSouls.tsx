@@ -42,29 +42,29 @@ const INTENSITY_GRADIENT = [
 ];
 
 const PUMP_GRADIENT = [
-  { bg: '#0EA5E9', glow: 'rgba(14, 165, 233, 0.6)' },
-  { bg: '#2196F3', glow: 'rgba(33, 150, 243, 0.6)' },
+  { bg: '#1E3A8A', glow: 'rgba(30, 58, 138, 0.6)' },
+  { bg: '#1D4ED8', glow: 'rgba(29, 78, 216, 0.6)' },
+  { bg: '#2563EB', glow: 'rgba(37, 99, 235, 0.6)' },
   { bg: '#3B82F6', glow: 'rgba(59, 130, 246, 0.6)' },
   { bg: '#60A5FA', glow: 'rgba(96, 165, 250, 0.6)' },
-  { bg: '#93C5FD', glow: 'rgba(147, 197, 253, 0.5)' },
-  { bg: '#FCA5A5', glow: 'rgba(252, 165, 165, 0.6)' },
+  { bg: '#F472B6', glow: 'rgba(244, 114, 182, 0.6)' },
+  { bg: '#FB7185', glow: 'rgba(251, 113, 133, 0.6)' },
   { bg: '#F87171', glow: 'rgba(248, 113, 113, 0.6)' },
-  { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.6)' },
-  { bg: '#DC2626', glow: 'rgba(220, 38, 38, 0.6)' },
-  { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.7)' },
+  { bg: '#EF4444', glow: 'rgba(239, 68, 68, 0.7)' },
+  { bg: '#B91C1C', glow: 'rgba(185, 28, 28, 0.75)' },
 ];
 
 const FOCUS_GRADIENT = [
-  { bg: '#22C55E', glow: 'rgba(34, 197, 94, 0.6)' },
-  { bg: '#16A34A', glow: 'rgba(22, 163, 74, 0.6)' },
+  { bg: '#064E3B', glow: 'rgba(6, 78, 59, 0.6)' },
+  { bg: '#047857', glow: 'rgba(4, 120, 87, 0.6)' },
+  { bg: '#059669', glow: 'rgba(5, 150, 105, 0.6)' },
   { bg: '#10B981', glow: 'rgba(16, 185, 129, 0.6)' },
   { bg: '#34D399', glow: 'rgba(52, 211, 153, 0.6)' },
   { bg: '#4ADE80', glow: 'rgba(74, 222, 128, 0.6)' },
-  { bg: '#A3E635', glow: 'rgba(163, 230, 53, 0.6)' },
-  { bg: '#C084FC', glow: 'rgba(192, 132, 252, 0.6)' },
+  { bg: '#a7f3d0', glow: 'rgba(167, 243, 208, 0.6)' },
   { bg: '#A855F7', glow: 'rgba(168, 85, 247, 0.6)' },
-  { bg: '#9333EA', glow: 'rgba(147, 51, 234, 0.6)' },
   { bg: '#7C3AED', glow: 'rgba(124, 58, 237, 0.6)' },
+  { bg: '#6D28D9', glow: 'rgba(109, 40, 217, 0.7)' },
 ];
 
 const LEVEL_TO_VALUE: Record<string, number> = {
@@ -77,7 +77,7 @@ const LEVEL_TO_VALUE: Record<string, number> = {
 const renderGradientBars = (value: number, gradient: { bg: string; glow: string }[]) => (
   <div className="flex items-center gap-1">
     {gradient.map((color, idx) => {
-      const isActive = idx < value;
+      const isActive = idx < Math.min(value, gradient.length);
       return (
         <div
           key={idx}
@@ -309,23 +309,13 @@ export const AllSouls = () => {
                   {/* Pump Level */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">{t('allSouls.pump')}</span>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-semibold text-secondary uppercase">
-                        {archetype.formulaProfile.pumpLevel}
-                      </span>
-                      {renderGradientBars(pumpValue, PUMP_GRADIENT)}
-                    </div>
+                    {renderGradientBars(pumpValue, PUMP_GRADIENT)}
                   </div>
 
                   {/* Focus Level */}
                   <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
                     <span className="text-xs text-gray-400">{t('allSouls.focus')}</span>
-                    <div className="flex flex-col gap-1">
-                      <span className="text-sm font-semibold text-accent uppercase">
-                        {archetype.formulaProfile.focusLevel}
-                      </span>
-                      {renderGradientBars(focusValue, FOCUS_GRADIENT)}
-                    </div>
+                    {renderGradientBars(focusValue, FOCUS_GRADIENT)}
                   </div>
                 </div>
 
