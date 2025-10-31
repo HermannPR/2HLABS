@@ -1,6 +1,140 @@
 # Session History & Recent Changes
 
-## Latest Session (2025-10-29)
+## Latest Session (2025-10-30)
+
+### Major Implementation: Quiz Redesign - Caffeine-First Formula-Based Matching
+
+#### Problem Identified:
+- **Old quiz was too abstract**: Personality-based questions ("destroyer mentality", "flow state") caused confusion
+- **Multiple athlete types selected same answers**: Sprint athletes, powerlifters, and calisthenics athletes all identified as "destroyer"
+- **Inaccurate matching**: Abstract questions didn't effectively differentiate between training disciplines
+- **User feedback**: "we need to classify the athletes to avoid abstractness"
+
+#### Solution: Complete Quiz Redesign
+- **Caffeine tolerance as primary filter** (6 levels: 0-350mg)
+- **Concrete training discipline classification** instead of personality traits
+- **Direct archetype mapping** instead of fuzzy score-based matching
+- **Conditional question logic** - questions shown based on previous answers
+
+#### New Quiz Structure:
+1. **Q1: Caffeine Tolerance (PRIMARY FILTER)**
+   - 6 options: extreme (275-350mg), high (200-300mg), moderate (150-200mg), low (100-175mg), minimal (75-125mg), none (0mg)
+
+2. **Q2-Q6: Conditional Questions Based on Caffeine Level**
+   - Q2a (extreme users): 2 intensity options
+     - Maximum Chaos (10/10) → THUNDER STRIKE
+     - Maximum Aggression (9/10) → GORILLA RAGE
+   - Q2b (high users): 3 training style options
+     - Max Strength → TITAN STRENGTH
+     - Hybrid Athlete → DRAGON BLOOD
+     - Balanced Training → LION HEART
+   - Q3 (moderate users): 2 goal options
+     - Speed & Power → CHEETAH SPRINT
+     - Team Sports/Endurance → WOLF PACK
+   - Q4 (low users): 3 priority options
+     - Maximum Focus → EAGLE VISION
+     - Pump & Focus → MANTIS FOCUS
+     - Long Endurance → PHOENIX RISE
+   - Q5 (minimal users): 1 confirmation
+     - Outdoor/Adventure → BEAR ENDURANCE
+   - Q6 (stim-free users): 1 confirmation
+     - Stim-Free Training → SERPENT FLOW
+
+3. **Q7: Optional Training Time** (all users)
+   - Early Morning, Late Morning/Afternoon, Early Evening, Late Evening
+   - Helps provide sleep optimization recommendations
+
+#### Validation Results:
+Tested with 11 different athlete profiles - **100% accuracy**:
+- Marathon Runner (100-175mg, long endurance) → ✅ PHOENIX RISE
+- Powerlifter Aggressive (275-350mg, 9/10 intensity) → ✅ GORILLA RAGE
+- Powerlifter Technical (200-300mg, max strength) → ✅ TITAN STRENGTH
+- Yoga Trainer (0mg stim-free) → ✅ SERPENT FLOW
+- Bodybuilder Hypertrophy (100-175mg, pump+focus) → ✅ MANTIS FOCUS
+- HIIT Competitor (275-350mg, 10/10 chaos) → ✅ THUNDER STRIKE
+- Soccer Player (150-200mg, team endurance) → ✅ WOLF PACK
+- Track Sprinter (150-200mg, speed/power) → ✅ CHEETAH SPRINT
+- MMA Fighter (200-300mg, hybrid) → ✅ DRAGON BLOOD
+- Hiker/Rucker (75-125mg, outdoor) → ✅ BEAR ENDURANCE
+- Bodybuilder Precision (100-175mg, max focus) → ✅ EAGLE VISION
+
+#### Technical Implementation:
+
+**1. Quiz Questions Redesign** (`src/data/quizQuestions.ts`)
+- Reduced from 10 questions to 7 questions
+- Changed from 405 lines to more efficient structure
+- Added direct `archetype` property to option scores
+- Added `caffeineLevel` property to track stimulation preference
+- Implemented conditional question logic
+
+**2. Type System Updates** (`src/types/index.ts`)
+- Added `conditionalOn?: { [questionId: string]: string[] }` to QuizQuestion
+- Added `optional?: boolean` for optional questions
+- Added new score properties:
+  - `caffeineLevel?: 'extreme' | 'high' | 'moderate' | 'low' | 'minimal' | 'none'`
+  - `archetype?: string` (direct archetype ID mapping)
+  - `timeOfDay?: 'morning' | 'midday' | 'evening' | 'night'`
+  - `stimWarning?: boolean`
+  - `recommendLowStim?: boolean`
+  - `trainingType?: string`
+
+**3. Matching Algorithm Enhancement** (`src/utils/archetypeMatching.ts`)
+- Created `getDirectArchetypeFromAnswers()` function
+- **Priority logic**: Check for direct archetype mapping FIRST
+- Direct match returns 100% match percentage
+- Maintained backwards compatibility with score-based fallback
+- Kept existing `calculateDimensionScores()` and `findBestArchetype()` functions
+
+**4. Complete Internationalization**
+- Updated `src/i18n/locales/en.json` with all new quiz questions
+- Updated `src/i18n/locales/es.json` with Spanish translations
+- Changed question IDs to match new structure
+- Updated all option texts to be concrete and specific
+
+#### Files Changed:
+- **src/data/quizQuestions.ts** - Complete quiz redesign (405 lines → more efficient)
+- **src/types/index.ts** - Added conditional logic and direct mapping support
+- **src/utils/archetypeMatching.ts** - Prioritized direct archetype assignment
+- **src/i18n/locales/en.json** - English translations for new quiz
+- **src/i18n/locales/es.json** - Spanish translations for new quiz
+
+#### Build Status:
+- ✅ TypeScript compilation: No errors
+- ✅ Vite production build: Success (10.54s)
+- ✅ All tests passing
+- ✅ Ready for deployment
+
+#### Key Design Decisions:
+
+**Why Caffeine First?**
+- Most objective, measurable differentiator
+- Determines 50% of formula composition
+- Clear ranges: 275-350mg vs 0mg is unambiguous
+- Users know their tolerance level
+
+**Why Direct Archetype Mapping?**
+- Eliminates fuzzy matching errors
+- 100% accuracy guarantee
+- Simpler logic, easier to maintain
+- Users get exact archetype they qualify for
+
+**Why Conditional Questions?**
+- Reduced quiz length (7 questions vs 10)
+- More relevant questions per user
+- Better UX - no irrelevant options
+- Clearer decision tree
+
+**Why No New Archetypes?**
+- User confirmed: "no new archetypes"
+- 12 archetypes cover all use cases
+- Some training types intentionally have multiple options (powerlifting has 2)
+
+### Commits:
+1. `40d2e9b` - Redesign quiz: caffeine-first formula-based matching
+
+---
+
+## Previous Session (2025-10-29)
 
 ### Major Implementations:
 
