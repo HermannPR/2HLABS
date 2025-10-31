@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { QUIZ_QUESTIONS } from '../data/quizQuestions';
-import type { QuizAnswers, ArchetypeResult } from '../types';
+import type { QuizAnswers, ArchetypeResult, FormulaIngredient } from '../types';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
-import { HiArrowLeft, HiArrowRight, HiLightningBolt, HiClock, HiFire, HiSparkles, HiBeaker } from 'react-icons/hi';
+import { HiArrowLeft, HiArrowRight, HiLightningBolt, HiClock, HiFire, HiSparkles, HiBeaker, HiPencil } from 'react-icons/hi';
 import { getArchetypeResult } from '../utils/archetypeMatching';
 import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
 import { analyzeDose, formatDoseRange } from '../utils/doseAnalysis';
@@ -15,6 +15,7 @@ import { FlavorSelection } from '../components/quiz/FlavorSelection';
 import { EmailCapture } from '../components/common/EmailCapture';
 import { ShareCardGenerator } from '../components/common/ShareCardGenerator';
 import { saveResult } from '../utils/resultsStorage';
+import { FormulaEditor } from '../components/formula/FormulaEditor';
 
 export const FormulaGenerator = () => {
   const { t } = useTranslation();
@@ -27,6 +28,8 @@ export const FormulaGenerator = () => {
   const [isNavigating, setIsNavigating] = useState(false);
   const [showFlavorSelection, setShowFlavorSelection] = useState(false);
   const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null);
+  const [showFormulaEditor, setShowFormulaEditor] = useState(false);
+  const [customIngredients, setCustomIngredients] = useState<FormulaIngredient[]>([]);
 
   // TODO: Use selectedFlavor for formula creation/ordering
   console.log('Current flavor selection:', selectedFlavor);
@@ -153,6 +156,18 @@ export const FormulaGenerator = () => {
 
   const handleSkipFlavor = () => {
     setShowFlavorSelection(false);
+  };
+
+  const handleToggleFormulaEditor = () => {
+    // Initialize custom ingredients with original formula on first open
+    if (!showFormulaEditor && archetypeResult) {
+      setCustomIngredients([...archetypeResult.formula.ingredients]);
+    }
+    setShowFormulaEditor(!showFormulaEditor);
+  };
+
+  const handleUpdateCustomIngredients = (updatedIngredients: FormulaIngredient[]) => {
+    setCustomIngredients(updatedIngredients);
   };
 
   const isAnswered = () => {
@@ -541,8 +556,39 @@ export const FormulaGenerator = () => {
                   );
                 })}
               </div>
+
+              {/* Customize Formula Button */}
+              <div className="mt-6 flex justify-center">
+                <Button
+                  variant={showFormulaEditor ? "outline" : "secondary"}
+                  size="md"
+                  onClick={handleToggleFormulaEditor}
+                  className="flex items-center gap-2"
+                >
+                  <HiPencil className="w-5 h-5" />
+                  {showFormulaEditor ? 'Hide Editor' : 'Customize Formula'}
+                </Button>
+              </div>
             </Card>
           </motion.div>
+
+          {/* Formula Editor */}
+          <AnimatePresence>
+            {showFormulaEditor && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                className="mb-8"
+              >
+                <FormulaEditor
+                  ingredients={customIngredients}
+                  onUpdate={handleUpdateCustomIngredients}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Warnings if any */}
           {archetype.warnings.length > 0 && (

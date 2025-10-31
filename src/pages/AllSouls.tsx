@@ -256,13 +256,15 @@ export const AllSouls = () => {
                         return (
                           <div
                             key={i}
-                            className={`w-1.5 h-5 rounded-sm transition-all ${
-                              isActive ? 'opacity-100 shadow-lg' : 'opacity-20 bg-gray-800'
-                            }`}
+                            className="w-1.5 h-5 rounded-sm transition-all"
                             style={isActive ? {
                               backgroundColor: color.bg,
-                              boxShadow: `0 0 8px ${color.glow}`
-                            } : undefined}
+                              boxShadow: `0 0 8px ${color.glow}`,
+                              opacity: 1
+                            } : {
+                              backgroundColor: '#1F2937',
+                              opacity: 0.2
+                            }}
                           />
                         );
                       })}
