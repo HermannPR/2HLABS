@@ -34,6 +34,19 @@ export const AllSouls = () => {
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile screen size
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768); // Tailwind's md breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Simulate loading for demonstration (remove in production or when using real API)
   useEffect(() => {
@@ -140,7 +153,8 @@ export const AllSouls = () => {
           ) : (
             ARCHETYPES.map((archetype, idx) => {
               const brandColor = SOUL_COLORS[archetype.id] || '#00e5ff';
-              const isHovered = hoveredCard === archetype.id;
+              // On mobile, always show effects; on desktop, show on hover
+              const isHovered = isMobile ? true : hoveredCard === archetype.id;
               const hexToRgb = (hex: string) => {
                 const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
                 return result ? {
@@ -157,15 +171,15 @@ export const AllSouls = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              onMouseEnter={() => setHoveredCard(archetype.id)}
-              onMouseLeave={() => setHoveredCard(null)}
+              onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
+              onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}
               style={{
                 borderColor: isHovered ? brandColor : 'rgba(255, 255, 255, 0.1)',
                 boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
                 borderWidth: '2px',
                 borderStyle: 'solid',
                 borderRadius: '0.75rem',
-                transition: 'all 0.3s ease',
+                transition: isMobile ? 'none' : 'all 0.3s ease',
               }}
             >
               <Card
