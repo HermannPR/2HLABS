@@ -125,7 +125,7 @@
         "description": "Tu meta define los ingredientes perfectos para ti",
         "options": {
           "maxStrength": "FUERZA MÁXIMA - Mover hierro pesado, ganar poder",
-          "muscleBuild": "GANAR MÚSCULO - Hipertrofia y congestión brutal",
+          "muscleBuild": "GANAR MÚSCULO - Hipertrofia y bombeo brutal",
           "endurance": "RESISTENCIA - Durar más, ir más allá",
           "explosivePower": "POTENCIA EXPLOSIVA - Velocidad, saltos, atletismo",
           "focusTechnique": "TÉCNICA Y ENFOQUE - Dominar cada movimiento",
@@ -194,7 +194,7 @@
     "clinicalDosage": "Dosis Clínica",
     "categories": {
       "energy": "Energía y Concentración",
-      "pump": "Congestión y Rendimiento",
+      "pump": "Bombeo y Rendimiento",
       "endurance": "Resistencia",
       "recovery": "Recuperación"
     }
@@ -304,7 +304,7 @@
     "testimonial1": {
       "name": "Marcus Chen",
       "role": "Levantador Competitivo",
-      "content": "Finalmente, un pre-entreno hecho para MIS necesidades. Sin nervios, sin bajones, solo energía limpia y congestión masiva. Mi entrenamiento nunca ha sido mejor."
+      "content": "Finalmente, un pre-entreno hecho para MIS necesidades. Sin nervios, sin bajones, solo energía limpia y bombeo masivo. Mi entrenamiento nunca ha sido mejor."
     },
     "testimonial2": {
       "name": "Sarah Mitchell",
@@ -414,7 +414,7 @@
     "subtitle": "Cada alma representa una filosofía única de entrenamiento y energía. Encuentra las que se ajustan a tus diferentes necesidades de entrenamiento.",
     "caffeine": "Cafeína",
     "intensity": "Intensidad",
-    "pump": "Congestión",
+    "pump": "Bombeo",
     "focus": "Concentración",
     "stim": "Estimulante",
     "viewProfile": "Ver Perfil Completo",
@@ -433,7 +433,7 @@
     "modal": {
       "caffeineRange": "Rango de Cafeína",
       "intensityLevel": "Nivel de Intensidad",
-      "pumpLevel": "Nivel de Congestión",
+      "pumpLevel": "Nivel de Bombeo",
       "focusLevel": "Nivel de Concentración",
       "coreTraits": "Características Clave",
       "perfectFor": "Perfecto Para",
@@ -446,7 +446,7 @@
     "pageSubtitle": "Explora los ingredientes respaldados por la ciencia que usamos en nuestras fórmulas personalizadas",
     "filterAll": "Todos",
     "energy": "Energía",
-    "pump": "Congestión",
+    "pump": "Bombeo",
     "strength": "Fuerza",
     "endurance": "Resistencia",
     "focusCategory": "Concentración",
@@ -471,17 +471,17 @@
     "l-citrulline": {
       "name": "L-Citrulina",
       "description": "Aminoácido que aumenta la producción de óxido nítrico para mejorar el flujo sanguíneo",
-      "benefits": ["Congestión muscular", "Mejor flujo sanguíneo", "Fatiga reducida", "Mejor entrega de nutrientes"]
+      "benefits": ["Bombeo muscular", "Mejor flujo sanguíneo", "Fatiga reducida", "Mejor entrega de nutrientes"]
     },
     "citrulline-malate": {
       "name": "Citrulina Malato",
       "description": "L-Citrulina unida a ácido málico para mejor absorción",
-      "benefits": ["Congestión mejorada", "Dolor muscular reducido", "Producción mejorada de ATP"]
+      "benefits": ["Bombeo mejorado", "Dolor muscular reducido", "Producción mejorada de ATP"]
     },
     "beetroot": {
       "name": "Extracto de Remolacha",
       "description": "Fuente natural de nitratos para mejorar el flujo sanguíneo",
-      "benefits": ["Resistencia mejorada", "Mejor uso del oxígeno", "Congestión mejorada"]
+      "benefits": ["Resistencia mejorada", "Mejor uso del oxígeno", "Bombeo mejorado"]
     },
     "creatine": {
       "name": "Monohidrato de Creatina",
@@ -521,7 +521,7 @@
     "sodium": {
       "name": "Sodio (como Sal Marina)",
       "description": "Electrolito esencial para la hidratación y función muscular",
-      "benefits": ["Hidratación mejorada", "Mejores contracciones musculares", "Congestión mejorada"]
+      "benefits": ["Hidratación mejorada", "Mejores contracciones musculares", "Bombeo mejorado"]
     },
     "potassium": {
       "name": "Potasio",
@@ -532,21 +532,21 @@
   "archetypes": {
     "gorilla-rage": {
       "tagline": "FUERZA IMPARABLE",
-      "description": "Eres EL DESTRUCTOR. Con 250-350mg de cafeína pura y congestión MÁXIMA, esto es poder bruto desatado. Sesiones cortas y brutales impulsadas por estimulación extrema y energía explosiva. Peso pesado, levantamientos agresivos e intensidad implacable - la energía golpea como un tren de carga.",
-      "traits": ["Cafeína máxima para poder explosivo (250-350mg)", "Congestión y vascularidad extremas", "Diseñado para sesiones pesadas cortas y brutales", "Energía agresiva que golpea rápido y fuerte"],
+      "description": "Eres EL DESTRUCTOR. Con 250-350mg de cafeína pura y bombeo MÁXIMO, esto es poder bruto desatado. Sesiones cortas y brutales impulsadas por estimulación extrema y energía explosiva. Peso pesado, levantamientos agresivos e intensidad implacable - la energía golpea como un tren de carga.",
+      "traits": ["Cafeína máxima para poder explosivo (250-350mg)", "Bombeo y vascularidad extremos", "Diseñado para sesiones pesadas cortas y brutales", "Energía agresiva que golpea rápido y fuerte"],
       "athleteTypes": ["Levantadores de Potencia", "Hombre Fuerte", "Levantadores Pesados", "Guerreros"],
       "warnings": ["No para entrenamientos nocturnos (no dormirás)", "Comienza con ½ porción para evaluar tolerancia", "No combines con otras fuentes de cafeína", "Toma 1 semana de descanso cada 8 semanas"]
     },
     "dragon-blood": {
       "tagline": "LISTO PARA EL COMBATE",
-      "description": "La fórmula híbrida definitiva. Con 200-250mg de cafeína y congestión ALTA, obtienes poder versátil para cualquier desafío. Perfecta para culturismo, deportes de combate o entrenamiento funcional - esta fórmula entrega agresión sostenida y vascularidad impresionante durante toda tu sesión.",
-      "traits": ["Cafeína balanceada 200-250mg para poder sostenido", "Congestión alta para máxima vascularidad", "Versátil para levantamiento y acondicionamiento", "Enfoque controlado para trabajo técnico"],
+      "description": "La fórmula híbrida definitiva. Con 200-250mg de cafeína y bombeo ALTO, obtienes poder versátil para cualquier desafío. Perfecta para culturismo, deportes de combate o entrenamiento funcional - esta fórmula entrega agresión sostenida y vascularidad impresionante durante toda tu sesión.",
+      "traits": ["Cafeína balanceada 200-250mg para poder sostenido", "Bombeo alto para máxima vascularidad", "Versátil para levantamiento y acondicionamiento", "Enfoque controlado para trabajo técnico"],
       "athleteTypes": ["Atletas de CrossFit", "Peleadores de MMA", "Culturismo", "Atletas Híbridos"],
       "warnings": ["Monitorea tu tolerancia con el tiempo", "Evita el uso nocturno", "Mantente bien hidratado durante el entrenamiento"]
     },
     "cheetah-sprint": {
       "tagline": "VELOCIDAD LIBERADA",
-      "description": "Construido para velocidad y agilidad. Con 150-200mg de cafeína optimizada para ráfagas explosivas, esta fórmula entrega energía de inicio rápido para sprints, saltos y movimientos rápidos poderosos. Congestión moderada te mantiene ligero y rápido, mientras que la intensidad alta (8/10) impulsa tu dominio de fibras rápidas.",
+      "description": "Construido para velocidad y agilidad. Con 150-200mg de cafeína optimizada para ráfagas explosivas, esta fórmula entrega energía de inicio rápido para sprints, saltos y movimientos rápidos poderosos. Bombeo moderado te mantiene ligero y rápido, mientras que la intensidad alta (8/10) impulsa tu dominio de fibras rápidas.",
       "traits": ["Cafeína moderada 150-200mg para velocidad explosiva", "Energía de acción rápida para ráfagas cortas e intensas", "Optimizada para agilidad y movimientos rápidos", "Reclutamiento mejorado de fibras musculares rápidas"],
       "athleteTypes": ["Velocistas", "Atletas de Pista", "Entusiastas HIIT", "Atletas de Poder Explosivo"],
       "warnings": ["Fórmula alta en estimulantes", "No para entrenamiento nocturno", "Descansa periódicamente para mejores resultados"]
@@ -560,57 +560,57 @@
     },
     "titan-strength": {
       "tagline": "PODER PURO",
-      "description": "Diseñado para fuerza pura. Con 250-300mg de cafeína, congestión ALTA y poder explosivo controlado, esta fórmula está construida para PRs y levantamientos máximos. Singles pesados, agresión controlada, fuerza absoluta - todo lo que necesitas para la plataforma, nada que no necesites.",
-      "traits": ["Cafeína alta (250-300mg) para activación máxima del SNC", "Congestión alta para plenitud muscular en levantamientos pesados", "Enfoque controlado para trabajo de fuerza técnica", "Diseñada para entrenamiento de repeticiones bajas y peso máximo"],
+      "description": "Diseñado para fuerza pura. Con 250-300mg de cafeína, bombeo ALTO y poder explosivo controlado, esta fórmula está construida para PRs y levantamientos máximos. Singles pesados, agresión controlada, fuerza absoluta - todo lo que necesitas para la plataforma, nada que no necesites.",
+      "traits": ["Cafeína alta (250-300mg) para activación máxima del SNC", "Bombeo alto para plenitud muscular en levantamientos pesados", "Enfoque controlado para trabajo de fuerza técnica", "Diseñada para entrenamiento de repeticiones bajas y peso máximo"],
       "athleteTypes": ["Levantadores de Potencia", "Hombre Fuerte", "Levantadores Olímpicos", "Especialistas en Fuerza"],
       "warnings": ["Alto contenido de estimulantes", "Solo mañana y temprano en la tarde", "Descansa cada 8 semanas"]
     },
     "wolf-pack": {
       "tagline": "MENTALIDAD DE MANADA",
-      "description": "Balanceada para rendimiento sostenido en equipo. Con 150-200mg de cafeína y congestión moderada, esta fórmula entrega energía constante para sesiones extendidas. Perfecta para deportes de equipo, entrenamiento grupal o trabajo funcional de movilidad - poder confiable sin sobreestimulación.",
+      "description": "Balanceada para rendimiento sostenido en equipo. Con 150-200mg de cafeína y bombeo moderado, esta fórmula entrega energía constante para sesiones extendidas. Perfecta para deportes de equipo, entrenamiento grupal o trabajo funcional de movilidad - poder confiable sin sobreestimulación.",
       "traits": ["Cafeína balanceada 150-200mg para esfuerzo sostenido", "Intensidad moderada perfecta para ambientes de equipo", "Combina fuerza funcional con resistencia", "Energía constante y confiable durante toda tu sesión"],
       "athleteTypes": ["Deportes de Equipo", "Futbolistas", "Entrenamiento de Movilidad", "Entrenamiento Grupal"],
       "warnings": ["Genial para entrenamiento vespertino", "Mantente hidratado durante sesiones de equipo", "Se necesita ciclado moderado"]
     },
     "phoenix-rise": {
       "tagline": "RENACIMIENTO DE RESISTENCIA",
-      "description": "Construida para rendimiento de larga duración. Con cafeína moderada 100-150mg, congestión moderada y soporte de resistencia pesado, esta fórmula es ideal para sesiones de culturismo maratónicas, entrenamiento de resistencia o trabajo de ultra distancia. Energía sostenida sin caída - resurge de la fatiga más fuerte.",
-      "traits": ["Cafeína suave 100-150mg para energía sostenida", "Congestión moderada para trabajo muscular de larga duración", "Soporte pesado de resistencia e hidratación", "Perfecta para culturismo de alto volumen o cardio"],
+      "description": "Construida para rendimiento de larga duración. Con cafeína moderada 100-150mg, bombeo moderado y soporte de resistencia pesado, esta fórmula es ideal para sesiones de culturismo maratónicas, entrenamiento de resistencia o trabajo de ultra distancia. Energía sostenida sin caída - resurge de la fatiga más fuerte.",
+      "traits": ["Cafeína suave 100-150mg para energía sostenida", "Bombeo moderado para trabajo muscular de larga duración", "Soporte pesado de resistencia e hidratación", "Perfecta para culturismo de alto volumen o cardio"],
       "athleteTypes": ["Corredores de Maratón", "Culturismo", "Triatletas", "Ultra Resistencia"],
       "warnings": ["Perfecto para sesiones de entrenamiento largas", "Estimulación mínima para trabajo de resistencia", "Excelente fórmula de hidratación incluida"]
     },
     "bear-endurance": {
       "tagline": "PODER CONSTANTE",
-      "description": "La fórmula más suave para fuerza-resistencia de todo el día. Con solo 75-125mg de cafeína y congestión ligera, esto entrega energía calmada y controlada para acarreos con carga, rucking, senderismo y trabajo sostenido al aire libre. Soporte de resistencia pesado te mantiene moviéndote fuerte durante horas sin sobreestimulación.",
-      "traits": ["Estimulación ultra-baja (75-125mg) para energía suave", "Congestión ligera optimizada para trabajo de resistencia", "Soporte pesado de resistencia y electrolitos", "Perfecta para actividades al aire libre de todo el día"],
+      "description": "La fórmula más suave para fuerza-resistencia de todo el día. Con solo 75-125mg de cafeína y bombeo ligero, esto entrega energía calmada y controlada para acarreos con carga, rucking, senderismo y trabajo sostenido al aire libre. Soporte de resistencia pesado te mantiene moviéndote fuerte durante horas sin sobreestimulación.",
+      "traits": ["Estimulación ultra-baja (75-125mg) para energía suave", "Bombeo ligero optimizado para trabajo de resistencia", "Soporte pesado de resistencia y electrolitos", "Perfecta para actividades al aire libre de todo el día"],
       "athleteTypes": ["Excursionistas", "Ruckers", "Atletas de Aventura", "Entrenamiento al Aire Libre"],
       "warnings": ["Estimulación muy suave", "Perfecto para actividades de todo el día", "Genial para trabajo de resistencia al aire libre"]
     },
     "mantis-focus": {
       "tagline": "PRECISIÓN QUIRÚRGICA",
-      "description": "La fórmula definitiva de mente-músculo. Con 125-175mg de cafeína, congestión ALTA y soporte de ENFOQUE MÁXIMO, esto es culturismo de precisión perfeccionado. Cada repetición es controlada, cada contracción se siente. También ideal para entrenamiento de movilidad donde la técnica y la conciencia corporal lo son todo.",
-      "traits": ["Cafeína moderada 125-175mg con enfoque máximo", "Congestión ALTA para plenitud muscular increíble", "Conexión mente-músculo máxima", "Perfecta para culturismo y trabajo de movilidad"],
+      "description": "La fórmula definitiva de mente-músculo. Con 125-175mg de cafeína, bombeo ALTO y soporte de ENFOQUE MÁXIMO, esto es culturismo de precisión perfeccionado. Cada repetición es controlada, cada contracción se siente. También ideal para entrenamiento de movilidad donde la técnica y la conciencia corporal lo son todo.",
+      "traits": ["Cafeína moderada 125-175mg con enfoque máximo", "Bombeo ALTO para plenitud muscular increíble", "Conexión mente-músculo máxima", "Perfecta para culturismo y trabajo de movilidad"],
       "athleteTypes": ["Culturistas", "Entrenamiento de Movilidad", "Atletas de Físico", "Levantadores Enfocados en Forma"],
       "warnings": ["Estimulación ligera para mejor control", "Fórmula que mejora el enfoque", "Perfecto para trabajo técnico"]
     },
     "thunder-strike": {
       "tagline": "FUERZA EXPLOSIVA",
-      "description": "CAOS MÁXIMO. Con 275-350mg de cafeína, congestión alta y clasificación de intensidad de 10/10, esta es la fórmula más extrema. Construida para HIIT, circuitos y sesiones de levantamiento de potencia donde necesitas poder explosivo absoluto. No para principiantes - esta es la tormenta.",
-      "traits": ["Cafeína EXTREMA (275-350mg) - máxima intensidad", "Congestión alta para rendimiento máximo", "Construida para HIIT, circuitos y levantamiento explosivo", "Clasificación de intensidad 10/10 - caos máximo"],
+      "description": "CAOS MÁXIMO. Con 275-350mg de cafeína, bombeo alto y clasificación de intensidad de 10/10, esta es la fórmula más extrema. Construida para HIIT, circuitos y sesiones de levantamiento de potencia donde necesitas poder explosivo absoluto. No para principiantes - esta es la tormenta.",
+      "traits": ["Cafeína EXTREMA (275-350mg) - máxima intensidad", "Bombeo alto para rendimiento máximo", "Construida para HIIT, circuitos y levantamiento explosivo", "Clasificación de intensidad 10/10 - caos máximo"],
       "athleteTypes": ["Atletas HIIT", "Levantamiento de Potencia", "Entrenadores de Circuito", "Especialistas en Acondicionamiento"],
       "warnings": ["Estimulación MÁXIMA - no para principiantes", "Solo recomendado por la mañana", "Requiere semana de descanso cada 6-8 semanas", "No apto para entrenamiento nocturno"]
     },
     "serpent-flow": {
       "tagline": "ARMONÍA MENTE-CUERPO",
-      "description": "CERO ESTIMULANTES. Rendimiento puro sin estimulantes para yoga, entrenamiento de movilidad, trabajo de flexibilidad y recuperación activa. Con 0mg de cafeína, soporte de congestión ligera y potenciadores de energía natural, esto es movimiento consciente perfeccionado. Entrena en cualquier momento, en cualquier lugar - incluso sesiones nocturnas.",
-      "traits": ["100% sin estimulantes - cero cafeína", "Congestión ligera para flujo sanguíneo sin tensión", "Energía natural de adaptógenos", "Perfecta para entrenamiento de movilidad y días de recuperación"],
+      "description": "CERO ESTIMULANTES. Rendimiento puro sin estimulantes para yoga, entrenamiento de movilidad, trabajo de flexibilidad y recuperación activa. Con 0mg de cafeína, soporte de bombeo ligero y potenciadores de energía natural, esto es movimiento consciente perfeccionado. Entrena en cualquier momento, en cualquier lugar - incluso sesiones nocturnas.",
+      "traits": ["100% sin estimulantes - cero cafeína", "Bombeo ligero para flujo sanguíneo sin tensión", "Energía natural de adaptógenos", "Perfecta para entrenamiento de movilidad y días de recuperación"],
       "athleteTypes": ["Practicantes de Yoga", "Entrenamiento de Movilidad", "Bailarines", "Atletas Enfocados en Recuperación"],
       "warnings": ["Cero estimulantes - perfecto para cualquier momento", "Ideal para entrenamiento nocturno", "Genial para días de recuperación"]
     },
     "lion-heart": {
       "tagline": "ESPÍRITU GUERRERO",
-      "description": "La fórmula guerrera balanceada. Con 175-225mg de cafeína, congestión moderada e intensidad 7/10, esto es poder versátil para cualquier estilo de entrenamiento. Perfecta para levantamiento de potencia, culturismo, fitness funcional - entrena con corazón, coraje y determinación inquebrantable.",
-      "traits": ["Cafeína balanceada 175-225mg para consistencia diaria", "Congestión e intensidad moderadas (7/10)", "Versátil para levantamiento de potencia, culturismo o trabajo funcional", "Fortaleza mental sin sobreestimulación"],
+      "description": "La fórmula guerrera balanceada. Con 175-225mg de cafeína, bombeo moderado e intensidad 7/10, esto es poder versátil para cualquier estilo de entrenamiento. Perfecta para levantamiento de potencia, culturismo, fitness funcional - entrena con corazón, coraje y determinación inquebrantable.",
+      "traits": ["Cafeína balanceada 175-225mg para consistencia diaria", "Bombeo e intensidad moderados (7/10)", "Versátil para levantamiento de potencia, culturismo o trabajo funcional", "Fortaleza mental sin sobreestimulación"],
       "athleteTypes": ["Levantamiento de Potencia", "Culturismo", "Fitness Funcional", "Artistas Marciales"],
       "warnings": ["Estimulación balanceada", "Fórmula versátil", "Genial para cualquier hora del día"]
     }

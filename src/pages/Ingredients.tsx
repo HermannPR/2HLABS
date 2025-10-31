@@ -80,7 +80,7 @@ export const Ingredients = () => {
                 <div className="mb-4">
                   <div className="text-sm font-semibold mb-2">{t('ingredientsPage.benefits')}</div>
                   <ul className="space-y-1">
-                    {t(`ingredients.${ingredient.id}.benefits`, { returnObjects: true }).slice(0, 3).map((benefit: string, i: number) => (
+                    {(t(`ingredients.${ingredient.id}.benefits`, { returnObjects: true }) as string[]).slice(0, 3).map((benefit: string, i: number) => (
                       <li key={i} className="text-sm text-gray-400 flex items-start">
                         <span className="text-primary mr-2">•</span>
                         {benefit}
