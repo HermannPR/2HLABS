@@ -69,6 +69,7 @@ export interface Ingredient {
   timing?: string;
   scienceRating: number; // 1-5
   caffeineContent?: number; // mg
+  enabled?: boolean;
 }
 
 export type IngredientCategory =

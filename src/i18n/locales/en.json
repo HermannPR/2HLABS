@@ -186,7 +186,8 @@
       "contact": "Contact",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
-      "shipping": "Shipping & Returns"
+      "shipping": "Shipping & Returns",
+      "developer": "Developer Login"
     }
   },
   "common": {
@@ -409,7 +410,11 @@
     "viewDetails": "View Details",
     "scienceRating": "Science Rating",
     "benefits": "Benefits:",
-    "dosage": "Dosage"
+    "dosage": "Dosage",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "markOutOfStock": "Mark out of stock",
+    "markInStock": "Mark in stock"
   },
   "ingredients": {
     "caffeine": {
@@ -471,6 +476,26 @@
       "name": "L-Theanine",
       "description": "Promotes calm focus and reduces caffeine jitters",
       "benefits": ["Smooth energy", "Reduced anxiety", "Enhanced focus"]
+    },
+    "nitrosigine": {
+      "name": "Nitrosigine®",
+      "description": "Inositol-stabilized arginine silicate that boosts nitric oxide for long-lasting pumps and focus",
+      "benefits": ["Sustained pumps", "Improved blood flow", "Enhanced cognitive focus"]
+    },
+    "glycerpump": {
+      "name": "GlycerPump® (65% Glycerol)",
+      "description": "Highly stable glycerol powder that increases cellular hydration and pump fullness",
+      "benefits": ["Hyper-hydration", "Full muscle pumps", "Improved endurance in heat"]
+    },
+    "rhodiola": {
+      "name": "Rhodiola Rosea",
+      "description": "Adaptogenic herb that reduces fatigue and sharpens mental performance under stress",
+      "benefits": ["Reduced perceived exertion", "Improved focus", "Anti-fatigue support"]
+    },
+    "coconut-water": {
+      "name": "Coconut Water Powder",
+      "description": "Natural electrolyte complex that replenishes sodium, potassium, and trace minerals",
+      "benefits": ["Enhanced hydration", "Electrolyte balance", "Supports muscle contractions"]
     },
     "sodium": {
       "name": "Sodium (as Sea Salt)",

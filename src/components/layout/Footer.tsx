@@ -100,6 +100,11 @@ export const Footer = () => {
                   {t('footer.links.shipping')}
                 </Link>
               </li>
+              <li>
+                <Link to="/developer" className="text-gray-500 hover:text-primary transition-colors text-sm">
+                  {t('footer.links.developer')}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

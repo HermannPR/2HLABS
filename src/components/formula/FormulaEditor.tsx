@@ -5,6 +5,7 @@ import type { FormulaIngredient, Ingredient } from '../../types';
 import { INGREDIENTS } from '../../data/ingredients';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
+import { useDeveloper } from '../../context/DeveloperContext';
 
 interface FormulaEditorProps {
   ingredients: FormulaIngredient[];
@@ -16,6 +17,7 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
   const [showAddWarning, setShowAddWarning] = useState(false);
   const [pendingIngredient, setPendingIngredient] = useState<Ingredient | null>(null);
   const [removedIngredients, setRemovedIngredients] = useState<FormulaIngredient[]>([]);
+  const { isIngredientEnabled } = useDeveloper();
 
   const handleDosageChange = (index: number, newDosage: number) => {
     const updated = [...ingredients];
@@ -70,7 +72,7 @@ export const FormulaEditor = ({ ingredients, onUpdate }: FormulaEditorProps) => 
 
   // Get ingredients not currently in formula
   const availableIngredients = INGREDIENTS.filter(
-    ing => !ingredients.some(fi => fi.ingredient.id === ing.id)
+    ing => isIngredientEnabled(ing.id) && !ingredients.some(fi => fi.ingredient.id === ing.id)
   );
 
   return (

@@ -14,6 +14,7 @@ import { Contact } from './pages/Contact';
 import { Privacy } from './pages/Privacy';
 import { Terms } from './pages/Terms';
 import { NotFound } from './pages/NotFound';
+import { Developer } from './pages/Developer';
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/terms" element={<Terms />} />
+            <Route path="/developer" element={<Developer />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>

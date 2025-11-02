@@ -186,7 +186,8 @@
       "contact": "Contacto",
       "privacy": "Privacidad",
       "terms": "Términos de Uso",
-      "shipping": "Envíos y Devoluciones"
+      "shipping": "Envíos y Devoluciones",
+      "developer": "Panel de Desarrollador"
     }
   },
   "common": {
@@ -409,7 +410,11 @@
     "viewDetails": "Ver Detalles",
     "scienceRating": "Calificación Científica",
     "benefits": "Beneficios:",
-    "dosage": "Dosis"
+    "dosage": "Dosis",
+    "inStock": "Disponible",
+    "outOfStock": "Agotado",
+    "markOutOfStock": "Marcar como agotado",
+    "markInStock": "Marcar como disponible"
   },
   "ingredients": {
     "caffeine": {
@@ -471,6 +476,26 @@
       "name": "L-Teanina",
       "description": "Promueve concentración tranquila y reduce los nervios de la cafeína",
       "benefits": ["Energía suave", "Ansiedad reducida", "Concentración mejorada"]
+    },
+    "nitrosigine": {
+      "name": "Nitrosigine®",
+      "description": "Silicato de arginina estabilizado con inositol que potencia el óxido nítrico para bombes duraderos y enfoque",
+      "benefits": ["Bombes prolongados", "Mejor flujo sanguíneo", "Mayor enfoque cognitivo"]
+    },
+    "glycerpump": {
+      "name": "GlycerPump® (65% Glicerol)",
+      "description": "Polvo de glicerol altamente estable que aumenta la hidratación celular y la plenitud muscular",
+      "benefits": ["Hiperhidratación", "Bombes completos", "Mayor resistencia en calor"]
+    },
+    "rhodiola": {
+      "name": "Rhodiola Rosea",
+      "description": "Hierba adaptógena que reduce la fatiga y agudiza el rendimiento mental bajo estrés",
+      "benefits": ["Menor percepción de esfuerzo", "Enfoque mejorado", "Soporte anti-fatiga"]
+    },
+    "coconut-water": {
+      "name": "Polvo de Agua de Coco",
+      "description": "Complejo natural de electrolitos que repone sodio, potasio y minerales traza",
+      "benefits": ["Hidratación mejorada", "Balance de electrolitos", "Apoya las contracciones musculares"]
     },
     "sodium": {
       "name": "Sodio (como Sal Marina)",
