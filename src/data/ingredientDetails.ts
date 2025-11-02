@@ -314,6 +314,382 @@ export const INGREDIENT_DETAILS: Record<string, IngredientDetailData> = {
         doi: '10.1016/j.biopsycho.2006.06.006'
       }
     ]
+  },
+
+  'theobromine': {
+    id: 'theobromine',
+    scientificName: '3,7-Dimethylxanthine',
+    alsoKnownAs: ['Cocoa Alkaloid'],
+    detailedDescription: 'Theobromine is a naturally occurring methylxanthine derived from cacao. It delivers a smoother, longer-lasting stimulation than caffeine, elevates mood, and contributes to vasodilation for improved blood flow.',
+    mechanismOfAction: 'Acts as an adenosine receptor antagonist and phosphodiesterase inhibitor, increasing cyclic AMP while promoting smooth muscle relaxation. Its slower absorption reduces jitteriness compared to caffeine.',
+    clinicalEvidence: [
+      'Enhances alertness and mood when stacked with caffeine',
+      'Supports vasodilation and smooth muscle relaxation',
+      'Reduces perceived exertion in endurance exercise settings'
+    ],
+    optimalDosing: {
+      standard: '200-300mg',
+      timing: '30-45 minutes before training',
+      withFood: false
+    },
+    synergies: [
+      { ingredient: 'Caffeine', benefit: 'Extends stimulant effect while softening the onset/offset' },
+      { ingredient: 'L-Theanine', benefit: 'Further smooths stimulant curve and elevates mood' }
+    ],
+    sideEffects: ['Mild nausea at doses >600mg', 'Headache in very stimulant-sensitive users'],
+    contraindications: ['Use caution with antihypertensives', 'Limited safety data in pregnancy/breastfeeding'],
+    researchCitations: [
+      {
+        title: 'Dietary theobromine and caffeine: effects on mood and alertness',
+        authors: 'Mitchell ES, Slettenaar M',
+        journal: 'Appetite',
+        year: 2014,
+        doi: '10.1016/j.appet.2014.03.021'
+      }
+    ]
+  },
+
+  'betaine': {
+    id: 'betaine',
+    scientificName: 'Trimethylglycine',
+    detailedDescription: 'Betaine is an osmolyte and methyl donor that supports cellular hydration, strength, and power output. It indirectly aids creatine synthesis and enhances training volume.',
+    mechanismOfAction: 'Acts as a methyl donor to convert homocysteine to methionine and functions as an osmoprotectant that preserves cellular fluid balance during intense exercise.',
+    clinicalEvidence: [
+      'Improves peak power output in resistance-trained athletes',
+      'Supports lean mass gains when combined with resistance training',
+      'Protects hydration status and performance in heat '
+    ],
+    optimalDosing: {
+      standard: '2.5-3.5g daily',
+      timing: 'Split into two doses around training',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Creatine', benefit: 'Supports endogenous creatine synthesis' },
+      { ingredient: 'Electrolytes', benefit: 'Improves osmotic balance for better endurance' }
+    ],
+    sideEffects: ['Occasional GI discomfort at high single doses (>3.5g)', 'Fishy odor in rare genetic conditions'],
+    contraindications: ['Consult physician if methylation disorders are present'],
+    researchCitations: [
+      {
+        title: 'Effects of betaine supplementation on strength and power performance',
+        authors: 'Hoffman JR, Ratamess NA, et al.',
+        journal: 'Journal of the International Society of Sports Nutrition',
+        year: 2009,
+        doi: '10.1186/1550-2783-6-7'
+      }
+    ]
+  },
+
+  'taurine': {
+    id: 'taurine',
+    scientificName: '2-Aminoethanesulfonic acid',
+    detailedDescription: 'Taurine supports electrolyte balance, calcium handling, and antioxidant defense. It enhances endurance performance and cognitive focus while reducing exercise-induced oxidative stress.',
+    mechanismOfAction: 'Regulates intracellular calcium, stabilizes membranes, and modulates GABA and glutamate receptors. Taurine helps maintain cellular hydration and mitigates free radical damage from strenuous exercise.',
+    clinicalEvidence: [
+      'Increases time-to-exhaustion in endurance activities',
+      'Reduces muscle soreness and markers of oxidative stress',
+      'Enhances cognitive performance during fatigue'
+    ],
+    optimalDosing: {
+      standard: '1-2g',
+      timing: '30-60 minutes before training',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Caffeine', benefit: 'Maintains smooth focus and reduces jitteriness' },
+      { ingredient: 'Glycerol', benefit: 'Improves cellular hydration and endurance' }
+    ],
+    sideEffects: ['Very well tolerated; rare GI upset with large doses'],
+    contraindications: ['None established for healthy adults'],
+    researchCitations: [
+      {
+        title: 'Taurine supplementation improves performance in endurance athletes',
+        authors: 'Balshaw TG, Bampouras TM, et al.',
+        journal: 'Amino Acids',
+        year: 2013,
+        doi: '10.1007/s00726-012-1367-0'
+      }
+    ]
+  },
+
+  'l-tyrosine': {
+    id: 'l-tyrosine',
+    scientificName: 'L-3-(4-hydroxyphenyl)alanine',
+    detailedDescription: 'L-Tyrosine replenishes catecholamine stores (dopamine, norepinephrine, epinephrine), preserving focus, motivation, and mental stamina under stress, multitasking, and sleep deprivation.',
+    mechanismOfAction: 'Acts as a precursor for catecholamines, maintaining neurotransmitter levels when they are depleted by intense exercise or stress.',
+    clinicalEvidence: [
+      'Supports working memory under stress and fatigue',
+      'Maintains reaction time during sleep deprivation or cold exposure',
+      'Improves mood and cognitive flexibility when combined with stimulants'
+    ],
+    optimalDosing: {
+      standard: '1.5-2g',
+      timing: '30-60 minutes before training',
+      withFood: false
+    },
+    synergies: [
+      { ingredient: 'Caffeine', benefit: 'Enhances alertness and resilience to fatigue' },
+      { ingredient: 'Rhodiola Rosea', benefit: 'Combined adaptogenic support for stress tolerance' }
+    ],
+    sideEffects: ['Headache or restlessness at high doses (>5g)', 'Possible GI discomfort'],
+    contraindications: ['Thyroid disorders', 'MAO inhibitor medications'],
+    researchCitations: [
+      {
+        title: 'Tyrosine supplementation and cognitive performance under stress',
+        authors: 'Deijen JB, Orlebeke JF',
+        journal: 'Psychopharmacology',
+        year: 1994,
+        doi: '10.1007/BF02245421'
+      }
+    ]
+  },
+
+  'alpha-gpc': {
+    id: 'alpha-gpc',
+    scientificName: 'L-Alpha glycerylphosphorylcholine',
+    detailedDescription: 'Alpha-GPC is a potent choline donor that elevates acetylcholine levels, improving neuromuscular efficiency, cognitive sharpness, and growth hormone response.',
+    mechanismOfAction: 'Delivers choline across the blood-brain barrier for acetylcholine synthesis, enhancing motor unit recruitment and cognitive processing. It also supports growth hormone release post-training.',
+    clinicalEvidence: [
+      'Boosts lower-body power output within 60 minutes of ingestion',
+      'Improves reaction time and cognitive performance',
+      'Supports growth hormone release after resistance exercise'
+    ],
+    optimalDosing: {
+      standard: '300-600mg',
+      timing: '30-45 minutes pre-workout',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Caffeine', benefit: 'Synergistic alertness and motor response' }
+    ],
+    sideEffects: ['Occasional headaches or nausea at doses >1g'],
+    contraindications: ['Use caution with anticoagulant therapy'],
+    researchCitations: [
+      {
+        title: 'Acute supplementation with alpha-GPC augments power output',
+        authors: 'Ziegenfuss TN, et al.',
+        journal: 'Journal of the International Society of Sports Nutrition',
+        year: 2008,
+        doi: '10.1186/1550-2783-5-S1-P15'
+      }
+    ]
+  },
+
+  'sodium': {
+    id: 'sodium',
+    scientificName: 'Sodium Chloride',
+    detailedDescription: 'Sodium is the primary extracellular electrolyte responsible for fluid balance, nerve impulses, and muscle contraction. Adequate sodium boosts blood volume, pump quality, and thermoregulation.',
+    mechanismOfAction: 'Maintains plasma volume and nerve conduction while aiding nutrient transport. Pre-exercise sodium improves fluid retention and helps sustain performance in heat.',
+    clinicalEvidence: [
+      'Sodium loading increases plasma volume and endurance in warm conditions',
+      'Supports cellular hydration when combined with glycerol and carbohydrates'
+    ],
+    optimalDosing: {
+      standard: '300-500mg',
+      timing: '30 minutes before training or split pre/during',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Glycerol', benefit: 'Enhances plasma volume expansion for endurance and pump' },
+      { ingredient: 'Potassium', benefit: 'Maintains sodium-potassium balance for neuromuscular function' }
+    ],
+    sideEffects: ['Transient water retention', 'Potential blood pressure elevation in sodium-sensitive individuals'],
+    contraindications: ['Hypertension', 'Kidney disease'],
+    researchCitations: [
+      {
+        title: 'Sodium ingestion prior to exercise: plasma volume and thermoregulatory responses',
+        authors: 'Sims ST, et al.',
+        journal: 'European Journal of Applied Physiology',
+        year: 2007,
+        doi: '10.1007/s00421-007-0464-2'
+      }
+    ]
+  },
+
+  'potassium': {
+    id: 'potassium',
+    scientificName: 'Potassium Citrate',
+    detailedDescription: 'Potassium is the primary intracellular electrolyte required for muscle contractions, nerve transmission, and acid-base balance. Replenishing potassium prevents cramping and supports endurance.',
+    mechanismOfAction: 'Works with sodium to maintain membrane potential and muscular excitability while supporting glycogen storage and utilization.',
+    clinicalEvidence: [
+      'Prevents muscle weakness and cramping during prolonged exercise',
+      'Supports glycogen utilization and post-exercise recovery'
+    ],
+    optimalDosing: {
+      standard: '200-400mg',
+      timing: 'Paired with sodium before or during training',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Sodium', benefit: 'Restores the optimal sodium:potassium ratio for neuromuscular firing' }
+    ],
+    sideEffects: ['High doses may upset stomach', 'Excessive intake can impact heart rhythm in renal issues'],
+    contraindications: ['Chronic kidney disease', 'Potassium-sparing medications'],
+    researchCitations: [
+      {
+        title: 'Potassium and human performance',
+        authors: 'Rodriguez NR, et al.',
+        journal: 'Nutrition Today',
+        year: 2009,
+        doi: '10.1097/NT.0b013e31819f1bf8'
+      }
+    ]
+  },
+
+  'beetroot': {
+    id: 'beetroot',
+    scientificName: 'Beta vulgaris',
+    detailedDescription: 'Beetroot extract provides dietary nitrates which convert to nitric oxide, improving blood flow, endurance, and oxygen efficiency. It complements the citrulline pathway for pump and endurance benefits.',
+    mechanismOfAction: 'Nitrates reduce to nitrites by oral bacteria and then to nitric oxide under low oxygen conditions, enhancing vasodilation and mitochondrial efficiency.',
+    clinicalEvidence: [
+      'Reduces oxygen cost during submaximal exercise',
+      'Improves time-trial performance and time-to-exhaustion',
+      'Enhances muscle oxygenation during high-intensity intervals'
+    ],
+    optimalDosing: {
+      standard: '500-1000mg standardized extract (6-8mmol nitrates)',
+      timing: '2-3 hours before event for peak nitrate conversion',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'L-Citrulline', benefit: 'Dual nitric oxide pathways for superior pumps and endurance' }
+    ],
+    sideEffects: ['Pink/red urine (beeturia) in some individuals'],
+    contraindications: ['Monitor if on nitrate medications; otherwise safe for healthy adults'],
+    researchCitations: [
+      {
+        title: 'Dietary nitrate supplementation improves exercise performance',
+        authors: 'Jones AM',
+        journal: 'Sports Medicine',
+        year: 2014,
+        doi: '10.1007/s40279-014-0149-y'
+      }
+    ]
+  },
+
+  'nitrosigine': {
+    id: 'nitrosigine',
+    scientificName: 'Inositol-stabilized arginine silicate',
+    detailedDescription: 'Nitrosigine® significantly boosts nitric oxide levels for up to six hours, supporting long-lasting pumps and cognitive benefits.',
+    mechanismOfAction: 'Enhances arginine bioavailability and stimulates endothelial nitric oxide synthase, producing sustained nitric oxide release.',
+    clinicalEvidence: [
+      'Increases nitric oxide markers within 30 minutes and maintains elevations for 6 hours',
+      'Improves endothelial function and blood flow',
+      'Enhances cognitive flexibility in healthy adults'
+    ],
+    optimalDosing: {
+      standard: '1500mg daily',
+      timing: '30-45 minutes before exercise',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'L-Citrulline', benefit: 'Amplifies nitric oxide production across multiple pathways' }
+    ],
+    sideEffects: ['Well tolerated up to 1500mg/day'],
+    contraindications: ['None established; consult physician for cardiovascular conditions'],
+    researchCitations: [
+      {
+        title: 'Inositol-stabilized arginine silicate improves blood pressure and endothelial function',
+        authors: 'Bloomer RJ, et al.',
+        journal: 'Nutrients',
+        year: 2017,
+        doi: '10.3390/nu9121331'
+      }
+    ]
+  },
+
+  'glycerpump': {
+    id: 'glycerpump',
+    scientificName: '65% Glycerol Powder',
+    detailedDescription: 'GlycerPump® delivers a stabilized form of glycerol that increases cellular hydration, volume, and endurance, especially in hot or high-volume sessions.',
+    mechanismOfAction: 'Glycerol acts as an osmotic agent, drawing water into the bloodstream and muscle cells, increasing plasma volume and improving thermoregulation.',
+    clinicalEvidence: [
+      'Improves endurance performance in heat by maintaining plasma volume',
+      'Reduces perceived exertion during prolonged exercise',
+      'Enhances muscle pump fullness by increasing cell hydration'
+    ],
+    optimalDosing: {
+      standard: '2-3g (65% glycerol) mixed with 16-20oz water',
+      timing: '30 minutes pre-workout',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Sodium', benefit: 'Enhances glycerol-driven plasma volume expansion' },
+      { ingredient: 'Creatine', benefit: 'Cell volumization stack for strength and pumps' }
+    ],
+    sideEffects: ['Requires adequate water intake to avoid stomach discomfort'],
+    contraindications: ['Renal disease (consult physician)'],
+    researchCitations: [
+      {
+        title: 'Glycerol hyperhydration and exercise performance',
+        authors: 'Goulet ED',
+        journal: 'Sports Medicine',
+        year: 2011,
+        doi: '10.2165/11586070-000000000-00000'
+      }
+    ]
+  },
+
+  'rhodiola': {
+    id: 'rhodiola',
+    scientificName: 'Rhodiola rosea (3% rosavins)',
+    detailedDescription: 'Rhodiola is an adaptogenic herb that reduces fatigue, supports mood, and maintains focus during stressful training or competition.',
+    mechanismOfAction: 'Modulates the HPA axis, lowering cortisol response, and influences serotonin and dopamine while improving mitochondrial efficiency.',
+    clinicalEvidence: [
+      'Improves endurance performance and reduces perceived exertion',
+      'Supports cognitive performance under stress and sleep deprivation',
+      'Shortens recovery time after intense sessions'
+    ],
+    optimalDosing: {
+      standard: '200-400mg standardized extract',
+      timing: '30-60 minutes before training or stressful events',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'L-Tyrosine', benefit: 'Provides dual support for catecholamine production and stress resilience' }
+    ],
+    sideEffects: ['Mild dizziness or dry mouth in rare cases'],
+    contraindications: ['Bipolar disorder (may trigger mania)', 'Use caution with antidepressants'],
+    researchCitations: [
+      {
+        title: 'Rhodiola rosea in stress-induced fatigue',
+        authors: 'Shevtsov VA, et al.',
+        journal: 'Phytomedicine',
+        year: 2003,
+        doi: '10.1078/094471103322331604'
+      }
+    ]
+  },
+
+  'coconut-water': {
+    id: 'coconut-water',
+    scientificName: 'Cocos nucifera Powder',
+    detailedDescription: 'Coconut water powder delivers naturally balanced electrolytes, supporting hydration, blood volume, and muscle contractions during training.',
+    mechanismOfAction: 'Provides sodium, potassium, magnesium, and trace minerals that aid plasma volume and electrolyte balance.',
+    clinicalEvidence: [
+      'Rehydrates similarly to commercial sports drinks after dehydration',
+      'Provides a potassium-rich electrolyte profile that supports nerve transmission'
+    ],
+    optimalDosing: {
+      standard: '1-2g mixed in pre/intra-workout fluids',
+      timing: 'Pre or intra-workout',
+      withFood: true
+    },
+    synergies: [
+      { ingredient: 'Sodium', benefit: 'Balanced electrolyte stack for long sessions or heat' }
+    ],
+    sideEffects: ['Very well tolerated; high doses may cause fullness or mild GI upset'],
+    contraindications: ['Hyperkalemia (high potassium levels)'],
+    researchCitations: [
+      {
+        title: 'Coconut water rehydration compared with carbohydrate-electrolyte beverage',
+        authors: 'Saat M, Singh R, et al.',
+        journal: 'Journal of Physiological Anthropology',
+        year: 2002,
+        doi: '10.2114/jpa.21.93'
+      }
+    ]
   }
 };
 

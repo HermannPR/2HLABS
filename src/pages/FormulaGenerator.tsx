@@ -16,6 +16,29 @@ import { EmailCapture } from '../components/common/EmailCapture';
 import { ShareCardGenerator } from '../components/common/ShareCardGenerator';
 import { saveResult } from '../utils/resultsStorage';
 import { FormulaEditor } from '../components/formula/FormulaEditor';
+import { INTENSITY_GRADIENT, PUMP_GRADIENT, FOCUS_GRADIENT, LEVEL_TO_VALUE, type GradientStop } from '../constants/gradients';
+
+const renderGradientBars = (value: number, gradient: GradientStop[]) => (
+  <div className="flex items-center gap-1">
+    {gradient.map((stop, idx) => {
+      const isActive = idx < Math.min(value, gradient.length);
+      return (
+        <div
+          key={idx}
+          className="w-2 h-6 md:w-2.5 md:h-7 rounded-sm transition-all"
+          style={isActive ? {
+            backgroundColor: stop.bg,
+            boxShadow: `0 0 10px ${stop.glow}`,
+            opacity: 1,
+          } : {
+            backgroundColor: '#1F2937',
+            opacity: 0.2,
+          }}
+        />
+      );
+    })}
+  </div>
+);
 
 export const FormulaGenerator = () => {
   const { t } = useTranslation();
@@ -317,6 +340,8 @@ export const FormulaGenerator = () => {
     const totalCaffeineDisplay = customIngredients.length > 0
       ? Math.round(calculatedCaffeine)
       : formula.totalCaffeine;
+    const pumpLevelValue = LEVEL_TO_VALUE[archetype.formulaProfile.pumpLevel] ?? 0;
+    const focusLevelValue = LEVEL_TO_VALUE[archetype.formulaProfile.focusLevel] ?? 0;
 
     return (
       <div className="min-h-screen bg-dark py-12">
@@ -500,6 +525,37 @@ export const FormulaGenerator = () => {
                         }%`
                       }}
                     />
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </motion.div>
+
+          {/* Soul Signature */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5 }}
+          >
+            <Card className="relative mb-8 overflow-hidden">
+              <div className="absolute inset-0 pointer-events-none opacity-20 blur-3xl bg-gradient-to-r from-primary via-transparent to-secondary" />
+              <div className="relative">
+                <h2 className="text-xl md:text-2xl font-heading font-bold mb-6 flex items-center gap-2">
+                  <HiSparkles className="text-primary" />
+                  Soul Signature
+                </h2>
+                <div className="grid gap-4 md:grid-cols-3">
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Intensity</p>
+                    {renderGradientBars(archetype.formulaProfile.intensity, INTENSITY_GRADIENT)}
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Pump</p>
+                    {renderGradientBars(pumpLevelValue, PUMP_GRADIENT)}
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400 uppercase tracking-widest mb-2">Focus</p>
+                    {renderGradientBars(focusLevelValue, FOCUS_GRADIENT)}
                   </div>
                 </div>
               </div>
