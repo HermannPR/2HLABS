@@ -155,7 +155,7 @@ function GradientBond({ start, end }: BondProps) {
   return (
     <Cylinder
       ref={meshRef}
-      args={[0.12, 0.12, length, 8]}
+      args={[0.18, 0.18, length, 8]}
       position={midpoint}
       rotation={[euler.x, euler.y, euler.z]}
     >
@@ -184,31 +184,31 @@ function CaffeineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   return (
     <group ref={groupRef} position={position}>
-      {/* Carbon ring structure - Giant atoms */}
+      {/* Carbon ring structure - Giant atoms with increased spacing */}
       <GradientAtom position={[0, 0, 0]} size={0.55} />
-      <GradientAtom position={[0.6, 0.4, 0]} size={0.55} />
-      <GradientAtom position={[1.2, 0, 0]} size={0.55} />
-      <GradientAtom position={[1.2, -0.8, 0]} size={0.55} />
-      <GradientAtom position={[0.6, -1.2, 0]} size={0.55} />
-      <GradientAtom position={[0, -0.8, 0]} size={0.55} />
+      <GradientAtom position={[0.9, 0.6, 0]} size={0.55} />
+      <GradientAtom position={[1.8, 0, 0]} size={0.55} />
+      <GradientAtom position={[1.8, -1.2, 0]} size={0.55} />
+      <GradientAtom position={[0.9, -1.8, 0]} size={0.55} />
+      <GradientAtom position={[0, -1.2, 0]} size={0.55} />
 
       {/* Nitrogen atoms - Larger */}
-      <GradientAtom position={[0.3, 0.8, 0.5]} size={0.62} />
-      <GradientAtom position={[0.9, -1.2, 0.5]} size={0.62} />
+      <GradientAtom position={[0.45, 1.2, 0.7]} size={0.62} />
+      <GradientAtom position={[1.35, -1.8, 0.7]} size={0.62} />
 
       {/* Oxygen atoms */}
-      <GradientAtom position={[1.8, 0.2, 0]} size={0.58} />
-      <GradientAtom position={[-0.3, -1.2, 0.5]} size={0.58} />
+      <GradientAtom position={[2.7, 0.3, 0]} size={0.58} />
+      <GradientAtom position={[-0.45, -1.8, 0.7]} size={0.58} />
 
       {/* Bonds */}
-      <GradientBond start={[0, 0, 0]} end={[0.6, 0.4, 0]} />
-      <GradientBond start={[0.6, 0.4, 0]} end={[1.2, 0, 0]} />
-      <GradientBond start={[1.2, 0, 0]} end={[1.2, -0.8, 0]} />
-      <GradientBond start={[1.2, -0.8, 0]} end={[0.6, -1.2, 0]} />
-      <GradientBond start={[0.6, -1.2, 0]} end={[0, -0.8, 0]} />
-      <GradientBond start={[0, -0.8, 0]} end={[0, 0, 0]} />
-      <GradientBond start={[0.6, 0.4, 0]} end={[0.3, 0.8, 0.5]} />
-      <GradientBond start={[1.2, 0, 0]} end={[1.8, 0.2, 0]} />
+      <GradientBond start={[0, 0, 0]} end={[0.9, 0.6, 0]} />
+      <GradientBond start={[0.9, 0.6, 0]} end={[1.8, 0, 0]} />
+      <GradientBond start={[1.8, 0, 0]} end={[1.8, -1.2, 0]} />
+      <GradientBond start={[1.8, -1.2, 0]} end={[0.9, -1.8, 0]} />
+      <GradientBond start={[0.9, -1.8, 0]} end={[0, -1.2, 0]} />
+      <GradientBond start={[0, -1.2, 0]} end={[0, 0, 0]} />
+      <GradientBond start={[0.9, 0.6, 0]} end={[0.45, 1.2, 0.7]} />
+      <GradientBond start={[1.8, 0, 0]} end={[2.7, 0.3, 0]} />
     </group>
   );
 }
@@ -230,17 +230,17 @@ function CreatineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
   return (
     <group ref={groupRef} position={position}>
       <GradientAtom position={[0, 0, 0]} size={0.55} />
-      <GradientAtom position={[0.7, 0, 0]} size={0.55} />
-      <GradientAtom position={[1.1, 0.6, 0]} size={0.55} />
-      <GradientAtom position={[0.3, 0.7, 0]} size={0.62} />
-      <GradientAtom position={[1.5, 0.9, 0.5]} size={0.62} />
-      <GradientAtom position={[-0.5, 0.3, 0.5]} size={0.58} />
+      <GradientAtom position={[1.05, 0, 0]} size={0.55} />
+      <GradientAtom position={[1.65, 0.9, 0]} size={0.55} />
+      <GradientAtom position={[0.45, 1.05, 0]} size={0.62} />
+      <GradientAtom position={[2.25, 1.35, 0.7]} size={0.62} />
+      <GradientAtom position={[-0.75, 0.45, 0.7]} size={0.58} />
 
-      <GradientBond start={[0, 0, 0]} end={[0.7, 0, 0]} />
-      <GradientBond start={[0.7, 0, 0]} end={[1.1, 0.6, 0]} />
-      <GradientBond start={[0, 0, 0]} end={[0.3, 0.7, 0]} />
-      <GradientBond start={[1.1, 0.6, 0]} end={[1.5, 0.9, 0.5]} />
-      <GradientBond start={[0, 0, 0]} end={[-0.5, 0.3, 0.5]} />
+      <GradientBond start={[0, 0, 0]} end={[1.05, 0, 0]} />
+      <GradientBond start={[1.05, 0, 0]} end={[1.65, 0.9, 0]} />
+      <GradientBond start={[0, 0, 0]} end={[0.45, 1.05, 0]} />
+      <GradientBond start={[1.65, 0.9, 0]} end={[2.25, 1.35, 0.7]} />
+      <GradientBond start={[0, 0, 0]} end={[-0.75, 0.45, 0.7]} />
     </group>
   );
 }
@@ -262,17 +262,17 @@ function BetaAlanineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
   return (
     <group ref={groupRef} position={position}>
       <GradientAtom position={[0, 0, 0]} size={0.55} />
-      <GradientAtom position={[0.6, 0.5, 0]} size={0.55} />
-      <GradientAtom position={[1.2, 0, 0]} size={0.55} />
-      <GradientAtom position={[0, 0.8, 0.4]} size={0.62} />
-      <GradientAtom position={[1.7, 0.4, 0.5]} size={0.58} />
-      <GradientAtom position={[1.5, -0.6, 0]} size={0.58} />
+      <GradientAtom position={[0.9, 0.75, 0]} size={0.55} />
+      <GradientAtom position={[1.8, 0, 0]} size={0.55} />
+      <GradientAtom position={[0, 1.2, 0.6]} size={0.62} />
+      <GradientAtom position={[2.55, 0.6, 0.7]} size={0.58} />
+      <GradientAtom position={[2.25, -0.9, 0]} size={0.58} />
 
-      <GradientBond start={[0, 0, 0]} end={[0.6, 0.5, 0]} />
-      <GradientBond start={[0.6, 0.5, 0]} end={[1.2, 0, 0]} />
-      <GradientBond start={[0, 0, 0]} end={[0, 0.8, 0.4]} />
-      <GradientBond start={[1.2, 0, 0]} end={[1.7, 0.4, 0.5]} />
-      <GradientBond start={[1.2, 0, 0]} end={[1.5, -0.6, 0]} />
+      <GradientBond start={[0, 0, 0]} end={[0.9, 0.75, 0]} />
+      <GradientBond start={[0.9, 0.75, 0]} end={[1.8, 0, 0]} />
+      <GradientBond start={[0, 0, 0]} end={[0, 1.2, 0.6]} />
+      <GradientBond start={[1.8, 0, 0]} end={[2.55, 0.6, 0.7]} />
+      <GradientBond start={[1.8, 0, 0]} end={[2.25, -0.9, 0]} />
     </group>
   );
 }
