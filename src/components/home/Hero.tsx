@@ -21,7 +21,7 @@ export const Hero = () => {
           animate={{ opacity: is3DReady ? 0.9 : 0 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          <Scene3D dynamicCamera onReady={() => setIs3DReady(true)}>
+          <Scene3D dynamicCamera mouseControlled onReady={() => setIs3DReady(true)}>
             <MolecularStructures />
           </Scene3D>
         </motion.div>

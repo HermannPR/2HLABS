@@ -9,6 +9,7 @@ interface Scene3DProps {
   className?: string;
   enableControls?: boolean;
   dynamicCamera?: boolean;
+  mouseControlled?: boolean;
   onReady?: () => void;
 }
 
@@ -20,6 +21,7 @@ export function Scene3D({
   className = '',
   enableControls = false,
   dynamicCamera = false,
+  mouseControlled = false,
   onReady,
 }: Scene3DProps) {
   return (
@@ -57,7 +59,7 @@ export function Scene3D({
         }}
       >
         {dynamicCamera ? (
-          <DynamicCamera />
+          <DynamicCamera mouseControlled={mouseControlled} />
         ) : (
           <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={75} />
         )}
