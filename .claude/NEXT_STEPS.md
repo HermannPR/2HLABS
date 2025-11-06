@@ -1,6 +1,22 @@
 # Next Steps & Roadmap
 
-## ✅ Recently Completed (2025-10-29)
+## ✅ Recently Completed (2025-11-05)
+
+### Animation & 3D Upgrade
+- [x] Installed React Three Fiber, drei, three, and lenis
+- [x] Created comprehensive animation component library
+- [x] Implemented 3D floating molecules on hero section
+- [x] Added 3D card tilt effects to All Souls page (desktop only)
+- [x] Implemented scroll-triggered reveal animations site-wide
+- [x] Added smooth scrolling with Lenis
+- [x] Created ScrollReveal, Card3D, ParallaxSection components
+- [x] Created ProgressBar and CountUp animation components
+- [x] Optimized animations for mobile (disabled 3D effects)
+- [x] Built complete documentation (ANIMATION_UPGRADE.md)
+- [x] All TypeScript type errors fixed
+- [x] Production build successful
+
+## ✅ Previously Completed (2025-10-29 & Earlier)
 
 ### Assets Implementation
 - [x] Generated and uploaded GEN 3 Standarized assets (12 soul logos, 4 badges, hero background)
@@ -25,6 +41,14 @@
 - [x] SEO optimization with structured data (just completed)
 
 ## 🔥 Current Sprint - Active Development
+
+### Phase 0: Animation & Visual Enhancement ✨
+**Status**: ✅ COMPLETED (2025-11-05)
+- Created comprehensive scroll animation system
+- Implemented 3D effects with React Three Fiber
+- Added smooth scrolling with Lenis
+- Mobile optimizations completed
+- Ready for further enhancements on other pages
 
 ### Phase 1: Quiz Progress Bar ⏳
 **Status**: ✅ COMPLETED
@@ -136,9 +160,45 @@
 
 ## 🎯 Quick Wins (Can Do Now)
 
-### Easy Improvements:
+### Animation Enhancements (Using New System):
 
-#### 1. Add Quiz Onboarding (30 min)
+#### 1. Enhance How It Works Page (45-60 min)
+Apply new animation components:
+- ScrollReveal for each step with stagger
+- CountUp for statistics (if any)
+- ParallaxSection for background elements
+- SVG path drawing for process flow
+
+**Files**: `src/pages/HowItWorks.tsx`
+**Components Available**: ScrollReveal, ParallaxSection, CountUp
+
+#### 2. Enhance About Page (30-45 min)
+Apply animations:
+- ScrollReveal for team members
+- Card3D for team member cards
+- Timeline scroll animations (if applicable)
+
+**Files**: `src/pages/About.tsx`
+**Components Available**: ScrollReveal, Card3D
+
+#### 3. Enhance Pricing Page (30-45 min)
+Apply animations:
+- Card3D for pricing tiers
+- ScrollReveal for features list with stagger
+- Hover effects already built into Card3D
+
+**Files**: `src/pages/Pricing.tsx`
+**Components Available**: ScrollReveal, Card3D
+
+#### 4. Add Parallax to Hero Sections (20-30 min)
+Apply ParallaxSection to background elements on various pages
+
+**Files**: Any page with hero section
+**Component**: ParallaxSection (already created, ready to use)
+
+### Other Easy Improvements:
+
+#### 5. Add Quiz Onboarding (30 min)
 Create 3-card intro before quiz starts:
 - "No Wrong Answers"
 - "Takes 2 Minutes"
@@ -147,22 +207,23 @@ Create 3-card intro before quiz starts:
 **File**: `src/pages/FormulaGenerator.tsx`
 **Location**: Add state for `showIntro` and intro screen before quiz
 
-#### 2. Expand FAQs (20 min)
+#### 6. Expand FAQs (20 min)
 Add more questions to `src/data/faqs.ts`:
 - "How accurate is the archetype matching?"
 - "Can I have multiple souls?"
 - "Are the dosages safe?"
 - "What if I'm caffeine sensitive?"
 
-#### 3. Add Social Proof (15 min)
+#### 7. Add Social Proof (15 min)
 Update `src/data/testimonials.ts` with more reviews
 
-#### 4. Improve Mobile Nav (30 min)
+#### 8. Improve Mobile Nav (30 min)
 - Make mobile menu full-screen
 - Add close button
 - Smooth animations
 
-#### 5. Add Scroll Progress Bar (20 min)
+#### 9. Add Scroll Progress Bar (20 min) - COMPONENT READY
+Use the ProgressBar component already created!
 Show progress while taking quiz:
 - Visual bar at top of page
 - Percentage indicator
@@ -182,10 +243,13 @@ Show progress while taking quiz:
 - [ ] Could benefit from state management library (Redux/Zustand)
 
 ### Performance:
-- [ ] Add lazy loading for routes
-- [ ] Optimize bundle size (currently 445 KB)
+- [x] Add lazy loading for routes (already implemented)
+- [ ] Optimize bundle size (currently ~913 KB for Home with R3F, ~250-450 KB for others)
 - [ ] Add image lazy loading (when images added)
-- [ ] Consider code splitting
+- [x] Consider code splitting (React Three Fiber only loads on Home page)
+- [x] Hardware-accelerated animations (transform/opacity only)
+- [ ] Add prefers-reduced-motion support
+- [ ] Intersection observer throttling for scroll animations
 
 ## 💡 Feature Ideas (Backlog)
 
@@ -316,9 +380,36 @@ Show progress while taking quiz:
 
 ## 🎯 This Week's Goals
 
-Based on current state:
-1. **Generate all visual assets** (highest priority)
-2. **Implement assets** into the site
-3. **Add quiz onboarding** for better UX
-4. **Expand FAQs** with 5-10 more questions
-5. **Test mobile experience** and fix issues
+Based on current state (Post-Animation Upgrade):
+1. **Apply animations to remaining pages** (How It Works, About, Pricing)
+2. **Test mobile experience** with new animations
+3. **Add prefers-reduced-motion support** for accessibility
+4. **Generate missing visual assets** for pages without 3D
+5. **Optimize bundle size** if needed (consider dynamic imports)
+6. **Add quiz onboarding** with new animation components
+7. **Expand FAQs** with 5-10 more questions
+
+## 🎨 Available Animation Components (Ready to Use)
+
+### Components in `src/components/animations/`:
+- **ScrollReveal** - Scroll-triggered animations (up/down/left/right)
+- **Card3D** - 3D tilt on mouse hover (desktop only)
+- **ParallaxSection** - Parallax scrolling effects
+- **ProgressBar** - Animated progress indicator
+- **CountUp** - Number counter with spring animation
+
+### 3D Components in `src/components/three/`:
+- **Scene3D** - React Three Fiber canvas wrapper
+- **FloatingMolecules** - 3D molecule background (currently on Home)
+
+### Hooks in `src/hooks/`:
+- **useScrollAnimation** - Viewport detection
+- **useSmoothScroll** - Lenis smooth scrolling (enabled globally)
+- **useStaggerAnimation** - List stagger animations
+
+### Import Example:
+```tsx
+import { ScrollReveal, Card3D, ParallaxSection } from '@/components/animations';
+```
+
+See `ANIMATION_UPGRADE.md` for complete usage documentation.
