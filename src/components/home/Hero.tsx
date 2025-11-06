@@ -13,12 +13,12 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
-      {/* 3D Background Scene with smooth fade-in */}
+      {/* 3D Background Scene with smooth fade-in - More Visible */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
         <motion.div
           className="w-full h-full"
           initial={{ opacity: 0 }}
-          animate={{ opacity: is3DReady ? 0.4 : 0 }}
+          animate={{ opacity: is3DReady ? 0.7 : 0 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
           <Scene3D onReady={() => setIs3DReady(true)}>
@@ -27,8 +27,8 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark/50 to-dark pointer-events-none" />
+      {/* Lighter Gradient Overlay for better 3D visibility */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark/30 to-dark/70 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
         <motion.div
