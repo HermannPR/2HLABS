@@ -367,12 +367,13 @@ export const AllSouls = () => {
 
           return (
           <div
-            className="fixed inset-0 bg-black/90 flex items-start justify-center p-4 sm:p-6 md:p-8 pt-20 sm:pt-24"
+            className="fixed inset-0 bg-black/90 flex items-start justify-center p-4 sm:p-6 md:p-8 pt-24 sm:pt-28 md:pt-32 pb-8"
             style={{
               zIndex: 9999,
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
               overflowY: 'auto',
+              overscrollBehavior: 'contain',
             }}
             onClick={() => setSelectedArchetype(null)}
           >

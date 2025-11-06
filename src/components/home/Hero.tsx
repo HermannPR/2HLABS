@@ -27,8 +27,15 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Lighter Gradient Overlay for better 3D visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark/20 to-dark/60 pointer-events-none" />
+      {/* Blur gradient overlay for content visibility */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to bottom, rgba(10, 14, 39, 0.8) 0%, rgba(10, 14, 39, 0.5) 20%, transparent 40%, transparent 60%, rgba(10, 14, 39, 0.5) 80%, rgba(10, 14, 39, 0.8) 100%)',
+          backdropFilter: 'blur(2px)',
+          WebkitBackdropFilter: 'blur(2px)',
+        }}
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
         <motion.div
