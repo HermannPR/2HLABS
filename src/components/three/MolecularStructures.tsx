@@ -10,8 +10,9 @@ interface AtomProps {
 
 /**
  * Atom with specific 2HLABS gradient (yellow→magenta→cyan like logo)
+ * Giant size for dramatic visual impact
  */
-function GradientAtom({ position, size = 0.3 }: AtomProps) {
+function GradientAtom({ position, size = 0.6 }: AtomProps) {
   const meshRef = useRef<THREE.Mesh>(null);
 
   // Create the exact gradient shader matching the 2HLABS logo
@@ -154,7 +155,7 @@ function GradientBond({ start, end }: BondProps) {
   return (
     <Cylinder
       ref={meshRef}
-      args={[0.06, 0.06, length, 8]}
+      args={[0.12, 0.12, length, 8]}
       position={midpoint}
       rotation={[euler.x, euler.y, euler.z]}
     >
@@ -183,21 +184,21 @@ function CaffeineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   return (
     <group ref={groupRef} position={position}>
-      {/* Carbon ring structure */}
-      <GradientAtom position={[0, 0, 0]} size={0.28} />
-      <GradientAtom position={[0.6, 0.4, 0]} size={0.28} />
-      <GradientAtom position={[1.2, 0, 0]} size={0.28} />
-      <GradientAtom position={[1.2, -0.8, 0]} size={0.28} />
-      <GradientAtom position={[0.6, -1.2, 0]} size={0.28} />
-      <GradientAtom position={[0, -0.8, 0]} size={0.28} />
+      {/* Carbon ring structure - Giant atoms */}
+      <GradientAtom position={[0, 0, 0]} size={0.55} />
+      <GradientAtom position={[0.6, 0.4, 0]} size={0.55} />
+      <GradientAtom position={[1.2, 0, 0]} size={0.55} />
+      <GradientAtom position={[1.2, -0.8, 0]} size={0.55} />
+      <GradientAtom position={[0.6, -1.2, 0]} size={0.55} />
+      <GradientAtom position={[0, -0.8, 0]} size={0.55} />
 
-      {/* Nitrogen atoms */}
-      <GradientAtom position={[0.3, 0.8, 0.5]} size={0.32} />
-      <GradientAtom position={[0.9, -1.2, 0.5]} size={0.32} />
+      {/* Nitrogen atoms - Larger */}
+      <GradientAtom position={[0.3, 0.8, 0.5]} size={0.62} />
+      <GradientAtom position={[0.9, -1.2, 0.5]} size={0.62} />
 
       {/* Oxygen atoms */}
-      <GradientAtom position={[1.8, 0.2, 0]} size={0.3} />
-      <GradientAtom position={[-0.3, -1.2, 0.5]} size={0.3} />
+      <GradientAtom position={[1.8, 0.2, 0]} size={0.58} />
+      <GradientAtom position={[-0.3, -1.2, 0.5]} size={0.58} />
 
       {/* Bonds */}
       <GradientBond start={[0, 0, 0]} end={[0.6, 0.4, 0]} />
@@ -228,12 +229,12 @@ function CreatineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   return (
     <group ref={groupRef} position={position}>
-      <GradientAtom position={[0, 0, 0]} size={0.28} />
-      <GradientAtom position={[0.7, 0, 0]} size={0.28} />
-      <GradientAtom position={[1.1, 0.6, 0]} size={0.28} />
-      <GradientAtom position={[0.3, 0.7, 0]} size={0.32} />
-      <GradientAtom position={[1.5, 0.9, 0.5]} size={0.32} />
-      <GradientAtom position={[-0.5, 0.3, 0.5]} size={0.3} />
+      <GradientAtom position={[0, 0, 0]} size={0.55} />
+      <GradientAtom position={[0.7, 0, 0]} size={0.55} />
+      <GradientAtom position={[1.1, 0.6, 0]} size={0.55} />
+      <GradientAtom position={[0.3, 0.7, 0]} size={0.62} />
+      <GradientAtom position={[1.5, 0.9, 0.5]} size={0.62} />
+      <GradientAtom position={[-0.5, 0.3, 0.5]} size={0.58} />
 
       <GradientBond start={[0, 0, 0]} end={[0.7, 0, 0]} />
       <GradientBond start={[0.7, 0, 0]} end={[1.1, 0.6, 0]} />
@@ -260,12 +261,12 @@ function BetaAlanineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   return (
     <group ref={groupRef} position={position}>
-      <GradientAtom position={[0, 0, 0]} size={0.28} />
-      <GradientAtom position={[0.6, 0.5, 0]} size={0.28} />
-      <GradientAtom position={[1.2, 0, 0]} size={0.28} />
-      <GradientAtom position={[0, 0.8, 0.4]} size={0.32} />
-      <GradientAtom position={[1.7, 0.4, 0.5]} size={0.3} />
-      <GradientAtom position={[1.5, -0.6, 0]} size={0.3} />
+      <GradientAtom position={[0, 0, 0]} size={0.55} />
+      <GradientAtom position={[0.6, 0.5, 0]} size={0.55} />
+      <GradientAtom position={[1.2, 0, 0]} size={0.55} />
+      <GradientAtom position={[0, 0.8, 0.4]} size={0.62} />
+      <GradientAtom position={[1.7, 0.4, 0.5]} size={0.58} />
+      <GradientAtom position={[1.5, -0.6, 0]} size={0.58} />
 
       <GradientBond start={[0, 0, 0]} end={[0.6, 0.5, 0]} />
       <GradientBond start={[0.6, 0.5, 0]} end={[1.2, 0, 0]} />
@@ -294,10 +295,10 @@ export function MolecularStructures() {
       <pointLight position={[5, -5, 5]} intensity={1.5} color="#FF00E5" />
       <pointLight position={[-5, -5, 5]} intensity={1.5} color="#00E5FF" />
 
-      {/* Molecules with unified gradient */}
-      <CaffeineMolecule position={[0, 0, -3]} rotationSpeed={0.8} />
-      <CreatineMolecule position={[-3.5, 1, -5]} rotationSpeed={1.0} />
-      <BetaAlanineMolecule position={[3, -0.5, -4]} rotationSpeed={0.9} />
+      {/* Giant molecules - much closer and larger */}
+      <CaffeineMolecule position={[0, 0, 0]} rotationSpeed={0.8} />
+      <CreatineMolecule position={[-3.5, 1, -1]} rotationSpeed={1.0} />
+      <BetaAlanineMolecule position={[3, -0.5, -2]} rotationSpeed={0.9} />
     </>
   );
 }
