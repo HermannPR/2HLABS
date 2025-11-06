@@ -11,8 +11,7 @@ import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 import { useTranslation } from 'react-i18next';
 import { INTENSITY_GRADIENT, PUMP_GRADIENT, FOCUS_GRADIENT, LEVEL_TO_VALUE, type GradientStop } from '../constants/gradients';
-import { Card3D } from '../components/animations/Card3D';
-import { ScrollReveal } from '../components/animations/ScrollReveal';
+import { Card3D, ScrollReveal, GlowingOrb, ScrollScale } from '../components/animations';
 
 // Brand colors for each soul archetype
 const SOUL_COLORS: Record<string, string> = {
@@ -133,7 +132,12 @@ export const AllSouls = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dark py-12">
+    <div className="min-h-screen bg-dark py-12 relative overflow-hidden">
+      {/* Ambient Glowing Orbs */}
+      <GlowingOrb color="#00E5FF" size={400} blur={120} className="top-20 -left-40" />
+      <GlowingOrb color="#FF00E5" size={350} blur={100} className="top-1/2 -right-32" />
+      <GlowingOrb color="#39FF14" size={300} blur={90} className="bottom-20 left-1/3" />
+
       <SEO
         title="All 12 Training Souls"
         description="Explore all 12 unique pre-workout archetypes. From Lion Heart's explosive power to Serpent Flow's stim-free endurance - find the perfect formula for your training style."
@@ -146,20 +150,21 @@ export const AllSouls = () => {
         { name: 'All Souls', url: '/souls' }
       ])} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
-            {t('allSouls.title')} <span className="text-gradient">{t('allSouls.titleHighlight')}</span>
-          </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            {t('allSouls.subtitle')}
-          </p>
-        </motion.div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Hero Section with Scale Animation */}
+        <ScrollScale scaleRange={[0.9, 1]} className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4">
+              {t('allSouls.title')} <span className="text-gradient">{t('allSouls.titleHighlight')}</span>
+            </h1>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              {t('allSouls.subtitle')}
+            </p>
+          </motion.div>
+        </ScrollScale>
 
         {/* Archetypes Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">

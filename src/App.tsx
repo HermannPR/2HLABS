@@ -5,6 +5,7 @@ import { Layout } from './components/layout/Layout';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { PageLoader } from './components/common/Skeleton';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { ScrollProgress } from './components/animations/ScrollProgress';
 
 const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const FormulaGenerator = lazy(() => import('./pages/FormulaGenerator').then(module => ({ default: module.FormulaGenerator })));
@@ -26,6 +27,7 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <ScrollProgress />
       <Layout>
         <AnimatePresence mode="wait">
           <Suspense fallback={<PageLoader message="Loading experience..." />}>

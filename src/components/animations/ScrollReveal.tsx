@@ -24,7 +24,7 @@ export function ScrollReveal({
   direction = 'up',
   delay = 0,
   duration = 0.6,
-  once = true,
+  once = false, // Changed to false so animations repeat
   className = '',
 }: ScrollRevealProps) {
   const { ref, isInView } = useScrollAnimation({ once });
