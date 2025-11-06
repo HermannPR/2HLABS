@@ -362,8 +362,12 @@ export const AllSouls = () => {
 
           return (
           <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
-            style={{ zIndex: 9999 }}
+            className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 overflow-y-auto"
+            style={{
+              zIndex: 9999,
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+            }}
             onClick={() => setSelectedArchetype(null)}
           >
             <motion.div

@@ -27,9 +27,13 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-2xl font-heading font-bold"
+              className="flex items-center"
             >
-              <span className="text-gradient">2HLABS</span>
+              <img
+                src="/assets/2hlabs-logo.png"
+                alt="2HLABS"
+                className="h-10 w-auto object-contain"
+              />
             </motion.div>
           </Link>
 
