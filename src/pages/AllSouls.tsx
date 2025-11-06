@@ -203,6 +203,7 @@ export const AllSouls = () => {
                 <motion.div
                   onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
                   onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}
+                  onClick={() => setSelectedArchetype(archetype)}
                   style={{
                     borderColor: isHovered ? brandColor : 'rgba(255, 255, 255, 0.1)',
                     boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
@@ -210,10 +211,11 @@ export const AllSouls = () => {
                     borderStyle: 'solid',
                     borderRadius: '0.75rem',
                     transition: isMobile ? 'none' : 'all 0.3s ease',
+                    cursor: 'pointer',
                   }}
                 >
                   <Card
-                    className="h-full cursor-pointer group relative overflow-hidden !border-0"
+                    className="h-full group relative overflow-hidden !border-0"
                   >
                 {/* Header */}
                 <div className="text-center mb-4">
@@ -314,7 +316,10 @@ export const AllSouls = () => {
                   variant="outline"
                   size="sm"
                   className="w-full"
-                  onClick={() => setSelectedArchetype(archetype)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedArchetype(archetype);
+                  }}
                 >
                   {t('allSouls.viewProfile')}
                 </Button>
@@ -362,25 +367,24 @@ export const AllSouls = () => {
 
           return (
           <div
-            className="fixed inset-0 bg-black/90 flex items-center justify-center p-4 overflow-y-auto"
+            className="fixed inset-0 bg-black/90 flex items-start justify-center p-4 sm:p-6 md:p-8 pt-20 sm:pt-24"
             style={{
               zIndex: 9999,
               backdropFilter: 'blur(12px)',
               WebkitBackdropFilter: 'blur(12px)',
+              overflowY: 'auto',
             }}
             onClick={() => setSelectedArchetype(null)}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-dark-lighter rounded-2xl max-w-3xl w-full my-8 relative"
+              className="bg-dark-lighter rounded-2xl max-w-3xl w-full mb-8 relative"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
                 borderColor: modalBrandColor,
                 boxShadow: `0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4), 0 0 80px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
-                maxHeight: 'calc(100vh - 4rem)',
-                overflowY: 'auto',
               }}
               onClick={(e) => e.stopPropagation()}
             >
@@ -406,72 +410,72 @@ export const AllSouls = () => {
                 </svg>
               </button>
 
-              <div className="p-8 clear-both">
+              <div className="p-4 sm:p-6 md:p-8 clear-both">
                 {/* Header */}
-                <div className="text-center mb-6">
-                  <div className="mb-4 flex justify-center">
+                <div className="text-center mb-4 sm:mb-6">
+                  <div className="mb-3 sm:mb-4 flex justify-center">
                     <img
                       src={getSoulLogo(selectedArchetype.id)}
                       alt={selectedArchetype.name}
-                      className="w-32 h-32 object-contain mix-blend-lighten"
+                      className="w-24 h-24 sm:w-32 sm:h-32 object-contain mix-blend-lighten"
                       style={{
                         filter: `drop-shadow(0 0 30px ${modalBrandColor}) drop-shadow(0 0 15px ${modalBrandColor})`,
                       }}
                     />
                   </div>
                   <h2
-                    className="text-4xl font-heading font-bold mb-2"
+                    className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-2"
                     style={{ color: modalBrandColor }}
                   >
                     {selectedArchetype.name}
                   </h2>
-                  <p className="text-xl font-semibold" style={{ color: modalBrandColor }}>
+                  <p className="text-base sm:text-lg md:text-xl font-semibold" style={{ color: modalBrandColor }}>
                     {t(`archetypes.${selectedArchetype.id}.tagline`)}
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
                   {t(`archetypes.${selectedArchetype.id}.description`)}
                 </p>
 
                 {/* Formula Profile */}
-                <div className="grid md:grid-cols-2 gap-4 mb-6">
-                  <div className="p-4 bg-dark rounded-lg">
-                    <h3 className="text-sm font-semibold text-gray-400 mb-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
+                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
+                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">
                       {t('allSouls.modal.caffeineRange')}
                     </h3>
-                    <p className="text-2xl font-bold text-primary">
+                    <p className="text-xl sm:text-2xl font-bold text-primary">
                       {selectedArchetype.formulaProfile.caffeineRange[0] === selectedArchetype.formulaProfile.caffeineRange[1]
                         ? `${selectedArchetype.formulaProfile.caffeineRange[0]}mg`
                         : `${selectedArchetype.formulaProfile.caffeineRange[0]}-${selectedArchetype.formulaProfile.caffeineRange[1]}mg`
                       }
                     </p>
                   </div>
-                  <div className="p-4 bg-dark rounded-lg">
-                    <h3 className="text-sm font-semibold text-gray-400 mb-2">
+                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
+                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">
                       {t('allSouls.modal.intensityLevel')}
                     </h3>
-                    <p className="text-2xl font-bold text-secondary">
+                    <p className="text-xl sm:text-2xl font-bold text-secondary">
                       {selectedArchetype.formulaProfile.intensity}/10
                     </p>
                   </div>
-                  <div className="p-4 bg-dark rounded-lg">
-                    <h3 className="text-sm font-semibold text-gray-400 mb-2">{t('allSouls.modal.pumpLevel')}</h3>
-                    <p className="text-xl font-bold text-white uppercase">
+                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
+                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">{t('allSouls.modal.pumpLevel')}</h3>
+                    <p className="text-lg sm:text-xl font-bold text-white uppercase">
                       {selectedArchetype.formulaProfile.pumpLevel}
                     </p>
                   </div>
-                  <div className="p-4 bg-dark rounded-lg">
-                    <h3 className="text-sm font-semibold text-gray-400 mb-2">{t('allSouls.modal.focusLevel')}</h3>
-                    <p className="text-xl font-bold text-white uppercase">
+                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
+                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">{t('allSouls.modal.focusLevel')}</h3>
+                    <p className="text-lg sm:text-xl font-bold text-white uppercase">
                       {selectedArchetype.formulaProfile.focusLevel}
                     </p>
                   </div>
                 </div>
 
                 {/* Traits & Athlete Types */}
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
                   <div>
                     <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.coreTraits')}</h3>
                     <ul className="space-y-2">
