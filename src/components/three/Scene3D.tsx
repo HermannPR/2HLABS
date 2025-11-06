@@ -27,11 +27,13 @@ export function Scene3D({
         className="w-full h-full"
         gl={{
           preserveDrawingBuffer: true,
-          antialias: true,
+          antialias: window.devicePixelRatio <= 1, // Disable on high DPI for performance
           alpha: true,
-          powerPreference: 'high-performance'
+          powerPreference: 'high-performance',
+          failIfMajorPerformanceCaveat: false // Allow on low-end devices
         }}
         onCreated={({ gl }) => {
+          // Better error handling for context loss
           gl.domElement.addEventListener('webglcontextlost', (e) => {
             e.preventDefault();
             console.warn('WebGL context lost, attempting to restore...');
@@ -40,6 +42,10 @@ export function Scene3D({
             console.log('WebGL context restored');
           });
 
+          // Set pixel ratio based on device - limit to 2 for performance
+          const pixelRatio = Math.min(window.devicePixelRatio, 2);
+          gl.setPixelRatio(pixelRatio);
+
           // Notify parent that 3D scene is ready
           if (onReady) {
             // Small delay to ensure everything is rendered
@@ -47,7 +53,7 @@ export function Scene3D({
           }
         }}
       >
-        <PerspectiveCamera makeDefault position={[0, 0, 8]} />
+        <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={75} />
         <Suspense fallback={null}>
           {children}
         </Suspense>

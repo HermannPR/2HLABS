@@ -39,17 +39,21 @@ function Molecule({ position, color, speed = 1 }: MoleculeProps) {
 
 /**
  * Floating molecules background for hero section
+ * Optimized for both desktop and mobile visibility
  */
 export function FloatingMolecules() {
   return (
     <>
-      {/* Brighter ambient light */}
-      <ambientLight intensity={0.8} />
+      {/* Brighter ambient light for mobile visibility */}
+      <ambientLight intensity={1.2} />
 
-      {/* Multiple colored lights for better visibility */}
-      <pointLight position={[10, 10, 10]} intensity={2} color="#00E5FF" />
-      <pointLight position={[-10, -10, -10]} color="#FF00E5" intensity={1.5} />
-      <pointLight position={[0, 10, -5]} color="#39FF14" intensity={1.2} />
+      {/* Multiple colored lights for better visibility - increased intensity */}
+      <pointLight position={[10, 10, 10]} intensity={3} color="#00E5FF" />
+      <pointLight position={[-10, -10, -10]} color="#FF00E5" intensity={2.5} />
+      <pointLight position={[0, 10, -5]} color="#39FF14" intensity={2} />
+
+      {/* Spotlight for dramatic effect */}
+      <spotLight position={[0, 15, 0]} intensity={2} angle={0.6} penumbra={1} color="#ffffff" />
 
       {/* Original 5 molecules - larger and more visible */}
       <Molecule position={[-3, 0, 0]} color="#00E5FF" speed={0.8} />

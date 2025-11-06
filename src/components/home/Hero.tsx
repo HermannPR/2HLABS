@@ -18,7 +18,7 @@ export const Hero = () => {
         <motion.div
           className="w-full h-full"
           initial={{ opacity: 0 }}
-          animate={{ opacity: is3DReady ? 0.7 : 0 }}
+          animate={{ opacity: is3DReady ? 0.9 : 0 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
           <Scene3D onReady={() => setIs3DReady(true)}>
@@ -28,7 +28,7 @@ export const Hero = () => {
       </div>
 
       {/* Lighter Gradient Overlay for better 3D visibility */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark/30 to-dark/70 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark/20 to-dark/60 pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
         <motion.div
