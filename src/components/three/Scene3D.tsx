@@ -2,11 +2,13 @@ import { Canvas } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Suspense } from 'react';
 import type { ReactNode } from 'react';
+import { DynamicCamera } from './DynamicCamera';
 
 interface Scene3DProps {
   children: ReactNode;
   className?: string;
   enableControls?: boolean;
+  dynamicCamera?: boolean;
   onReady?: () => void;
 }
 
@@ -17,6 +19,7 @@ export function Scene3D({
   children,
   className = '',
   enableControls = false,
+  dynamicCamera = false,
   onReady,
 }: Scene3DProps) {
   return (
@@ -53,7 +56,11 @@ export function Scene3D({
           }
         }}
       >
-        <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={75} />
+        {dynamicCamera ? (
+          <DynamicCamera />
+        ) : (
+          <PerspectiveCamera makeDefault position={[0, 0, 8]} fov={75} />
+        )}
         <Suspense fallback={null}>
           {children}
         </Suspense>
