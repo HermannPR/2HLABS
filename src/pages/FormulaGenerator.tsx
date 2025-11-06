@@ -50,12 +50,9 @@ export const FormulaGenerator = () => {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const [showFlavorSelection, setShowFlavorSelection] = useState(false);
-  const [selectedFlavor, setSelectedFlavor] = useState<string | null>(null);
+  const [, setSelectedFlavor] = useState<string | null>(null);
   const [showFormulaEditor, setShowFormulaEditor] = useState(false);
   const [customIngredients, setCustomIngredients] = useState<FormulaIngredient[]>([]);
-
-  // TODO: Use selectedFlavor for formula creation/ordering
-  console.log('Current flavor selection:', selectedFlavor);
 
   // Filter questions based on conditional logic
   const getVisibleQuestions = () => {
@@ -177,8 +174,7 @@ export const FormulaGenerator = () => {
   const handleFlavorSelected = (flavorId: string) => {
     setSelectedFlavor(flavorId);
     setShowFlavorSelection(false);
-    // Could add logic here to save the complete formula with flavor
-    console.log('Selected flavor:', flavorId);
+    // TODO: Save the complete formula with selected flavor for e-commerce
   };
 
   const handleSkipFlavor = () => {

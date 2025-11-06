@@ -23,6 +23,21 @@ export function Scene3D({
         dpr={[1, 2]}
         performance={{ min: 0.5 }}
         className="w-full h-full"
+        gl={{
+          preserveDrawingBuffer: true,
+          antialias: true,
+          alpha: true,
+          powerPreference: 'high-performance'
+        }}
+        onCreated={({ gl }) => {
+          gl.domElement.addEventListener('webglcontextlost', (e) => {
+            e.preventDefault();
+            console.warn('WebGL context lost, attempting to restore...');
+          });
+          gl.domElement.addEventListener('webglcontextrestored', () => {
+            console.log('WebGL context restored');
+          });
+        }}
       >
         <PerspectiveCamera makeDefault position={[0, 0, 8]} />
         <Suspense fallback={null}>
