@@ -32,7 +32,7 @@ export const Navbar = () => {
               <img
                 src="/assets/2hlabs-logo.png"
                 alt="2HLABS"
-                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
+                className="h-6 sm:h-8 md:h-10 w-auto object-contain"
               />
             </motion.div>
           </Link>

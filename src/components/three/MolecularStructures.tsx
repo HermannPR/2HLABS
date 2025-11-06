@@ -24,12 +24,14 @@ function GradientAtom({ position, size = 0.6 }: AtomProps) {
       varying vec2 vUv;
       varying vec3 vNormal;
       varying vec3 vViewPosition;
+      varying float vFogDepth;
 
       void main() {
         vUv = uv;
         vNormal = normalize(normalMatrix * normal);
         vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
         vViewPosition = -mvPosition.xyz;
+        vFogDepth = -mvPosition.z;
         gl_Position = projectionMatrix * mvPosition;
       }
     `,
@@ -38,6 +40,7 @@ function GradientAtom({ position, size = 0.6 }: AtomProps) {
       varying vec2 vUv;
       varying vec3 vNormal;
       varying vec3 vViewPosition;
+      varying float vFogDepth;
 
       void main() {
         // Exact colors from 2HLABS logo
@@ -70,6 +73,7 @@ function GradientAtom({ position, size = 0.6 }: AtomProps) {
         gl_FragColor = vec4(finalColor, 1.0);
       }
     `,
+    fog: true,
   });
 
   useFrame((state) => {
@@ -116,14 +120,18 @@ function GradientBond({ start, end }: BondProps) {
     },
     vertexShader: `
       varying vec2 vUv;
+      varying float vFogDepth;
       void main() {
         vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+        vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+        vFogDepth = -mvPosition.z;
+        gl_Position = projectionMatrix * mvPosition;
       }
     `,
     fragmentShader: `
       uniform float time;
       varying vec2 vUv;
+      varying float vFogDepth;
 
       void main() {
         // Same gradient: yellow→magenta→cyan
@@ -144,6 +152,7 @@ function GradientBond({ start, end }: BondProps) {
       }
     `,
     transparent: true,
+    fog: true,
   });
 
   useFrame((state) => {

@@ -3,6 +3,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Suspense } from 'react';
 import type { ReactNode } from 'react';
 import { DynamicCamera } from './DynamicCamera';
+import * as THREE from 'three';
 
 interface Scene3DProps {
   children: ReactNode;
@@ -11,6 +12,9 @@ interface Scene3DProps {
   dynamicCamera?: boolean;
   mouseControlled?: boolean;
   onReady?: () => void;
+  enableFog?: boolean;
+  fogColor?: string;
+  fogDensity?: number;
 }
 
 /**
@@ -23,6 +27,9 @@ export function Scene3D({
   dynamicCamera = false,
   mouseControlled = false,
   onReady,
+  enableFog = false,
+  fogColor = '#0a0e27',
+  fogDensity = 0.08,
 }: Scene3DProps) {
   return (
     <div className={`w-full h-full ${className}`}>
@@ -37,7 +44,7 @@ export function Scene3D({
           powerPreference: 'high-performance',
           failIfMajorPerformanceCaveat: false // Allow on low-end devices
         }}
-        onCreated={({ gl }) => {
+        onCreated={({ gl, scene }) => {
           // Better error handling for context loss
           gl.domElement.addEventListener('webglcontextlost', (e) => {
             e.preventDefault();
@@ -50,6 +57,11 @@ export function Scene3D({
           // Set pixel ratio based on device - limit to 2 for performance
           const pixelRatio = Math.min(window.devicePixelRatio, 2);
           gl.setPixelRatio(pixelRatio);
+
+          // Add volumetric fog if enabled
+          if (enableFog) {
+            scene.fog = new THREE.FogExp2(fogColor, fogDensity);
+          }
 
           // Notify parent that 3D scene is ready
           if (onReady) {

@@ -5,11 +5,24 @@ import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
 import { Scene3D } from '../three/Scene3D';
 import { MolecularStructures } from '../three/MolecularStructures';
-import { useState } from 'react';
+import { BackgroundMolecules } from '../three/BackgroundMolecules';
+import { VolumetricFog } from '../three/VolumetricFog';
+import { useState, useEffect } from 'react';
 
 export const Hero = () => {
   const { t } = useTranslation();
   const [is3DReady, setIs3DReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile for performance optimization
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || /iPhone|iPad|iPod|Android/i.test(navigator.userAgent));
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
@@ -21,7 +34,33 @@ export const Hero = () => {
           animate={{ opacity: is3DReady ? 0.9 : 0 }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
-          <Scene3D dynamicCamera mouseControlled onReady={() => setIs3DReady(true)}>
+          <Scene3D
+            dynamicCamera
+            mouseControlled
+            enableFog
+            fogColor="#0a0e27"
+            fogDensity={0.035}
+            onReady={() => setIs3DReady(true)}
+          >
+            {/* Volumetric fog particles (reduced on mobile) */}
+            <VolumetricFog
+              particleCount={isMobile ? 300 : 800}
+              color1="#FFE500"
+              color2="#FF00E5"
+              color3="#00E5FF"
+              size={isMobile ? 2.0 : 2.5}
+              opacity={isMobile ? 0.15 : 0.2}
+              driftSpeed={0.015}
+            />
+
+            {/* Background molecular space (reduced on mobile) */}
+            <BackgroundMolecules
+              farCount={isMobile ? 10 : 30}
+              midCount={isMobile ? 5 : 15}
+              nearCount={isMobile ? 2 : 5}
+            />
+
+            {/* Hero molecules (in focus) */}
             <MolecularStructures />
           </Scene3D>
         </motion.div>

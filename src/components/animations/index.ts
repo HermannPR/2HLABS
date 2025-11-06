@@ -2,6 +2,7 @@
 export { ScrollReveal } from './ScrollReveal';
 export { ParallaxSection } from './ParallaxSection';
 export { Card3D } from './Card3D';
+export { CardHover } from './CardHover';
 export { ProgressBar } from './ProgressBar';
 export { CountUp } from './CountUp';
 
@@ -10,6 +11,7 @@ export { MagneticButton } from './MagneticButton';
 export { ScrollScale } from './ScrollScale';
 export { TextReveal } from './TextReveal';
 export { GlowingOrb } from './GlowingOrb';
+export { SpinningGlow } from './SpinningGlow';
 export { ScrollProgress } from './ScrollProgress';
 
 // Animation Hooks

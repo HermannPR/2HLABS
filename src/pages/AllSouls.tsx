@@ -11,23 +11,22 @@ import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 import { useTranslation } from 'react-i18next';
 import { INTENSITY_GRADIENT, PUMP_GRADIENT, FOCUS_GRADIENT, LEVEL_TO_VALUE, type GradientStop } from '../constants/gradients';
-import { Card3D, ScrollReveal, GlowingOrb, ScrollScale } from '../components/animations';
+import { CardHover, ScrollReveal, GlowingOrb, ScrollScale, SpinningGlow } from '../components/animations';
 
-// Brand colors for each soul archetype
-const SOUL_COLORS: Record<string, string> = {
-  'gorilla-rage': '#FF5722',      // Warmer orange-red
-  'dragon-blood': '#8B0000',      // Red wine / dark red
-  'cheetah-sprint': '#FFFF00',    // Bright yellow (reverted)
-  'eagle-vision': '#00D4FF',      // Colder cyan / ice blue
-  'titan-strength': '#708090',    // Slate gray
-  'phoenix-rise': '#FF6600',      // Orange
-  'serpent-flow': '#00FF88',      // Green
-  'wolf-pack': '#90EE90',         // Light green
-  'mantis-focus': '#32CD32',      // Lime green (mantis focus)
-  'viper-strike': '#00FF00',      // Neon green
-  'bear-endurance': '#8B4513',    // Brown
-  'thunder-strike': '#9933FF',    // Purple (thunder strike)
-  'lion-heart': '#FFD700',        // Warm golden yellow
+// Brand colors for each soul archetype (primary + secondary for spinning glow)
+const SOUL_COLORS: Record<string, { primary: string; secondary: string }> = {
+  'gorilla-rage': { primary: '#FF8C00', secondary: '#FFB84D' },      // Orange to yellowy-orange
+  'dragon-blood': { primary: '#8B0A50', secondary: '#00D4FF' },      // Wine to electric blue
+  'cheetah-sprint': { primary: '#FFE500', secondary: '#00D4FF' },    // Yellow to electric blue
+  'eagle-vision': { primary: '#00A8E8', secondary: '#F5F5F5' },      // Blue to white
+  'titan-strength': { primary: '#8B94A1', secondary: '#FF8C00' },    // Gray to orange
+  'wolf-pack': { primary: '#90EE90', secondary: '#C4A57B' },         // Light green to light brown
+  'phoenix-rise': { primary: '#FF8C00', secondary: '#FFCC00' },      // Orange to yellower-orange
+  'bear-endurance': { primary: '#8B7355', secondary: '#D4C4B0' },    // Brown to light light brown
+  'mantis-focus': { primary: '#7FFF00', secondary: '#B8FF99' },      // Lime to light green
+  'thunder-strike': { primary: '#B19CD9', secondary: '#9933FF' },    // Light purple to saturated purple
+  'serpent-flow': { primary: '#00C9A7', secondary: '#7FFFD4' },      // Jade to light jade
+  'lion-heart': { primary: '#A8B5C1', secondary: '#8B94A1' },        // Gray with blue tone to darker blue-gray
 };
 
 const renderGradientBars = (value: number, gradient: GradientStop[]) => (
@@ -182,7 +181,7 @@ export const AllSouls = () => {
             ))
           ) : (
                 ARCHETYPES.map((archetype, idx) => {
-                  const brandColor = SOUL_COLORS[archetype.id] || '#00e5ff';
+                  const brandColor = SOUL_COLORS[archetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
                   // On mobile, always show effects; on desktop, show on hover
                   const isHovered = isMobile ? true : hoveredCard === archetype.id;
                   const hexToRgb = (hex: string) => {
@@ -193,19 +192,19 @@ export const AllSouls = () => {
                       b: parseInt(result[3], 16)
                     } : { r: 0, g: 229, b: 255 };
                   };
-                  const rgb = hexToRgb(brandColor);
+                  const rgb = hexToRgb(brandColor.primary);
                   const pumpValue = LEVEL_TO_VALUE[archetype.formulaProfile.pumpLevel] ?? 0;
                   const focusValue = LEVEL_TO_VALUE[archetype.formulaProfile.focusLevel] ?? 0;
 
               return (
             <ScrollReveal key={archetype.id} delay={idx * 0.05}>
-              <Card3D intensity={isMobile ? 0 : 3}>
+              <CardHover>
                 <motion.div
                   onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
                   onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}
                   onClick={() => setSelectedArchetype(archetype)}
                   style={{
-                    borderColor: isHovered ? brandColor : 'rgba(255, 255, 255, 0.1)',
+                    borderColor: isHovered ? brandColor.primary : 'rgba(255, 255, 255, 0.1)',
                     boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
                     borderWidth: '2px',
                     borderStyle: 'solid',
@@ -224,22 +223,24 @@ export const AllSouls = () => {
                       transform: isHovered ? 'scale(1.1)' : 'scale(1)',
                     }}
                   >
-                    <img
-                      src={getSoulLogo(archetype.id)}
-                      alt={archetype.name}
-                      className="w-24 h-24 object-contain mix-blend-lighten"
-                      style={{
-                        filter: isHovered
-                          ? `drop-shadow(0 0 40px ${brandColor}) drop-shadow(0 0 20px ${brandColor})`
-                          : `drop-shadow(0 0 10px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3))`,
-                        transition: 'filter 0.3s ease',
-                      }}
-                    />
+                    <SpinningGlow
+                      color1={brandColor.primary}
+                      color2={brandColor.secondary}
+                      size={96}
+                      speed={6}
+                      intensity={isHovered ? 0.6 : 0.3}
+                    >
+                      <img
+                        src={getSoulLogo(archetype.id)}
+                        alt={archetype.name}
+                        className="w-24 h-24 object-contain mix-blend-lighten"
+                      />
+                    </SpinningGlow>
                   </div>
                   <h3
                     className="text-2xl font-heading font-bold mb-1 transition-colors duration-300"
                     style={{
-                      color: isHovered ? brandColor : 'white',
+                      color: isHovered ? brandColor.primary : 'white',
                     }}
                   >
                     {archetype.name}
@@ -325,7 +326,7 @@ export const AllSouls = () => {
                 </Button>
               </Card>
                 </motion.div>
-              </Card3D>
+              </CardHover>
             </ScrollReveal>
               );
             })
@@ -354,7 +355,7 @@ export const AllSouls = () => {
 
         {/* Detailed Modal */}
         {selectedArchetype && (() => {
-          const modalBrandColor = SOUL_COLORS[selectedArchetype.id] || '#00e5ff';
+          const modalBrandColor = SOUL_COLORS[selectedArchetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
           const hexToRgb = (hex: string) => {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
             return result ? {
@@ -363,7 +364,7 @@ export const AllSouls = () => {
               b: parseInt(result[3], 16)
             } : { r: 0, g: 229, b: 255 };
           };
-          const modalRgb = hexToRgb(modalBrandColor);
+          const modalRgb = hexToRgb(modalBrandColor.primary);
 
           return (
           <div
@@ -384,7 +385,7 @@ export const AllSouls = () => {
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
-                borderColor: modalBrandColor,
+                borderColor: modalBrandColor.primary,
                 boxShadow: `0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4), 0 0 80px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
               }}
               onClick={(e) => e.stopPropagation()}
@@ -395,13 +396,13 @@ export const AllSouls = () => {
                 className="sticky top-4 right-4 float-right z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
                 style={{
                   backgroundColor: `rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
-                  border: `2px solid ${modalBrandColor}`,
+                  border: `2px solid ${modalBrandColor.primary}`,
                 }}
                 aria-label="Close modal"
               >
                 <svg
                   className="w-5 h-5"
-                  style={{ color: modalBrandColor }}
+                  style={{ color: modalBrandColor.primary }}
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -415,22 +416,27 @@ export const AllSouls = () => {
                 {/* Header */}
                 <div className="text-center mb-4 sm:mb-6">
                   <div className="mb-3 sm:mb-4 flex justify-center">
-                    <img
-                      src={getSoulLogo(selectedArchetype.id)}
-                      alt={selectedArchetype.name}
-                      className="w-24 h-24 sm:w-32 sm:h-32 object-contain mix-blend-lighten"
-                      style={{
-                        filter: `drop-shadow(0 0 30px ${modalBrandColor}) drop-shadow(0 0 15px ${modalBrandColor})`,
-                      }}
-                    />
+                    <SpinningGlow
+                      color1={modalBrandColor.primary}
+                      color2={modalBrandColor.secondary}
+                      size={128}
+                      speed={5}
+                      intensity={0.7}
+                    >
+                      <img
+                        src={getSoulLogo(selectedArchetype.id)}
+                        alt={selectedArchetype.name}
+                        className="w-24 h-24 sm:w-32 sm:h-32 object-contain mix-blend-lighten"
+                      />
+                    </SpinningGlow>
                   </div>
                   <h2
                     className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-2"
-                    style={{ color: modalBrandColor }}
+                    style={{ color: modalBrandColor.primary }}
                   >
                     {selectedArchetype.name}
                   </h2>
-                  <p className="text-base sm:text-lg md:text-xl font-semibold" style={{ color: modalBrandColor }}>
+                  <p className="text-base sm:text-lg md:text-xl font-semibold" style={{ color: modalBrandColor.primary }}>
                     {t(`archetypes.${selectedArchetype.id}.tagline`)}
                   </p>
                 </div>
