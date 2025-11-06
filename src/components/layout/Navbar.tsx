@@ -22,7 +22,7 @@ export const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-dark/95 backdrop-blur-sm border-b border-dark-light">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 sm:h-20 md:h-24 lg:h-28">
+        <div className="flex justify-between items-center h-16 sm:h-18 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <motion.div
@@ -32,7 +32,7 @@ export const Navbar = () => {
               <img
                 src="/assets/2hlabs-logo.png"
                 alt="2HLABS"
-                className="h-12 sm:h-14 md:h-16 lg:h-20 w-auto object-contain"
+                className="h-8 sm:h-10 md:h-12 w-auto object-contain"
               />
             </motion.div>
           </Link>
