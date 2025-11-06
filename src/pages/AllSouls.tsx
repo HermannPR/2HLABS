@@ -199,7 +199,7 @@ export const AllSouls = () => {
 
               return (
             <ScrollReveal key={archetype.id} delay={idx * 0.05}>
-              <Card3D intensity={isMobile ? 0 : 10}>
+              <Card3D intensity={isMobile ? 0 : 3}>
                 <motion.div
                   onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
                   onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}

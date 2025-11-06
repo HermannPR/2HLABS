@@ -19,8 +19,8 @@ export function Card3D({
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
+  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 40 });
+  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 40 });
 
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [intensity, -intensity]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-intensity, intensity]);
@@ -53,7 +53,7 @@ export function Card3D({
       }}
       className={className}
     >
-      <div style={{ transform: 'translateZ(50px)' }}>{children}</div>
+      <div style={{ transform: 'translateZ(20px)' }}>{children}</div>
     </motion.div>
   );
 }
