@@ -362,18 +362,21 @@ export const AllSouls = () => {
 
           return (
           <div
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"
+            style={{ zIndex: 9999 }}
             onClick={() => setSelectedArchetype(null)}
           >
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-dark-lighter rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative"
+              className="bg-dark-lighter rounded-2xl max-w-3xl w-full my-8 relative"
               style={{
                 borderWidth: '2px',
                 borderStyle: 'solid',
                 borderColor: modalBrandColor,
                 boxShadow: `0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4), 0 0 80px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
+                maxHeight: 'calc(100vh - 4rem)',
+                overflowY: 'auto',
               }}
               onClick={(e) => e.stopPropagation()}
             >

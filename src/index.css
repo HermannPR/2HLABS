@@ -19,8 +19,12 @@
 }
 
 @layer utilities {
+  /* 2HLABS signature iridescent gradient: Yellow → Magenta → Cyan */
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+    background: linear-gradient(135deg, #FFE500 0%, #FF00E5 50%, #00E5FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   .glow-primary {
@@ -29,5 +33,22 @@
 
   .glow-secondary {
     text-shadow: 0 0 10px rgba(255, 0, 229, 0.5), 0 0 20px rgba(255, 0, 229, 0.3);
+  }
+
+  /* Brand gradient for backgrounds and buttons */
+  .bg-brand-gradient {
+    background: linear-gradient(135deg, #FFE500 0%, #FF00E5 50%, #00E5FF 100%);
+  }
+
+  /* Animated shimmer variant */
+  .bg-brand-gradient-shimmer {
+    background: linear-gradient(135deg, #FFE500 0%, #FF00E5 50%, #00E5FF 100%);
+    background-size: 200% 200%;
+    animation: gradient-shimmer 3s ease infinite;
+  }
+
+  @keyframes gradient-shimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
   }
 }
