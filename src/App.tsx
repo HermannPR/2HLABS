@@ -4,6 +4,7 @@ import { Suspense, lazy } from 'react';
 import { Layout } from './components/layout/Layout';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { PageLoader } from './components/common/Skeleton';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
 
 const Home = lazy(() => import('./pages/Home').then(module => ({ default: module.Home })));
 const FormulaGenerator = lazy(() => import('./pages/FormulaGenerator').then(module => ({ default: module.FormulaGenerator })));
@@ -21,6 +22,7 @@ const NotFound = lazy(() => import('./pages/NotFound').then(module => ({ default
 
 function App() {
   const location = useLocation();
+  useSmoothScroll();
 
   return (
     <ErrorBoundary>

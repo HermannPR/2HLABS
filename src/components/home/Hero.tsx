@@ -3,43 +3,23 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
+import { Scene3D } from '../three/Scene3D';
+import { FloatingMolecules } from '../three/FloatingMolecules';
 
 export const Hero = () => {
   const { t } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
-      {/* Hero Background Image */}
+      {/* 3D Background Scene */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
-        <img
-          src="/assets/backgrounds/hero-bg.png"
-          alt="Hero Background"
-          className="w-full h-full object-cover opacity-30 mix-blend-overlay"
-        />
+        <Scene3D className="opacity-40">
+          <FloatingMolecules />
+        </Scene3D>
       </div>
 
-      {/* Floating particles effect */}
-      <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-primary rounded-full opacity-20"
-            initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
-            }}
-            animate={{
-              y: [null, Math.random() * window.innerHeight],
-              x: [null, Math.random() * window.innerWidth],
-            }}
-            transition={{
-              duration: 10 + Math.random() * 20,
-              repeat: Infinity,
-              ease: 'linear',
-            }}
-          />
-        ))}
-      </div>
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-dark/50 to-dark pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
         <motion.div

@@ -11,6 +11,8 @@ import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 import { useTranslation } from 'react-i18next';
 import { INTENSITY_GRADIENT, PUMP_GRADIENT, FOCUS_GRADIENT, LEVEL_TO_VALUE, type GradientStop } from '../constants/gradients';
+import { Card3D } from '../components/animations/Card3D';
+import { ScrollReveal } from '../components/animations/ScrollReveal';
 
 // Brand colors for each soul archetype
 const SOUL_COLORS: Record<string, string> = {
@@ -191,25 +193,23 @@ export const AllSouls = () => {
                   const focusValue = LEVEL_TO_VALUE[archetype.formulaProfile.focusLevel] ?? 0;
 
               return (
-            <motion.div
-              key={archetype.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.05 }}
-              onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
-              onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}
-              style={{
-                borderColor: isHovered ? brandColor : 'rgba(255, 255, 255, 0.1)',
-                boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
-                borderWidth: '2px',
-                borderStyle: 'solid',
-                borderRadius: '0.75rem',
-                transition: isMobile ? 'none' : 'all 0.3s ease',
-              }}
-            >
-              <Card
-                className="h-full cursor-pointer group relative overflow-hidden !border-0"
-              >
+            <ScrollReveal key={archetype.id} delay={idx * 0.05}>
+              <Card3D intensity={isMobile ? 0 : 10}>
+                <motion.div
+                  onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
+                  onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}
+                  style={{
+                    borderColor: isHovered ? brandColor : 'rgba(255, 255, 255, 0.1)',
+                    boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
+                    borderWidth: '2px',
+                    borderStyle: 'solid',
+                    borderRadius: '0.75rem',
+                    transition: isMobile ? 'none' : 'all 0.3s ease',
+                  }}
+                >
+                  <Card
+                    className="h-full cursor-pointer group relative overflow-hidden !border-0"
+                  >
                 {/* Header */}
                 <div className="text-center mb-4">
                   <div className="mb-3 transition-transform duration-300 flex justify-center"
@@ -314,7 +314,9 @@ export const AllSouls = () => {
                   {t('allSouls.viewProfile')}
                 </Button>
               </Card>
-            </motion.div>
+                </motion.div>
+              </Card3D>
+            </ScrollReveal>
               );
             })
           )}

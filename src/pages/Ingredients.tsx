@@ -5,6 +5,7 @@ import { Card } from '../components/common/Card';
 import type { IngredientCategory } from '../types';
 import { useTranslation } from 'react-i18next';
 import { useDeveloper } from '../context/DeveloperContext';
+import { ScrollReveal } from '../components/animations/ScrollReveal';
 
 export const Ingredients = () => {
   const { t } = useTranslation();
@@ -68,11 +69,10 @@ export const Ingredients = () => {
         {/* Ingredients Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredIngredients.map((ingredient, index) => (
-            <motion.div
+            <ScrollReveal
               key={ingredient.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
+              direction="up"
+              delay={index * 0.03}
             >
               <Card
                 hover
@@ -139,7 +139,7 @@ export const Ingredients = () => {
                   </div>
                 )}
               </Card>
-            </motion.div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
