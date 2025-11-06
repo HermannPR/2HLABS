@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
 import { Scene3D } from '../three/Scene3D';
-import { GeometricCrystals } from '../three/GeometricCrystals';
+import { MolecularStructures } from '../three/MolecularStructures';
 import { useState } from 'react';
 
 export const Hero = () => {
@@ -22,7 +22,7 @@ export const Hero = () => {
           transition={{ duration: 1.5, ease: "easeInOut" }}
         >
           <Scene3D onReady={() => setIs3DReady(true)}>
-            <GeometricCrystals />
+            <MolecularStructures />
           </Scene3D>
         </motion.div>
       </div>
