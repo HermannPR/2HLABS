@@ -7,6 +7,7 @@ interface Scene3DProps {
   children: ReactNode;
   className?: string;
   enableControls?: boolean;
+  onReady?: () => void;
 }
 
 /**
@@ -16,6 +17,7 @@ export function Scene3D({
   children,
   className = '',
   enableControls = false,
+  onReady,
 }: Scene3DProps) {
   return (
     <div className={`w-full h-full ${className}`}>
@@ -37,6 +39,12 @@ export function Scene3D({
           gl.domElement.addEventListener('webglcontextrestored', () => {
             console.log('WebGL context restored');
           });
+
+          // Notify parent that 3D scene is ready
+          if (onReady) {
+            // Small delay to ensure everything is rendered
+            setTimeout(onReady, 100);
+          }
         }}
       >
         <PerspectiveCamera makeDefault position={[0, 0, 8]} />

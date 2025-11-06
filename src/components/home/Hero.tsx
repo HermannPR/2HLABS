@@ -5,17 +5,26 @@ import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
 import { Scene3D } from '../three/Scene3D';
 import { FloatingMolecules } from '../three/FloatingMolecules';
+import { useState } from 'react';
 
 export const Hero = () => {
   const { t } = useTranslation();
+  const [is3DReady, setIs3DReady] = useState(false);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
-      {/* 3D Background Scene */}
+      {/* 3D Background Scene with smooth fade-in */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
-        <Scene3D className="opacity-40">
-          <FloatingMolecules />
-        </Scene3D>
+        <motion.div
+          className="w-full h-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: is3DReady ? 0.4 : 0 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
+        >
+          <Scene3D onReady={() => setIs3DReady(true)}>
+            <FloatingMolecules />
+          </Scene3D>
+        </motion.div>
       </div>
 
       {/* Gradient Overlay */}
