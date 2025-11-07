@@ -60,12 +60,18 @@ export const AllSouls = () => {
     }, {} as Record<string, { primary: { r: number; g: number; b: number }; secondary: { r: number; g: number; b: number } }>);
   }, []);
 
-  // Detect mobile screen size - include tablets for better performance
+  // Detect mobile/tablet - use lightweight card stack for better performance
   useEffect(() => {
     const checkMobile = () => {
-      // Treat tablets (< 1024px) as mobile for performance
-      // This includes iPads and Android tablets
-      setIsMobile(window.innerWidth < 1024 || /iPad|Android/i.test(navigator.userAgent));
+      // Use card stack for:
+      // 1. Screens < 1280px (tablets and below)
+      // 2. Touch devices (iPad, tablets)
+      // 3. Devices with iPad/Android in user agent
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isTabletOrBelow = window.innerWidth < 1280;
+      const isTabletUserAgent = /iPad|Android|webOS/i.test(navigator.userAgent);
+      
+      setIsMobile(isTabletOrBelow || isTouchDevice || isTabletUserAgent);
     };
 
     checkMobile();
