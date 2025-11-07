@@ -323,7 +323,7 @@ export const FormulaGenerator = () => {
 
   // Results screen
   if (showResults && archetypeResult) {
-    const { archetype, dimensionScores, formula, matchPercentage } = archetypeResult;
+    const { archetype, formula, matchPercentage } = archetypeResult;
     const baseIngredients = formula.ingredients;
     const displayedIngredients = customIngredients.length > 0 ? customIngredients : baseIngredients;
 
