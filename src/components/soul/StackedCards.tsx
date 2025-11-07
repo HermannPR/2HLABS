@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion';
 import type { PanInfo } from 'framer-motion';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import type { Archetype } from '../../types';
 import { PokemonCard } from './PokemonCard';
 
@@ -41,6 +41,22 @@ function SwipeCard({
 
   // Check if this is the current card
   const isCurrentCard = index === currentIndex;
+
+  // Smooth entrance animation when card becomes visible
+  useEffect(() => {
+    if (isCurrentCard) {
+      controls.start({
+        x: 0,
+        opacity: 1,
+        scale: 1,
+        transition: {
+          type: 'spring',
+          stiffness: 300,
+          damping: 30,
+        }
+      });
+    }
+  }, [isCurrentCard, controls]);
 
   const handleDragEnd = async (_: any, info: PanInfo) => {
     const threshold = 80; // Lower threshold for easier swiping
@@ -91,16 +107,22 @@ function SwipeCard({
         transformStyle: 'preserve-3d',
       }}
       initial={{
-        scale: 1,
-        opacity: 1,
-        rotateY: 0,
+        x: 300,
+        opacity: 0,
+        scale: 0.9,
+      }}
+      transition={{
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
       }}
       exit={{
-        scale: 0.8,
+        x: -300,
         opacity: 0,
-        rotateY: -20,
+        scale: 0.9,
         transition: {
-          duration: 0.3
+          duration: 0.3,
+          ease: 'easeOut',
         }
       }}
       whileTap={isTop ? { cursor: 'grabbing', scale: 0.98 } : {}}
@@ -149,8 +171,8 @@ export function StackedCards({
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleSwipe = useCallback((_direction: 'left' | 'right') => {
-    // Move to next card on right swipe, previous on left
-    if (_direction === 'right') {
+    // Swipe left = next card, Swipe right = previous card (natural feel)
+    if (_direction === 'left') {
       if (currentIndex < cards.length - 1) {
         setCurrentIndex(currentIndex + 1);
       } else {
