@@ -19,7 +19,6 @@ interface CardProps {
   totalCards: number;
   onSwipe: (direction: 'left' | 'right') => void;
   onTap: () => void;
-  isTop: boolean;
   currentIndex: number;
 }
 
@@ -30,107 +29,88 @@ function SwipeCard({
   index,
   onSwipe,
   onTap,
-  isTop,
   currentIndex,
 }: CardProps) {
   const x = useMotionValue(0);
   const controls = useAnimation();
 
   // More sensitive rotation for better feedback
-  const rotate = useTransform(x, [-300, 0, 300], [-30, 0, 30]);
+  const rotate = useTransform(x, [-300, 0, 300], [-15, 0, 15]);
 
-  // Check if this is the current card
-  const isCurrentCard = index === currentIndex;
+  // Calculate position relative to current
+  const offset = index - currentIndex;
+  const isVisible = Math.abs(offset) <= 1; // Show current, previous, and next
 
-  // Smooth entrance animation when card becomes visible
+  // Fast entrance animation when card becomes visible
   useEffect(() => {
-    if (isCurrentCard) {
+    if (isVisible) {
       controls.start({
-        x: 0,
-        opacity: 1,
-        scale: 1,
+        x: offset * 85, // Offset side cards by 85%
+        scale: offset === 0 ? 1 : 0.85,
+        opacity: offset === 0 ? 1 : 0.4,
+        zIndex: offset === 0 ? 10 : 5 - Math.abs(offset),
         transition: {
-          type: 'spring',
-          stiffness: 300,
-          damping: 30,
+          duration: 0.25,
+          ease: 'easeOut',
         }
       });
     }
-  }, [isCurrentCard, controls]);
+  }, [offset, isVisible, controls]);
 
   const handleDragEnd = async (_: any, info: PanInfo) => {
-    const threshold = 80; // Lower threshold for easier swiping
+    const threshold = 50; // Lower threshold for easier swiping
 
     if (Math.abs(info.offset.x) > threshold) {
-      // Animate card off screen with 3D rotation
+      // Quick swipe animation
       await controls.start({
         x: info.offset.x > 0 ? 1000 : -1000,
-        rotateY: info.offset.x > 0 ? 45 : -45,
-        rotateZ: info.offset.x > 0 ? 10 : -10,
         opacity: 0,
-        transition: { duration: 0.4, ease: 'easeOut' }
+        transition: { duration: 0.2, ease: 'easeOut' }
       });
       onSwipe(info.offset.x > 0 ? 'right' : 'left');
     } else {
-      // Snap back to center with spring
+      // Snap back quickly
       controls.start({
-        x: 0,
-        y: 0,
-        rotateY: 0,
-        rotateZ: 0,
-        transition: { type: 'spring', stiffness: 300, damping: 25 }
+        x: offset * 85,
+        transition: { duration: 0.15, ease: 'easeOut' }
       });
     }
   };
 
-  // Don't render if not current card (deck style - one card at a time)
-  if (!isCurrentCard) return null;
+  // Don't render if not visible
+  if (!isVisible) return null;
 
   return (
     <motion.div
-      drag={isTop ? "x" : false}
+      drag={offset === 0 ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.7}
+      dragElastic={0.5}
       onDragEnd={handleDragEnd}
       animate={controls}
       style={{
-        x: isTop ? x : 0,
-        y: 0,
-        rotate: isTop ? rotate : 0,
+        x: offset === 0 ? x : offset * 85 + '%',
+        rotate: offset === 0 ? rotate : 0,
         position: 'absolute',
         top: 0,
         left: 0,
         right: 0,
-        zIndex: 1,
-        touchAction: isTop ? 'pan-x' : 'auto',
-        cursor: isTop ? 'grab' : 'default',
+        touchAction: offset === 0 ? 'pan-x' : 'auto',
+        cursor: offset === 0 ? 'grab' : 'pointer',
         transformStyle: 'preserve-3d',
+        pointerEvents: Math.abs(offset) <= 1 ? 'auto' : 'none',
       }}
-      initial={{
-        x: 300,
-        opacity: 0,
-        scale: 0.9,
-      }}
-      transition={{
-        type: 'spring',
-        stiffness: 300,
-        damping: 30,
-      }}
-      exit={{
-        x: -300,
-        opacity: 0,
-        scale: 0.9,
-        transition: {
-          duration: 0.3,
-          ease: 'easeOut',
-        }
-      }}
-      whileTap={isTop ? { cursor: 'grabbing', scale: 0.98 } : {}}
+      initial={false}
+      whileTap={offset === 0 ? { cursor: 'grabbing', scale: 0.98 } : {}}
       className="w-full"
       onClick={() => {
-        // Only trigger tap if not dragging
-        if (isTop && Math.abs(x.get()) < 5) {
+        if (offset === 0 && Math.abs(x.get()) < 5) {
           onTap();
+        } else if (offset === -1) {
+          // Click left card to go previous
+          onSwipe('right');
+        } else if (offset === 1) {
+          // Click right card to go next
+          onSwipe('left');
         }
       }}
     >
@@ -208,8 +188,17 @@ export function StackedCards({
     onCardTap(currentCard);
   }, [cards, currentIndex, onCardTap]);
 
-  // Only render current card + 2 behind it for performance
-  const visibleCards = cards.slice(currentIndex, currentIndex + 3);
+  // Render current card + 1 on each side (pre-rendered stack)
+  const visibleCards = [
+    cards[(currentIndex - 1 + cards.length) % cards.length],
+    cards[currentIndex],
+    cards[(currentIndex + 1) % cards.length],
+  ];
+  const visibleIndices = [
+    (currentIndex - 1 + cards.length) % cards.length,
+    currentIndex,
+    (currentIndex + 1) % cards.length,
+  ];
 
   return (
     <div className="relative w-full px-4 mb-4">
@@ -226,31 +215,26 @@ export function StackedCards({
       <div className="relative w-full max-w-lg mx-auto mb-3">
         {/* Card deck */}
         <div
-          className="relative w-full bg-transparent"
+          className="relative w-full bg-transparent overflow-visible"
           style={{
             height: '500px',
             minHeight: '500px',
             perspective: '1000px',
           }}
         >
-          {visibleCards.length > 0 ? (
-            visibleCards.map((archetype, idx) => (
-              <SwipeCard
-                key={`${archetype.id}-${currentIndex + idx}`}
-                archetype={archetype}
-                brandColor={brandColors[archetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' }}
-                getSoulLogo={getSoulLogo}
-                index={currentIndex + idx}
-                totalCards={visibleCards.length}
-                onSwipe={handleSwipe}
-                onTap={handleCardTap}
-                isTop={idx === 0}
-                currentIndex={currentIndex}
-              />
-            ))
-          ) : (
-            <div className="text-white text-center p-8">No cards available</div>
-          )}
+          {visibleCards.map((archetype, idx) => (
+            <SwipeCard
+              key={`${archetype.id}-${visibleIndices[idx]}`}
+              archetype={archetype}
+              brandColor={brandColors[archetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' }}
+              getSoulLogo={getSoulLogo}
+              index={visibleIndices[idx]}
+              totalCards={cards.length}
+              onSwipe={handleSwipe}
+              onTap={handleCardTap}
+              currentIndex={currentIndex}
+            />
+          ))}
         </div>
       </div>
 
@@ -266,7 +250,7 @@ export function StackedCards({
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
           </svg>
-          <span>Swipe to browse</span>
+          <span>Swipe or click to browse</span>
           <svg
             className="w-6 h-6 animate-wiggle text-gray-300"
             fill="none"
@@ -281,7 +265,7 @@ export function StackedCards({
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
           </svg>
-          <span>Tap for details</span>
+          <span>Tap center for details</span>
         </div>
       </div>
 
