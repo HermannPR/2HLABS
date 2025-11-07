@@ -72,8 +72,8 @@ function SwipeCard({
 
   return (
     <motion.div
-      drag={isTop}
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      drag={isTop ? "x" : false}
+      dragConstraints={{ left: 0, right: 0 }}
       dragElastic={0.7}
       onDragEnd={handleDragEnd}
       animate={controls}
@@ -86,7 +86,7 @@ function SwipeCard({
         left: 0,
         right: 0,
         zIndex: 1,
-        touchAction: isTop ? 'pan-x pan-y' : 'auto',
+        touchAction: isTop ? 'pan-x' : 'auto',
         cursor: isTop ? 'grab' : 'default',
         transformStyle: 'preserve-3d',
       }}
@@ -190,9 +190,9 @@ export function StackedCards({
   const visibleCards = cards.slice(currentIndex, currentIndex + 3);
 
   return (
-    <div className="relative w-full px-4 mb-8">
+    <div className="relative w-full px-4 mb-4">
       {/* Counter at top */}
-      <div className="text-center mb-4">
+      <div className="text-center mb-3">
         <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-6 py-3 rounded-full border border-white/20">
           <span className="text-white font-bold text-2xl">{currentIndex + 1}</span>
           <span className="text-gray-400 text-lg">/</span>
@@ -201,13 +201,13 @@ export function StackedCards({
       </div>
 
       {/* Card container - full width */}
-      <div className="relative w-full max-w-lg mx-auto mb-4">
+      <div className="relative w-full max-w-lg mx-auto mb-3">
         {/* Card deck */}
         <div
           className="relative w-full bg-transparent"
           style={{
-            height: '540px',
-            minHeight: '540px',
+            height: '500px',
+            minHeight: '500px',
             perspective: '1000px',
           }}
         >
@@ -233,7 +233,7 @@ export function StackedCards({
       </div>
 
       {/* Swipe animation hint */}
-      <div className="flex items-center justify-center gap-3 mb-3 flex-wrap">
+      <div className="flex items-center justify-center gap-3 mb-2 flex-wrap">
         {/* Animated swipe gesture hint */}
         <div className="flex items-center gap-2 text-gray-400 text-sm">
           <svg
@@ -264,7 +264,7 @@ export function StackedCards({
       </div>
 
       {/* Navigation buttons below card */}
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex flex-col items-center gap-2">
         <div className="flex items-center justify-center gap-6">
           {/* Previous Button */}
           <div className="flex flex-col items-center gap-1">
@@ -330,7 +330,7 @@ export function StackedCards({
       </div>
 
       {/* Progress indicator */}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2 mt-3">
         {cards.map((_, idx) => (
           <div
             key={idx}
