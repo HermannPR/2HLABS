@@ -254,8 +254,8 @@ export const Hero = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Progress indicators with swipe hint */}
-              <div className="flex flex-col items-center gap-2">
+              {/* Progress indicators with scroll hint */}
+              <div className="flex flex-col items-center gap-3">
                 <div className="flex gap-2">
                   {badges.map((_, idx) => (
                     <button
@@ -271,38 +271,24 @@ export const Hero = () => {
                   ))}
                 </div>
 
-                {/* Swipe indicator hint */}
+                {/* Scroll down indicator - subtle bounce */}
                 <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 0.5 }}
-                  transition={{ delay: 1 }}
-                  className="flex items-center gap-1.5 text-xs text-gray-500"
+                  animate={{ y: [0, 6, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex flex-col items-center gap-1 opacity-40"
                 >
-                  <motion.svg
-                    animate={{ x: [-3, 3, -3] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    width="16"
-                    height="16"
+                  <svg
+                    width="20"
+                    height="20"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
                     strokeWidth="2"
+                    className="text-gray-400"
                   >
-                    <path d="M15 18l-6-6 6-6" />
-                  </motion.svg>
-                  <span>Swipe</span>
-                  <motion.svg
-                    animate={{ x: [-3, 3, -3] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M9 18l6-6-6-6" />
-                  </motion.svg>
+                    <path d="M12 5v14M19 12l-7 7-7-7" />
+                  </svg>
+                  <div className="w-0.5 h-2 bg-gradient-to-b from-gray-400 to-transparent rounded-full" />
                 </motion.div>
               </div>
             </div>
