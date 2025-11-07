@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
@@ -20,6 +20,31 @@ export const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const isInViewport = useInViewport(heroRef, { threshold: 0.1, rootMargin: '200px' });
   const prefersReducedMotion = useReducedMotion();
+  const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0);
+
+  // Badge data for rotation
+  const badges = [
+    {
+      src: "/assets/badges/lab-tested.png",
+      alt: t('hero.badges.labTested'),
+      tooltip: t('hero.badges.labTestedTooltip'),
+    },
+    {
+      src: "/assets/badges/clinical-dosages.png",
+      alt: t('hero.badges.clinicalDosages'),
+      tooltip: t('hero.badges.clinicalDosagesTooltip'),
+    },
+    {
+      src: "/assets/badges/science-backed.png",
+      alt: t('hero.badges.scienceBacked'),
+      tooltip: t('hero.badges.scienceBackedTooltip'),
+    },
+    {
+      src: "/assets/badges/full-transparency.png",
+      alt: t('hero.badges.fullTransparency'),
+      tooltip: t('hero.badges.fullTransparencyTooltip'),
+    },
+  ];
 
   // Detect mobile for performance optimization
   useEffect(() => {
@@ -30,6 +55,17 @@ export const Hero = () => {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // Auto-rotate badges on mobile
+  useEffect(() => {
+    if (!isMobile || prefersReducedMotion) return;
+
+    const interval = setInterval(() => {
+      setCurrentBadgeIndex((prev) => (prev + 1) % badges.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isMobile, prefersReducedMotion, badges.length]);
 
   return (
     <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-dark md:-mt-16">
@@ -156,42 +192,83 @@ export const Hero = () => {
             </Link>
           </div>
 
-          {/* Trust Badges - 2x2 grid on mobile, single row on desktop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-xs sm:max-w-none mx-auto"
-          >
-            <BadgeWithTooltip
-              src="/assets/badges/lab-tested.png"
-              alt={t('hero.badges.labTested')}
-              tooltip={t('hero.badges.labTestedTooltip')}
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto mix-blend-lighten"
-              glowEffect
-            />
-            <BadgeWithTooltip
-              src="/assets/badges/clinical-dosages.png"
-              alt={t('hero.badges.clinicalDosages')}
-              tooltip={t('hero.badges.clinicalDosagesTooltip')}
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto mix-blend-lighten"
-              glowEffect
-            />
-            <BadgeWithTooltip
-              src="/assets/badges/science-backed.png"
-              alt={t('hero.badges.scienceBacked')}
-              tooltip={t('hero.badges.scienceBackedTooltip')}
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto mix-blend-lighten"
-              glowEffect
-            />
-            <BadgeWithTooltip
-              src="/assets/badges/full-transparency.png"
-              alt={t('hero.badges.fullTransparency')}
-              tooltip={t('hero.badges.fullTransparencyTooltip')}
-              className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mx-auto mix-blend-lighten"
-              glowEffect
-            />
-          </motion.div>
+          {/* Trust Badges - Single rotating badge on mobile, row on desktop */}
+          {isMobile ? (
+            // Mobile: Single badge with auto-rotation
+            <div className="flex flex-col items-center gap-3">
+              {/* Badge description hint */}
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={`hint-${currentBadgeIndex}`}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.3 }}
+                  className="text-sm text-primary font-medium"
+                >
+                  {badges[currentBadgeIndex].alt}
+                </motion.p>
+              </AnimatePresence>
+
+              {/* Rotating badge with animation */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentBadgeIndex}
+                  initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
+                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeInOut"
+                  }}
+                  style={{ willChange: "transform, opacity" }}
+                >
+                  <BadgeWithTooltip
+                    src={badges[currentBadgeIndex].src}
+                    alt={badges[currentBadgeIndex].alt}
+                    tooltip={badges[currentBadgeIndex].tooltip}
+                    className="w-32 h-32 mx-auto mix-blend-lighten"
+                    glowEffect
+                  />
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Progress indicators */}
+              <div className="flex gap-2">
+                {badges.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setCurrentBadgeIndex(idx)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      idx === currentBadgeIndex
+                        ? 'bg-primary w-6'
+                        : 'bg-gray-600 hover:bg-gray-500'
+                    }`}
+                    aria-label={`View badge ${idx + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            // Desktop: All badges in a row
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex flex-wrap justify-center gap-5 md:gap-6 lg:gap-8"
+            >
+              {badges.map((badge, idx) => (
+                <BadgeWithTooltip
+                  key={idx}
+                  src={badge.src}
+                  alt={badge.alt}
+                  tooltip={badge.tooltip}
+                  className="w-24 h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mix-blend-lighten"
+                  glowEffect
+                />
+              ))}
+            </motion.div>
+          )}
         </motion.div>
       </div>
 
