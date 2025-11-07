@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
+// Deployment trigger - Rollback to stable version de2f6eb
 export default defineConfig({
   plugins: [
     react(),
