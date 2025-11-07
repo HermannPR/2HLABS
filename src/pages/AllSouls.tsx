@@ -5,13 +5,15 @@ import { Button } from '../components/common/Button';
 import { ARCHETYPES } from '../data/archetypes';
 import { getSoulLogo } from '../utils/soulLogos';
 import type { Archetype } from '../types';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { SkeletonSoulCard } from '../components/common/Skeleton';
 import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 import { useTranslation } from 'react-i18next';
 import { GlowingOrb, ScrollScale } from '../components/animations';
 import { SoulCardWithFlip } from '../components/soul/SoulCardWithFlip';
+import { StackedCards } from '../components/soul/StackedCards';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 
 // Brand colors for each soul archetype (primary + secondary for spinning glow)
 const SOUL_COLORS: Record<string, { primary: string; secondary: string }> = {
@@ -33,9 +35,30 @@ export const AllSouls = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading] = useState(false); // Instant load for better UX
   const [isMobile, setIsMobile] = useState(false);
   const [flippedCardId, setFlippedCardId] = useState<string | null>(null);
+  const prefersReducedMotion = useReducedMotion();
+
+  // Memoize RGB color conversions for modal rendering performance
+  const memoizedColorRgb = useMemo(() => {
+    const hexToRgb = (hex: string) => {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      return result ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16)
+      } : { r: 0, g: 229, b: 255 };
+    };
+
+    return Object.entries(SOUL_COLORS).reduce((acc, [key, colors]) => {
+      acc[key] = {
+        primary: hexToRgb(colors.primary),
+        secondary: hexToRgb(colors.secondary),
+      };
+      return acc;
+    }, {} as Record<string, { primary: { r: number; g: number; b: number }; secondary: { r: number; g: number; b: number } }>);
+  }, []);
 
   // Detect mobile screen size
   useEffect(() => {
@@ -49,13 +72,7 @@ export const AllSouls = () => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Simulate loading for demonstration (remove in production or when using real API)
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 800);
-    return () => clearTimeout(timer);
-  }, []);
+  // Loading removed - instant display for better UX
 
   // Prevent body scroll when modal is open and handle ESC key
   useEffect(() => {
@@ -104,25 +121,34 @@ export const AllSouls = () => {
 
   return (
     <div className="min-h-screen bg-dark py-12 relative overflow-hidden">
-      {/* Animated gradient background */}
+      {/* Animated gradient background - disabled on mobile or reduced motion */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            background: [
-              'radial-gradient(circle at 20% 30%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255, 0, 229, 0.08) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%)',
-              'radial-gradient(circle at 80% 20%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(255, 0, 229, 0.08) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%)',
-            ],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: 'reverse',
-          }}
-        />
-        
+        {!isMobile && !prefersReducedMotion ? (
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: [
+                'radial-gradient(circle at 20% 30%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255, 0, 229, 0.08) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%)',
+                'radial-gradient(circle at 80% 20%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(255, 0, 229, 0.08) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%)',
+              ],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+          />
+        ) : (
+          <div
+            className="absolute inset-0"
+            style={{
+              background: 'radial-gradient(circle at 50% 50%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255, 0, 229, 0.08) 0%, transparent 50%)',
+            }}
+          />
+        )}
+
         {/* Grid pattern overlay */}
-        <div 
+        <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage: `
@@ -134,10 +160,14 @@ export const AllSouls = () => {
         />
       </div>
 
-      {/* Ambient Glowing Orbs */}
-      <GlowingOrb color="#00E5FF" size={400} blur={120} className="top-20 -left-40" />
-      <GlowingOrb color="#FF00E5" size={350} blur={100} className="top-1/2 -right-32" />
-      <GlowingOrb color="#39FF14" size={300} blur={90} className="bottom-20 left-1/3" />
+      {/* Ambient Glowing Orbs - disabled on mobile for performance */}
+      {!isMobile && (
+        <>
+          <GlowingOrb color="#00E5FF" size={400} blur={120} className="top-20 -left-40" reduceMotion={prefersReducedMotion} />
+          <GlowingOrb color="#FF00E5" size={350} blur={100} className="top-1/2 -right-32" reduceMotion={prefersReducedMotion} />
+          <GlowingOrb color="#39FF14" size={300} blur={90} className="bottom-20 left-1/3" reduceMotion={prefersReducedMotion} />
+        </>
+      )}
 
       <SEO
         title="All 12 Training Souls"
@@ -167,46 +197,66 @@ export const AllSouls = () => {
           </motion.div>
         </ScrollScale>
 
-        {/* Archetypes Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-5xl mx-auto px-4" style={{ transform: 'scale(0.9)', transformOrigin: 'top center' }}>
-          {isLoading ? (
-            // Show skeleton cards while loading
-            [...Array(12)].map((_, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.05 }}
-              >
+        {/* Archetypes - Mobile: Stacked Cards, Desktop: Grid */}
+        {isMobile ? (
+          // Mobile: Tinder-style stacked cards
+          <div className="mb-12">
+            {isLoading ? (
+              <div className="flex items-center justify-center" style={{ height: '70vh' }}>
                 <SkeletonSoulCard />
-              </motion.div>
-            ))
-          ) : (
-                ARCHETYPES.map((archetype, index) => {
-                  const brandColor = SOUL_COLORS[archetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
+              </div>
+            ) : (
+              <StackedCards
+                archetypes={ARCHETYPES}
+                brandColors={SOUL_COLORS}
+                getSoulLogo={getSoulLogo}
+                onCardTap={setSelectedArchetype}
+              />
+            )}
+          </div>
+        ) : (
+          // Desktop: Grid with flip cards
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-5xl mx-auto px-4">
+            {isLoading ? (
+              // Show skeleton cards while loading
+              [...Array(12)].map((_, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.05 }}
+                >
+                  <SkeletonSoulCard />
+                </motion.div>
+              ))
+            ) : (
+                  ARCHETYPES.map((archetype, index) => {
+                    const brandColor = SOUL_COLORS[archetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
 
-              return (
-                <SoulCardWithFlip
-                  key={archetype.id}
-                  archetype={archetype}
-                  brandColor={brandColor}
-                  isMobile={isMobile}
-                  onSelect={setSelectedArchetype}
-                  getSoulLogo={getSoulLogo}
-                  cardNumber={index + 1}
-                  isActive={flippedCardId === archetype.id}
-                  onFlipChange={(isFlipped) => {
-                    if (isFlipped) {
-                      setFlippedCardId(archetype.id);
-                    } else if (flippedCardId === archetype.id) {
-                      setFlippedCardId(null);
-                    }
-                  }}
-                />
-              );
-            })
-          )}
-        </div>
+                return (
+                  <SoulCardWithFlip
+                    key={archetype.id}
+                    archetype={archetype}
+                    brandColor={brandColor}
+                    isMobile={isMobile}
+                    onSelect={setSelectedArchetype}
+                    getSoulLogo={getSoulLogo}
+                    cardNumber={index + 1}
+                    isActive={flippedCardId === archetype.id}
+                    reduceMotion={prefersReducedMotion}
+                    onFlipChange={(isFlipped) => {
+                      if (isFlipped) {
+                        setFlippedCardId(archetype.id);
+                      } else if (flippedCardId === archetype.id) {
+                        setFlippedCardId(null);
+                      }
+                    }}
+                  />
+                );
+              })
+            )}
+          </div>
+        )}
 
         {/* CTA Section */}
         <motion.div
@@ -231,16 +281,13 @@ export const AllSouls = () => {
         {/* Premium High-End Modal */}
         {selectedArchetype && (() => {
           const modalBrandColor = SOUL_COLORS[selectedArchetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
-          const hexToRgb = (hex: string) => {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? {
-              r: parseInt(result[1], 16),
-              g: parseInt(result[2], 16),
-              b: parseInt(result[3], 16)
-            } : { r: 0, g: 229, b: 255 };
+          // Use memoized RGB conversions for better performance
+          const colorRgb = memoizedColorRgb[selectedArchetype.id] || {
+            primary: { r: 0, g: 229, b: 255 },
+            secondary: { r: 0, g: 229, b: 255 }
           };
-          const modalRgb = hexToRgb(modalBrandColor.primary);
-          const secondaryRgb = hexToRgb(modalBrandColor.secondary);
+          const modalRgb = colorRgb.primary;
+          const secondaryRgb = colorRgb.secondary;
 
           return (
           <div
@@ -248,29 +295,31 @@ export const AllSouls = () => {
             style={{
               zIndex: 10000,
               background: 'rgba(0, 0, 0, 0.95)',
-              backdropFilter: 'blur(20px)',
-              WebkitBackdropFilter: 'blur(20px)',
+              backdropFilter: isMobile ? 'none' : 'blur(20px)',
+              WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
               pointerEvents: 'auto',
             }}
             onClick={() => setSelectedArchetype(null)}
             onWheel={(e) => e.stopPropagation()}
           >
-            {/* Animated background glow */}
-            <motion.div
-              className="absolute inset-0 opacity-30 pointer-events-none"
-              animate={{
-                background: [
-                  `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
-                  `radial-gradient(circle at 70% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.3) 0%, transparent 50%)`,
-                  `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
-                ],
-              }}
-              transition={{
-                duration: 8,
-                repeat: Infinity,
-                ease: 'easeInOut',
-              }}
-            />
+            {/* Animated background glow - disabled on mobile for performance */}
+            {!isMobile && !prefersReducedMotion && (
+              <motion.div
+                className="absolute inset-0 opacity-30 pointer-events-none"
+                animate={{
+                  background: [
+                    `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
+                    `radial-gradient(circle at 70% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.3) 0%, transparent 50%)`,
+                    `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
+                  ],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: 'easeInOut',
+                }}
+              />
+            )}
 
             {/* Content wrapper with proper spacing */}
             <div 
@@ -323,72 +372,114 @@ export const AllSouls = () => {
               >
                 {/* Left Side - Visual Identity */}
                 <div className="relative p-3 sm:p-4 lg:p-5 flex flex-col items-center justify-center border-r border-white/5 min-h-[250px] lg:min-h-[380px]">
-                  {/* Animated gradient background */}
-                  <motion.div
-                    className="absolute inset-0"
-                    animate={{
-                      background: [
-                        `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
-                        `radial-gradient(circle at 50% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.08) 0%, transparent 70%)`,
-                        `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
-                      ],
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: 'easeInOut',
-                    }}
-                  />
-
-                  {/* Soul Logo with Premium Glow */}
-                  <div className="relative z-10 mb-6">
+                  {/* Animated gradient background - simplified on mobile */}
+                  {!isMobile && !prefersReducedMotion ? (
                     <motion.div
+                      className="absolute inset-0"
                       animate={{
-                        scale: [1, 1.05, 1],
-                        rotate: [0, 5, 0, -5, 0],
+                        background: [
+                          `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
+                          `radial-gradient(circle at 50% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.08) 0%, transparent 70%)`,
+                          `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
+                        ],
                       }}
                       transition={{
-                        duration: 6,
+                        duration: 8,
                         repeat: Infinity,
                         ease: 'easeInOut',
                       }}
-                      className="relative"
-                    >
-                      {/* Outer glow ring */}
+                    />
+                  ) : (
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        background: `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
+                      }}
+                    />
+                  )}
+
+                  {/* Soul Logo with Premium Glow */}
+                  <div className="relative z-10 mb-6">
+                    {!prefersReducedMotion ? (
                       <motion.div
-                        className="absolute inset-0 rounded-full blur-3xl"
                         animate={{
-                          opacity: [0.2, 0.35, 0.2],
+                          scale: [1, 1.05, 1],
+                          rotate: [0, 5, 0, -5, 0],
                         }}
                         transition={{
-                          duration: 4,
+                          duration: 6,
                           repeat: Infinity,
                           ease: 'easeInOut',
                         }}
-                        style={{
-                          background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
-                          transform: 'scale(1.5)',
-                        }}
-                      />
-                      
-                      {/* Logo container */}
-                      <div 
-                        className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
-                        style={{
-                          background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
-                          boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
-                        }}
+                        className="relative"
                       >
-                        <img
-                          src={getSoulLogo(selectedArchetype.id)}
-                          alt={selectedArchetype.name}
-                          className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
+                        {/* Outer glow ring */}
+                        <motion.div
+                          className="absolute inset-0 rounded-full blur-3xl"
+                          animate={{
+                            opacity: [0.2, 0.35, 0.2],
+                          }}
+                          transition={{
+                            duration: 4,
+                            repeat: Infinity,
+                            ease: 'easeInOut',
+                          }}
                           style={{
-                            filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
+                            background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
+                            transform: 'scale(1.5)',
                           }}
                         />
+
+                        {/* Logo container */}
+                        <div
+                          className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
+                          style={{
+                            background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
+                            boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
+                          }}
+                        >
+                          <img
+                            src={getSoulLogo(selectedArchetype.id)}
+                            alt={selectedArchetype.name}
+                            loading="lazy"
+                            className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
+                            style={{
+                              filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
+                            }}
+                          />
+                        </div>
+                      </motion.div>
+                    ) : (
+                      <div className="relative">
+                        {/* Static glow ring */}
+                        <div
+                          className="absolute inset-0 rounded-full blur-3xl opacity-30"
+                          style={{
+                            background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
+                            transform: 'scale(1.5)',
+                          }}
+                        />
+
+                        {/* Logo container */}
+                        <div
+                          className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
+                          style={{
+                            background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
+                            boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
+                          }}
+                        >
+                          <img
+                            src={getSoulLogo(selectedArchetype.id)}
+                            alt={selectedArchetype.name}
+                            loading="lazy"
+                            className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
+                            style={{
+                              filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
+                            }}
+                          />
+                        </div>
                       </div>
-                    </motion.div>
+                    )}
                   </div>
 
                   {/* Name & Tagline */}

@@ -1,6 +1,6 @@
 import { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { Points, Color, AdditiveBlending, CanvasTexture } from 'three';
 
 interface VolumetricFogProps {
   particleCount?: number;
@@ -25,7 +25,27 @@ export function VolumetricFog({
   opacity = 0.15,
   driftSpeed = 0.01,
 }: VolumetricFogProps) {
-  const pointsRef = useRef<THREE.Points>(null);
+  const pointsRef = useRef<Points>(null);
+
+  // Create circular particle texture
+  const particleTexture = useMemo(() => {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return null;
+
+    // Draw a soft circular gradient
+    const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    gradient.addColorStop(0.5, 'rgba(255, 255, 255, 0.5)');
+    gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 64, 64);
+
+    return new CanvasTexture(canvas);
+  }, []);
 
   // Generate fog particles with brand gradient colors
   const { positions, colors, velocities } = useMemo(() => {
@@ -34,7 +54,7 @@ export function VolumetricFog({
     const velocities = new Float32Array(particleCount * 3);
 
     // Parse brand colors
-    const parseColor = (hex: string) => new THREE.Color(hex);
+    const parseColor = (hex: string) => new Color(hex);
     const brandColor1 = parseColor(color1);
     const brandColor2 = parseColor(color2);
     const brandColor3 = parseColor(color3);
@@ -49,7 +69,7 @@ export function VolumetricFog({
 
       // Assign colors based on depth (gradient effect)
       const depth = (positions[i3 + 2] + 35) / 70; // Normalize to 0-1
-      let particleColor: THREE.Color;
+      let particleColor: Color;
 
       if (depth < 0.33) {
         // Far: Cyan to Magenta
@@ -120,10 +140,12 @@ export function VolumetricFog({
         transparent
         opacity={opacity}
         vertexColors
-        blending={THREE.AdditiveBlending}
+        blending={AdditiveBlending}
         depthWrite={false}
         sizeAttenuation={true}
         fog={true}
+        map={particleTexture}
+        alphaTest={0.01}
       />
     </points>
   );

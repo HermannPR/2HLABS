@@ -1,9 +1,10 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import { memo } from 'react';
 import { Card } from '../common/Card';
 import { HiUserCircle, HiBeaker, HiAdjustments, HiShieldCheck } from 'react-icons/hi';
 
-export const Features = () => {
+export const Features = memo(() => {
   const { t } = useTranslation();
 
   const features = [
@@ -70,4 +71,4 @@ export const Features = () => {
       </div>
     </section>
   );
-};
+});

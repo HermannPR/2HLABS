@@ -65,7 +65,7 @@ export const HowItWorksPreview = () => {
                   <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center flex-shrink-0">
                     <step.icon className="text-white" size={28} />
                   </div>
-                  <span className="text-6xl font-heading font-bold text-primary/20">{step.number}</span>
+                  <span className="text-6xl font-heading font-bold text-primary/40">{step.number}</span>
                 </div>
                 <h3 className="text-2xl font-heading font-semibold mb-3">{t(step.titleKey)}</h3>
                 <p className="text-gray-400">{t(step.descriptionKey)}</p>

@@ -43,7 +43,7 @@ export const Navbar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className="text-gray-300 hover:text-primary transition-colors duration-200"
+                className="text-gray-200 hover:text-primary transition-colors duration-200"
               >
                 {link.name}
               </Link>
@@ -78,7 +78,7 @@ export const Navbar = () => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  className="block text-gray-300 hover:text-primary transition-colors duration-200 py-2"
+                  className="block text-gray-200 hover:text-primary transition-colors duration-200 py-2"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}

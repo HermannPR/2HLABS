@@ -3,16 +3,23 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
-import { Scene3D } from '../three/Scene3D';
-import { MolecularStructures } from '../three/MolecularStructures';
-import { BackgroundMolecules } from '../three/BackgroundMolecules';
-import { VolumetricFog } from '../three/VolumetricFog';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useInViewport } from '../../hooks/useInViewport';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
+
+// Lazy load 3D components for better initial load performance
+const Scene3D = lazy(() => import('../three/Scene3D').then(m => ({ default: m.Scene3D })));
+const MolecularStructures = lazy(() => import('../three/MolecularStructures').then(m => ({ default: m.MolecularStructures })));
+const BackgroundMolecules = lazy(() => import('../three/BackgroundMolecules').then(m => ({ default: m.BackgroundMolecules })));
+const VolumetricFog = lazy(() => import('../three/VolumetricFog').then(m => ({ default: m.VolumetricFog })));
 
 export const Hero = () => {
   const { t } = useTranslation();
   const [is3DReady, setIs3DReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const isInViewport = useInViewport(heroRef, { threshold: 0.1, rootMargin: '200px' });
+  const prefersReducedMotion = useReducedMotion();
 
   // Detect mobile for performance optimization
   useEffect(() => {
@@ -25,84 +32,124 @@ export const Hero = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-dark pt-0 pb-8">
-      {/* 3D Background Scene with smooth fade-in - More Visible */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-dark to-secondary/10">
-        <motion.div
-          className="w-full h-full"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: is3DReady ? 0.9 : 0 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-        >
-          <Scene3D
-            dynamicCamera
-            mouseControlled
-            enableFog
-            fogColor="#0a0e27"
-            fogDensity={0.035}
-            onReady={() => setIs3DReady(true)}
+    <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-dark md:-mt-16">
+      {/* Premium subtle gradient background - Apple/Samsung style */}
+      <div className="absolute inset-0">
+        {/* Static base gradient layer for instant load */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 229, 0, 0.08) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255, 0, 229, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0, 229, 255, 0.06) 0%, transparent 50%),
+              radial-gradient(ellipse 100% 100% at 50% 100%, rgba(10, 14, 39, 1) 0%, rgba(10, 14, 39, 0.95) 100%)
+            `
+          }}
+        />
+
+        {/* Subtle animated gradient overlay */}
+        {!isMobile && !prefersReducedMotion && (
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: [
+                'radial-gradient(ellipse 70% 50% at 30% 30%, rgba(255, 229, 0, 0.04) 0%, transparent 50%)',
+                'radial-gradient(ellipse 70% 50% at 70% 60%, rgba(255, 0, 229, 0.04) 0%, transparent 50%)',
+                'radial-gradient(ellipse 70% 50% at 30% 30%, rgba(255, 229, 0, 0.04) 0%, transparent 50%)',
+              ]
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        )}
+
+        {/* 3D Scene overlay - subtle and smooth */}
+        {isInViewport && (
+          <motion.div
+            className="w-full h-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: is3DReady ? 0.7 : 0 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
           >
-            {/* Volumetric fog particles (reduced on mobile) */}
-            <VolumetricFog
-              particleCount={isMobile ? 300 : 800}
-              color1="#FFE500"
-              color2="#FF00E5"
-              color3="#00E5FF"
-              size={isMobile ? 2.0 : 2.5}
-              opacity={isMobile ? 0.15 : 0.2}
-              driftSpeed={0.015}
-            />
+            <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-primary/5 via-dark to-secondary/5" />}>
+              <Scene3D
+                dynamicCamera
+                mouseControlled
+                enableFog
+                fogColor="#0a0e27"
+                fogDensity={0.035}
+                onReady={() => setIs3DReady(true)}
+              >
+                {/* Volumetric fog particles (reduced on mobile) */}
+                <VolumetricFog
+                  particleCount={isMobile ? 300 : 800}
+                  color1="#FFE500"
+                  color2="#FF00E5"
+                  color3="#00E5FF"
+                  size={isMobile ? 2.0 : 2.5}
+                  opacity={isMobile ? 0.15 : 0.2}
+                  driftSpeed={0.015}
+                />
 
-            {/* Background molecular space (reduced on mobile) */}
-            <BackgroundMolecules
-              farCount={isMobile ? 10 : 30}
-              midCount={isMobile ? 5 : 15}
-              nearCount={isMobile ? 2 : 5}
-            />
+                {/* Background molecular space (reduced on mobile) */}
+                <BackgroundMolecules
+                  farCount={isMobile ? 10 : 30}
+                  midCount={isMobile ? 5 : 15}
+                  nearCount={isMobile ? 2 : 5}
+                />
 
-            {/* Hero molecules (in focus) */}
-            <MolecularStructures />
-          </Scene3D>
-        </motion.div>
+                {/* Hero molecules (in focus) */}
+                <MolecularStructures />
+              </Scene3D>
+            </Suspense>
+          </motion.div>
+        )}
       </div>
 
-      {/* Blur gradient overlay for content visibility */}
+      {/* Enhanced radial gradient overlay for maximum content visibility */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: 'linear-gradient(to bottom, rgba(10, 14, 39, 0.8) 0%, rgba(10, 14, 39, 0.5) 20%, transparent 40%, transparent 60%, rgba(10, 14, 39, 0.5) 80%, rgba(10, 14, 39, 0.8) 100%)',
-          backdropFilter: 'blur(2px)',
-          WebkitBackdropFilter: 'blur(2px)',
+          background: `
+            radial-gradient(ellipse at center, rgba(10, 14, 39, 0.85) 0%, rgba(10, 14, 39, 0.6) 30%, rgba(10, 14, 39, 0.3) 60%, transparent 100%),
+            linear-gradient(to bottom, rgba(10, 14, 39, 0.7) 0%, rgba(10, 14, 39, 0.4) 25%, transparent 50%, transparent 75%, rgba(10, 14, 39, 0.6) 100%)
+          `,
+          backdropFilter: 'blur(3px)',
+          WebkitBackdropFilter: 'blur(3px)',
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 md:pt-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
           {/* Main headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4" style={{textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6)'}}>
             {t('hero.titlePart1')} <span className="text-gradient glow-primary">{t('hero.titlePart2')}</span>
             <br />
             {t('hero.titlePart3')}
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-gray-300 mb-6 max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto" style={{textShadow: '0 3px 6px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.7)'}}>
             {t('hero.subtitle')}
           </p>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons with enhanced styling */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
             <Link to="/formula">
-              <Button size="lg">
+              <Button size="lg" className="shadow-[0_0_35px_rgba(255,229,0,0.7),0_10px_25px_rgba(0,0,0,0.9)] hover:shadow-[0_0_50px_rgba(255,229,0,0.9),0_15px_35px_rgba(0,0,0,0.95)] ring-2 ring-black/50">
                 {t('hero.ctaPrimary')}
               </Button>
             </Link>
             <Link to="/how-it-works">
-              <Button size="lg" variant="outline">
+              <Button size="lg" variant="outline" className="shadow-[0_0_25px_rgba(0,229,255,0.5),0_10px_25px_rgba(0,0,0,0.9)] hover:shadow-[0_0_35px_rgba(0,229,255,0.7),0_15px_35px_rgba(0,0,0,0.95)] ring-2 ring-black/50">
                 {t('hero.ctaSecondary')}
               </Button>
             </Link>

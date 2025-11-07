@@ -82,4 +82,32 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate Three.js ecosystem (largest dependency)
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+          // Animation libraries
+          'animation-vendor': ['framer-motion'],
+          // Internationalization
+          'i18n-vendor': ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
+          // Form handling and validation
+          'form-vendor': ['react-hook-form', 'zod', '@hookform/resolvers'],
+          // Routing
+          'router-vendor': ['react-router-dom'],
+          // React core (keep together for better caching)
+          'react-vendor': ['react', 'react-dom'],
+        }
+      }
+    },
+    chunkSizeWarningLimit: 600, // Increase slightly to allow for vendor chunks
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true, // Remove console.logs in production
+        drop_debugger: true
+      }
+    }
+  }
 })

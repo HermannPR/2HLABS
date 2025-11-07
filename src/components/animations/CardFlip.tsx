@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { useState, useRef, type ReactNode } from 'react';
+import { useState, useRef, useCallback, type ReactNode } from 'react';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface CardFlipProps {
   children: ReactNode;
@@ -37,43 +38,44 @@ export function CardFlip({
   const [isFlippedInternal, setIsFlippedInternal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
-  
+  const prefersReducedMotion = useReducedMotion();
+
   // Use controlled or internal state
   const isFlipped = isFlippedControlled ? (isFlippedProp ?? false) : isFlippedInternal;
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = useCallback(() => {
     if (!isInViewport || disabled || isFlippedControlled) return;
     setIsFlippedInternal(true);
     onFlip?.(true);
-  };
+  }, [isInViewport, disabled, isFlippedControlled, onFlip]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     if (!isInViewport || disabled || isFlippedControlled) return;
     setIsFlippedInternal(false);
     onFlip?.(false);
     setMousePosition({ x: 0, y: 0 });
-  };
+  }, [isInViewport, disabled, isFlippedControlled, onFlip]);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (disabled) return;
-    
+
     const card = cardRef.current;
     if (!card) return;
-    
+
     const rect = card.getBoundingClientRect();
     const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
     const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-    
+
     // Clamp values between -1 and 1
     const clampedX = Math.max(-1, Math.min(1, x));
     const clampedY = Math.max(-1, Math.min(1, y));
-    
-    setMousePosition({ x: clampedX, y: clampedY });
-  };
 
-  const handleClick = () => {
+    setMousePosition({ x: clampedX, y: clampedY });
+  }, [disabled]);
+
+  const handleClick = useCallback(() => {
     onClick?.();
-  };
+  }, [onClick]);
 
   return (
     <div
@@ -93,12 +95,14 @@ export function CardFlip({
         className="card-flip-inner"
         animate={{
           rotateY: isFlipped ? 180 : 0,
-          rotateX: !disabled ? mousePosition.y * -10 : 0,
-          rotateZ: !disabled ? mousePosition.x * 5 : 0,
+          rotateX: !disabled && !prefersReducedMotion ? mousePosition.y * -10 : 0,
+          rotateZ: !disabled && !prefersReducedMotion ? mousePosition.x * 5 : 0,
           scale: isFlipped ? 1.05 : 1,
           y: isFlipped ? -10 : 0,
         }}
-        transition={{
+        transition={prefersReducedMotion ? {
+          duration: 0.01, // Instant transitions for reduced motion
+        } : {
           rotateY: {
             duration: 0.6,
             ease: [0.34, 1.56, 0.64, 1], // Spring-like easing

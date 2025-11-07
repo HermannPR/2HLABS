@@ -14,6 +14,7 @@ interface SoulCardWithFlipProps {
   cardNumber?: number;
   isActive?: boolean;
   onFlipChange?: (isFlipped: boolean) => void;
+  reduceMotion?: boolean;
 }
 
 /**
@@ -29,6 +30,7 @@ export function SoulCardWithFlip({
   cardNumber,
   isActive = false,
   onFlipChange,
+  reduceMotion = false,
 }: SoulCardWithFlipProps) {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const isInViewport = useInViewport(cardRef as React.RefObject<Element>);
@@ -81,6 +83,8 @@ export function SoulCardWithFlip({
         intensity={archetype.formulaProfile.intensity}
         isFlipped={isFlipped}
         hideOriginalBorder={false}
+        isMobile={isMobile}
+        reduceMotion={reduceMotion}
       />
     </div>
   );

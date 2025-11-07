@@ -31,6 +31,7 @@ export default {
       animation: {
         'glow': 'glow 2s ease-in-out infinite alternate',
         'float': 'float 3s ease-in-out infinite',
+        'wiggle': 'wiggle 2s ease-in-out infinite',
       },
       keyframes: {
         glow: {
@@ -40,6 +41,11 @@ export default {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'translateX(0px)' },
+          '25%': { transform: 'translateX(-8px)' },
+          '75%': { transform: 'translateX(8px)' },
         },
       },
     },

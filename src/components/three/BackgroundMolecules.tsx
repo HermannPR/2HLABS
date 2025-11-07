@@ -6,7 +6,7 @@ import {
   AmmoniaMolecule,
   MethaneMolecule,
 } from './molecules/SimpleMolecules';
-import * as THREE from 'three';
+import { Group } from 'three';
 
 interface MoleculeInstance {
   id: string;
@@ -33,7 +33,7 @@ export function BackgroundMolecules({
   midCount = 15,
   nearCount = 5,
 }: BackgroundMoleculesProps) {
-  const groupRef = useRef<THREE.Group>(null);
+  const groupRef = useRef<Group>(null);
 
   // Generate molecules at different depth zones
   const molecules = useMemo(() => {
@@ -59,9 +59,9 @@ export function BackgroundMolecules({
           Math.random() * Math.PI * 2,
         ],
         rotationSpeed: [
-          (Math.random() - 0.5) * 0.05,
-          (Math.random() - 0.5) * 0.05,
-          (Math.random() - 0.5) * 0.05,
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01,
+          (Math.random() - 0.5) * 0.01,
         ],
       });
     }
@@ -85,9 +85,9 @@ export function BackgroundMolecules({
           Math.random() * Math.PI * 2,
         ],
         rotationSpeed: [
-          (Math.random() - 0.5) * 0.08,
-          (Math.random() - 0.5) * 0.08,
-          (Math.random() - 0.5) * 0.08,
+          (Math.random() - 0.5) * 0.015,
+          (Math.random() - 0.5) * 0.015,
+          (Math.random() - 0.5) * 0.015,
         ],
       });
     }
@@ -111,9 +111,9 @@ export function BackgroundMolecules({
           Math.random() * Math.PI * 2,
         ],
         rotationSpeed: [
-          (Math.random() - 0.5) * 0.1,
-          (Math.random() - 0.5) * 0.1,
-          (Math.random() - 0.5) * 0.1,
+          (Math.random() - 0.5) * 0.02,
+          (Math.random() - 0.5) * 0.02,
+          (Math.random() - 0.5) * 0.02,
         ],
       });
     }
@@ -126,7 +126,7 @@ export function BackgroundMolecules({
     if (groupRef.current) {
       groupRef.current.children.forEach((child, index) => {
         const molecule = molecules[index];
-        if (molecule && child instanceof THREE.Group) {
+        if (molecule && child instanceof Group) {
           child.rotation.x += molecule.rotationSpeed[0];
           child.rotation.y += molecule.rotationSpeed[1];
           child.rotation.z += molecule.rotationSpeed[2];

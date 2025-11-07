@@ -9,6 +9,8 @@ interface PokemonCardProps {
   intensity: number;
   isFlipped?: boolean;
   hideOriginalBorder?: boolean;
+  isMobile?: boolean;
+  reduceMotion?: boolean;
 }
 
 // Helper function to convert level string to percentage
@@ -52,30 +54,47 @@ export function PokemonCard({
   intensity,
   isFlipped = false,
   hideOriginalBorder = false,
+  isMobile = false,
+  reduceMotion = false,
 }: PokemonCardProps) {
+  // Determine if animations should be active
+  const shouldAnimateBackground = !isMobile && !reduceMotion;
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden bg-dark-lighter">
-      {/* Holographic card background */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          repeatType: 'reverse',
-          ease: 'linear',
-        }}
-        style={{
-          background: `
-            radial-gradient(circle at 30% 20%, ${brandColor.primary}20 0%, transparent 50%),
-            radial-gradient(circle at 70% 80%, ${brandColor.secondary}20 0%, transparent 50%),
-            linear-gradient(135deg, rgba(255,229,0,0.05), rgba(255,0,229,0.05), rgba(0,229,255,0.05))
-          `,
-          backgroundSize: '200% 200%',
-        }}
-      />
+      {/* Holographic card background - animated on desktop, static on mobile */}
+      {shouldAnimateBackground ? (
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%'],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'linear',
+          }}
+          style={{
+            background: `
+              radial-gradient(circle at 30% 20%, ${brandColor.primary}20 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, ${brandColor.secondary}20 0%, transparent 50%),
+              linear-gradient(135deg, rgba(255,229,0,0.05), rgba(255,0,229,0.05), rgba(0,229,255,0.05))
+            `,
+            backgroundSize: '200% 200%',
+          }}
+        />
+      ) : (
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(circle at 30% 20%, ${brandColor.primary}20 0%, transparent 50%),
+              radial-gradient(circle at 70% 80%, ${brandColor.secondary}20 0%, transparent 50%),
+              linear-gradient(135deg, rgba(255,229,0,0.05), rgba(255,0,229,0.05), rgba(0,229,255,0.05))
+            `,
+          }}
+        />
+      )}
 
       {/* Card border with soul colors */}
       {!hideOriginalBorder && (
@@ -130,24 +149,25 @@ export function PokemonCard({
             }}
           />
 
-          {/* Soul logo */}
+          {/* Soul logo - with lazy loading */}
           <motion.img
             src={getSoulLogo(archetype.id)}
             alt={archetype.name}
+            loading="lazy"
             className="relative z-10 w-36 h-36 object-contain"
             style={{
               filter: `drop-shadow(0 0 20px ${brandColor.primary}80)`,
             }}
             animate={
-              isFlipped 
-                ? { 
-                    scale: [1, 1.15, 1.05], 
+              isFlipped && !reduceMotion
+                ? {
+                    scale: [1, 1.15, 1.05],
                     rotate: [0, 8, 0],
                   }
                 : { scale: 1, rotate: 0 }
             }
-            transition={{ 
-              duration: 0.6, 
+            transition={{
+              duration: 0.6,
               ease: [0.34, 1.56, 0.64, 1],
               times: [0, 0.5, 1]
             }}
@@ -267,27 +287,29 @@ export function PokemonCard({
         </div>
       </div>
 
-      {/* Holographic shine effect */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        animate={{
-          backgroundPosition: ['0% 0%', '200% 200%'],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-        style={{
-          background: `linear-gradient(
-            45deg,
-            transparent 30%,
-            rgba(255, 255, 255, 0.1) 50%,
-            transparent 70%
-          )`,
-          backgroundSize: '200% 200%',
-        }}
-      />
+      {/* Holographic shine effect - only on desktop */}
+      {shouldAnimateBackground && (
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          animate={{
+            backgroundPosition: ['0% 0%', '200% 200%'],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: 'linear',
+          }}
+          style={{
+            background: `linear-gradient(
+              45deg,
+              transparent 30%,
+              rgba(255, 255, 255, 0.1) 50%,
+              transparent 70%
+            )`,
+            backgroundSize: '200% 200%',
+          }}
+        />
+      )}
     </div>
   );
 }

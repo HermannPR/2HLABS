@@ -3,7 +3,7 @@ import { OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Suspense } from 'react';
 import type { ReactNode } from 'react';
 import { DynamicCamera } from './DynamicCamera';
-import * as THREE from 'three';
+import { FogExp2 } from 'three';
 
 interface Scene3DProps {
   children: ReactNode;
@@ -60,7 +60,7 @@ export function Scene3D({
 
           // Add volumetric fog if enabled
           if (enableFog) {
-            scene.fog = new THREE.FogExp2(fogColor, fogDensity);
+            scene.fog = new FogExp2(fogColor, fogDensity);
           }
 
           // Notify parent that 3D scene is ready

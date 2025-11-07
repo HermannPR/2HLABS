@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import type { ReactNode, MouseEvent } from 'react';
+import { useCallback, type ReactNode, type MouseEvent } from 'react';
+import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface Card3DProps {
   children: ReactNode;
@@ -16,16 +17,18 @@ export function Card3D({
   className = '',
   intensity = 15,
 }: Card3DProps) {
+  const prefersReducedMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
-  const mouseXSpring = useSpring(x, { stiffness: 150, damping: 40 });
-  const mouseYSpring = useSpring(y, { stiffness: 150, damping: 40 });
+  // Disable spring animations if reduced motion is preferred
+  const mouseXSpring = useSpring(x, prefersReducedMotion ? { stiffness: 1000, damping: 100 } : { stiffness: 150, damping: 40 });
+  const mouseYSpring = useSpring(y, prefersReducedMotion ? { stiffness: 1000, damping: 100 } : { stiffness: 150, damping: 40 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], [intensity, -intensity]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], [-intensity, intensity]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [intensity, -intensity]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [-intensity, intensity]);
 
-  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const width = rect.width;
     const height = rect.height;
@@ -35,12 +38,12 @@ export function Card3D({
     const yPct = mouseY / height - 0.5;
     x.set(xPct);
     y.set(yPct);
-  };
+  }, [x, y]);
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = useCallback(() => {
     x.set(0);
     y.set(0);
-  };
+  }, [x, y]);
 
   return (
     <motion.div

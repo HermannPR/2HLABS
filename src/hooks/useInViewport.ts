@@ -10,7 +10,7 @@ interface UseInViewportOptions {
  * Used for performance optimization - only animate cards that are visible
  */
 export function useInViewport(
-  ref: RefObject<Element>,
+  ref: RefObject<Element | null>,
   options: UseInViewportOptions = {}
 ) {
   const { threshold = 0.1, rootMargin = '100px' } = options;

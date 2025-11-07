@@ -19,6 +19,8 @@ function GradientAtom({ position, size = 0.6 }: AtomProps) {
   const gradientMaterial = new THREE.ShaderMaterial({
     uniforms: {
       time: { value: 0 },
+      fogColor: { value: new THREE.Color(0x0a0e27) },
+      fogDensity: { value: 0.035 },
     },
     vertexShader: `
       varying vec2 vUv;
@@ -37,6 +39,8 @@ function GradientAtom({ position, size = 0.6 }: AtomProps) {
     `,
     fragmentShader: `
       uniform float time;
+      uniform vec3 fogColor;
+      uniform float fogDensity;
       varying vec2 vUv;
       varying vec3 vNormal;
       varying vec3 vViewPosition;
@@ -70,10 +74,14 @@ function GradientAtom({ position, size = 0.6 }: AtomProps) {
         // Final color with highlight
         vec3 finalColor = color + highlight;
 
+        // Apply exponential fog
+        float fogFactor = 1.0 - exp(-fogDensity * fogDensity * vFogDepth * vFogDepth);
+        finalColor = mix(finalColor, fogColor, fogFactor);
+
         gl_FragColor = vec4(finalColor, 1.0);
       }
     `,
-    fog: true,
+    fog: false, // We handle fog manually
   });
 
   useFrame((state) => {
@@ -117,6 +125,8 @@ function GradientBond({ start, end }: BondProps) {
   const gradientMaterial = new THREE.ShaderMaterial({
     uniforms: {
       time: { value: 0 },
+      fogColor: { value: new THREE.Color(0x0a0e27) },
+      fogDensity: { value: 0.035 },
     },
     vertexShader: `
       varying vec2 vUv;
@@ -130,6 +140,8 @@ function GradientBond({ start, end }: BondProps) {
     `,
     fragmentShader: `
       uniform float time;
+      uniform vec3 fogColor;
+      uniform float fogDensity;
       varying vec2 vUv;
       varying float vFogDepth;
 
@@ -148,11 +160,15 @@ function GradientBond({ start, end }: BondProps) {
           color = mix(magenta, cyan, (t - 0.5) * 2.0);
         }
 
-        gl_FragColor = vec4(color, 0.9);
+        // Apply exponential fog
+        float fogFactor = 1.0 - exp(-fogDensity * fogDensity * vFogDepth * vFogDepth);
+        vec3 finalColor = mix(color, fogColor, fogFactor);
+
+        gl_FragColor = vec4(finalColor, 0.9);
       }
     `,
     transparent: true,
-    fog: true,
+    fog: false, // We handle fog manually
   });
 
   useFrame((state) => {
@@ -186,7 +202,7 @@ function CaffeineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const time = state.clock.getElapsedTime() * rotationSpeed * 0.15;
+    const time = state.clock.getElapsedTime() * rotationSpeed * 0.08;
     groupRef.current.rotation.y = time;
     groupRef.current.position.y = position[1] + Math.sin(time * 0.5) * 0.3;
   });
@@ -230,7 +246,7 @@ function CreatineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const time = state.clock.getElapsedTime() * rotationSpeed * 0.15;
+    const time = state.clock.getElapsedTime() * rotationSpeed * 0.08;
     groupRef.current.rotation.x = time * 0.5;
     groupRef.current.rotation.y = time;
     groupRef.current.position.y = position[1] + Math.cos(time * 0.5) * 0.3;
@@ -262,7 +278,7 @@ function BetaAlanineMolecule({ position, rotationSpeed = 1 }: MoleculeProps) {
 
   useFrame((state) => {
     if (!groupRef.current) return;
-    const time = state.clock.getElapsedTime() * rotationSpeed * 0.15;
+    const time = state.clock.getElapsedTime() * rotationSpeed * 0.08;
     groupRef.current.rotation.z = time * 0.7;
     groupRef.current.rotation.y = time * 0.5;
     groupRef.current.position.y = position[1] + Math.sin(time * 0.7) * 0.25;

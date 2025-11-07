@@ -20,7 +20,7 @@ export const Button = ({
   const variants = {
     primary: 'bg-brand-gradient text-white hover:shadow-lg hover:shadow-secondary/50',
     secondary: 'bg-accent text-dark hover:bg-accent/90',
-    outline: 'border-2 border-primary text-primary hover:bg-brand-gradient hover:text-white hover:border-transparent',
+    outline: 'border-2 border-primary bg-primary/10 text-primary hover:bg-brand-gradient hover:text-white hover:border-transparent shadow-[0_0_15px_rgba(0,229,255,0.3)]',
   };
 
   const sizes = {
