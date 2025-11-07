@@ -159,7 +159,7 @@ export const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 pb-8 md:pt-16 md:pb-8 lg:pt-20 lg:pb-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-16 pb-6 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -179,7 +179,7 @@ export const Hero = () => {
           </p>
 
           {/* CTA Buttons with enhanced styling */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-6">
             <Link to="/formula">
               <Button size="lg" className="shadow-[0_0_35px_rgba(255,229,0,0.7),0_10px_25px_rgba(0,0,0,0.9)] hover:shadow-[0_0_50px_rgba(255,229,0,0.9),0_15px_35px_rgba(0,0,0,0.95)] ring-2 ring-black/50">
                 {t('hero.ctaPrimary')}
@@ -211,7 +211,7 @@ export const Hero = () => {
               </AnimatePresence>
 
               {/* Spinning badge container */}
-              <div className="relative w-32 h-32">
+              <div className="relative w-28 h-28">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentBadgeIndex}
@@ -247,7 +247,7 @@ export const Hero = () => {
                       src={badges[currentBadgeIndex].src}
                       alt={badges[currentBadgeIndex].alt}
                       tooltip={badges[currentBadgeIndex].tooltip}
-                      className="w-32 h-32 mix-blend-lighten"
+                      className="w-28 h-28 mix-blend-lighten"
                       glowEffect
                     />
                   </motion.div>
