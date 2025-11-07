@@ -167,14 +167,14 @@ export const Hero = () => {
           style={{ willChange: "transform, opacity" }}
         >
           {/* Main headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4" style={{textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6)'}}>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4" style={{textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6)'}}>
             {t('hero.titlePart1')} <span className="text-gradient glow-primary">{t('hero.titlePart2')}</span>
             <br />
             {t('hero.titlePart3')}
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white mb-6 max-w-3xl mx-auto" style={{textShadow: '0 3px 6px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.7)'}}>
+          <p className="text-base md:text-lg text-white mb-4 max-w-3xl mx-auto" style={{textShadow: '0 3px 6px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.7)'}}>
             {t('hero.subtitle')}
           </p>
 
