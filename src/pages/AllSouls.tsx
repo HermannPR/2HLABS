@@ -10,8 +10,8 @@ import { SkeletonSoulCard } from '../components/common/Skeleton';
 import { SEO, StructuredData } from '../components/seo/SEO';
 import { getItemListSchema, getBreadcrumbSchema } from '../utils/structuredData';
 import { useTranslation } from 'react-i18next';
-import { INTENSITY_GRADIENT, PUMP_GRADIENT, FOCUS_GRADIENT, LEVEL_TO_VALUE, type GradientStop } from '../constants/gradients';
-import { CardHover, ScrollReveal, GlowingOrb, ScrollScale, SpinningGlow } from '../components/animations';
+import { GlowingOrb, ScrollScale } from '../components/animations';
+import { SoulCardWithFlip } from '../components/soul/SoulCardWithFlip';
 
 // Brand colors for each soul archetype (primary + secondary for spinning glow)
 const SOUL_COLORS: Record<string, { primary: string; secondary: string }> = {
@@ -26,38 +26,16 @@ const SOUL_COLORS: Record<string, { primary: string; secondary: string }> = {
   'mantis-focus': { primary: '#7FFF00', secondary: '#B8FF99' },      // Lime to light green
   'thunder-strike': { primary: '#B19CD9', secondary: '#9933FF' },    // Light purple to saturated purple
   'serpent-flow': { primary: '#00C9A7', secondary: '#7FFFD4' },      // Jade to light jade
-  'lion-heart': { primary: '#A8B5C1', secondary: '#8B94A1' },        // Gray with blue tone to darker blue-gray
+  'lion-heart': { primary: '#A8B5C1', secondary: '#FFD966' },        // Gray to light yellow-orange
 };
-
-const renderGradientBars = (value: number, gradient: GradientStop[]) => (
-  <div className="flex items-center gap-1">
-    {gradient.map((color, idx) => {
-      const isActive = idx < Math.min(value, gradient.length);
-      return (
-        <div
-          key={idx}
-          className="w-1.5 h-5 rounded-sm transition-all"
-          style={isActive ? {
-            backgroundColor: color.bg,
-            boxShadow: `0 0 8px ${color.glow}`,
-            opacity: 1,
-          } : {
-            backgroundColor: '#1F2937',
-            opacity: 0.2,
-          }}
-        />
-      );
-    })}
-  </div>
-);
 
 export const AllSouls = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [selectedArchetype, setSelectedArchetype] = useState<Archetype | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [flippedCardId, setFlippedCardId] = useState<string | null>(null);
 
   // Detect mobile screen size
   useEffect(() => {
@@ -79,16 +57,31 @@ export const AllSouls = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  // Prevent body scroll when modal is open
+  // Prevent body scroll when modal is open and handle ESC key
   useEffect(() => {
     if (selectedArchetype) {
+      // Hide scrollbar but keep scroll functionality
       document.body.style.overflow = 'hidden';
+      document.body.style.paddingRight = `${window.innerWidth - document.documentElement.clientWidth}px`;
+      
+      // Handle ESC key
+      const handleEscape = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          setSelectedArchetype(null);
+        }
+      };
+      
+      window.addEventListener('keydown', handleEscape);
+      
+      return () => {
+        window.removeEventListener('keydown', handleEscape);
+        document.body.style.overflow = 'unset';
+        document.body.style.paddingRight = '0';
+      };
     } else {
       document.body.style.overflow = 'unset';
+      document.body.style.paddingRight = '0';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [selectedArchetype]);
 
   // Handle browser back button to close modal
@@ -109,29 +102,38 @@ export const AllSouls = () => {
     }
   }, [selectedArchetype]);
 
-  const getDimensionBadgeColor = (value: string) => {
-    const colorMap: Record<string, string> = {
-      explosive: 'bg-red-500/20 text-red-400 border-red-500/30',
-      steady: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      mixed: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      sprint: 'bg-orange-500/20 text-orange-400 border-orange-500/30',
-      marathon: 'bg-green-500/20 text-green-400 border-green-500/30',
-      aggressive: 'bg-red-500/20 text-red-400 border-red-500/30',
-      controlled: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      flow: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30',
-      burst: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-      sustained: 'bg-green-500/20 text-green-400 border-green-500/30',
-      balanced: 'bg-purple-500/20 text-purple-400 border-purple-500/30',
-      none: 'bg-gray-500/20 text-gray-400 border-gray-500/30',
-      low: 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-      moderate: 'bg-primary/20 text-primary border-primary/30',
-      high: 'bg-accent/20 text-accent border-accent/30',
-    };
-    return colorMap[value] || 'bg-gray-500/20 text-gray-400 border-gray-500/30';
-  };
-
   return (
     <div className="min-h-screen bg-dark py-12 relative overflow-hidden">
+      {/* Animated gradient background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              'radial-gradient(circle at 20% 30%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(255, 0, 229, 0.08) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 20%, rgba(255, 229, 0, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(255, 0, 229, 0.08) 0%, transparent 50%), radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.05) 0%, transparent 50%)',
+            ],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+        />
+        
+        {/* Grid pattern overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
+        />
+      </div>
+
       {/* Ambient Glowing Orbs */}
       <GlowingOrb color="#00E5FF" size={400} blur={120} className="top-20 -left-40" />
       <GlowingOrb color="#FF00E5" size={350} blur={100} className="top-1/2 -right-32" />
@@ -166,7 +168,7 @@ export const AllSouls = () => {
         </ScrollScale>
 
         {/* Archetypes Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-5xl mx-auto px-4" style={{ transform: 'scale(0.9)', transformOrigin: 'top center' }}>
           {isLoading ? (
             // Show skeleton cards while loading
             [...Array(12)].map((_, idx) => (
@@ -180,154 +182,27 @@ export const AllSouls = () => {
               </motion.div>
             ))
           ) : (
-                ARCHETYPES.map((archetype, idx) => {
+                ARCHETYPES.map((archetype, index) => {
                   const brandColor = SOUL_COLORS[archetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
-                  // On mobile, always show effects; on desktop, show on hover
-                  const isHovered = isMobile ? true : hoveredCard === archetype.id;
-                  const hexToRgb = (hex: string) => {
-                    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-                    return result ? {
-                      r: parseInt(result[1], 16),
-                      g: parseInt(result[2], 16),
-                      b: parseInt(result[3], 16)
-                    } : { r: 0, g: 229, b: 255 };
-                  };
-                  const rgb = hexToRgb(brandColor.primary);
-                  const pumpValue = LEVEL_TO_VALUE[archetype.formulaProfile.pumpLevel] ?? 0;
-                  const focusValue = LEVEL_TO_VALUE[archetype.formulaProfile.focusLevel] ?? 0;
 
               return (
-            <ScrollReveal key={archetype.id} delay={idx * 0.05}>
-              <CardHover>
-                <motion.div
-                  onMouseEnter={!isMobile ? () => setHoveredCard(archetype.id) : undefined}
-                  onMouseLeave={!isMobile ? () => setHoveredCard(null) : undefined}
-                  onClick={() => setSelectedArchetype(archetype)}
-                  style={{
-                    borderColor: isHovered ? brandColor.primary : 'rgba(255, 255, 255, 0.1)',
-                    boxShadow: isHovered ? `0 0 30px rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.3)` : 'none',
-                    borderWidth: '2px',
-                    borderStyle: 'solid',
-                    borderRadius: '0.75rem',
-                    transition: isMobile ? 'none' : 'all 0.3s ease',
-                    cursor: 'pointer',
+                <SoulCardWithFlip
+                  key={archetype.id}
+                  archetype={archetype}
+                  brandColor={brandColor}
+                  isMobile={isMobile}
+                  onSelect={setSelectedArchetype}
+                  getSoulLogo={getSoulLogo}
+                  cardNumber={index + 1}
+                  isActive={flippedCardId === archetype.id}
+                  onFlipChange={(isFlipped) => {
+                    if (isFlipped) {
+                      setFlippedCardId(archetype.id);
+                    } else if (flippedCardId === archetype.id) {
+                      setFlippedCardId(null);
+                    }
                   }}
-                >
-                  <Card
-                    className="h-full group relative overflow-hidden !border-0"
-                  >
-                {/* Header */}
-                <div className="text-center mb-4">
-                  <div className="mb-3 transition-transform duration-300 flex justify-center"
-                    style={{
-                      transform: isHovered ? 'scale(1.1)' : 'scale(1)',
-                    }}
-                  >
-                    <SpinningGlow
-                      color1={brandColor.primary}
-                      color2={brandColor.secondary}
-                      size={96}
-                      speed={6}
-                      intensity={isHovered ? 0.6 : 0.3}
-                    >
-                      <img
-                        src={getSoulLogo(archetype.id)}
-                        alt={archetype.name}
-                        className="w-24 h-24 object-contain mix-blend-lighten"
-                      />
-                    </SpinningGlow>
-                  </div>
-                  <h3
-                    className="text-2xl font-heading font-bold mb-1 transition-colors duration-300"
-                    style={{
-                      color: isHovered ? brandColor.primary : 'white',
-                    }}
-                  >
-                    {archetype.name}
-                  </h3>
-                  <p className="text-primary font-semibold text-sm">
-                    {t(`archetypes.${archetype.id}.tagline`)}
-                  </p>
-                </div>
-
-                {/* Key Stats */}
-                <div className="space-y-3 mb-4">
-                  {/* Caffeine Range */}
-                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">{t('allSouls.caffeine')}</span>
-                    <span className="text-sm font-bold text-white">
-                      {archetype.formulaProfile.caffeineRange[0] === archetype.formulaProfile.caffeineRange[1]
-                        ? `${archetype.formulaProfile.caffeineRange[0]}mg`
-                        : `${archetype.formulaProfile.caffeineRange[0]}-${archetype.formulaProfile.caffeineRange[1]}mg`
-                      }
-                    </span>
-                  </div>
-
-                  {/* Intensity */}
-                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">{t('allSouls.intensity')}</span>
-                    {renderGradientBars(archetype.formulaProfile.intensity, INTENSITY_GRADIENT)}
-                  </div>
-
-                  {/* Pump Level */}
-                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">{t('allSouls.pump')}</span>
-                    {renderGradientBars(pumpValue, PUMP_GRADIENT)}
-                  </div>
-
-                  {/* Focus Level */}
-                  <div className="grid grid-cols-[140px_1fr] gap-6 items-center p-2 bg-dark-lighter rounded">
-                    <span className="text-xs text-gray-400">{t('allSouls.focus')}</span>
-                    {renderGradientBars(focusValue, FOCUS_GRADIENT)}
-                  </div>
-                </div>
-
-                {/* Dimension Badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  <span
-                    className={`px-2 py-1 rounded text-xs font-semibold border ${getDimensionBadgeColor(
-                      archetype.dimensions.intensity
-                    )}`}
-                  >
-                    {archetype.dimensions.intensity}
-                  </span>
-                  <span
-                    className={`px-2 py-1 rounded text-xs font-semibold border ${getDimensionBadgeColor(
-                      archetype.dimensions.duration
-                    )}`}
-                  >
-                    {archetype.dimensions.duration}
-                  </span>
-                  <span
-                    className={`px-2 py-1 rounded text-xs font-semibold border ${getDimensionBadgeColor(
-                      archetype.dimensions.stimTolerance
-                    )}`}
-                  >
-                    {t('allSouls.stim')}: {archetype.dimensions.stimTolerance}
-                  </span>
-                </div>
-
-                {/* Description */}
-                <p className="text-sm text-gray-400 mb-4 line-clamp-3">
-                  {t(`archetypes.${archetype.id}.description`)}
-                </p>
-
-                {/* View Details Button */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setSelectedArchetype(archetype);
-                  }}
-                >
-                  {t('allSouls.viewProfile')}
-                </Button>
-              </Card>
-                </motion.div>
-              </CardHover>
-            </ScrollReveal>
+                />
               );
             })
           )}
@@ -353,7 +228,7 @@ export const AllSouls = () => {
           </Card>
         </motion.div>
 
-        {/* Detailed Modal */}
+        {/* Premium High-End Modal */}
         {selectedArchetype && (() => {
           const modalBrandColor = SOUL_COLORS[selectedArchetype.id] || { primary: '#00e5ff', secondary: '#00e5ff' };
           const hexToRgb = (hex: string) => {
@@ -365,158 +240,376 @@ export const AllSouls = () => {
             } : { r: 0, g: 229, b: 255 };
           };
           const modalRgb = hexToRgb(modalBrandColor.primary);
+          const secondaryRgb = hexToRgb(modalBrandColor.secondary);
 
           return (
           <div
-            className="fixed inset-0 bg-black/90 flex items-start justify-center p-4 sm:p-6 md:p-8 pt-24 sm:pt-28 md:pt-32 pb-8"
+            className="fixed inset-0 overflow-y-scroll"
             style={{
-              zIndex: 9999,
-              backdropFilter: 'blur(12px)',
-              WebkitBackdropFilter: 'blur(12px)',
-              overflowY: 'auto',
-              overscrollBehavior: 'contain',
+              zIndex: 10000,
+              background: 'rgba(0, 0, 0, 0.95)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              pointerEvents: 'auto',
             }}
             onClick={() => setSelectedArchetype(null)}
+            onWheel={(e) => e.stopPropagation()}
           >
+            {/* Animated background glow */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="bg-dark-lighter rounded-2xl max-w-3xl w-full mb-8 relative"
+              className="absolute inset-0 opacity-30 pointer-events-none"
+              animate={{
+                background: [
+                  `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
+                  `radial-gradient(circle at 70% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.3) 0%, transparent 50%)`,
+                  `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
+                ],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+
+            {/* Content wrapper with proper spacing */}
+            <div 
+              className="pt-24 pb-16 px-4 sm:px-6 lg:px-8"
               style={{
-                borderWidth: '2px',
-                borderStyle: 'solid',
-                borderColor: modalBrandColor.primary,
-                boxShadow: `0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4), 0 0 80px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
+                minHeight: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Sticky Close Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 20, scale: 0.95 }}
+                transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="relative w-full max-w-5xl"
+                style={{ transform: 'scale(0.70)' }}
+                onClick={(e) => e.stopPropagation()}
+              >
+              {/* Close Button */}
               <button
                 onClick={() => setSelectedArchetype(null)}
-                className="sticky top-4 right-4 float-right z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-                style={{
-                  backgroundColor: `rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.2)`,
-                  border: `2px solid ${modalBrandColor.primary}`,
-                }}
-                aria-label="Close modal"
+                className="absolute -top-2 -right-2 sm:top-4 sm:right-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:rotate-90 bg-white/10 hover:bg-white/20 backdrop-blur-sm"
+                aria-label="Close modal (ESC)"
               >
                 <svg
-                  className="w-5 h-5"
-                  style={{ color: modalBrandColor.primary }}
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
 
-              <div className="p-4 sm:p-6 md:p-8 clear-both">
-                {/* Header */}
-                <div className="text-center mb-4 sm:mb-6">
-                  <div className="mb-3 sm:mb-4 flex justify-center">
-                    <SpinningGlow
-                      color1={modalBrandColor.primary}
-                      color2={modalBrandColor.secondary}
-                      size={128}
-                      speed={5}
-                      intensity={0.7}
+              {/* Main Content - Split Layout */}
+              <div className="grid grid-cols-1 lg:grid-cols-[25%_75%] gap-0 overflow-hidden rounded-3xl"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(15, 20, 50, 0.95) 0%, rgba(10, 14, 39, 0.98) 100%)',
+                  boxShadow: `
+                    0 0 60px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4),
+                    0 0 120px rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.2),
+                    inset 0 0 100px rgba(0, 0, 0, 0.5)
+                  `,
+                }}
+              >
+                {/* Left Side - Visual Identity */}
+                <div className="relative p-3 sm:p-4 lg:p-5 flex flex-col items-center justify-center border-r border-white/5 min-h-[250px] lg:min-h-[380px]">
+                  {/* Animated gradient background */}
+                  <motion.div
+                    className="absolute inset-0"
+                    animate={{
+                      background: [
+                        `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
+                        `radial-gradient(circle at 50% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.08) 0%, transparent 70%)`,
+                        `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
+                      ],
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                    }}
+                  />
+
+                  {/* Soul Logo with Premium Glow */}
+                  <div className="relative z-10 mb-6">
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.05, 1],
+                        rotate: [0, 5, 0, -5, 0],
+                      }}
+                      transition={{
+                        duration: 6,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                      }}
+                      className="relative"
                     >
-                      <img
-                        src={getSoulLogo(selectedArchetype.id)}
-                        alt={selectedArchetype.name}
-                        className="w-24 h-24 sm:w-32 sm:h-32 object-contain mix-blend-lighten"
+                      {/* Outer glow ring */}
+                      <motion.div
+                        className="absolute inset-0 rounded-full blur-3xl"
+                        animate={{
+                          opacity: [0.2, 0.35, 0.2],
+                        }}
+                        transition={{
+                          duration: 4,
+                          repeat: Infinity,
+                          ease: 'easeInOut',
+                        }}
+                        style={{
+                          background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
+                          transform: 'scale(1.5)',
+                        }}
                       />
-                    </SpinningGlow>
+                      
+                      {/* Logo container */}
+                      <div 
+                        className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
+                        style={{
+                          background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
+                          boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
+                        }}
+                      >
+                        <img
+                          src={getSoulLogo(selectedArchetype.id)}
+                          alt={selectedArchetype.name}
+                          className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
+                          style={{
+                            filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
+                          }}
+                        />
+                      </div>
+                    </motion.div>
                   </div>
-                  <h2
-                    className="text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-2"
-                    style={{ color: modalBrandColor.primary }}
+
+                  {/* Name & Tagline */}
+                  <div className="text-center relative z-10">
+                    <motion.h2
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2 }}
+                      className="text-4xl sm:text-5xl font-heading font-bold mb-3"
+                      style={{
+                        color: modalBrandColor.primary,
+                        textShadow: `0 0 30px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.6)`,
+                      }}
+                    >
+                      {selectedArchetype.name}
+                    </motion.h2>
+                    <motion.p
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.3 }}
+                      className="text-xl sm:text-2xl font-medium italic"
+                      style={{
+                        color: modalBrandColor.secondary,
+                        textShadow: `0 0 20px rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.5)`,
+                      }}
+                    >
+                      "{t(`archetypes.${selectedArchetype.id}.tagline`)}"
+                    </motion.p>
+                  </div>
+
+                  {/* Decorative lines */}
+                  <div className="absolute top-0 left-0 w-full h-1"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${modalBrandColor.primary}, ${modalBrandColor.secondary}, transparent)`,
+                    }}
+                  />
+                  <div className="absolute bottom-0 left-0 w-full h-1"
+                    style={{
+                      background: `linear-gradient(90deg, transparent, ${modalBrandColor.secondary}, ${modalBrandColor.primary}, transparent)`,
+                    }}
+                  />
+                </div>
+
+                {/* Right Side - Details */}
+                <div className="p-4 sm:p-5 lg:p-6 flex flex-col">
+                  {/* Description */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="mb-4"
                   >
-                    {selectedArchetype.name}
-                  </h2>
-                  <p className="text-base sm:text-lg md:text-xl font-semibold" style={{ color: modalBrandColor.primary }}>
-                    {t(`archetypes.${selectedArchetype.id}.tagline`)}
-                  </p>
+                    <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                      {t(`archetypes.${selectedArchetype.id}.description`)}
+                    </p>
+                  </motion.div>
+
+                  {/* Stats Grid - Compact Bar Style */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="space-y-2 mb-4"
+                  >
+                    {/* Caffeine Range */}
+                    <div className="relative">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          {t('allSouls.modal.caffeineRange')}
+                        </span>
+                        <span className="text-sm font-bold" style={{ color: modalBrandColor.primary }}>
+                          {selectedArchetype.formulaProfile.caffeineRange[0] === selectedArchetype.formulaProfile.caffeineRange[1]
+                            ? `${selectedArchetype.formulaProfile.caffeineRange[0]}mg`
+                            : `${selectedArchetype.formulaProfile.caffeineRange[0]}-${selectedArchetype.formulaProfile.caffeineRange[1]}mg`
+                          }
+                        </span>
+                      </div>
+                      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{ 
+                            width: `${(selectedArchetype.formulaProfile.caffeineRange[1] / 400) * 100}%`,
+                            background: modalBrandColor.primary
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Intensity Level */}
+                    <div className="relative">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          {t('allSouls.modal.intensityLevel')}
+                        </span>
+                        <span className="text-sm font-bold" style={{ color: modalBrandColor.secondary }}>
+                          {selectedArchetype.formulaProfile.intensity}/10
+                        </span>
+                      </div>
+                      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{ 
+                            width: `${(selectedArchetype.formulaProfile.intensity / 10) * 100}%`,
+                            background: modalBrandColor.secondary
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Pump Level */}
+                    <div className="relative">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          {t('allSouls.modal.pumpLevel')}
+                        </span>
+                        <span className="text-sm font-bold text-white uppercase">
+                          {selectedArchetype.formulaProfile.pumpLevel}
+                        </span>
+                      </div>
+                      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{ 
+                            width: selectedArchetype.formulaProfile.pumpLevel === 'maximum' ? '100%' : 
+                                   selectedArchetype.formulaProfile.pumpLevel === 'high' ? '75%' : 
+                                   selectedArchetype.formulaProfile.pumpLevel === 'moderate' ? '50%' : '25%',
+                            background: modalBrandColor.primary
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Focus Level */}
+                    <div className="relative">
+                      <div className="flex justify-between items-center mb-1.5">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          {t('allSouls.modal.focusLevel')}
+                        </span>
+                        <span className="text-sm font-bold text-white uppercase">
+                          {selectedArchetype.formulaProfile.focusLevel}
+                        </span>
+                      </div>
+                      <div className="h-2 bg-white/5 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full rounded-full transition-all duration-500"
+                          style={{ 
+                            width: selectedArchetype.formulaProfile.focusLevel === 'maximum' ? '100%' : 
+                                   selectedArchetype.formulaProfile.focusLevel === 'high' ? '75%' : 
+                                   selectedArchetype.formulaProfile.focusLevel === 'moderate' ? '50%' : '25%',
+                            background: modalBrandColor.secondary
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Traits & Athlete Types */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                  >
+                    <div>
+                      <h3 className="text-xs font-semibold uppercase tracking-wider mb-2"
+                        style={{ color: modalBrandColor.primary }}
+                      >
+                        {t('allSouls.modal.coreTraits')}
+                      </h3>
+                      <ul className="space-y-1.5">
+                        {(t(`archetypes.${selectedArchetype.id}.traits`, { returnObjects: true }) as string[]).map((trait, idx) => (
+                          <li key={idx} className="flex items-start space-x-2 text-xs">
+                            <span style={{ color: modalBrandColor.primary }}>▸</span>
+                            <span className="text-gray-300">{trait}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xs font-semibold uppercase tracking-wider mb-2"
+                        style={{ color: modalBrandColor.secondary }}
+                      >
+                        Ideal For
+                      </h3>
+                      <ul className="space-y-1.5">
+                        {(t(`archetypes.${selectedArchetype.id}.athleteTypes`, { returnObjects: true }) as string[]).map((type, idx) => (
+                          <li key={idx} className="flex items-start space-x-2 text-xs">
+                            <span style={{ color: modalBrandColor.secondary }}>▸</span>
+                            <span className="text-gray-300">{type}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </motion.div>
+
+                  {/* CTA Button */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="mt-auto pt-8"
+                  >
+                    <button
+                      onClick={() => {
+                        setSelectedArchetype(null);
+                        navigate('/formula');
+                      }}
+                      className="w-full py-4 px-6 rounded-xl font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                      style={{
+                        background: `linear-gradient(135deg, ${modalBrandColor.primary}, ${modalBrandColor.secondary})`,
+                        boxShadow: `0 10px 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4)`,
+                      }}
+                    >
+                      Create Your Custom Formula
+                    </button>
+                  </motion.div>
                 </div>
-
-                {/* Description */}
-                <p className="text-gray-300 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6">
-                  {t(`archetypes.${selectedArchetype.id}.description`)}
-                </p>
-
-                {/* Formula Profile */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-4 sm:mb-6">
-                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
-                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">
-                      {t('allSouls.modal.caffeineRange')}
-                    </h3>
-                    <p className="text-xl sm:text-2xl font-bold text-primary">
-                      {selectedArchetype.formulaProfile.caffeineRange[0] === selectedArchetype.formulaProfile.caffeineRange[1]
-                        ? `${selectedArchetype.formulaProfile.caffeineRange[0]}mg`
-                        : `${selectedArchetype.formulaProfile.caffeineRange[0]}-${selectedArchetype.formulaProfile.caffeineRange[1]}mg`
-                      }
-                    </p>
-                  </div>
-                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
-                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">
-                      {t('allSouls.modal.intensityLevel')}
-                    </h3>
-                    <p className="text-xl sm:text-2xl font-bold text-secondary">
-                      {selectedArchetype.formulaProfile.intensity}/10
-                    </p>
-                  </div>
-                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
-                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">{t('allSouls.modal.pumpLevel')}</h3>
-                    <p className="text-lg sm:text-xl font-bold text-white uppercase">
-                      {selectedArchetype.formulaProfile.pumpLevel}
-                    </p>
-                  </div>
-                  <div className="p-3 sm:p-4 bg-dark rounded-lg">
-                    <h3 className="text-xs sm:text-sm font-semibold text-gray-400 mb-1 sm:mb-2">{t('allSouls.modal.focusLevel')}</h3>
-                    <p className="text-lg sm:text-xl font-bold text-white uppercase">
-                      {selectedArchetype.formulaProfile.focusLevel}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Traits & Athlete Types */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 mb-4 sm:mb-6">
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.coreTraits')}</h3>
-                    <ul className="space-y-2">
-                      {(t(`archetypes.${selectedArchetype.id}.traits`, { returnObjects: true }) as string[]).map((trait, idx) => (
-                        <li key={idx} className="flex items-start space-x-2">
-                          <span className="text-accent mt-1">▸</span>
-                          <span className="text-gray-300">{trait}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-primary mb-3">{t('allSouls.modal.perfectFor')}</h3>
-                    <ul className="space-y-2">
-                      {(t(`archetypes.${selectedArchetype.id}.athleteTypes`, { returnObjects: true }) as string[]).map((type, idx) => (
-                        <li key={idx} className="flex items-start space-x-2">
-                          <span className="text-accent mt-1">▸</span>
-                          <span className="text-gray-300">{type}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                {/* Close Button */}
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => setSelectedArchetype(null)}
-                >
-                  {t('allSouls.modal.closeButton')}
-                </Button>
               </div>
             </motion.div>
+            </div>
           </div>
           );
         })()}
