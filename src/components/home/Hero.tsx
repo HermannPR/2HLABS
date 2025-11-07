@@ -194,44 +194,53 @@ export const Hero = () => {
 
           {/* Trust Badges - Single rotating badge on mobile, row on desktop */}
           {isMobile ? (
-            // Mobile: Single badge with auto-rotation
-            <div className="flex flex-col items-center gap-3">
-              {/* Badge description hint */}
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={`hint-${currentBadgeIndex}`}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
-                  transition={{ duration: 0.3 }}
-                  className="text-sm text-primary font-medium"
-                >
-                  {badges[currentBadgeIndex].alt}
-                </motion.p>
-              </AnimatePresence>
+            // Mobile: Horizontal layout with badge and text side-by-side
+            <div className="flex flex-col items-center gap-4 w-full max-w-md mx-auto">
+              <div className="flex items-center gap-6 w-full">
+                {/* Rotating badge with animation */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentBadgeIndex}
+                    initial={{ opacity: 0, scale: 0.8, x: -30 }}
+                    animate={{ opacity: 1, scale: 1, x: 0 }}
+                    exit={{ opacity: 0, scale: 0.8, x: 30 }}
+                    transition={{
+                      duration: 0.5,
+                      ease: "easeInOut"
+                    }}
+                    style={{ willChange: "transform, opacity" }}
+                    className="flex-shrink-0"
+                  >
+                    <BadgeWithTooltip
+                      src={badges[currentBadgeIndex].src}
+                      alt={badges[currentBadgeIndex].alt}
+                      tooltip={badges[currentBadgeIndex].tooltip}
+                      className="w-28 h-28 mix-blend-lighten"
+                      glowEffect
+                    />
+                  </motion.div>
+                </AnimatePresence>
 
-              {/* Rotating badge with animation */}
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentBadgeIndex}
-                  initial={{ opacity: 0, scale: 0.8, rotateY: -90 }}
-                  animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                  exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeInOut"
-                  }}
-                  style={{ willChange: "transform, opacity" }}
-                >
-                  <BadgeWithTooltip
-                    src={badges[currentBadgeIndex].src}
-                    alt={badges[currentBadgeIndex].alt}
-                    tooltip={badges[currentBadgeIndex].tooltip}
-                    className="w-32 h-32 mx-auto mix-blend-lighten"
-                    glowEffect
-                  />
-                </motion.div>
-              </AnimatePresence>
+                {/* Badge description hint - larger text, one word per line */}
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={`hint-${currentBadgeIndex}`}
+                    initial={{ opacity: 0, x: 30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -30 }}
+                    transition={{ duration: 0.5 }}
+                    className="flex-1"
+                  >
+                    <p className="text-2xl font-bold text-primary leading-tight">
+                      {badges[currentBadgeIndex].alt.split(' ').map((word, idx) => (
+                        <span key={idx} className="block">
+                          {word}
+                        </span>
+                      ))}
+                    </p>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
 
               {/* Progress indicators */}
               <div className="flex gap-2">
@@ -239,10 +248,10 @@ export const Hero = () => {
                   <button
                     key={idx}
                     onClick={() => setCurrentBadgeIndex(idx)}
-                    className={`w-2 h-2 rounded-full transition-all ${
+                    className={`h-2 rounded-full transition-all ${
                       idx === currentBadgeIndex
-                        ? 'bg-primary w-6'
-                        : 'bg-gray-600 hover:bg-gray-500'
+                        ? 'bg-primary w-8'
+                        : 'bg-gray-600 hover:bg-gray-500 w-2'
                     }`}
                     aria-label={`View badge ${idx + 1}`}
                   />
