@@ -5,6 +5,7 @@ import { QUIZ_QUESTIONS } from '../data/quizQuestions';
 import type { QuizAnswers, ArchetypeResult, FormulaIngredient } from '../types';
 import { Button } from '../components/common/Button';
 import { Card } from '../components/common/Card';
+import { MagneticButton } from '../components/animations/MagneticButton';
 import { HiArrowLeft, HiArrowRight, HiLightningBolt, HiClock, HiFire, HiSparkles, HiBeaker, HiPencil } from 'react-icons/hi';
 import { getArchetypeResult } from '../utils/archetypeMatching';
 import { generateArchetypeFormula, getUserContextFromAnswers } from '../utils/archetypeFormulaGenerator';
@@ -774,26 +775,68 @@ export const FormulaGenerator = () => {
 
   return (
     <div className="min-h-screen bg-dark py-12 relative overflow-hidden">
-      {/* Floating Background Elements */}
+      {/* Enhanced Background with Gradients */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Base gradient overlay */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 229, 0, 0.03) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255, 0, 229, 0.04) 0%, transparent 50%),
+              radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0, 229, 255, 0.04) 0%, transparent 50%)
+            `
+          }}
+        />
+
+        {/* Animated gradient overlay */}
+        <motion.div
+          className="absolute inset-0"
+          animate={{
+            background: [
+              'radial-gradient(ellipse 70% 50% at 30% 30%, rgba(255, 229, 0, 0.02) 0%, transparent 50%)',
+              'radial-gradient(ellipse 70% 50% at 70% 60%, rgba(255, 0, 229, 0.02) 0%, transparent 50%)',
+              'radial-gradient(ellipse 70% 50% at 30% 30%, rgba(255, 229, 0, 0.02) 0%, transparent 50%)',
+            ]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+      </div>
+
+      {/* Floating particles - enhanced */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-primary rounded-full opacity-10"
+            className="absolute rounded-full opacity-20"
+            style={{
+              width: i % 3 === 0 ? '3px' : '2px',
+              height: i % 3 === 0 ? '3px' : '2px',
+              background: i % 3 === 0 ? '#FFE500' : i % 3 === 1 ? '#FF00E5' : '#00E5FF',
+              boxShadow: i % 3 === 0 
+                ? '0 0 10px rgba(255, 229, 0, 0.5)' 
+                : i % 3 === 1 
+                ? '0 0 10px rgba(255, 0, 229, 0.5)' 
+                : '0 0 10px rgba(0, 229, 255, 0.5)',
+            }}
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200),
+              y: Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800),
             }}
             animate={{
-              y: [null, Math.random() * window.innerHeight],
-              x: [null, Math.random() * window.innerWidth],
-              scale: [1, 1.5, 1],
-              opacity: [0.1, 0.3, 0.1],
+              y: [null, Math.random() * (typeof window !== 'undefined' ? window.innerHeight : 800)],
+              x: [null, Math.random() * (typeof window !== 'undefined' ? window.innerWidth : 1200)],
+              scale: [1, 1.8, 1],
+              opacity: [0.1, 0.4, 0.1],
             }}
             transition={{
-              duration: 15 + Math.random() * 10,
+              duration: 15 + Math.random() * 15,
               repeat: Infinity,
-              ease: 'linear',
+              ease: 'easeInOut',
             }}
           />
         ))}
@@ -807,113 +850,298 @@ export const FormulaGenerator = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-4">
-              Discover Your <span className="text-gradient">Training Archetype</span>
+            {/* Animated soul icon */}
+            <motion.div
+              className="inline-block mb-6"
+              animate={{
+                rotateY: [0, 360],
+                scale: [1, 1.05, 1],
+              }}
+              transition={{
+                rotateY: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                scale: { duration: 3, repeat: Infinity, ease: "easeInOut" },
+              }}
+            >
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 border-2 border-primary/40 flex items-center justify-center shadow-lg shadow-primary/30"
+                style={{
+                  boxShadow: '0 0 30px rgba(255, 229, 0, 0.3), 0 0 60px rgba(0, 229, 255, 0.2)'
+                }}
+              >
+                <HiSparkles className="text-primary" size={40} />
+              </div>
+            </motion.div>
+
+            <h1 className="text-4xl md:text-6xl font-heading font-bold mb-4"
+              style={{
+                textShadow: '0 4px 12px rgba(0,0,0,0.8), 0 0 40px rgba(255, 229, 0, 0.15)'
+              }}
+            >
+              Discover Your <span className="text-gradient glow-primary">Training Soul</span>
             </h1>
-            <p className="text-xl text-gray-400">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-xl text-gray-300 max-w-2xl mx-auto"
+              style={{
+                textShadow: '0 2px 8px rgba(0,0,0,0.6)'
+              }}
+            >
               Answer honestly - there are no wrong answers. This takes about 2 minutes.
-            </p>
+            </motion.p>
+
+            {/* Floating particles around title */}
+            {[...Array(6)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 rounded-full bg-primary/40"
+                style={{
+                  left: `${50 + (Math.random() - 0.5) * 30}%`,
+                  top: `${20 + Math.random() * 10}%`,
+                }}
+                animate={{
+                  y: [0, -20, 0],
+                  opacity: [0.2, 0.6, 0.2],
+                  scale: [1, 1.5, 1],
+                }}
+                transition={{
+                  duration: 3 + Math.random() * 2,
+                  repeat: Infinity,
+                  delay: i * 0.3,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
           </motion.div>
         )}
 
-        {/* Progress Section */}
+        {/* Progress Section - Enhanced */}
         <div className="mb-8 flex items-center gap-6">
-          {/* Circular Progress */}
-          <div className="relative w-20 h-20 flex-shrink-0">
-            <svg className="transform -rotate-90 w-full h-full">
+          {/* Circular Progress with glow */}
+          <div className="relative w-24 h-24 flex-shrink-0">
+            {/* Glow ring */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: `radial-gradient(circle, rgba(0, 229, 255, 0.2) 0%, transparent 70%)`,
+                filter: 'blur(8px)',
+              }}
+              animate={{
+                opacity: [0.3, 0.6, 0.3],
+                scale: [0.95, 1.05, 0.95],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+
+            <svg className="transform -rotate-90 w-full h-full relative z-10">
               {/* Background Circle */}
               <circle
-                cx="40"
-                cy="40"
-                r="36"
+                cx="48"
+                cy="48"
+                r="42"
                 stroke="currentColor"
                 strokeWidth="6"
                 fill="none"
                 className="text-dark-lighter"
               />
-              {/* Progress Circle */}
+              {/* Progress Circle with enhanced gradient */}
               <motion.circle
-                cx="40"
-                cy="40"
-                r="36"
-                stroke="url(#progressGradient)"
+                cx="48"
+                cy="48"
+                r="42"
+                stroke="url(#enhancedProgressGradient)"
                 strokeWidth="6"
                 fill="none"
                 strokeLinecap="round"
-                initial={{ strokeDashoffset: 226 }}
-                animate={{ strokeDashoffset: 226 - (226 * progress) / 100 }}
+                initial={{ strokeDashoffset: 264 }}
+                animate={{ strokeDashoffset: 264 - (264 * progress) / 100 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
                 style={{
-                  strokeDasharray: 226,
+                  strokeDasharray: 264,
+                  filter: 'drop-shadow(0 0 4px rgba(0, 229, 255, 0.6))',
                 }}
               />
               <defs>
-                <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#00e5ff" />
-                  <stop offset="100%" stopColor="#00b8cc" />
+                <linearGradient id="enhancedProgressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FFE500" />
+                  <stop offset="50%" stopColor="#00E5FF" />
+                  <stop offset="100%" stopColor="#FF00E5" />
                 </linearGradient>
               </defs>
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold text-primary">{Math.round(progress)}%</span>
+              <motion.span
+                key={Math.round(progress)}
+                initial={{ scale: 1.2, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                className="text-base font-bold text-gradient"
+              >
+                {Math.round(progress)}%
+              </motion.span>
             </div>
+
+            {/* Pulse effect on milestones */}
+            {[25, 50, 75, 100].includes(Math.round(progress)) && (
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-primary"
+                initial={{ scale: 1, opacity: 0.8 }}
+                animate={{ scale: 1.5, opacity: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              />
+            )}
           </div>
 
-          {/* Linear Progress */}
+          {/* Linear Progress - Enhanced */}
           <div className="flex-1">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm text-gray-400">
+              <span className="text-sm text-gray-300 font-medium">
                 Question {currentQuestionIndex + 1} of {visibleQuestions.length}
               </span>
-              <span className="text-sm text-primary font-semibold">
+              <motion.span
+                key={Math.round(progress)}
+                initial={{ scale: 1.1 }}
+                animate={{ scale: 1 }}
+                className="text-sm font-bold"
+                style={{
+                  background: 'linear-gradient(90deg, #FFE500, #00E5FF)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 0 8px rgba(0, 229, 255, 0.4))',
+                }}
+              >
                 {Math.round(progress)}% Complete
-              </span>
+              </motion.span>
             </div>
-            <div className="w-full h-3 bg-dark-lighter rounded-full overflow-hidden shadow-inner">
+            <div className="relative w-full h-4 bg-dark-lighter rounded-full overflow-hidden shadow-inner"
+              style={{
+                boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.6)',
+              }}
+            >
               <motion.div
-                className="h-full bg-gradient-to-r from-primary to-secondary shadow-lg shadow-primary/50"
+                className="h-full relative overflow-hidden rounded-full"
+                style={{
+                  background: 'linear-gradient(90deg, #FFE500 0%, #00E5FF 50%, #FF00E5 100%)',
+                  boxShadow: '0 0 20px rgba(0, 229, 255, 0.6), 0 0 40px rgba(255, 229, 0, 0.3)',
+                }}
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-              />
+              >
+                {/* Shimmer effect */}
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)',
+                  }}
+                  animate={{
+                    x: ['-100%', '200%'],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+              </motion.div>
             </div>
           </div>
         </div>
 
-        {/* Question Card */}
+        {/* Question Card - Enhanced with Glassmorphism */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentQuestion.id}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            exit={{ opacity: 0, x: -50, scale: 0.95 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="mb-8 relative"
           >
-            <Card className="mb-8 relative overflow-visible">
-              {/* Dimension Icon Badge */}
+            {/* Glow effect behind card */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-primary/10 rounded-2xl blur-2xl -z-10 opacity-50" />
+
+            <div className="relative overflow-visible bg-dark-lighter/80 backdrop-blur-xl border border-primary/20 rounded-2xl p-6 md:p-8 shadow-2xl"
+              style={{
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 229, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+              }}
+            >
+              {/* Dimension Icon Badge - Enhanced */}
               <div className="flex items-center justify-center mb-6">
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
                   transition={{ type: "spring", stiffness: 200, delay: 0.1 }}
-                  className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 border-2 border-primary/30 flex items-center justify-center shadow-lg shadow-primary/20"
+                  className="relative"
                 >
-                  {getDimensionIcon(currentQuestion.dimension)}
+                  {/* Rotating glow ring */}
+                  <motion.div
+                    className="absolute inset-0 rounded-full"
+                    style={{
+                      background: 'conic-gradient(from 0deg, #FFE500, #00E5FF, #FF00E5, #FFE500)',
+                      filter: 'blur(12px)',
+                      opacity: 0.4,
+                    }}
+                    animate={{
+                      rotate: 360,
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
+
+                  <div className="relative w-20 h-20 rounded-full bg-gradient-to-br from-primary/30 to-secondary/30 border-2 border-primary/50 flex items-center justify-center shadow-lg"
+                    style={{
+                      boxShadow: '0 0 30px rgba(255, 229, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                      backdropFilter: 'blur(10px)',
+                    }}
+                  >
+                    {getDimensionIcon(currentQuestion.dimension)}
+                  </div>
                 </motion.div>
               </div>
 
-              {/* Question Number Badge */}
-              <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-primary/10 border border-primary/30">
-                <span className="text-sm font-semibold text-primary">
+              {/* Question Number Badge - Enhanced */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="absolute top-4 right-4 px-4 py-2 rounded-full bg-dark/60 backdrop-blur-md border border-primary/40"
+                style={{
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 229, 0, 0.2)',
+                }}
+              >
+                <span className="text-sm font-bold text-gradient">
                   {currentQuestionIndex + 1}/{visibleQuestions.length}
                 </span>
-              </div>
+              </motion.div>
 
-              <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3 text-center">
+              <motion.h2
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.15 }}
+                className="text-2xl md:text-3xl font-heading font-bold mb-3 text-center"
+                style={{
+                  textShadow: '0 2px 12px rgba(0, 0, 0, 0.4)',
+                }}
+              >
                 {t(`quiz.questions.${currentQuestion.id}.question`)}
-              </h2>
+              </motion.h2>
               {currentQuestion.description && (
-                <p className="text-gray-400 mb-6 text-center">{t(`quiz.questions.${currentQuestion.id}.description`)}</p>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                  className="text-gray-300 mb-6 text-center"
+                >
+                  {t(`quiz.questions.${currentQuestion.id}.description`)}
+                </motion.p>
               )}
 
               {/* Options Grid */}
@@ -922,31 +1150,86 @@ export const FormulaGenerator = () => {
                   ? 'grid-cols-1'
                   : 'grid-cols-1 md:grid-cols-2'
               }`}>
-                {currentQuestion.options.map((option) => {
+                {currentQuestion.options.map((option, optionIndex) => {
                   const isSelected = answers[currentQuestion.id] === option.id;
 
                   return (
                     <motion.button
                       key={option.id}
                       onClick={() => handleAnswer(option.id)}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.25 + optionIndex * 0.05 }}
+                      whileHover={{ scale: 1.03, y: -4 }}
+                      whileTap={{ scale: 0.97 }}
                       className={`
-                        p-6 rounded-xl border-2 transition-all text-left h-full
+                        relative p-6 rounded-xl border-2 transition-all text-left h-full overflow-hidden
                         ${isSelected
-                          ? 'border-primary bg-primary/10 shadow-lg shadow-primary/20'
-                          : 'border-dark-light bg-dark-lighter hover:border-primary/50'
+                          ? 'border-primary/60 bg-dark/60 shadow-xl'
+                          : 'border-dark-light/40 bg-dark-lighter/60 hover:border-primary/40'
                         }
                       `}
+                      style={{
+                        backdropFilter: 'blur(12px)',
+                        boxShadow: isSelected
+                          ? '0 0 30px rgba(255, 229, 0, 0.3), 0 8px 20px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05)'
+                          : '0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03)',
+                      }}
                     >
-                      <div className="flex items-start space-x-4">
+                      {/* Glow effect on selected */}
+                      {isSelected && (
+                        <motion.div
+                          className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 rounded-xl -z-10"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      )}
+
+                      {/* Particle burst on select */}
+                      {isSelected && (
+                        <>
+                          {[...Array(4)].map((_, i) => (
+                            <motion.div
+                              key={i}
+                              className="absolute w-1 h-1 rounded-full bg-primary"
+                              style={{
+                                left: '50%',
+                                top: '50%',
+                              }}
+                              initial={{ scale: 0, x: 0, y: 0 }}
+                              animate={{
+                                scale: [0, 1, 0],
+                                x: [0, (Math.random() - 0.5) * 100],
+                                y: [0, (Math.random() - 0.5) * 100],
+                                opacity: [1, 0],
+                              }}
+                              transition={{ duration: 0.6, delay: i * 0.05 }}
+                            />
+                          ))}
+                        </>
+                      )}
+
+                      <div className="flex items-start space-x-4 relative z-10">
                         {option.emoji && (
-                          <span className="text-4xl flex-shrink-0">{option.emoji}</span>
+                          <motion.span
+                            className="text-4xl flex-shrink-0"
+                            animate={{
+                              scale: isSelected ? [1, 1.2, 1] : 1,
+                            }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            {option.emoji}
+                          </motion.span>
                         )}
                         <div className="flex-1">
-                          <p className={`text-lg font-semibold ${
-                            isSelected ? 'text-primary' : 'text-white'
-                          }`}>
+                          <p className={`text-lg font-semibold transition-colors ${
+                            isSelected ? 'text-gradient' : 'text-white'
+                          }`}
+                            style={{
+                              textShadow: isSelected ? '0 0 10px rgba(255, 229, 0, 0.5)' : 'none',
+                            }}
+                          >
                             {t(`quiz.questions.${currentQuestion.id}.options.${option.id}`)}
                           </p>
                         </div>
@@ -955,62 +1238,123 @@ export const FormulaGenerator = () => {
                   );
                 })}
               </div>
-            </Card>
+            </div>
           </motion.div>
         </AnimatePresence>
 
-        {/* Navigation */}
-        <div className="flex justify-between items-center">
-          <Button
-            variant="outline"
-            onClick={handlePrevious}
-            disabled={currentQuestionIndex === 0 || isNavigating}
-            className="flex items-center space-x-2"
-          >
-            <HiArrowLeft />
-            <span>Previous</span>
-          </Button>
+        {/* Navigation - Enhanced */}
+        <div className="flex justify-between items-center gap-4">
+          {currentQuestionIndex === 0 || isNavigating ? (
+            <Button
+              variant="outline"
+              onClick={handlePrevious}
+              disabled={true}
+              className="flex items-center space-x-2 backdrop-blur-md bg-dark-lighter/60 border-primary/20 shadow-lg opacity-50"
+            >
+              <HiArrowLeft />
+              <span>Previous</span>
+            </Button>
+          ) : (
+            <MagneticButton strength={0.2}>
+              <Button
+                variant="outline"
+                onClick={handlePrevious}
+                className="flex items-center space-x-2 backdrop-blur-md bg-dark-lighter/60 border-primary/20 hover:border-primary/40 shadow-lg"
+                style={{
+                  boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05)',
+                }}
+              >
+                <motion.div
+                  animate={{ x: [-2, 0, -2] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <HiArrowLeft />
+                </motion.div>
+                <span>Previous</span>
+              </Button>
+            </MagneticButton>
+          )}
 
           <div className="flex items-center space-x-4">
             {!isAnswered() && !isNavigating && !currentQuestion.optional && (
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-sm text-gray-500 hidden sm:block"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-gray-400 hidden sm:block"
               >
                 Select an option to continue
               </motion.p>
             )}
             {currentQuestion.optional && !isAnswered() && (
               <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="text-sm text-gray-400 hidden sm:block"
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-gray-300 hidden sm:block"
               >
                 Optional - Skip if you prefer
               </motion.p>
             )}
-            <Button
-              onClick={handleNext}
-              disabled={!isAnswered() || isNavigating}
-              className="flex items-center space-x-2"
-            >
-              {isNavigating ? (
-                <>
+
+            {!isAnswered() || isNavigating ? (
+              <Button
+                onClick={handleNext}
+                disabled={true}
+                className="flex items-center space-x-2 relative overflow-hidden backdrop-blur-md shadow-lg opacity-50"
+              >
+                <span>
+                  {isNavigating ? (
+                    <>
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        className="w-4 h-4 border-2 border-white border-t-transparent rounded-full inline-block"
+                      />
+                      <span className="ml-2">Loading...</span>
+                    </>
+                  ) : (
+                    <span>{isLastQuestion ? 'Generate My Formula' : 'Next'}</span>
+                  )}
+                </span>
+              </Button>
+            ) : (
+              <MagneticButton strength={0.3}>
+                <Button
+                  onClick={handleNext}
+                  className="flex items-center space-x-2 relative overflow-hidden backdrop-blur-md shadow-xl"
+                  style={{
+                    boxShadow: '0 0 25px rgba(255, 229, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.4)',
+                  }}
+                >
+                  {/* Shimmer effect */}
                   <motion.div
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-                    className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
+                    className="absolute inset-0 opacity-30"
+                    style={{
+                      background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent)',
+                    }}
+                    animate={{
+                      x: ['-100%', '200%'],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
                   />
-                  <span>Loading...</span>
-                </>
-              ) : (
-                <>
-                  <span>{isLastQuestion ? 'Generate My Formula' : 'Next'}</span>
-                  {!isLastQuestion && <HiArrowRight />}
-                </>
-              )}
-            </Button>
+
+                  <span className="relative z-10 flex items-center space-x-2">
+                    <span>{isLastQuestion ? 'Generate My Formula' : 'Next'}</span>
+                    {!isLastQuestion && (
+                      <motion.div
+                        animate={{ x: [0, 2, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                      >
+                        <HiArrowRight />
+                      </motion.div>
+                    )}
+                  </span>
+                </Button>
+              </MagneticButton>
+            )}
           </div>
         </div>
 
