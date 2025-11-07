@@ -141,6 +141,8 @@ export function CardFlip({
           style={{
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
+            transform: 'rotateY(0deg)',
+            opacity: isFlipped ? 0 : 1,
           }}
         >
           {backContent || <DefaultCardBack cardNumber={cardNumber} totalCards={totalCards} brandColor={brandColor} />}
@@ -153,6 +155,7 @@ export function CardFlip({
             backfaceVisibility: 'hidden',
             WebkitBackfaceVisibility: 'hidden',
             transform: 'rotateY(180deg)',
+            opacity: isFlipped ? 1 : 0,
           }}
         >
           {children}

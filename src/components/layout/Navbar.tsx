@@ -84,7 +84,7 @@ export const Navbar = () => {
                   {link.name}
                 </Link>
               ))}
-              <div className="pt-2">
+              <div className="pt-2 pb-3">
                 <LanguageSwitcher />
               </div>
               <Link to="/formula" onClick={() => setIsOpen(false)}>

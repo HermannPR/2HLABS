@@ -193,7 +193,18 @@ export const Hero = () => {
           </div>
 
           {/* Trust Badges - Single rotating badge on mobile, row on desktop */}
-          {isMobile ? (
+          <div className="flex flex-col items-center gap-3">
+            {/* Badges Section Title */}
+            <motion.h3
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="text-sm md:text-base font-semibold text-gray-300 tracking-wide uppercase"
+            >
+              {t('hero.badgesTitle')}
+            </motion.h3>
+
+            {isMobile ? (
             // Mobile: Spinning badge carousel with text on top
             <div className="flex flex-col items-center gap-2 w-full">
               {/* Subtle badge description on top */}
@@ -314,6 +325,7 @@ export const Hero = () => {
               ))}
             </motion.div>
           )}
+          </div>
         </motion.div>
       </div>
 
