@@ -159,7 +159,7 @@ export const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-16 pb-6 md:pt-12 md:pb-6 lg:pt-16 lg:pb-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-12 pb-6 sm:pt-14 sm:pb-8 md:pt-16 md:pb-10 lg:pt-20 lg:pb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -255,7 +255,7 @@ export const Hero = () => {
               </div>
 
               {/* Progress indicators with scroll hint */}
-              <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-col items-center gap-4">
                 <div className="flex gap-2">
                   {badges.map((_, idx) => (
                     <button
@@ -271,24 +271,26 @@ export const Hero = () => {
                   ))}
                 </div>
 
-                {/* Scroll down indicator - subtle bounce */}
+                {/* Scroll down indicator - visible and clear */}
                 <motion.div
-                  animate={{ y: [0, 6, 0] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  className="flex flex-col items-center gap-1 opacity-40"
+                  animate={{ y: [0, 8, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                  className="flex flex-col items-center gap-1.5 opacity-60"
                 >
                   <svg
-                    width="20"
-                    height="20"
+                    width="24"
+                    height="24"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    strokeWidth="2"
-                    className="text-gray-400"
+                    strokeWidth="2.5"
+                    className="text-gray-300"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
                     <path d="M12 5v14M19 12l-7 7-7-7" />
                   </svg>
-                  <div className="w-0.5 h-2 bg-gradient-to-b from-gray-400 to-transparent rounded-full" />
+                  <div className="w-1 h-3 bg-gradient-to-b from-gray-300 to-transparent rounded-full" />
                 </motion.div>
               </div>
             </div>
