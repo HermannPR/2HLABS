@@ -35,27 +35,12 @@ function SwipeCard({
 }: CardProps) {
   const x = useMotionValue(0);
   const controls = useAnimation();
-  const [isAnimatingIn, setIsAnimatingIn] = useState(true);
 
   // More sensitive rotation for better feedback
   const rotate = useTransform(x, [-300, 0, 300], [-30, 0, 30]);
 
-  // Animate card appearance
+  // Check if this is the current card
   const isCurrentCard = index === currentIndex;
-  if (isCurrentCard && isAnimatingIn) {
-    controls.start({
-      scale: 1,
-      opacity: 1,
-      rotateY: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 200,
-        damping: 20,
-      }
-    }).then(() => {
-      setIsAnimatingIn(false);
-    });
-  }
 
   const handleDragEnd = async (_: any, info: PanInfo) => {
     const threshold = 80; // Lower threshold for easier swiping
@@ -96,8 +81,6 @@ function SwipeCard({
         x: isTop ? x : 0,
         y: 0,
         rotate: isTop ? rotate : 0,
-        opacity: 1,
-        scale: 1,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -106,12 +89,11 @@ function SwipeCard({
         touchAction: isTop ? 'pan-x pan-y' : 'auto',
         cursor: isTop ? 'grab' : 'default',
         transformStyle: 'preserve-3d',
-        pointerEvents: isAnimatingIn ? 'none' : 'auto',
       }}
       initial={{
-        scale: 0.9,
-        opacity: 0,
-        rotateY: 20,
+        scale: 1,
+        opacity: 1,
+        rotateY: 0,
       }}
       exit={{
         scale: 0.8,
@@ -124,8 +106,8 @@ function SwipeCard({
       whileTap={isTop ? { cursor: 'grabbing', scale: 0.98 } : {}}
       className="w-full"
       onClick={() => {
-        // Only trigger tap if not dragging and animation is complete
-        if (isTop && Math.abs(x.get()) < 5 && !isAnimatingIn) {
+        // Only trigger tap if not dragging
+        if (isTop && Math.abs(x.get()) < 5) {
           onTap();
         }
       }}
