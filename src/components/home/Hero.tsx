@@ -159,7 +159,7 @@ export const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 pb-12 md:pt-16 md:pb-8 lg:pt-20 lg:pb-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 pb-8 md:pt-16 md:pb-8 lg:pt-20 lg:pb-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -194,10 +194,24 @@ export const Hero = () => {
 
           {/* Trust Badges - Single rotating badge on mobile, row on desktop */}
           {isMobile ? (
-            // Mobile: Spinning badge carousel with subtle text
-            <div className="flex flex-col items-center gap-4 w-full">
+            // Mobile: Spinning badge carousel with text on top
+            <div className="flex flex-col items-center gap-2 w-full">
+              {/* Subtle badge description on top */}
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={`hint-${currentBadgeIndex}`}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-sm text-gray-400 font-normal text-center"
+                >
+                  {badges[currentBadgeIndex].alt}
+                </motion.p>
+              </AnimatePresence>
+
               {/* Spinning badge container */}
-              <div className="relative w-36 h-36">
+              <div className="relative w-32 h-32">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentBadgeIndex}
@@ -233,41 +247,63 @@ export const Hero = () => {
                       src={badges[currentBadgeIndex].src}
                       alt={badges[currentBadgeIndex].alt}
                       tooltip={badges[currentBadgeIndex].tooltip}
-                      className="w-36 h-36 mix-blend-lighten"
+                      className="w-32 h-32 mix-blend-lighten"
                       glowEffect
                     />
                   </motion.div>
                 </AnimatePresence>
               </div>
 
-              {/* Subtle badge description */}
-              <AnimatePresence mode="wait">
-                <motion.p
-                  key={`hint-${currentBadgeIndex}`}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  transition={{ duration: 0.4 }}
-                  className="text-sm text-gray-400 font-normal text-center"
-                >
-                  {badges[currentBadgeIndex].alt}
-                </motion.p>
-              </AnimatePresence>
+              {/* Progress indicators with swipe hint */}
+              <div className="flex flex-col items-center gap-2">
+                <div className="flex gap-2">
+                  {badges.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentBadgeIndex(idx)}
+                      className={`h-1.5 rounded-full transition-all ${
+                        idx === currentBadgeIndex
+                          ? 'bg-primary w-8'
+                          : 'bg-gray-700 hover:bg-gray-600 w-1.5'
+                      }`}
+                      aria-label={`View badge ${idx + 1}`}
+                    />
+                  ))}
+                </div>
 
-              {/* Progress indicators */}
-              <div className="flex gap-2">
-                {badges.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setCurrentBadgeIndex(idx)}
-                    className={`h-1.5 rounded-full transition-all ${
-                      idx === currentBadgeIndex
-                        ? 'bg-primary w-8'
-                        : 'bg-gray-700 hover:bg-gray-600 w-1.5'
-                    }`}
-                    aria-label={`View badge ${idx + 1}`}
-                  />
-                ))}
+                {/* Swipe indicator hint */}
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.5 }}
+                  transition={{ delay: 1 }}
+                  className="flex items-center gap-1.5 text-xs text-gray-500"
+                >
+                  <motion.svg
+                    animate={{ x: [-3, 3, -3] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M15 18l-6-6 6-6" />
+                  </motion.svg>
+                  <span>Swipe</span>
+                  <motion.svg
+                    animate={{ x: [-3, 3, -3] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <path d="M9 18l6-6-6-6" />
+                  </motion.svg>
+                </motion.div>
               </div>
             </div>
           ) : (
@@ -293,22 +329,24 @@ export const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        style={{ willChange: "transform" }}
-      >
-        <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center pt-2">
-          <motion.div
-            className="w-1 h-3 bg-primary rounded-full"
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            style={{ willChange: "transform" }}
-          />
-        </div>
-      </motion.div>
+      {/* Scroll indicator - desktop only */}
+      {!isMobile && (
+        <motion.div
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          style={{ willChange: "transform" }}
+        >
+          <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center pt-2">
+            <motion.div
+              className="w-1 h-3 bg-primary rounded-full"
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              style={{ willChange: "transform" }}
+            />
+          </div>
+        </motion.div>
+      )}
     </section>
   );
 };
