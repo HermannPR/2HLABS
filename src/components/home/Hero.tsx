@@ -123,7 +123,7 @@ export const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 pb-16 md:pt-12 md:pb-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 pb-12 md:pt-16 md:pb-8 lg:pt-20 lg:pb-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -156,39 +156,39 @@ export const Hero = () => {
             </Link>
           </div>
 
-          {/* Trust Badges */}
+          {/* Trust Badges - 2x2 grid on mobile, single row on desktop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 lg:gap-12 mb-8"
+            className="grid grid-cols-2 sm:flex sm:flex-wrap justify-center gap-3 sm:gap-5 md:gap-6 lg:gap-8 max-w-xl sm:max-w-none mx-auto"
           >
             <BadgeWithTooltip
               src="/assets/badges/lab-tested.png"
               alt={t('hero.badges.labTested')}
               tooltip={t('hero.badges.labTestedTooltip')}
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-full h-auto aspect-square sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/clinical-dosages.png"
               alt={t('hero.badges.clinicalDosages')}
               tooltip={t('hero.badges.clinicalDosagesTooltip')}
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-full h-auto aspect-square sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/science-backed.png"
               alt={t('hero.badges.scienceBacked')}
               tooltip={t('hero.badges.scienceBackedTooltip')}
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-full h-auto aspect-square sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/full-transparency.png"
               alt={t('hero.badges.fullTransparency')}
               tooltip={t('hero.badges.fullTransparencyTooltip')}
-              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-full h-auto aspect-square sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 mix-blend-lighten"
               glowEffect
             />
           </motion.div>
