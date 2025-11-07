@@ -14,11 +14,11 @@ export const IntroCard = ({ icon, headline, body, color }: IntroCardProps) => {
 
   return (
     <div
-      className={`border-2 ${colorClasses[color]} bg-dark/50 backdrop-blur-sm rounded-xl p-8 text-center`}
+      className={`h-full border-2 ${colorClasses[color]} bg-dark/50 backdrop-blur-sm rounded-xl p-8 text-center flex flex-col`}
     >
       <div className={`text-5xl mb-4 ${colorClasses[color]}`}>{icon}</div>
       <h3 className="text-2xl font-bold text-white mb-3">{headline}</h3>
-      <p className="text-gray-300 leading-relaxed">{body}</p>
+      <p className="text-gray-300 leading-relaxed flex-1">{body}</p>
     </div>
   );
 };

@@ -272,7 +272,10 @@ export const FormulaGenerator = () => {
           >
             <Button
               size="lg"
-              onClick={() => setShowIntro(false)}
+              onClick={() => {
+                setShowIntro(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="text-xl px-12 py-6"
             >
               {t('formulaGenerator.intro.startButton')}
