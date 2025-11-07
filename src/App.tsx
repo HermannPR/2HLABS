@@ -4,6 +4,7 @@ import { Suspense, lazy } from 'react';
 import { Layout } from './components/layout/Layout';
 import { ErrorBoundary } from './components/common/ErrorBoundary';
 import { PageLoader } from './components/common/Skeleton';
+import { ScrollToTop } from './components/common/ScrollToTop';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { ScrollProgress } from './components/animations/ScrollProgress';
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <ScrollToTop />
       <ScrollProgress />
       <Layout>
         <AnimatePresence mode="wait">
