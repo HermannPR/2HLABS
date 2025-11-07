@@ -133,9 +133,9 @@ export const FormulaGenerator = () => {
         setShowResults(true);
       }, 2500);
     } else {
+      // Instant scroll to top before state change
+      window.scrollTo(0, 0);
       setIsNavigating(true);
-      // Scroll to top when navigating to next question
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex + 1);
         setIsNavigating(false);
@@ -145,9 +145,9 @@ export const FormulaGenerator = () => {
 
   const handlePrevious = () => {
     if (currentQuestionIndex > 0) {
+      // Instant scroll to top before state change
+      window.scrollTo(0, 0);
       setIsNavigating(true);
-      // Scroll to top when navigating to previous question
-      window.scrollTo({ top: 0, behavior: 'smooth' });
       setTimeout(() => {
         setCurrentQuestionIndex(currentQuestionIndex - 1);
         setIsNavigating(false);

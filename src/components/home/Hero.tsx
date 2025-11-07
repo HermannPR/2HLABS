@@ -123,11 +123,12 @@ export const Hero = () => {
         }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 md:pt-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center py-8 pt-20 pb-16 md:pt-8 md:pb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          style={{ willChange: "transform, opacity" }}
         >
           {/* Main headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-4" style={{textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6)'}}>
@@ -160,34 +161,34 @@ export const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap justify-center gap-6 sm:gap-8 md:gap-10 lg:gap-12"
+            className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10 lg:gap-12 mb-8"
           >
             <BadgeWithTooltip
               src="/assets/badges/lab-tested.png"
               alt={t('hero.badges.labTested')}
               tooltip={t('hero.badges.labTestedTooltip')}
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/clinical-dosages.png"
               alt={t('hero.badges.clinicalDosages')}
               tooltip={t('hero.badges.clinicalDosagesTooltip')}
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/science-backed.png"
               alt={t('hero.badges.scienceBacked')}
               tooltip={t('hero.badges.scienceBackedTooltip')}
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
             <BadgeWithTooltip
               src="/assets/badges/full-transparency.png"
               alt={t('hero.badges.fullTransparency')}
               tooltip={t('hero.badges.fullTransparencyTooltip')}
-              className="w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
+              className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 mix-blend-lighten"
               glowEffect
             />
           </motion.div>
@@ -198,13 +199,15 @@ export const Hero = () => {
       <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
         animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        style={{ willChange: "transform" }}
       >
         <div className="w-6 h-10 border-2 border-primary rounded-full flex justify-center pt-2">
           <motion.div
             className="w-1 h-3 bg-primary rounded-full"
             animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            style={{ willChange: "transform" }}
           />
         </div>
       </motion.div>
