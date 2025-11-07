@@ -105,7 +105,7 @@ export const About = () => {
                 textShadow: '0 2px 8px rgba(0,0,0,0.6)'
               }}
             >
-              Born from frustration. Built with science. Powered by athletes.
+              Built from opportunity. Powered by science. Made for athletes.
             </motion.p>
           </motion.div>
 
@@ -127,11 +127,11 @@ export const About = () => {
                 <div className="relative space-y-6">
                   <div className="flex items-center gap-3 mb-8">
                     <HiAcademicCap className="text-primary" size={32} />
-                    <h2 className="text-3xl font-heading font-bold">The Problem We Lived</h2>
+                    <h2 className="text-3xl font-heading font-bold">The Opportunity We Saw</h2>
                   </div>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    We were two computer science students who shared a passion that went beyond code: <span className="text-primary font-semibold">athletic performance</span>. Between classes and projects, we trained hard across multiple disciplines.
+                    We were two computer science students with a passion beyond code: <span className="text-primary font-semibold">peak athletic performance</span>. Between classes and projects, we trained across multiple disciplines, each demanding something different from our bodies.
                   </p>
 
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 py-6">
@@ -150,26 +150,26 @@ export const About = () => {
                   </div>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    But here's the thing: <span className="text-secondary font-semibold">every sport demanded different energy</span>. Basketball needed explosive power. Swimming required sustained endurance. Sprints demanded instant energy without the crash. Yet the market only offered us three choices:
+                    Then we realized something: <span className="text-secondary font-semibold">personalization wasn't just easier—it was fundamentally better</span>. Just like how Spotify creates custom playlists that fit your taste better than any radio station, or how Netflix recommends shows that match your preferences perfectly.
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-4 my-8">
-                    <div className="p-4 rounded-xl bg-red-900/10 border border-red-500/30">
-                      <p className="text-red-400 font-semibold mb-2">❌ Too Aggressive</p>
-                      <p className="text-sm text-gray-400">300mg+ caffeine bombs that left us jittery and crashed hard</p>
+                    <div className="p-4 rounded-xl bg-primary-900/10 border border-primary/30">
+                      <p className="text-primary font-semibold mb-2">✨ Better Performance</p>
+                      <p className="text-sm text-gray-400">Custom formulas matched to your training deliver superior results</p>
                     </div>
-                    <div className="p-4 rounded-xl bg-orange-900/10 border border-orange-500/30">
-                      <p className="text-orange-400 font-semibold mb-2">❌ Too Vague</p>
-                      <p className="text-sm text-gray-400">Proprietary blends hiding what we actually consumed</p>
+                    <div className="p-4 rounded-xl bg-secondary-900/10 border border-secondary/30">
+                      <p className="text-secondary font-semibold mb-2">✨ Smarter Science</p>
+                      <p className="text-sm text-gray-400">Algorithms optimize ingredient ratios for your specific needs</p>
                     </div>
-                    <div className="p-4 rounded-xl bg-yellow-900/10 border border-yellow-500/30">
-                      <p className="text-yellow-400 font-semibold mb-2">❌ One-Size-Fits-All</p>
-                      <p className="text-sm text-gray-400">Same formula for powerlifters and yoga enthusiasts</p>
+                    <div className="p-4 rounded-xl bg-accent-900/10 border border-accent/30">
+                      <p className="text-accent font-semibold mb-2">✨ More Efficient</p>
+                      <p className="text-sm text-gray-400">No wasted ingredients or doses that don't match your goals</p>
                     </div>
                   </div>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    As beginners, we were overwhelmed. As experienced athletes, we were frustrated. The supplements industry was designed for marketing, not athletes.
+                    The supplement industry was stuck selling the same formula to everyone. We saw an opportunity to do what tech does best: <span className="text-primary font-semibold">use data and algorithms to deliver better, personalized experiences</span>.
                   </p>
                 </div>
               </div>
@@ -194,38 +194,38 @@ export const About = () => {
                 <div className="relative space-y-6">
                   <div className="flex items-center gap-3 mb-8">
                     <HiCode className="text-secondary" size={32} />
-                    <h2 className="text-3xl font-heading font-bold">The Algorithm Solution</h2>
+                    <h2 className="text-3xl font-heading font-bold">The Technology Advantage</h2>
                   </div>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    So we did what computer scientists do best: <span className="text-primary font-semibold">we built a system</span>. Not just another supplement brand, but an intelligent framework that understands what each athlete actually needs.
+                    We asked ourselves: <span className="text-primary font-semibold">what if supplements worked like modern technology?</span> Your phone learns your habits. Your music app curates your playlists. Your fitness tracker adapts to your progress. Why should pre-workout be any different?
                   </p>
 
                   <div className="grid md:grid-cols-3 gap-4 my-8">
                     <div className="p-6 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/30 hover:border-primary/50 transition-all">
                       <div className="text-3xl mb-3">🧬</div>
                       <h3 className="text-lg font-semibold text-primary mb-2">12 Training Souls</h3>
-                      <p className="text-sm text-gray-400">Distinct archetypes based on training style, goals, and experience level</p>
+                      <p className="text-sm text-gray-400">Unique archetypes matched to your training style, goals, and experience</p>
                     </div>
                     <div className="p-6 rounded-xl bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/30 hover:border-secondary/50 transition-all">
                       <div className="text-3xl mb-3">⚡</div>
-                      <h3 className="text-lg font-semibold text-secondary mb-2">Smart Matching</h3>
-                      <p className="text-sm text-gray-400">Algorithm analyzes your needs and matches you to your training soul</p>
+                      <h3 className="text-lg font-semibold text-secondary mb-2">Intelligent Matching</h3>
+                      <p className="text-sm text-gray-400">Algorithms analyze your needs and optimize your formula in real-time</p>
                     </div>
                     <div className="p-6 rounded-xl bg-gradient-to-br from-accent/10 to-accent/5 border border-accent/30 hover:border-accent/50 transition-all">
                       <div className="text-3xl mb-3">🔬</div>
-                      <h3 className="text-lg font-semibold text-accent mb-2">Transparent Formulas</h3>
-                      <p className="text-sm text-gray-400">Every ingredient, every dose, backed by research and explained clearly</p>
+                      <h3 className="text-lg font-semibold text-accent mb-2">Research-Backed</h3>
+                      <p className="text-sm text-gray-400">Every ingredient optimized with science, no marketing gimmicks</p>
                     </div>
                   </div>
 
                   <p className="text-lg text-gray-300 leading-relaxed">
-                    No more guessing. No more proprietary blends. No more one-size-fits-all. Just science-backed formulas tailored to how you actually train.
+                    The result? <span className="text-secondary font-semibold">Formulas that perform better because they're built for YOU</span>. Not easier—better. Not simpler—smarter. Just like a custom-tailored suit fits better than off-the-rack, your personalized formula delivers superior results.
                   </p>
 
                   <div className="mt-8 p-6 rounded-xl bg-dark/60 border-l-4 border-primary">
                     <p className="text-gray-300 italic">
-                      "We built 2HLABS because we needed it ourselves. Every formula, every feature, every line of code comes from our own frustration with the industry. This is the supplement platform we wish existed when we started."
+                      "We built 2HLABS because we saw an opportunity to do supplements the way modern tech does everything else: personalized, data-driven, and optimized for each individual. Custom isn't just convenient—it's objectively superior."
                     </p>
                     <p className="text-sm text-gray-500 mt-3">— The 2HLABS Founders</p>
                   </div>
