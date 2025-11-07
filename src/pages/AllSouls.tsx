@@ -60,10 +60,12 @@ export const AllSouls = () => {
     }, {} as Record<string, { primary: { r: number; g: number; b: number }; secondary: { r: number; g: number; b: number } }>);
   }, []);
 
-  // Detect mobile screen size
+  // Detect mobile screen size - include tablets for better performance
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768); // Tailwind's md breakpoint
+      // Treat tablets (< 1024px) as mobile for performance
+      // This includes iPads and Android tablets
+      setIsMobile(window.innerWidth < 1024 || /iPad|Android/i.test(navigator.userAgent));
     };
 
     checkMobile();

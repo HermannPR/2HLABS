@@ -437,105 +437,11 @@ export const FormulaGenerator = () => {
             </Card>
           </motion.div>
 
-          {/* Dimension Scores */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4 }}
-          >
-            <Card className="mb-8">
-              <h2 className="text-xl md:text-2xl font-heading font-bold mb-6">Your Training DNA</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-400">Intensity</span>
-                    <span className="text-primary font-bold uppercase text-sm">
-                      {dimensionScores.intensity}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-secondary"
-                      style={{ width: `${dimensionScores.intensityScore}%` }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-400">Duration</span>
-                    <span className="text-primary font-bold uppercase text-sm">
-                      {dimensionScores.duration}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-secondary"
-                      style={{ width: `${dimensionScores.durationScore}%` }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-400">Focus</span>
-                    <span className="text-primary font-bold uppercase text-sm">
-                      {dimensionScores.focus}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-secondary"
-                      style={{ width: `${dimensionScores.focusScore}%` }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-400">Energy Pattern</span>
-                    <span className="text-primary font-bold uppercase text-sm">
-                      {dimensionScores.energyPattern}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-secondary"
-                      style={{ width: `${dimensionScores.energyScore}%` }}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-400">Stim Tolerance</span>
-                    <span className="text-primary font-bold uppercase text-sm">
-                      {dimensionScores.stimTolerance}
-                    </span>
-                  </div>
-                  <div className="w-full h-2 bg-dark-lighter rounded-full overflow-hidden">
-                    <div
-                      className="h-full bg-gradient-to-r from-primary to-secondary"
-                      style={{
-                        width: `${
-                          dimensionScores.stimTolerance === 'none' ? 0 :
-                          dimensionScores.stimTolerance === 'low' ? 25 :
-                          dimensionScores.stimTolerance === 'moderate' ? 60 :
-                          100
-                        }%`
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </motion.div>
-
           {/* Soul Signature */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5 }}
+            transition={{ delay: 1.4 }}
           >
             <Card className="relative mb-8 overflow-hidden">
               <div className="absolute inset-0 pointer-events-none opacity-20 blur-3xl bg-gradient-to-r from-primary via-transparent to-secondary" />
