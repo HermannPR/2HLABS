@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useTransform, useAnimation } from 'framer-motion';
+import { motion, useMotionValue, useAnimation } from 'framer-motion';
 import type { PanInfo } from 'framer-motion';
 import { useState, useCallback, useEffect } from 'react';
 import type { Archetype } from '../../types';
@@ -34,62 +34,83 @@ function SwipeCard({
   const x = useMotionValue(0);
   const controls = useAnimation();
 
-  // More sensitive rotation for better feedback
-  const rotate = useTransform(x, [-300, 0, 300], [-15, 0, 15]);
-
-  // Calculate position relative to current
+  // Calculate position in carousel (circular offset)
   const offset = index - currentIndex;
-  const isVisible = Math.abs(offset) <= 1; // Show current, previous, and next
+  
+  // Show cards in range: -1, 0, 1 (previous, current, next)
+  const isVisible = Math.abs(offset) <= 1;
 
-  // Fast entrance animation when card becomes visible
+  // Carousel positioning with smooth gradual transitions
   useEffect(() => {
     if (isVisible) {
+      // Gradual scale and opacity based on position
+      const absOffset = Math.abs(offset);
+      const scale = offset === 0 ? 1 : 0.75 - (absOffset * 0.1);
+      const opacity = offset === 0 ? 1 : 0.3;
+      const xPos = offset * 90; // 90% card width spacing
+      const zIndex = 10 - absOffset;
+
       controls.start({
-        x: offset * 85, // Offset side cards by 85%
-        scale: offset === 0 ? 1 : 0.85,
-        opacity: offset === 0 ? 1 : 0.4,
-        zIndex: offset === 0 ? 10 : 5 - Math.abs(offset),
+        x: xPos + '%',
+        scale,
+        opacity,
+        zIndex,
+        rotateY: offset * -15, // Subtle 3D rotation
         transition: {
-          duration: 0.25,
-          ease: 'easeOut',
+          type: 'spring',
+          stiffness: 400,
+          damping: 40,
+          mass: 0.8,
         }
       });
     }
   }, [offset, isVisible, controls]);
 
   const handleDragEnd = async (_: any, info: PanInfo) => {
-    const threshold = 50; // Lower threshold for easier swiping
+    const threshold = 60;
+    const velocity = info.velocity.x;
 
-    if (Math.abs(info.offset.x) > threshold) {
-      // Quick swipe animation
+    // Snap to position based on drag distance and velocity
+    if (Math.abs(info.offset.x) > threshold || Math.abs(velocity) > 500) {
+      const direction = info.offset.x > 0 ? 'right' : 'left';
+      
+      // Smooth exit animation
       await controls.start({
-        x: info.offset.x > 0 ? 1000 : -1000,
+        x: direction === 'right' ? '120%' : '-120%',
         opacity: 0,
-        transition: { duration: 0.2, ease: 'easeOut' }
+        scale: 0.6,
+        transition: {
+          type: 'spring',
+          stiffness: 300,
+          damping: 35,
+        }
       });
-      onSwipe(info.offset.x > 0 ? 'right' : 'left');
+      
+      onSwipe(direction);
     } else {
-      // Snap back quickly
+      // Snap back to locked position with spring
       controls.start({
-        x: offset * 85,
-        transition: { duration: 0.15, ease: 'easeOut' }
+        x: offset * 90 + '%',
+        transition: {
+          type: 'spring',
+          stiffness: 400,
+          damping: 40,
+        }
       });
     }
   };
 
-  // Don't render if not visible
   if (!isVisible) return null;
 
   return (
     <motion.div
       drag={offset === 0 ? "x" : false}
       dragConstraints={{ left: 0, right: 0 }}
-      dragElastic={0.5}
+      dragElastic={0.2}
+      dragMomentum={true}
       onDragEnd={handleDragEnd}
       animate={controls}
       style={{
-        x: offset === 0 ? x : offset * 85 + '%',
-        rotate: offset === 0 ? rotate : 0,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -99,17 +120,19 @@ function SwipeCard({
         transformStyle: 'preserve-3d',
         pointerEvents: Math.abs(offset) <= 1 ? 'auto' : 'none',
       }}
-      initial={false}
-      whileTap={offset === 0 ? { cursor: 'grabbing', scale: 0.98 } : {}}
+      initial={{
+        x: offset * 90 + '%',
+        scale: offset === 0 ? 1 : 0.75,
+        opacity: offset === 0 ? 1 : 0.3,
+      }}
+      whileTap={offset === 0 ? { cursor: 'grabbing' } : {}}
       className="w-full"
       onClick={() => {
         if (offset === 0 && Math.abs(x.get()) < 5) {
           onTap();
         } else if (offset === -1) {
-          // Click left card to go previous
           onSwipe('right');
         } else if (offset === 1) {
-          // Click right card to go next
           onSwipe('left');
         }
       }}
