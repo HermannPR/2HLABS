@@ -13,27 +13,44 @@ This folder contains comprehensive context documentation for continuing developm
 
 ### 📖 Essential Reading (in order)
 
-1. **PROJECT_OVERVIEW.md** (5 min)
+1. **PROJECT_STATUS.md** (5 min) ⭐ NEW
+   - Current project state (PRE-LAUNCH READY)
+   - Completed features checklist
+   - Recent changes (Nov 7, 2025)
+   - Build stats and performance metrics
+   - TODO lists (high/medium/nice-to-have)
+   - Next sprint goals
+
+2. **FILE_STRUCTURE.md** (10 min) ⭐ NEW
+   - Complete directory structure breakdown
+   - Naming conventions (PascalCase, camelCase, kebab-case)
+   - Import organization standards
+   - Component structure template
+   - Code quality standards
+   - Git workflow guidelines
+   - Build & deploy instructions
+
+3. **PROJECT_OVERVIEW.md** (5 min)
    - What is 2HLABS?
    - The soul discovery concept
    - Tech stack
    - Brand identity
    - Current status
 
-2. **SESSION_HISTORY.md** (5 min)
+4. **SESSION_HISTORY.md** (5 min)
    - Recent changes and implementations
    - User feedback that shaped development
    - Important design decisions
    - Commit history
 
-3. **ARCHITECTURE.md** (10 min)
+5. **ARCHITECTURE.md** (10 min)
    - System architecture
    - Data flow
    - Key algorithms
    - Component structure
    - Performance considerations
 
-4. **DEV_WORKFLOW.md** (10 min)
+6. **DEV_WORKFLOW.md** (10 min)
    - Getting started
    - Development commands
    - Git workflow
@@ -41,7 +58,7 @@ This folder contains comprehensive context documentation for continuing developm
    - Deployment process
    - Troubleshooting
 
-5. **NEXT_STEPS.md** (5 min)
+7. **NEXT_STEPS.md** (5 min)
    - Immediate priorities
    - Feature roadmap
    - Quick wins
