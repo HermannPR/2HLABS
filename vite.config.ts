@@ -1,12 +1,25 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 // Deployment trigger - Rollback to stable version de2f6eb
 export default defineConfig({
   plugins: [
     react(),
+    viteCompression({
+      algorithm: 'gzip',
+      ext: '.gz',
+      threshold: 10240, // Only compress files > 10KB
+      deleteOriginFile: false,
+    }),
+    viteCompression({
+      algorithm: 'brotliCompress',
+      ext: '.br',
+      threshold: 10240,
+      deleteOriginFile: false,
+    }),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'assets/**/*'],
@@ -87,7 +100,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          // Separate Three.js ecosystem (largest dependency)
+          // Separate Three.js ecosystem (largest dependency) - lazy loaded
           'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
           // Animation libraries
           'animation-vendor': ['framer-motion'],
@@ -98,17 +111,19 @@ export default defineConfig({
           // Routing
           'router-vendor': ['react-router-dom'],
           // React core (keep together for better caching)
-          'react-vendor': ['react', 'react-dom'],
+          'react-vendor': ['react', 'react-dom', 'react/jsx-runtime'],
         }
       }
     },
-    chunkSizeWarningLimit: 600, // Increase slightly to allow for vendor chunks
+    chunkSizeWarningLimit: 1000, // Three.js vendor chunk is legitimately large
     minify: 'terser',
     terserOptions: {
       compress: {
         drop_console: true, // Remove console.logs in production
-        drop_debugger: true
+        drop_debugger: true,
+        pure_funcs: ['console.log', 'console.info', 'console.debug'], // Remove specific console methods
       }
-    }
+    },
+    sourcemap: false, // Disable sourcemaps in production for smaller build
   }
 })
