@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { useCallback, type ReactNode, type MouseEvent } from 'react';
+import { useCallback, useRef, type ReactNode, type MouseEvent } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface Card3DProps {
@@ -20,6 +20,7 @@ export function Card3D({
   const prefersReducedMotion = useReducedMotion();
   const x = useMotionValue(0);
   const y = useMotionValue(0);
+  const rafId = useRef<number | null>(null);
 
   // Disable spring animations if reduced motion is preferred
   const mouseXSpring = useSpring(x, prefersReducedMotion ? { stiffness: 1000, damping: 100 } : { stiffness: 150, damping: 40 });
@@ -29,18 +30,29 @@ export function Card3D({
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], prefersReducedMotion ? [0, 0] : [-intensity, intensity]);
 
   const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
+    // Throttle with requestAnimationFrame
+    if (rafId.current !== null) return;
+
+    rafId.current = requestAnimationFrame(() => {
+      const rect = event.currentTarget.getBoundingClientRect();
+      const width = rect.width;
+      const height = rect.height;
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
+      const xPct = mouseX / width - 0.5;
+      const yPct = mouseY / height - 0.5;
+      x.set(xPct);
+      y.set(yPct);
+      rafId.current = null;
+    });
   }, [x, y]);
 
   const handleMouseLeave = useCallback(() => {
+    // Cancel pending RAF
+    if (rafId.current !== null) {
+      cancelAnimationFrame(rafId.current);
+      rafId.current = null;
+    }
     x.set(0);
     y.set(0);
   }, [x, y]);
@@ -53,10 +65,12 @@ export function Card3D({
         rotateX,
         rotateY,
         transformStyle: 'preserve-3d',
+        contain: 'layout style paint',
+        willChange: 'transform',
       }}
       className={className}
     >
-      <div style={{ transform: 'translateZ(20px)' }}>{children}</div>
+      <div style={{ transform: 'translateZ(20px)', willChange: 'transform' }}>{children}</div>
     </motion.div>
   );
 }

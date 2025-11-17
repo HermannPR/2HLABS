@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState, useRef, useCallback, type ReactNode } from 'react';
+import { useState, useRef, useCallback, useEffect, type ReactNode } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface CardFlipProps {
@@ -37,8 +37,28 @@ export function CardFlip({
 }: CardFlipProps) {
   const [isFlippedInternal, setIsFlippedInternal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isCardInView, setIsCardInView] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
+
+  // Track viewport visibility with IntersectionObserver
+  useEffect(() => {
+    const element = cardRef.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsCardInView(entry.isIntersecting);
+      },
+      {
+        threshold: 0.1,
+        rootMargin: '50px',
+      }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
   // Use controlled or internal state
   const isFlipped = isFlippedControlled ? (isFlippedProp ?? false) : isFlippedInternal;
@@ -133,6 +153,8 @@ export function CardFlip({
           width: '100%',
           height: '100%',
           position: 'relative',
+          contain: 'layout style paint',
+          willChange: isFlipped ? 'transform' : 'auto',
         }}
       >
         {/* Card Back (face-down default) */}
@@ -145,7 +167,7 @@ export function CardFlip({
             opacity: isFlipped ? 0 : 1,
           }}
         >
-          {backContent || <DefaultCardBack cardNumber={cardNumber} totalCards={totalCards} brandColor={brandColor} />}
+          {backContent || <DefaultCardBack cardNumber={cardNumber} totalCards={totalCards} brandColor={brandColor} isInViewport={isCardInView} />}
         </div>
 
         {/* Card Front (revealed on flip) */}
@@ -169,26 +191,28 @@ export function CardFlip({
  * Default card back design with iridescent holographic effect
  * Pokemon card style with 2HLABS branding
  */
-function DefaultCardBack({ 
-  cardNumber, 
+function DefaultCardBack({
+  cardNumber,
   totalCards = 12,
-  brandColor = { primary: '#FFE500', secondary: '#FF00E5' }
-}: { 
-  cardNumber?: number; 
+  brandColor = { primary: '#FFE500', secondary: '#FF00E5' },
+  isInViewport = true,
+}: {
+  cardNumber?: number;
   totalCards?: number;
   brandColor?: { primary: string; secondary: string };
+  isInViewport?: boolean;
 }) {
   return (
     <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-dark via-dark-lighter to-dark">
       {/* Iridescent holographic background */}
       <motion.div
         className="absolute inset-0"
-        animate={{
+        animate={isInViewport ? {
           backgroundPosition: ['0% 0%', '100% 100%'],
-        }}
+        } : {}}
         transition={{
           duration: 8,
-          repeat: Infinity,
+          repeat: isInViewport ? Infinity : 0,
           repeatType: 'reverse',
           ease: 'linear',
         }}
@@ -212,12 +236,12 @@ function DefaultCardBack({
       {/* Holographic shimmer overlay */}
       <motion.div
         className="absolute inset-0"
-        animate={{
+        animate={isInViewport ? {
           rotate: 360,
-        }}
+        } : {}}
         transition={{
           duration: 20,
-          repeat: Infinity,
+          repeat: isInViewport ? Infinity : 0,
           ease: 'linear',
         }}
         style={{
@@ -256,12 +280,12 @@ function DefaultCardBack({
         {/* Center section - Brand logo */}
         <div className="flex-1 flex items-center justify-center">
           <motion.div
-            animate={{
+            animate={isInViewport ? {
               opacity: [0.7, 1, 0.7],
-            }}
+            } : {}}
             transition={{
               duration: 2,
-              repeat: Infinity,
+              repeat: isInViewport ? Infinity : 0,
               ease: 'easeInOut',
             }}
             className="text-center"
@@ -297,12 +321,12 @@ function DefaultCardBack({
         {cardNumber && (
           <div className="text-center relative">
             <motion.div
-              animate={{
+              animate={isInViewport ? {
                 backgroundPosition: ['0% 50%', '200% 50%', '0% 50%'],
-              }}
+              } : {}}
               transition={{
                 duration: 6,
-                repeat: Infinity,
+                repeat: isInViewport ? Infinity : 0,
                 ease: 'linear',
               }}
               className="text-2xl font-heading font-black tracking-wider relative"

@@ -224,7 +224,7 @@ export const AllSouls = () => {
           </div>
         ) : (
           // Desktop: Grid with flip cards
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-5xl mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 max-w-5xl mx-auto px-4" style={{ contain: 'layout style' }}>
             {isLoading ? (
               // Show skeleton cards while loading
               [...Array(12)].map((_, idx) => (

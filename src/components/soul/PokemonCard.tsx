@@ -60,7 +60,13 @@ export function PokemonCard({
   // Determine if animations should be active
   const shouldAnimateBackground = !isMobile && !reduceMotion;
   return (
-    <div className="relative w-full h-full rounded-2xl overflow-hidden bg-dark-lighter">
+    <div
+      className="relative w-full h-full rounded-2xl overflow-hidden bg-dark-lighter"
+      style={{
+        contain: 'layout style paint',
+        willChange: isFlipped ? 'transform' : 'auto',
+      }}
+    >
       {/* Holographic card background - animated on desktop, static on mobile */}
       {shouldAnimateBackground ? (
         <motion.div

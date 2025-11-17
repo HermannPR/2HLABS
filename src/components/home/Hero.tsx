@@ -211,7 +211,7 @@ export const Hero = () => {
               </AnimatePresence>
 
               {/* Spinning badge container */}
-              <div className="relative w-28 h-28">
+              <div className="relative w-28 h-28" style={{ contain: 'layout style paint' }}>
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentBadgeIndex}

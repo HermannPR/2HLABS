@@ -119,6 +119,8 @@ function SwipeCard({
         cursor: offset === 0 ? 'grab' : 'pointer',
         transformStyle: 'preserve-3d',
         pointerEvents: Math.abs(offset) <= 1 ? 'auto' : 'none',
+        contain: 'layout style paint',
+        willChange: offset === 0 ? 'transform' : 'auto',
       }}
       initial={{
         x: offset * 90 + '%',
@@ -243,6 +245,8 @@ export function StackedCards({
             height: '500px',
             minHeight: '500px',
             perspective: '1000px',
+            contain: 'layout style',
+            transform: 'translate3d(0, 0, 0)',
           }}
         >
           {visibleCards.map((archetype, idx) => (
