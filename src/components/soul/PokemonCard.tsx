@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import type { Archetype } from '../../types';
+import { OptimizedImage } from '../common/OptimizedImage';
 
 interface PokemonCardProps {
   archetype: Archetype;
@@ -149,12 +150,9 @@ export function PokemonCard({
             }}
           />
 
-          {/* Soul logo - with lazy loading */}
-          <motion.img
-            src={getSoulLogo(archetype.id)}
-            alt={archetype.name}
-            loading="lazy"
-            className="relative z-10 w-36 h-36 object-contain"
+          {/* Soul logo - with lazy loading and WebP optimization */}
+          <motion.div
+            className="relative z-10 w-36 h-36"
             style={{
               filter: `drop-shadow(0 0 20px ${brandColor.primary}80)`,
             }}
@@ -171,7 +169,13 @@ export function PokemonCard({
               ease: [0.34, 1.56, 0.64, 1],
               times: [0, 0.5, 1]
             }}
-          />
+          >
+            <OptimizedImage
+              src={getSoulLogo(archetype.id)}
+              alt={archetype.name}
+              className="w-full h-full object-contain"
+            />
+          </motion.div>
         </div>
 
         {/* Stats bars - expanded section */}

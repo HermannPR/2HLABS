@@ -106,8 +106,6 @@ export default defineConfig({
           'animation-vendor': ['framer-motion'],
           // Internationalization
           'i18n-vendor': ['i18next', 'react-i18next', 'i18next-browser-languagedetector'],
-          // Form handling and validation
-          'form-vendor': ['react-hook-form', 'zod', '@hookform/resolvers'],
           // Routing
           'router-vendor': ['react-router-dom'],
           // React core (keep together for better caching)

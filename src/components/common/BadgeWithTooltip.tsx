@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { OptimizedImage } from './OptimizedImage';
 
 interface BadgeWithTooltipProps {
   src: string;
@@ -45,10 +46,8 @@ export const BadgeWithTooltip = ({
         )}
       </AnimatePresence>
 
-      {/* Badge Image */}
-      <motion.img
-        src={src}
-        alt={alt}
+      {/* Badge Image - WebP optimized */}
+      <motion.div
         className={`object-contain transition-all duration-150 ${className}`}
         style={glowEffect ? {
           filter: isHovered
@@ -60,7 +59,13 @@ export const BadgeWithTooltip = ({
           y: isHovered ? -4 : 0,
         }}
         transition={{ duration: 0.15, ease: 'easeOut' }}
-      />
+      >
+        <OptimizedImage
+          src={src}
+          alt={alt}
+          className="w-full h-full object-contain"
+        />
+      </motion.div>
     </div>
   );
 };
