@@ -119,7 +119,7 @@ function SwipeCard({
         cursor: offset === 0 ? 'grab' : 'pointer',
         transformStyle: 'preserve-3d',
         pointerEvents: Math.abs(offset) <= 1 ? 'auto' : 'none',
-        contain: 'layout style paint',
+        contain: 'layout style',
         willChange: offset === 0 ? 'transform' : 'auto',
       }}
       initial={{

@@ -65,7 +65,7 @@ export function Card3D({
         rotateX,
         rotateY,
         transformStyle: 'preserve-3d',
-        contain: 'layout style paint',
+        contain: 'layout style',
         willChange: 'transform',
       }}
       className={className}

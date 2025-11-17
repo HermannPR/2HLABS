@@ -153,7 +153,7 @@ export function CardFlip({
           width: '100%',
           height: '100%',
           position: 'relative',
-          contain: 'layout style paint',
+          contain: 'layout style',
           willChange: isFlipped ? 'transform' : 'auto',
         }}
       >
