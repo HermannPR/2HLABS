@@ -302,9 +302,7 @@ export const AllSouls = () => {
             className="fixed inset-0 overflow-y-scroll"
             style={{
               zIndex: 10000,
-              background: 'rgba(0, 0, 0, 0.95)',
-              backdropFilter: isMobile ? 'none' : 'blur(20px)',
-              WebkitBackdropFilter: isMobile ? 'none' : 'blur(20px)',
+              background: 'rgba(0, 0, 0, 0.97)',
               pointerEvents: 'auto',
             }}
             onClick={() => setSelectedArchetype(null)}
@@ -382,21 +380,12 @@ export const AllSouls = () => {
                   {/* Soul Logo with Premium Glow */}
                   <div className="relative z-10 mb-6">
                     <div className="relative">
-                      {/* Static glow ring - no animation for better performance */}
-                      <div
-                        className="absolute inset-0 rounded-full blur-3xl opacity-30"
-                        style={{
-                          background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
-                          transform: 'scale(1.5)',
-                        }}
-                      />
-
                       {/* Logo container */}
                       <div
                         className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
                         style={{
-                          background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
-                          boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
+                          background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15) 0%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.05) 70%)`,
+                          boxShadow: `0 0 30px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.4), inset 0 0 20px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1)`,
                         }}
                       >
                         <img
@@ -404,9 +393,6 @@ export const AllSouls = () => {
                           alt={selectedArchetype.name}
                           loading="lazy"
                           className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
-                          style={{
-                            filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
-                          }}
                         />
                       </div>
                     </div>
@@ -418,7 +404,6 @@ export const AllSouls = () => {
                       className="text-4xl sm:text-5xl font-heading font-bold mb-3"
                       style={{
                         color: modalBrandColor.primary,
-                        textShadow: `0 0 30px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.6)`,
                       }}
                     >
                       {selectedArchetype.name}
@@ -427,7 +412,6 @@ export const AllSouls = () => {
                       className="text-xl sm:text-2xl font-medium italic"
                       style={{
                         color: modalBrandColor.secondary,
-                        textShadow: `0 0 20px rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.5)`,
                       }}
                     >
                       "{t(`archetypes.${selectedArchetype.id}.tagline`)}"

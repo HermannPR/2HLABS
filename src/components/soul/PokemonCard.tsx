@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import type { Archetype } from '../../types';
 
 interface PokemonCardProps {
@@ -67,40 +66,16 @@ export function PokemonCard({
         willChange: isFlipped ? 'transform' : 'auto',
       }}
     >
-      {/* Holographic card background - animated on desktop, static on mobile */}
-      {shouldAnimateBackground ? (
-        <motion.div
-          className="absolute inset-0"
-          animate={{
-            backgroundPosition: ['0% 0%', '100% 100%'],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            repeatType: 'reverse',
-            ease: 'linear',
-          }}
-          style={{
-            background: `
-              radial-gradient(circle at 30% 20%, ${brandColor.primary}20 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, ${brandColor.secondary}20 0%, transparent 50%),
-              linear-gradient(135deg, rgba(255,229,0,0.05), rgba(255,0,229,0.05), rgba(0,229,255,0.05))
-            `,
-            backgroundSize: '200% 200%',
-          }}
-        />
-      ) : (
-        <div
-          className="absolute inset-0"
-          style={{
-            background: `
-              radial-gradient(circle at 30% 20%, ${brandColor.primary}20 0%, transparent 50%),
-              radial-gradient(circle at 70% 80%, ${brandColor.secondary}20 0%, transparent 50%),
-              linear-gradient(135deg, rgba(255,229,0,0.05), rgba(255,0,229,0.05), rgba(0,229,255,0.05))
-            `,
-          }}
-        />
-      )}
+      {/* Static card background - no animation for performance */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background: `
+            radial-gradient(circle at 30% 20%, ${brandColor.primary}15 0%, transparent 50%),
+            radial-gradient(circle at 70% 80%, ${brandColor.secondary}15 0%, transparent 50%)
+          `,
+        }}
+      />
 
       {/* Card border with soul colors */}
       {!hideOriginalBorder && (
@@ -147,36 +122,12 @@ export function PokemonCard({
 
         {/* Main image area - reduced size */}
         <div className="flex items-center justify-center mb-3 relative">
-          {/* Background glow */}
-          <div
-            className="absolute inset-0 rounded-xl blur-2xl opacity-30"
-            style={{
-              background: `radial-gradient(circle, ${brandColor.primary} 0%, ${brandColor.secondary} 100%)`,
-            }}
-          />
-
           {/* Soul logo - with lazy loading */}
-          <motion.img
+          <img
             src={getSoulLogo(archetype.id)}
             alt={archetype.name}
             loading="lazy"
             className="relative z-10 w-36 h-36 object-contain"
-            style={{
-              filter: `drop-shadow(0 0 20px ${brandColor.primary}80)`,
-            }}
-            animate={
-              isFlipped && !reduceMotion
-                ? {
-                    scale: [1, 1.15, 1.05],
-                    rotate: [0, 8, 0],
-                  }
-                : { scale: 1, rotate: 0 }
-            }
-            transition={{
-              duration: 0.6,
-              ease: [0.34, 1.56, 0.64, 1],
-              times: [0, 0.5, 1]
-            }}
           />
         </div>
 
@@ -193,15 +144,12 @@ export function PokemonCard({
               </span>
             </div>
             <div className="h-2 bg-dark rounded-full overflow-hidden">
-              <motion.div
-                className="h-full"
+              <div
+                className="h-full transition-all duration-300"
                 style={{
                   background: `linear-gradient(90deg, ${brandColor.primary}, ${brandColor.secondary})`,
                   width: `${Math.min((caffeineRange[1] / 400) * 100, 100)}%`,
                 }}
-                initial={{ width: 0 }}
-                animate={{ width: `${Math.min((caffeineRange[1] / 400) * 100, 100)}%` }}
-                transition={{ duration: 0.8, delay: 0.1 }}
               />
             </div>
           </div>
@@ -213,15 +161,12 @@ export function PokemonCard({
               <span className="text-white font-bold">{intensity}/10</span>
             </div>
             <div className="h-2 bg-dark rounded-full overflow-hidden">
-              <motion.div
-                className="h-full"
+              <div
+                className="h-full transition-all duration-300"
                 style={{
                   background: `linear-gradient(90deg, ${brandColor.primary}, ${brandColor.secondary})`,
                   width: `${(intensity / 10) * 100}%`,
                 }}
-                initial={{ width: 0 }}
-                animate={{ width: `${(intensity / 10) * 100}%` }}
-                transition={{ duration: 0.8, delay: 0.2 }}
               />
             </div>
           </div>
@@ -233,15 +178,12 @@ export function PokemonCard({
               <span className="text-white font-bold uppercase">{archetype.formulaProfile.pumpLevel}</span>
             </div>
             <div className="h-2 bg-dark rounded-full overflow-hidden">
-              <motion.div
-                className="h-full"
+              <div
+                className="h-full transition-all duration-300"
                 style={{
                   background: `linear-gradient(90deg, ${brandColor.primary}, ${brandColor.secondary})`,
                   width: `${getLevelPercentage(archetype.formulaProfile.pumpLevel)}%`,
                 }}
-                initial={{ width: 0 }}
-                animate={{ width: `${getLevelPercentage(archetype.formulaProfile.pumpLevel)}%` }}
-                transition={{ duration: 0.8, delay: 0.3 }}
               />
             </div>
           </div>
@@ -253,15 +195,12 @@ export function PokemonCard({
               <span className="text-white font-bold uppercase">{archetype.formulaProfile.focusLevel}</span>
             </div>
             <div className="h-2 bg-dark rounded-full overflow-hidden">
-              <motion.div
-                className="h-full"
+              <div
+                className="h-full transition-all duration-300"
                 style={{
                   background: `linear-gradient(90deg, ${brandColor.primary}, ${brandColor.secondary})`,
                   width: `${getLevelPercentage(archetype.formulaProfile.focusLevel)}%`,
                 }}
-                initial={{ width: 0 }}
-                animate={{ width: `${getLevelPercentage(archetype.formulaProfile.focusLevel)}%` }}
-                transition={{ duration: 0.8, delay: 0.4 }}
               />
             </div>
           </div>
@@ -273,15 +212,12 @@ export function PokemonCard({
               <span className="text-white font-bold uppercase">{archetype.dimensions.duration}</span>
             </div>
             <div className="h-2 bg-dark rounded-full overflow-hidden">
-              <motion.div
-                className="h-full"
+              <div
+                className="h-full transition-all duration-300"
                 style={{
                   background: `linear-gradient(90deg, ${brandColor.primary}, ${brandColor.secondary})`,
                   width: `${getDimensionPercentage(archetype.dimensions.duration)}%`,
                 }}
-                initial={{ width: 0 }}
-                animate={{ width: `${getDimensionPercentage(archetype.dimensions.duration)}%` }}
-                transition={{ duration: 0.8, delay: 0.5 }}
               />
             </div>
           </div>
@@ -292,30 +228,6 @@ export function PokemonCard({
           </p>
         </div>
       </div>
-
-      {/* Holographic shine effect - only on desktop */}
-      {shouldAnimateBackground && (
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          animate={{
-            backgroundPosition: ['0% 0%', '200% 200%'],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: 'linear',
-          }}
-          style={{
-            background: `linear-gradient(
-              45deg,
-              transparent 30%,
-              rgba(255, 255, 255, 0.1) 50%,
-              transparent 70%
-            )`,
-            backgroundSize: '200% 200%',
-          }}
-        />
-      )}
     </div>
   );
 }
