@@ -56,8 +56,6 @@ export function PokemonCard({
   isMobile = false,
   reduceMotion = false,
 }: PokemonCardProps) {
-  // Determine if animations should be active
-  const shouldAnimateBackground = !isMobile && !reduceMotion;
   return (
     <div
       className="relative w-full h-full rounded-2xl overflow-hidden bg-dark-lighter"
