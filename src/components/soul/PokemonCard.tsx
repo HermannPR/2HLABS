@@ -53,8 +53,8 @@ export function PokemonCard({
   intensity,
   isFlipped = false,
   hideOriginalBorder = false,
-  isMobile = false,
-  reduceMotion = false,
+  isMobile: _isMobile = false,
+  reduceMotion: _reduceMotion = false,
 }: PokemonCardProps) {
   return (
     <div
