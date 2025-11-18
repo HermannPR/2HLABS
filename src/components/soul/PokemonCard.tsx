@@ -60,7 +60,7 @@ export function PokemonCard({
     <div
       className="relative w-full h-full rounded-2xl overflow-hidden bg-dark-lighter"
       style={{
-        contain: 'layout style paint',
+        contain: 'layout style',
         willChange: isFlipped ? 'transform' : 'auto',
       }}
     >

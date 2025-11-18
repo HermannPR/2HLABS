@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import { useState, useRef, useCallback, useEffect, type ReactNode } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
 
@@ -38,7 +37,6 @@ export function CardFlip({
   disableBackAnimations = false,
 }: CardFlipProps) {
   const [isFlippedInternal, setIsFlippedInternal] = useState(false);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isCardInView, setIsCardInView] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
   const prefersReducedMotion = useReducedMotion();
@@ -65,126 +63,37 @@ export function CardFlip({
   // Use controlled or internal state
   const isFlipped = isFlippedControlled ? (isFlippedProp ?? false) : isFlippedInternal;
 
-  const handleMouseEnter = useCallback(() => {
-    if (!isInViewport || disabled || isFlippedControlled) return;
-    setIsFlippedInternal(true);
-    onFlip?.(true);
-  }, [isInViewport, disabled, isFlippedControlled, onFlip]);
-
-  const handleMouseLeave = useCallback(() => {
-    if (!isInViewport || disabled || isFlippedControlled) return;
-    setIsFlippedInternal(false);
-    onFlip?.(false);
-    setMousePosition({ x: 0, y: 0 });
-  }, [isInViewport, disabled, isFlippedControlled, onFlip]);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled || disableBackAnimations) return; // Skip mouse tracking if animations disabled
-
-    const card = cardRef.current;
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-    const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-
-    // Clamp values between -1 and 1
-    const clampedX = Math.max(-1, Math.min(1, x));
-    const clampedY = Math.max(-1, Math.min(1, y));
-
-    setMousePosition({ x: clampedX, y: clampedY });
-  }, [disabled, disableBackAnimations]);
-
   const handleClick = useCallback(() => {
+    // For mobile: toggle flip on click
+    if (isFlippedControlled && !disabled) {
+      setIsFlippedInternal(!isFlipped);
+      onFlip?.(!isFlipped);
+    }
     onClick?.();
-  }, [onClick]);
+  }, [isFlippedControlled, disabled, isFlipped, onFlip, onClick]);
+
+  // CSS classes for mobile controlled flip
+  const containerClasses = `card-flip-container ${className} ${
+    isFlippedControlled ? 'mobile' : ''
+  } ${isFlipped ? 'flipped' : ''}`;
 
   return (
     <div
       ref={cardRef}
-      className={`card-flip-container ${className}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      onMouseMove={handleMouseMove}
+      className={containerClasses}
       onClick={handleClick}
-      style={{
-        perspective: '1200px',
-        width: '100%',
-        height: '100%',
-      }}
     >
-      <motion.div
-        className="card-flip-inner"
-        animate={{
-          rotateY: isFlipped ? 180 : 0,
-          rotateX: !disabled && !prefersReducedMotion ? mousePosition.y * -10 : 0,
-          rotateZ: !disabled && !prefersReducedMotion ? mousePosition.x * 5 : 0,
-          scale: isFlipped ? 1.05 : 1,
-          y: isFlipped ? -10 : 0,
-        }}
-        transition={prefersReducedMotion ? {
-          duration: 0.01, // Instant transitions for reduced motion
-        } : {
-          rotateY: {
-            duration: 0.6,
-            ease: [0.34, 1.56, 0.64, 1], // Spring-like easing
-          },
-          rotateX: {
-            type: "spring",
-            stiffness: 350,
-            damping: 35,
-            mass: 0.5,
-          },
-          rotateZ: {
-            type: "spring",
-            stiffness: 350,
-            damping: 35,
-            mass: 0.5,
-          },
-          scale: {
-            duration: 0.4,
-            ease: [0.34, 1.56, 0.64, 1],
-          },
-          y: {
-            duration: 0.4,
-            ease: [0.34, 1.56, 0.64, 1],
-          },
-        }}
-        style={{
-          transformStyle: 'preserve-3d',
-          width: '100%',
-          height: '100%',
-          position: 'relative',
-          contain: 'layout style',
-          willChange: isFlipped ? 'transform' : 'auto',
-        }}
-      >
+      <div className="card-flip-inner">
         {/* Card Back (face-down default) */}
-        <div
-          className="card-back absolute inset-0 w-full h-full"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: 'rotateY(0deg)',
-            opacity: isFlipped ? 0 : 1,
-          }}
-        >
+        <div className="card-face card-face-back">
           {backContent || <DefaultCardBack cardNumber={cardNumber} totalCards={totalCards} brandColor={brandColor} isInViewport={isCardInView && !disableBackAnimations} />}
         </div>
 
         {/* Card Front (revealed on flip) */}
-        <div
-          className="card-front absolute inset-0 w-full h-full"
-          style={{
-            backfaceVisibility: 'hidden',
-            WebkitBackfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-            opacity: isFlipped ? 1 : 0,
-          }}
-        >
+        <div className="card-face card-face-front">
           {children}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }
@@ -204,20 +113,13 @@ function DefaultCardBack({
   brandColor?: { primary: string; secondary: string };
   isInViewport?: boolean;
 }) {
+  const containerClass = isInViewport ? '' : 'card-back-paused';
+
   return (
-    <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-dark via-dark-lighter to-dark">
+    <div className={`relative w-full h-full rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-dark via-dark-lighter to-dark ${containerClass}`}>
       {/* Iridescent holographic background */}
-      <motion.div
-        className="absolute inset-0"
-        animate={isInViewport ? {
-          backgroundPosition: ['0% 0%', '100% 100%'],
-        } : {}}
-        transition={{
-          duration: 8,
-          repeat: isInViewport ? Infinity : 0,
-          repeatType: 'reverse',
-          ease: 'linear',
-        }}
+      <div
+        className="absolute inset-0 holographic-bg"
         style={{
           background: `
             radial-gradient(circle at 20% 50%, rgba(255, 229, 0, 0.3) 0%, transparent 50%),
@@ -236,16 +138,8 @@ function DefaultCardBack({
       />
 
       {/* Holographic shimmer overlay */}
-      <motion.div
-        className="absolute inset-0"
-        animate={isInViewport ? {
-          rotate: 360,
-        } : {}}
-        transition={{
-          duration: 20,
-          repeat: isInViewport ? Infinity : 0,
-          ease: 'linear',
-        }}
+      <div
+        className="absolute inset-0 shimmer-overlay"
         style={{
           background: `conic-gradient(
             from 0deg,
@@ -281,17 +175,7 @@ function DefaultCardBack({
       <div className="relative h-full flex flex-col items-center justify-center p-6">
         {/* Center section - Brand logo */}
         <div className="flex-1 flex items-center justify-center">
-          <motion.div
-            animate={isInViewport ? {
-              opacity: [0.7, 1, 0.7],
-            } : {}}
-            transition={{
-              duration: 2,
-              repeat: isInViewport ? Infinity : 0,
-              ease: 'easeInOut',
-            }}
-            className="text-center"
-          >
+          <div className="text-center logo-glow">
             {/* 2HLABS logo */}
             <div className="relative">
               {/* Logo glow background */}
@@ -316,22 +200,13 @@ function DefaultCardBack({
             <div className="text-xs font-heading font-bold tracking-widest text-white/60 mt-2">
               CUSTOM PRE-WORKOUT
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Bottom section - Card numbering with holographic effect */}
         {cardNumber && (
           <div className="text-center relative">
-            <motion.div
-              animate={isInViewport ? {
-                backgroundPosition: ['0% 50%', '200% 50%', '0% 50%'],
-              } : {}}
-              transition={{
-                duration: 6,
-                repeat: isInViewport ? Infinity : 0,
-                ease: 'linear',
-              }}
-              className="text-2xl font-heading font-black tracking-wider relative"
+            <div className="text-2xl font-heading font-black tracking-wider relative number-gradient"
               style={{
                 background: `linear-gradient(
                   90deg,

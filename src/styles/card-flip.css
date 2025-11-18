@@ -1,0 +1,129 @@
+/* CSS-Only 3D Card Flip Animations */
+
+.card-flip-container {
+  perspective: 1200px;
+  width: 100%;
+  height: 100%;
+}
+
+.card-flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  contain: layout style;
+}
+
+/* Flip on hover */
+.card-flip-container:hover .card-flip-inner {
+  transform: rotateY(180deg) translateY(-10px) scale(1.05);
+}
+
+/* Card faces */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-face-back {
+  transform: rotateY(0deg);
+}
+
+.card-face-front {
+  transform: rotateY(180deg);
+}
+
+/* Mobile: Controlled flip instead of hover */
+.card-flip-container.mobile .card-flip-inner {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.card-flip-container.mobile.flipped .card-flip-inner {
+  transform: rotateY(180deg) translateY(-10px) scale(1.05);
+}
+
+.card-flip-container.mobile:hover .card-flip-inner {
+  transform: none; /* Disable hover on mobile */
+}
+
+/* Performance optimizations */
+.card-flip-inner {
+  will-change: auto;
+}
+
+.card-flip-container:hover .card-flip-inner,
+.card-flip-container.mobile.flipped .card-flip-inner {
+  will-change: transform;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .card-flip-inner {
+    transition: transform 0.01s !important;
+  }
+}
+
+/* Card back animations */
+@keyframes holographic-gradient {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+}
+
+@keyframes shimmer-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes logo-pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes number-gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 200% 50%;
+  }
+}
+
+.holographic-bg {
+  animation: holographic-gradient 8s linear infinite alternate;
+}
+
+.shimmer-overlay {
+  animation: shimmer-rotate 20s linear infinite;
+}
+
+.logo-glow {
+  animation: logo-pulse 2s ease-in-out infinite;
+}
+
+.number-gradient {
+  animation: number-gradient 6s linear infinite;
+}
+
+/* Pause animations when card not in viewport */
+.card-back-paused .holographic-bg,
+.card-back-paused .shimmer-overlay,
+.card-back-paused .logo-glow,
+.card-back-paused .number-gradient {
+  animation-play-state: paused;
+}
