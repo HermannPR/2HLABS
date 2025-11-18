@@ -1,5 +1,4 @@
 import { useState, useRef, useCallback, useEffect, type ReactNode } from 'react';
-import { useReducedMotion } from '../../hooks/useReducedMotion';
 
 interface CardFlipProps {
   children: ReactNode;
@@ -24,7 +23,7 @@ interface CardFlipProps {
 export function CardFlip({
   children,
   backContent,
-  isInViewport = true,
+  isInViewport: _isInViewport = true,
   disabled = false,
   onFlip,
   className = '',
@@ -39,7 +38,6 @@ export function CardFlip({
   const [isFlippedInternal, setIsFlippedInternal] = useState(false);
   const [isCardInView, setIsCardInView] = useState(true);
   const cardRef = useRef<HTMLDivElement>(null);
-  const prefersReducedMotion = useReducedMotion();
 
   // Track viewport visibility with IntersectionObserver
   useEffect(() => {
@@ -228,7 +226,7 @@ function DefaultCardBack({
               }}
             >
               {cardNumber}/{totalCards}
-            </motion.div>
+            </div>
           </div>
         )}
       </div>
