@@ -15,6 +15,7 @@ interface CardFlipProps {
   onClick?: () => void;
   isFlippedControlled?: boolean;
   isFlipped?: boolean;
+  disableBackAnimations?: boolean; // Disable expensive back card animations
 }
 
 /**
@@ -34,6 +35,7 @@ export function CardFlip({
   onClick,
   isFlippedControlled,
   isFlipped: isFlippedProp,
+  disableBackAnimations = false,
 }: CardFlipProps) {
   const [isFlippedInternal, setIsFlippedInternal] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -77,7 +79,7 @@ export function CardFlip({
   }, [isInViewport, disabled, isFlippedControlled, onFlip]);
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (disabled) return;
+    if (disabled || disableBackAnimations) return; // Skip mouse tracking if animations disabled
 
     const card = cardRef.current;
     if (!card) return;
@@ -91,7 +93,7 @@ export function CardFlip({
     const clampedY = Math.max(-1, Math.min(1, y));
 
     setMousePosition({ x: clampedX, y: clampedY });
-  }, [disabled]);
+  }, [disabled, disableBackAnimations]);
 
   const handleClick = useCallback(() => {
     onClick?.();
@@ -167,7 +169,7 @@ export function CardFlip({
             opacity: isFlipped ? 0 : 1,
           }}
         >
-          {backContent || <DefaultCardBack cardNumber={cardNumber} totalCards={totalCards} brandColor={brandColor} isInViewport={isCardInView} />}
+          {backContent || <DefaultCardBack cardNumber={cardNumber} totalCards={totalCards} brandColor={brandColor} isInViewport={isCardInView && !disableBackAnimations} />}
         </div>
 
         {/* Card Front (revealed on flip) */}

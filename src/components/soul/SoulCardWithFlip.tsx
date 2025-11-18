@@ -36,6 +36,9 @@ export function SoulCardWithFlip({
   const isInViewport = useInViewport(cardRef as React.RefObject<Element>);
   const [isFlipped, setIsFlipped] = useState(false);
 
+  // Only enable animations if card is active or in viewport (performance optimization)
+  const shouldAnimate = isInViewport && (isActive || isFlipped);
+
   // Reset flip state when another card becomes active
   useEffect(() => {
     if (!isActive && isFlipped) {
@@ -111,6 +114,7 @@ export function SoulCardWithFlip({
         isFlippedControlled={isMobile}
         isFlipped={isFlipped}
         onClick={handleClick}
+        disableBackAnimations={!shouldAnimate}
       >
         {cardContent}
       </CardFlip>

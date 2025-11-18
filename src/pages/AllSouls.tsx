@@ -310,21 +310,12 @@ export const AllSouls = () => {
             onClick={() => setSelectedArchetype(null)}
             onWheel={(e) => e.stopPropagation()}
           >
-            {/* Animated background glow - disabled on mobile for performance */}
-            {!isMobile && !prefersReducedMotion && (
-              <motion.div
+            {/* Static background glow - animation removed for better performance */}
+            {!isMobile && (
+              <div
                 className="absolute inset-0 opacity-30 pointer-events-none"
-                animate={{
-                  background: [
-                    `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
-                    `radial-gradient(circle at 70% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.3) 0%, transparent 50%)`,
-                    `radial-gradient(circle at 30% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
-                  ],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: 'easeInOut',
+                style={{
+                  background: `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.3) 0%, transparent 50%)`,
                 }}
               />
             )}
@@ -380,122 +371,50 @@ export const AllSouls = () => {
               >
                 {/* Left Side - Visual Identity */}
                 <div className="relative p-3 sm:p-4 lg:p-5 flex flex-col items-center justify-center border-r border-white/5 min-h-[250px] lg:min-h-[380px]">
-                  {/* Animated gradient background - simplified on mobile */}
-                  {!isMobile && !prefersReducedMotion ? (
-                    <motion.div
-                      className="absolute inset-0"
-                      animate={{
-                        background: [
-                          `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
-                          `radial-gradient(circle at 50% 50%, rgba(${secondaryRgb.r}, ${secondaryRgb.g}, ${secondaryRgb.b}, 0.08) 0%, transparent 70%)`,
-                          `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
-                        ],
-                      }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: 'easeInOut',
-                      }}
-                    />
-                  ) : (
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background: `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
-                      }}
-                    />
-                  )}
+                  {/* Static gradient background - animation removed for performance */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: `radial-gradient(circle at 50% 50%, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.08) 0%, transparent 70%)`,
+                    }}
+                  />
 
                   {/* Soul Logo with Premium Glow */}
                   <div className="relative z-10 mb-6">
-                    {!prefersReducedMotion ? (
-                      <motion.div
-                        animate={{
-                          scale: [1, 1.05, 1],
-                          rotate: [0, 5, 0, -5, 0],
+                    <div className="relative">
+                      {/* Static glow ring - no animation for better performance */}
+                      <div
+                        className="absolute inset-0 rounded-full blur-3xl opacity-30"
+                        style={{
+                          background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
+                          transform: 'scale(1.5)',
                         }}
-                        transition={{
-                          duration: 6,
-                          repeat: Infinity,
-                          ease: 'easeInOut',
+                      />
+
+                      {/* Logo container */}
+                      <div
+                        className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
+                        style={{
+                          background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
+                          boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
                         }}
-                        className="relative"
                       >
-                        {/* Outer glow ring */}
-                        <motion.div
-                          className="absolute inset-0 rounded-full blur-3xl"
-                          animate={{
-                            opacity: [0.2, 0.35, 0.2],
-                          }}
-                          transition={{
-                            duration: 4,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                          }}
+                        <img
+                          src={getSoulLogo(selectedArchetype.id)}
+                          alt={selectedArchetype.name}
+                          loading="lazy"
+                          className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
                           style={{
-                            background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
-                            transform: 'scale(1.5)',
+                            filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
                           }}
                         />
-
-                        {/* Logo container */}
-                        <div
-                          className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
-                          style={{
-                            background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
-                            boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
-                          }}
-                        >
-                          <img
-                            src={getSoulLogo(selectedArchetype.id)}
-                            alt={selectedArchetype.name}
-                            loading="lazy"
-                            className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
-                            style={{
-                              filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
-                            }}
-                          />
-                        </div>
-                      </motion.div>
-                    ) : (
-                      <div className="relative">
-                        {/* Static glow ring */}
-                        <div
-                          className="absolute inset-0 rounded-full blur-3xl opacity-30"
-                          style={{
-                            background: `radial-gradient(circle, ${modalBrandColor.primary} 0%, ${modalBrandColor.secondary} 50%, transparent 70%)`,
-                            transform: 'scale(1.5)',
-                          }}
-                        />
-
-                        {/* Logo container */}
-                        <div
-                          className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-full flex items-center justify-center"
-                          style={{
-                            background: `radial-gradient(circle, rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.1) 0%, transparent 70%)`,
-                            boxShadow: `inset 0 0 40px rgba(${modalRgb.r}, ${modalRgb.g}, ${modalRgb.b}, 0.15)`,
-                          }}
-                        >
-                          <img
-                            src={getSoulLogo(selectedArchetype.id)}
-                            alt={selectedArchetype.name}
-                            loading="lazy"
-                            className="w-28 h-28 sm:w-40 sm:h-40 object-contain mix-blend-lighten"
-                            style={{
-                              filter: `drop-shadow(0 0 15px ${modalBrandColor.primary}80)`,
-                            }}
-                          />
-                        </div>
                       </div>
-                    )}
+                    </div>
                   </div>
 
                   {/* Name & Tagline */}
                   <div className="text-center relative z-10">
-                    <motion.h2
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.2 }}
+                    <h2
                       className="text-4xl sm:text-5xl font-heading font-bold mb-3"
                       style={{
                         color: modalBrandColor.primary,
@@ -503,11 +422,8 @@ export const AllSouls = () => {
                       }}
                     >
                       {selectedArchetype.name}
-                    </motion.h2>
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.3 }}
+                    </h2>
+                    <p
                       className="text-xl sm:text-2xl font-medium italic"
                       style={{
                         color: modalBrandColor.secondary,
@@ -515,7 +431,7 @@ export const AllSouls = () => {
                       }}
                     >
                       "{t(`archetypes.${selectedArchetype.id}.tagline`)}"
-                    </motion.p>
+                    </p>
                   </div>
 
                   {/* Decorative lines */}
@@ -534,24 +450,14 @@ export const AllSouls = () => {
                 {/* Right Side - Details */}
                 <div className="p-4 sm:p-5 lg:p-6 flex flex-col">
                   {/* Description */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="mb-4"
-                  >
+                  <div className="mb-4">
                     <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
                       {t(`archetypes.${selectedArchetype.id}.description`)}
                     </p>
-                  </motion.div>
+                  </div>
 
                   {/* Stats Grid - Compact Bar Style */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.3 }}
-                    className="space-y-2 mb-4"
-                  >
+                  <div className="space-y-2 mb-4">
                     {/* Caffeine Range */}
                     <div className="relative">
                       <div className="flex justify-between items-center mb-1.5">
@@ -642,15 +548,10 @@ export const AllSouls = () => {
                         />
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* Traits & Athlete Types */}
-                  <motion.div
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.4 }}
-                    className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-                  >
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <h3 className="text-xs font-semibold uppercase tracking-wider mb-2"
                         style={{ color: modalBrandColor.primary }}
@@ -682,15 +583,10 @@ export const AllSouls = () => {
                         ))}
                       </ul>
                     </div>
-                  </motion.div>
+                  </div>
 
                   {/* CTA Button */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-auto pt-8"
-                  >
+                  <div className="mt-auto pt-8">
                     <button
                       onClick={() => {
                         setSelectedArchetype(null);
