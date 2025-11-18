@@ -600,7 +600,7 @@ export const AllSouls = () => {
                     >
                       Create Your Custom Formula
                     </button>
-                  </motion.div>
+                  </div>
                 </div>
               </div>
             </motion.div>
