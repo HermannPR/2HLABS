@@ -65,12 +65,12 @@ export function SoulCardWithFlip({
     }
   };
 
-  // Desktop: Click when flipped opens modal
+  // Desktop: Click opens modal (hover handles flip animation via CSS)
   const handleClick = () => {
     if (isMobile) {
       handleMobileClick();
-    } else if (isFlipped) {
-      // Desktop: only open modal when card is flipped
+    } else {
+      // Desktop: click opens modal (CSS hover triggers flip)
       onSelect(archetype);
     }
   };
