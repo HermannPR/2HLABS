@@ -51,19 +51,42 @@ export const Ingredients = () => {
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full border-2 transition-all capitalize ${
-                selectedCategory === category
-                  ? 'border-primary bg-primary/10 text-primary'
-                  : 'border-dark-light text-gray-400 hover:border-primary/50'
-              }`}
-            >
-              {t(getCategoryTranslationKey(category))}
-            </button>
-          ))}
+          {categories.map((category) => {
+            // Map category to icon path (pump doesn't have icon yet)
+            const categoryIcons: Record<string, string | null> = {
+              'energy': '/assets/categories/energy.png',
+              'strength': '/assets/categories/strength.png',
+              'endurance': '/assets/categories/endurance.png',
+              'focus': '/assets/categories/focus.png',
+              'recovery': '/assets/categories/recovery.png',
+              'hydration': '/assets/categories/hydration.png',
+              'pump': null, // To be generated
+              'all': null,
+            };
+
+            const iconPath = categoryIcons[category];
+
+            return (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full border-2 transition-all capitalize flex items-center gap-2 ${selectedCategory === category
+                    ? 'border-primary bg-primary/10 text-primary'
+                    : 'border-dark-light text-gray-400 hover:border-primary/50'
+                  }`}
+              >
+                {iconPath && (
+                  <img
+                    src={iconPath}
+                    alt={category}
+                    className="w-5 h-5 object-contain mix-blend-lighten"
+                    loading="lazy"
+                  />
+                )}
+                {t(getCategoryTranslationKey(category))}
+              </button>
+            );
+          })}
         </div>
 
         {/* Ingredients Grid */}
@@ -76,11 +99,10 @@ export const Ingredients = () => {
             >
               <Card
                 hover
-                className={`h-full border-2 ${
-                  isDeveloper && !isIngredientEnabled(ingredient.id)
+                className={`h-full border-2 ${isDeveloper && !isIngredientEnabled(ingredient.id)
                     ? 'border-red-500/40'
                     : 'border-transparent'
-                }`}
+                  }`}
               >
                 <div className="flex justify-between items-start mb-4">
                   <div>
@@ -89,11 +111,10 @@ export const Ingredients = () => {
                       <span className="text-xs uppercase text-primary">{t(`ingredientsPage.${ingredient.category}`)}</span>
                       {isDeveloper && (
                         <span
-                          className={`text-xs uppercase font-semibold ${
-                            isIngredientEnabled(ingredient.id)
+                          className={`text-xs uppercase font-semibold ${isIngredientEnabled(ingredient.id)
                               ? 'text-green-400'
                               : 'text-red-400'
-                          }`}
+                            }`}
                         >
                           {isIngredientEnabled(ingredient.id) ? t('ingredientsPage.inStock') : t('ingredientsPage.outOfStock')}
                         </span>
@@ -128,11 +149,10 @@ export const Ingredients = () => {
                   <div className="mt-4 flex justify-end">
                     <button
                       onClick={() => handleToggleIngredient(ingredient.id)}
-                      className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${
-                        isIngredientEnabled(ingredient.id)
+                      className={`px-3 py-1 rounded-full text-xs font-semibold transition-colors ${isIngredientEnabled(ingredient.id)
                           ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20'
                           : 'bg-green-500/10 text-green-400 hover:bg-green-500/20'
-                      }`}
+                        }`}
                     >
                       {isIngredientEnabled(ingredient.id) ? t('ingredientsPage.markOutOfStock') : t('ingredientsPage.markInStock')}
                     </button>
