@@ -51,4 +51,16 @@
     0%, 100% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
   }
+
+  /* Iridescent background shift for Hero - slow, smooth */
+  @keyframes iridescent-shift {
+    0%, 100% { 
+      background-position: 0% 50%; 
+      transform: rotate(0deg) scale(1);
+    }
+    50% { 
+      background-position: 100% 50%; 
+      transform: rotate(10deg) scale(1.05);
+    }
+  }
 }

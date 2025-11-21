@@ -3,22 +3,13 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
-import { useState, useEffect, useRef, lazy, Suspense } from 'react';
-import { useInViewport } from '../../hooks/useInViewport';
+import { useState, useEffect, useRef } from 'react';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
-
-// Lazy load 3D components for better initial load performance
-const Scene3D = lazy(() => import('../three/Scene3D').then(m => ({ default: m.Scene3D })));
-const MolecularStructures = lazy(() => import('../three/MolecularStructures').then(m => ({ default: m.MolecularStructures })));
-const BackgroundMolecules = lazy(() => import('../three/BackgroundMolecules').then(m => ({ default: m.BackgroundMolecules })));
-const VolumetricFog = lazy(() => import('../three/VolumetricFog').then(m => ({ default: m.VolumetricFog })));
 
 export const Hero = () => {
   const { t } = useTranslation();
-  const [is3DReady, setIs3DReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
-  const isInViewport = useInViewport(heroRef, { threshold: 0.1, rootMargin: '200px' });
   const prefersReducedMotion = useReducedMotion();
   const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0);
 
@@ -69,81 +60,47 @@ export const Hero = () => {
 
   return (
     <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden bg-dark md:-mt-16">
-      {/* Premium subtle gradient background - Apple/Samsung style */}
+      {/* Premium iridescent gradient background - CSS only, 60fps */}
       <div className="absolute inset-0">
-        {/* Static base gradient layer for instant load */}
+        {/* Layer 1: Base molecular glow */}
         <div
           className="absolute inset-0"
           style={{
             background: `
-              radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255, 229, 0, 0.08) 0%, transparent 50%),
-              radial-gradient(ellipse 60% 50% at 80% 50%, rgba(255, 0, 229, 0.06) 0%, transparent 50%),
-              radial-gradient(ellipse 60% 50% at 20% 50%, rgba(0, 229, 255, 0.06) 0%, transparent 50%),
-              radial-gradient(ellipse 100% 100% at 50% 100%, rgba(10, 14, 39, 1) 0%, rgba(10, 14, 39, 0.95) 100%)
+              radial-gradient(ellipse 120% 80% at 50% -10%, rgba(255, 229, 0, 0.14) 0%, transparent 60%),
+              radial-gradient(ellipse 100% 70% at 80% 50%, rgba(255, 0, 229, 0.10) 0%, transparent 55%),
+              radial-gradient(ellipse 100% 70% at 20% 50%, rgba(0, 229, 255, 0.10) 0%, transparent 55%),
+              radial-gradient(ellipse 150% 120% at 50% 100%, rgba(10, 14, 39, 1) 0%, rgba(10, 14, 39, 0.98) 100%)
             `
           }}
         />
 
-        {/* Subtle animated gradient overlay */}
-        {!isMobile && !prefersReducedMotion && (
-          <motion.div
-            className="absolute inset-0"
-            animate={{
-              background: [
-                'radial-gradient(ellipse 70% 50% at 30% 30%, rgba(255, 229, 0, 0.04) 0%, transparent 50%)',
-                'radial-gradient(ellipse 70% 50% at 70% 60%, rgba(255, 0, 229, 0.04) 0%, transparent 50%)',
-                'radial-gradient(ellipse 70% 50% at 30% 30%, rgba(255, 229, 0, 0.04) 0%, transparent 50%)',
-              ]
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "easeInOut"
+        {/* Layer 2: Iridescent shimmer - slow animation */}
+        {!prefersReducedMotion && (
+          <div
+            className="absolute inset-0 opacity-60"
+            style={{
+              background: `
+                conic-gradient(from 0deg at 50% 50%,
+                  rgba(255, 229, 0, 0.08) 0deg,
+                  rgba(255, 0, 229, 0.08) 120deg,
+                  rgba(0, 229, 255, 0.08) 240deg,
+                  rgba(255, 229, 0, 0.08) 360deg)
+              `,
+              backgroundSize: '200% 200%',
+              animation: 'iridescent-shift 30s ease-in-out infinite',
             }}
           />
         )}
 
-        {/* 3D Scene overlay - subtle and smooth */}
-        {isInViewport && (
-          <motion.div
-            className="w-full h-full"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: is3DReady ? 0.7 : 0 }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-          >
-            <Suspense fallback={<div className="w-full h-full bg-gradient-to-br from-primary/5 via-dark to-secondary/5" />}>
-              <Scene3D
-                dynamicCamera
-                mouseControlled
-                enableFog
-                fogColor="#0a0e27"
-                fogDensity={0.035}
-                onReady={() => setIs3DReady(true)}
-              >
-                {/* Volumetric fog particles (reduced on mobile) */}
-                <VolumetricFog
-                  particleCount={isMobile ? 300 : 800}
-                  color1="#FFE500"
-                  color2="#FF00E5"
-                  color3="#00E5FF"
-                  size={isMobile ? 2.0 : 2.5}
-                  opacity={isMobile ? 0.15 : 0.2}
-                  driftSpeed={0.015}
-                />
-
-                {/* Background molecular space (reduced on mobile) */}
-                <BackgroundMolecules
-                  farCount={isMobile ? 10 : 30}
-                  midCount={isMobile ? 5 : 15}
-                  nearCount={isMobile ? 2 : 5}
-                />
-
-                {/* Hero molecules (in focus) */}
-                <MolecularStructures />
-              </Scene3D>
-            </Suspense>
-          </motion.div>
-        )}
+        {/* Layer 3: Subtle noise texture for depth */}
+        <div
+          className="absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E")`,
+            mixBlendMode: 'overlay',
+          }}
+        />
       </div>
 
       {/* Enhanced radial gradient overlay for maximum content visibility */}
@@ -167,14 +124,14 @@ export const Hero = () => {
           style={{ willChange: "transform, opacity" }}
         >
           {/* Main headline */}
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4" style={{textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6)'}}>
+          <h1 className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold mb-4" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.8), 0 0 30px rgba(0,0,0,0.6)' }}>
             {t('hero.titlePart1')} <span className="text-gradient glow-primary">{t('hero.titlePart2')}</span>
             <br />
             {t('hero.titlePart3')}
           </h1>
 
           {/* Subheadline */}
-          <p className="text-base md:text-lg text-white mb-4 max-w-3xl mx-auto" style={{textShadow: '0 3px 6px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.7)'}}>
+          <p className="text-base md:text-lg text-white mb-4 max-w-3xl mx-auto" style={{ textShadow: '0 3px 6px rgba(0,0,0,0.9), 0 0 25px rgba(0,0,0,0.7)' }}>
             {t('hero.subtitle')}
           </p>
 
@@ -261,11 +218,10 @@ export const Hero = () => {
                     <button
                       key={idx}
                       onClick={() => setCurrentBadgeIndex(idx)}
-                      className={`h-1.5 rounded-full transition-all ${
-                        idx === currentBadgeIndex
-                          ? 'bg-primary w-8'
-                          : 'bg-gray-700 hover:bg-gray-600 w-1.5'
-                      }`}
+                      className={`h-1.5 rounded-full transition-all ${idx === currentBadgeIndex
+                        ? 'bg-primary w-8'
+                        : 'bg-gray-700 hover:bg-gray-600 w-1.5'
+                        }`}
                       aria-label={`View badge ${idx + 1}`}
                     />
                   ))}
