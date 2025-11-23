@@ -3,13 +3,20 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Button } from '../common/Button';
 import { BadgeWithTooltip } from '../common/BadgeWithTooltip';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, lazy, Suspense } from 'react';
+import { useInViewport } from '../../hooks/useInViewport';
 import { useReducedMotion } from '../../hooks/useReducedMotion';
+
+// Lazy load 3D components - Only essential ones
+const Scene3D = lazy(() => import('../three/Scene3D').then(m => ({ default: m.Scene3D })));
+const MolecularStructures = lazy(() => import('../three/MolecularStructures').then(m => ({ default: m.MolecularStructures })));
 
 export const Hero = () => {
   const { t } = useTranslation();
+  const [is3DReady, setIs3DReady] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+  const isInViewport = useInViewport(heroRef, { threshold: 0.1, rootMargin: '200px' });
   const prefersReducedMotion = useReducedMotion();
   const [currentBadgeIndex, setCurrentBadgeIndex] = useState(0);
 
@@ -101,6 +108,28 @@ export const Hero = () => {
             mixBlendMode: 'overlay',
           }}
         />
+
+        {/* Optimized 3D Scene - Main Particles Only */}
+        {isInViewport && !prefersReducedMotion && (
+          <motion.div
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: is3DReady ? 1 : 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          >
+            <Suspense fallback={null}>
+              <Scene3D
+                dynamicCamera
+                mouseControlled
+                enableFog={false} // Disable fog for performance
+                onReady={() => setIs3DReady(true)}
+              >
+                {/* Only main hero molecules - no heavy fog or background noise */}
+                <MolecularStructures />
+              </Scene3D>
+            </Suspense>
+          </motion.div>
+        )}
       </div>
 
       {/* Enhanced radial gradient overlay for maximum content visibility */}
