@@ -421,178 +421,422 @@
     "caffeine": {
       "name": "Caffeine Anhydrous",
       "description": "Pure caffeine that increases alertness, energy, and focus",
-      "benefits": ["Increased energy", "Enhanced focus", "Improved endurance", "Fat oxidation"]
+      "benefits": [
+        "Increased energy",
+        "Enhanced focus",
+        "Improved endurance",
+        "Fat oxidation"
+      ]
     },
     "theobromine": {
       "name": "Theobromine",
       "description": "Natural stimulant from cocoa with smooth, long-lasting energy",
-      "benefits": ["Sustained energy", "Mood enhancement", "Vasodilation"]
+      "benefits": [
+        "Sustained energy",
+        "Mood enhancement",
+        "Vasodilation"
+      ]
     },
     "l-citrulline": {
       "name": "L-Citrulline",
       "description": "Amino acid that boosts nitric oxide production for enhanced blood flow",
-      "benefits": ["Muscle pumps", "Improved blood flow", "Reduced fatigue", "Better nutrient delivery"]
+      "benefits": [
+        "Muscle pumps",
+        "Improved blood flow",
+        "Reduced fatigue",
+        "Better nutrient delivery"
+      ]
     },
     "citrulline-malate": {
       "name": "Citrulline Malate",
       "description": "L-Citrulline bound to malic acid for enhanced absorption",
-      "benefits": ["Enhanced pumps", "Reduced muscle soreness", "Improved ATP production"]
+      "benefits": [
+        "Enhanced pumps",
+        "Reduced muscle soreness",
+        "Improved ATP production"
+      ]
     },
     "beetroot": {
       "name": "Beetroot Extract",
       "description": "Natural nitrate source for improved blood flow",
-      "benefits": ["Enhanced endurance", "Better oxygen utilization", "Improved pumps"]
+      "benefits": [
+        "Enhanced endurance",
+        "Better oxygen utilization",
+        "Improved pumps"
+      ]
     },
     "creatine": {
       "name": "Creatine Monohydrate",
       "description": "Most researched supplement for strength and power output",
-      "benefits": ["Increased strength", "Enhanced power", "Muscle growth", "Improved recovery"]
+      "benefits": [
+        "Increased strength",
+        "Enhanced power",
+        "Muscle growth",
+        "Improved recovery"
+      ]
     },
     "betaine": {
       "name": "Betaine Anhydrous",
       "description": "Improves power output and supports hydration",
-      "benefits": ["Increased power", "Enhanced strength", "Better hydration"]
+      "benefits": [
+        "Increased power",
+        "Enhanced strength",
+        "Better hydration"
+      ]
     },
     "beta-alanine": {
       "name": "Beta-Alanine",
       "description": "Buffers lactic acid buildup for improved endurance",
-      "benefits": ["Delayed fatigue", "Increased endurance", "Better high-rep performance"]
+      "benefits": [
+        "Delayed fatigue",
+        "Increased endurance",
+        "Better high-rep performance"
+      ]
     },
     "taurine": {
       "name": "Taurine",
       "description": "Amino acid that supports endurance and reduces oxidative stress",
-      "benefits": ["Enhanced endurance", "Reduced muscle damage", "Improved focus"]
+      "benefits": [
+        "Enhanced endurance",
+        "Reduced muscle damage",
+        "Improved focus"
+      ]
     },
     "l-tyrosine": {
       "name": "L-Tyrosine",
       "description": "Amino acid precursor to dopamine for enhanced mental performance",
-      "benefits": ["Improved focus", "Stress reduction", "Enhanced mood"]
+      "benefits": [
+        "Improved focus",
+        "Stress reduction",
+        "Enhanced mood"
+      ]
     },
     "alpha-gpc": {
       "name": "Alpha-GPC",
       "description": "Choline compound that enhances acetylcholine production",
-      "benefits": ["Enhanced focus", "Improved mind-muscle connection", "Better power output"]
+      "benefits": [
+        "Enhanced focus",
+        "Improved mind-muscle connection",
+        "Better power output"
+      ]
     },
     "l-theanine": {
       "name": "L-Theanine",
       "description": "Promotes calm focus and reduces caffeine jitters",
-      "benefits": ["Smooth energy", "Reduced anxiety", "Enhanced focus"]
+      "benefits": [
+        "Smooth energy",
+        "Reduced anxiety",
+        "Enhanced focus"
+      ]
     },
     "nitrosigine": {
       "name": "Nitrosigine®",
       "description": "Inositol-stabilized arginine silicate that boosts nitric oxide for long-lasting pumps and focus",
-      "benefits": ["Sustained pumps", "Improved blood flow", "Enhanced cognitive focus"]
+      "benefits": [
+        "Sustained pumps",
+        "Improved blood flow",
+        "Enhanced cognitive focus"
+      ]
     },
     "glycerpump": {
       "name": "GlycerPump® (65% Glycerol)",
       "description": "Highly stable glycerol powder that increases cellular hydration and pump fullness",
-      "benefits": ["Hyper-hydration", "Full muscle pumps", "Improved endurance in heat"]
+      "benefits": [
+        "Hyper-hydration",
+        "Full muscle pumps",
+        "Improved endurance in heat"
+      ]
     },
     "rhodiola": {
       "name": "Rhodiola Rosea",
       "description": "Adaptogenic herb that reduces fatigue and sharpens mental performance under stress",
-      "benefits": ["Reduced perceived exertion", "Improved focus", "Anti-fatigue support"]
+      "benefits": [
+        "Reduced perceived exertion",
+        "Improved focus",
+        "Anti-fatigue support"
+      ]
     },
     "coconut-water": {
       "name": "Coconut Water Powder",
       "description": "Natural electrolyte complex that replenishes sodium, potassium, and trace minerals",
-      "benefits": ["Enhanced hydration", "Electrolyte balance", "Supports muscle contractions"]
+      "benefits": [
+        "Enhanced hydration",
+        "Electrolyte balance",
+        "Supports muscle contractions"
+      ]
     },
     "sodium": {
       "name": "Sodium (as Sea Salt)",
       "description": "Essential electrolyte for hydration and muscle function",
-      "benefits": ["Improved hydration", "Better muscle contractions", "Enhanced pumps"]
+      "benefits": [
+        "Improved hydration",
+        "Better muscle contractions",
+        "Enhanced pumps"
+      ]
     },
     "potassium": {
       "name": "Potassium",
       "description": "Electrolyte that supports hydration and muscle function",
-      "benefits": ["Muscle function", "Hydration support", "Cramp prevention"]
+      "benefits": [
+        "Muscle function",
+        "Hydration support",
+        "Cramp prevention"
+      ]
     }
   },
   "archetypes": {
     "gorilla-rage": {
       "tagline": "UNSTOPPABLE FORCE",
       "description": "You are THE DESTROYER. Explosive, aggressive, maximum intensity. Short, brutal sessions that leave nothing behind. You thrive on heavy weight and raw power. Energy hits fast and hard - just how you like it.",
-      "traits": ["Explosive, aggressive, maximum intensity", "Short, brutal sessions that leave nothing behind", "You thrive on heavy weight and raw power", "Energy hits fast and hard - just how you like it"],
-      "athleteTypes": ["Powerlifters", "Strongman", "Heavy Lifters", "Warriors"],
-      "warnings": ["Not for evening workouts (you won't sleep)", "Start with ½ scoop to assess tolerance", "Don't combine with other caffeine sources", "Take 1 week off every 8 weeks"]
+      "traits": [
+        "Explosive, aggressive, maximum intensity",
+        "Short, brutal sessions that leave nothing behind",
+        "You thrive on heavy weight and raw power",
+        "Energy hits fast and hard - just how you like it"
+      ],
+      "athleteTypes": [
+        "Powerlifters",
+        "Strongman",
+        "Heavy Lifters",
+        "Warriors"
+      ],
+      "warnings": [
+        "Not for evening workouts (you won't sleep)",
+        "Start with ½ scoop to assess tolerance",
+        "Don't combine with other caffeine sources",
+        "Take 1 week off every 8 weeks"
+      ]
     },
     "dragon-blood": {
       "tagline": "COMBAT READY",
       "description": "Balanced power meets sustained aggression. You're versatile, powerful, and always ready for battle. Whether it's heavy lifting or intense conditioning, you bring controlled fury to every session.",
-      "traits": ["Explosive yet sustainable power output", "Versatile across different training styles", "Controlled aggression and focus", "Sustained energy throughout your session"],
-      "athleteTypes": ["CrossFit Athletes", "MMA Fighters", "Hybrid Athletes", "Combat Sports"],
-      "warnings": ["Monitor your tolerance over time", "Avoid late evening use", "Stay well hydrated during training"]
+      "traits": [
+        "Explosive yet sustainable power output",
+        "Versatile across different training styles",
+        "Controlled aggression and focus",
+        "Sustained energy throughout your session"
+      ],
+      "athleteTypes": [
+        "CrossFit Athletes",
+        "MMA Fighters",
+        "Hybrid Athletes",
+        "Combat Sports"
+      ],
+      "warnings": [
+        "Monitor your tolerance over time",
+        "Avoid late evening use",
+        "Stay well hydrated during training"
+      ]
     },
     "cheetah-sprint": {
       "tagline": "VELOCITY UNLEASHED",
       "description": "Speed, agility, and explosive quickness define you. You're built for short bursts of maximum effort. Fast-twitch dominant, you excel at sprints, jumps, and quick, powerful movements.",
-      "traits": ["Explosive speed and agility", "Short, intense bursts of maximum effort", "Quick recovery between sets", "Fast-twitch muscle dominance"],
-      "athleteTypes": ["Sprinters", "Track Athletes", "HIIT Enthusiasts", "Explosive Power Athletes"],
-      "warnings": ["High stimulant formula", "Not for evening training", "Cycle off periodically for best results"]
+      "traits": [
+        "Explosive speed and agility",
+        "Short, intense bursts of maximum effort",
+        "Quick recovery between sets",
+        "Fast-twitch muscle dominance"
+      ],
+      "athleteTypes": [
+        "Sprinters",
+        "Track Athletes",
+        "HIIT Enthusiasts",
+        "Explosive Power Athletes"
+      ],
+      "warnings": [
+        "High stimulant formula",
+        "Not for evening training",
+        "Cycle off periodically for best results"
+      ]
     },
     "eagle-vision": {
       "tagline": "PRECISION FOCUS",
       "description": "Laser-sharp mental clarity and precision execution. You value perfect form, mind-muscle connection, and intentional movement. Every rep is calculated, every set purposeful.",
-      "traits": ["Exceptional mental clarity and focus", "Mind-muscle connection master", "Precision over chaos", "Calculated, intentional movement"],
-      "athleteTypes": ["Bodybuilders", "Physique Athletes", "Form-Focused Lifters", "Calisthenics"],
-      "warnings": ["Contains focus-enhancing nootropics", "Reduce coffee intake on training days", "Perfect for morning and midday sessions"]
+      "traits": [
+        "Exceptional mental clarity and focus",
+        "Mind-muscle connection master",
+        "Precision over chaos",
+        "Calculated, intentional movement"
+      ],
+      "athleteTypes": [
+        "Bodybuilders",
+        "Physique Athletes",
+        "Form-Focused Lifters",
+        "Calisthenics"
+      ],
+      "warnings": [
+        "Contains focus-enhancing nootropics",
+        "Reduce coffee intake on training days",
+        "Perfect for morning and midday sessions"
+      ]
     },
     "titan-strength": {
       "tagline": "PURE POWER",
       "description": "Maximum strength is your only language. Heavy singles, doubles, triples - you live for the barbell. Raw power and absolute strength define every training session.",
-      "traits": ["Maximum strength focus", "Heavy compound lifts", "Low reps, maximum weight", "Pure power output"],
-      "athleteTypes": ["Powerlifters", "Strength Athletes", "Olympic Lifters", "Max Strength Training"],
-      "warnings": ["High stimulant content", "Morning and early afternoon only", "Cycle off every 8 weeks"]
+      "traits": [
+        "Maximum strength focus",
+        "Heavy compound lifts",
+        "Low reps, maximum weight",
+        "Pure power output"
+      ],
+      "athleteTypes": [
+        "Powerlifters",
+        "Strength Athletes",
+        "Olympic Lifters",
+        "Max Strength Training"
+      ],
+      "warnings": [
+        "High stimulant content",
+        "Morning and early afternoon only",
+        "Cycle off every 8 weeks"
+      ]
     },
     "wolf-pack": {
       "tagline": "PACK MENTALITY",
       "description": "You thrive in team environments and sustained effort. Consistent performance over extended periods defines your training. Endurance meets strength in balanced harmony.",
-      "traits": ["Team-oriented and collaborative", "Sustained effort over time", "Balanced strength and endurance", "Consistent, reliable performance"],
-      "athleteTypes": ["Team Sports", "Soccer Players", "Hockey Players", "Group Training"],
-      "warnings": ["Great for afternoon training", "Stay hydrated during team sessions", "Moderate cycling needed"]
+      "traits": [
+        "Team-oriented and collaborative",
+        "Sustained effort over time",
+        "Balanced strength and endurance",
+        "Consistent, reliable performance"
+      ],
+      "athleteTypes": [
+        "Team Sports",
+        "Soccer Players",
+        "Hockey Players",
+        "Group Training"
+      ],
+      "warnings": [
+        "Great for afternoon training",
+        "Stay hydrated during team sessions",
+        "Moderate cycling needed"
+      ]
     },
     "phoenix-rise": {
       "tagline": "ENDURANCE REBIRTH",
       "description": "You're built for the long haul. Endurance, stamina, and sustained effort define your training. You rise from fatigue stronger every time. Distance and duration are your domain.",
-      "traits": ["Exceptional endurance and stamina", "Sustained effort over long durations", "Mental resilience and grit", "Steady, long-lasting energy"],
-      "athleteTypes": ["Marathon Runners", "Cyclists", "Triathletes", "Ultra Endurance"],
-      "warnings": ["Perfect for long training sessions", "Minimal stimulation for endurance work", "Excellent hydration formula included"]
+      "traits": [
+        "Exceptional endurance and stamina",
+        "Sustained effort over long durations",
+        "Mental resilience and grit",
+        "Steady, long-lasting energy"
+      ],
+      "athleteTypes": [
+        "Marathon Runners",
+        "Cyclists",
+        "Triathletes",
+        "Ultra Endurance"
+      ],
+      "warnings": [
+        "Perfect for long training sessions",
+        "Minimal stimulation for endurance work",
+        "Excellent hydration formula included"
+      ]
     },
     "bear-endurance": {
       "tagline": "STEADY POWER",
       "description": "Strong, steady, and unstoppable. You combine strength with endurance for long training sessions. Hiking, rucking, loaded carries - you thrive on sustained heavy work.",
-      "traits": ["Strong and steady effort", "Combines strength with endurance", "Long duration under load", "Calm, controlled energy"],
-      "athleteTypes": ["Hikers", "Ruckers", "Adventure Athletes", "Outdoor Training"],
-      "warnings": ["Very gentle stimulation", "Perfect for all-day activities", "Great for outdoor endurance work"]
+      "traits": [
+        "Strong and steady effort",
+        "Combines strength with endurance",
+        "Long duration under load",
+        "Calm, controlled energy"
+      ],
+      "athleteTypes": [
+        "Hikers",
+        "Ruckers",
+        "Adventure Athletes",
+        "Outdoor Training"
+      ],
+      "warnings": [
+        "Very gentle stimulation",
+        "Perfect for all-day activities",
+        "Great for outdoor endurance work"
+      ]
     },
     "mantis-focus": {
       "tagline": "SURGICAL PRECISION",
       "description": "You are the master of control and technique. Calisthenics, gymnastics, bodyweight mastery - every movement is art. Balance, coordination, and body control define you.",
-      "traits": ["Exceptional body control", "Technical movement mastery", "Balance and coordination focus", "Bodyweight strength specialist"],
-      "athleteTypes": ["Gymnasts", "Calisthenics Athletes", "Yoga Practitioners", "Movement Specialists"],
-      "warnings": ["Light stimulation for better control", "Focus-enhancing formula", "Perfect for technical work"]
+      "traits": [
+        "Exceptional body control",
+        "Technical movement mastery",
+        "Balance and coordination focus",
+        "Bodyweight strength specialist"
+      ],
+      "athleteTypes": [
+        "Gymnasts",
+        "Calisthenics Athletes",
+        "Yoga Practitioners",
+        "Movement Specialists"
+      ],
+      "warnings": [
+        "Light stimulation for better control",
+        "Focus-enhancing formula",
+        "Perfect for technical work"
+      ]
     },
     "thunder-strike": {
       "tagline": "EXPLOSIVE FORCE",
       "description": "You live for high-intensity intervals and metabolic chaos. HIIT, circuits, intense conditioning - you bring thunder to every workout. Fast-paced, heart-pounding, relentless.",
-      "traits": ["High-intensity interval specialist", "Loves metabolic conditioning", "Quick transitions, no rest", "Thrives in chaos and intensity"],
-      "athleteTypes": ["HIIT Athletes", "Circuit Trainers", "Bootcamp Enthusiasts", "Conditioning Specialists"],
-      "warnings": ["Very high intensity formula", "Excellent for morning sessions", "Stay hydrated throughout"]
+      "traits": [
+        "High-intensity interval specialist",
+        "Loves metabolic conditioning",
+        "Quick transitions, no rest",
+        "Thrives in chaos and intensity"
+      ],
+      "athleteTypes": [
+        "HIIT Athletes",
+        "Circuit Trainers",
+        "Bootcamp Enthusiasts",
+        "Conditioning Specialists"
+      ],
+      "warnings": [
+        "Very high intensity formula",
+        "Excellent for morning sessions",
+        "Stay hydrated throughout"
+      ]
     },
     "serpent-flow": {
       "tagline": "MIND-BODY HARMONY",
       "description": "Fluid movement, flexibility, and mind-body connection define your training. Yoga, mobility work, flow states - you move with intention and grace. Strength through flexibility.",
-      "traits": ["Exceptional flexibility and mobility", "Mind-body connection master", "Fluid, intentional movement", "Strength through flexibility"],
-      "athleteTypes": ["Yoga Practitioners", "Dancers", "Mobility Specialists", "Flow State Athletes"],
-      "warnings": ["Minimal stimulation", "Natural energy boost", "Perfect for mindful training"]
+      "traits": [
+        "Exceptional flexibility and mobility",
+        "Mind-body connection master",
+        "Fluid, intentional movement",
+        "Strength through flexibility"
+      ],
+      "athleteTypes": [
+        "Yoga Practitioners",
+        "Dancers",
+        "Mobility Specialists",
+        "Flow State Athletes"
+      ],
+      "warnings": [
+        "Minimal stimulation",
+        "Natural energy boost",
+        "Perfect for mindful training"
+      ]
     },
     "lion-heart": {
       "tagline": "WARRIOR SPIRIT",
       "description": "The balanced warrior formula. With 175-225mg caffeine, moderate pump, and 7/10 intensity, this is versatile power for any training style. Perfect for powerlifting, bodybuilding, functional fitness - train with heart, courage, and unwavering determination.",
-      "traits": ["Balanced 175-225mg caffeine for daily consistency", "Moderate pump and intensity (7/10)", "Versatile for powerlifting, bodybuilding, or functional work", "Mental toughness without overstimulation"],
-      "athleteTypes": ["Powerlifting", "Bodybuilding", "Functional Fitness", "Martial Artists"],
-      "warnings": ["Balanced stimulation", "Versatile formula", "Great for any time of day"]
+      "traits": [
+        "Balanced 175-225mg caffeine for daily consistency",
+        "Moderate pump and intensity (7/10)",
+        "Versatile for powerlifting, bodybuilding, or functional work",
+        "Mental toughness without overstimulation"
+      ],
+      "athleteTypes": [
+        "Powerlifting",
+        "Bodybuilding",
+        "Functional Fitness",
+        "Martial Artists"
+      ],
+      "warnings": [
+        "Balanced stimulation",
+        "Versatile formula",
+        "Great for any time of day"
+      ]
     }
   },
   "about": {
@@ -663,5 +907,33 @@
     "termsTitle": "Terms of Service",
     "lastUpdated": "Last Updated",
     "backButton": "Back to Home"
+  },
+  "ingredientDetail": {
+    "backToAll": "Back to All Ingredients",
+    "comingSoon": "Detailed Information Coming Soon",
+    "workingOnIt": "We're working on comprehensive research-backed information for {{name}}.",
+    "alsoKnownAs": "Also known as",
+    "overview": "Overview",
+    "howItWorks": "How It Works",
+    "clinicalEvidence": "Clinical Evidence",
+    "optimalDosing": "Optimal Dosing",
+    "standardDose": "Standard Dose",
+    "loadingProtocol": "Loading Protocol",
+    "timing": "Timing",
+    "withFood": "With Food?",
+    "withFoodYes": "Yes - Better absorption",
+    "withFoodNo": "No - Empty stomach preferred",
+    "withFoodEither": "Either way works",
+    "synergies": "Synergies",
+    "synergiesDesc": "Ingredients that work particularly well when combined:",
+    "safetyInfo": "Safety Information",
+    "sideEffects": "Potential Side Effects",
+    "contraindications": "Contraindications",
+    "disclaimer": "Disclaimer: This information is for educational purposes only. Consult with a healthcare professional before starting any supplement regimen.",
+    "researchCitations": "Research Citations",
+    "findYourSoul": "Find Your Perfect Soul",
+    "findYourSoulDesc": "See which souls contain {{name}} optimally dosed for your training style",
+    "discoverSoul": "Discover Your Soul",
+    "viewAllSouls": "View All 12 Souls"
   }
 }

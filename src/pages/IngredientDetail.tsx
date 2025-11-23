@@ -1,6 +1,7 @@
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { HiArrowLeft, HiBeaker, HiLightningBolt, HiShieldCheck, HiExclamationCircle } from 'react-icons/hi';
+import { useTranslation } from 'react-i18next';
 import { Card } from '../components/common/Card';
 import { Button } from '../components/common/Button';
 import { getIngredientById } from '../data/ingredients';
@@ -12,24 +13,25 @@ import { PageLoader } from '../components/common/Skeleton';
 export const IngredientDetail = () => {
   const { ingredientId } = useParams<{ ingredientId: string }>();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const ingredient = getIngredientById(ingredientId || '');
   const details = getIngredientDetail(ingredientId || '');
 
   if (!ingredient) {
-    return <PageLoader message="Loading ingredient information..." />;
+    return <PageLoader message={t('common.loading')} />;
   }
 
   if (!details) {
     return (
       <div className="min-h-screen bg-dark py-12">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-3xl font-heading font-bold mb-4">Detailed Information Coming Soon</h1>
+          <h1 className="text-3xl font-heading font-bold mb-4">{t('ingredientDetail.comingSoon')}</h1>
           <p className="text-gray-400 mb-8">
-            We're working on comprehensive research-backed information for {ingredient.name}.
+            {t('ingredientDetail.workingOnIt', { name: ingredient.name })}
           </p>
           <Button onClick={() => navigate('/ingredients')}>
-            Back to All Ingredients
+            {t('ingredientDetail.backToAll')}
           </Button>
         </div>
       </div>
@@ -64,7 +66,7 @@ export const IngredientDetail = () => {
             className="inline-flex items-center space-x-2 text-primary hover:text-primary-light transition-colors"
           >
             <HiArrowLeft />
-            <span>Back to All Ingredients</span>
+            <span>{t('ingredientDetail.backToAll')}</span>
           </Link>
         </motion.div>
 
@@ -86,7 +88,7 @@ export const IngredientDetail = () => {
               )}
               {details.alsoKnownAs && (
                 <p className="text-sm text-gray-500">
-                  Also known as: {details.alsoKnownAs.join(', ')}
+                  {t('ingredientDetail.alsoKnownAs')}: {details.alsoKnownAs.join(', ')}
                 </p>
               )}
             </div>
@@ -102,7 +104,7 @@ export const IngredientDetail = () => {
               {ingredient.category}
             </span>
             <span className="px-3 py-1 bg-accent/10 border border-accent/30 text-accent rounded-full text-sm font-semibold">
-              Science Rating: {ingredient.scienceRating}/5
+              {t('ingredientsPage.scienceRating')}: {ingredient.scienceRating}/5
             </span>
           </div>
         </motion.div>
@@ -116,7 +118,7 @@ export const IngredientDetail = () => {
           <Card className="mb-8">
             <h2 className="text-2xl font-heading font-bold mb-4 flex items-center space-x-2">
               <HiLightningBolt className="text-primary" />
-              <span>Overview</span>
+              <span>{t('ingredientDetail.overview')}</span>
             </h2>
             <p className="text-gray-300 text-lg leading-relaxed">
               {details.detailedDescription}
@@ -131,7 +133,7 @@ export const IngredientDetail = () => {
           transition={{ delay: 0.2 }}
         >
           <Card className="mb-8">
-            <h2 className="text-2xl font-heading font-bold mb-4">How It Works</h2>
+            <h2 className="text-2xl font-heading font-bold mb-4">{t('ingredientDetail.howItWorks')}</h2>
             <p className="text-gray-300 leading-relaxed">
               {details.mechanismOfAction}
             </p>
@@ -147,7 +149,7 @@ export const IngredientDetail = () => {
           <Card className="mb-8">
             <h2 className="text-2xl font-heading font-bold mb-4 flex items-center space-x-2">
               <HiShieldCheck className="text-secondary" />
-              <span>Clinical Evidence</span>
+              <span>{t('ingredientDetail.clinicalEvidence')}</span>
             </h2>
             <ul className="space-y-3">
               {details.clinicalEvidence.map((evidence, idx) => (
@@ -167,10 +169,10 @@ export const IngredientDetail = () => {
           transition={{ delay: 0.4 }}
         >
           <Card className="mb-8">
-            <h2 className="text-2xl font-heading font-bold mb-4">Optimal Dosing</h2>
+            <h2 className="text-2xl font-heading font-bold mb-4">{t('ingredientDetail.optimalDosing')}</h2>
             <div className="space-y-4">
               <div className="p-4 bg-primary/5 border border-primary/20 rounded-lg">
-                <p className="text-sm text-gray-400 mb-1">Standard Dose</p>
+                <p className="text-sm text-gray-400 mb-1">{t('ingredientDetail.standardDose')}</p>
                 <p className="text-lg font-semibold text-white">
                   {details.optimalDosing.standard}
                 </p>
@@ -178,7 +180,7 @@ export const IngredientDetail = () => {
 
               {details.optimalDosing.loading && (
                 <div className="p-4 bg-accent/5 border border-accent/20 rounded-lg">
-                  <p className="text-sm text-gray-400 mb-1">Loading Protocol</p>
+                  <p className="text-sm text-gray-400 mb-1">{t('ingredientDetail.loadingProtocol')}</p>
                   <p className="text-lg font-semibold text-white">
                     {details.optimalDosing.loading}
                   </p>
@@ -187,17 +189,17 @@ export const IngredientDetail = () => {
 
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="p-4 bg-dark-lighter rounded-lg">
-                  <p className="text-sm text-gray-400 mb-1">Timing</p>
+                  <p className="text-sm text-gray-400 mb-1">{t('ingredientDetail.timing')}</p>
                   <p className="text-white font-semibold">{details.optimalDosing.timing}</p>
                 </div>
                 <div className="p-4 bg-dark-lighter rounded-lg">
-                  <p className="text-sm text-gray-400 mb-1">With Food?</p>
+                  <p className="text-sm text-gray-400 mb-1">{t('ingredientDetail.withFood')}</p>
                   <p className="text-white font-semibold">
                     {details.optimalDosing.withFood !== undefined
                       ? details.optimalDosing.withFood
-                        ? 'Yes - Better absorption'
-                        : 'No - Empty stomach preferred'
-                      : 'Either way works'}
+                        ? t('ingredientDetail.withFoodYes')
+                        : t('ingredientDetail.withFoodNo')
+                      : t('ingredientDetail.withFoodEither')}
                   </p>
                 </div>
               </div>
@@ -213,9 +215,9 @@ export const IngredientDetail = () => {
             transition={{ delay: 0.5 }}
           >
             <Card className="mb-8">
-              <h2 className="text-2xl font-heading font-bold mb-4">Synergies</h2>
+              <h2 className="text-2xl font-heading font-bold mb-4">{t('ingredientDetail.synergies')}</h2>
               <p className="text-gray-400 mb-4">
-                Ingredients that work particularly well when combined:
+                {t('ingredientDetail.synergiesDesc')}
               </p>
               <div className="space-y-3">
                 {details.synergies.map((synergy, idx) => (
@@ -241,12 +243,12 @@ export const IngredientDetail = () => {
             <Card className="mb-8 border-2 border-secondary/30">
               <h2 className="text-2xl font-heading font-bold mb-4 flex items-center space-x-2 text-secondary">
                 <HiExclamationCircle />
-                <span>Safety Information</span>
+                <span>{t('ingredientDetail.safetyInfo')}</span>
               </h2>
 
               {details.sideEffects && details.sideEffects.length > 0 && (
                 <div className="mb-6">
-                  <h3 className="text-lg font-semibold mb-3">Potential Side Effects</h3>
+                  <h3 className="text-lg font-semibold mb-3">{t('ingredientDetail.sideEffects')}</h3>
                   <ul className="space-y-2">
                     {details.sideEffects.map((effect, idx) => (
                       <li key={idx} className="flex items-start space-x-2">
@@ -260,7 +262,7 @@ export const IngredientDetail = () => {
 
               {details.contraindications && details.contraindications.length > 0 && (
                 <div>
-                  <h3 className="text-lg font-semibold mb-3">Contraindications</h3>
+                  <h3 className="text-lg font-semibold mb-3">{t('ingredientDetail.contraindications')}</h3>
                   <ul className="space-y-2">
                     {details.contraindications.map((contra, idx) => (
                       <li key={idx} className="flex items-start space-x-2">
@@ -274,8 +276,7 @@ export const IngredientDetail = () => {
 
               <div className="mt-4 p-3 bg-secondary/10 rounded border border-secondary/30">
                 <p className="text-sm text-gray-300">
-                  <strong>Disclaimer:</strong> This information is for educational purposes only.
-                  Consult with a healthcare professional before starting any supplement regimen.
+                  <strong>{t('ingredientDetail.disclaimer')}</strong>
                 </p>
               </div>
             </Card>
@@ -289,7 +290,7 @@ export const IngredientDetail = () => {
           transition={{ delay: 0.7 }}
         >
           <Card className="mb-8">
-            <h2 className="text-2xl font-heading font-bold mb-4">Research Citations</h2>
+            <h2 className="text-2xl font-heading font-bold mb-4">{t('ingredientDetail.researchCitations')}</h2>
             <div className="space-y-4">
               {details.researchCitations.map((citation, idx) => (
                 <div key={idx} className="p-4 bg-dark-lighter rounded-lg">
@@ -323,17 +324,17 @@ export const IngredientDetail = () => {
         >
           <Card>
             <h2 className="text-2xl font-heading font-bold mb-4">
-              Find Your Perfect Soul
+              {t('ingredientDetail.findYourSoul')}
             </h2>
             <p className="text-gray-400 mb-6">
-              See which souls contain {ingredient.name} optimally dosed for your training style
+              {t('ingredientDetail.findYourSoulDesc', { name: ingredient.name })}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" onClick={() => navigate('/formula')}>
-                Discover Your Soul
+                {t('ingredientDetail.discoverSoul')}
               </Button>
               <Button variant="outline" size="lg" onClick={() => navigate('/souls')}>
-                View All 12 Souls
+                {t('ingredientDetail.viewAllSouls')}
               </Button>
             </div>
           </Card>
